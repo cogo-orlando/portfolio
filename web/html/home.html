@@ -13,39 +13,49 @@
 <div class="blob1"></div>
 <div class="blob2"></div>
 <div class="grid"></div>
-
 <div class="corner corner--tl"></div>
 <div class="corner corner--tr"></div>
 <div class="corner corner--bl"></div>
 <div class="corner corner--br"></div>
 
+<canvas id="matrix" class="matrix-canvas"></canvas>
+
+<!-- Boot screen -->
+<div class="boot-screen" id="bootScreen">
+    <div class="boot-lines" id="bootLines"></div>
+</div>
+
 <!-- NAV -->
 <nav class="nav">
-    <div class="nav-logo">
-        <span class="prompt">~/</span>orlando.cogo
-    </div>
+    <a href="/home" class="nav-logo"><span class="prompt">~/</span>orlando.cogo</a>
     <ul class="nav-links">
         <li><a href="/about">à propos</a></li>
         <li><a href="/skills">compétences</a></li>
         <li><a href="/project">projets</a></li>
         <li><a href="/contact">contact</a></li>
     </ul>
-    <div class="nav-status">
-        <span class="status-dot"></span>
-        <span>disponible</span>
+    <div class="nav-right">
+        <a href="/cv.pdf" class="cv-btn" download>
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v7M6.5 8l-2.5-2.5M6.5 8L9 5.5M1 11h11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            CV
+        </a>
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            <span>open to work</span>
+        </div>
     </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero" id="about">
+<section class="hero">
     <div class="hero-tag">
         <span class="prompt">~/home $</span>
         <span class="typed"></span>
         <span class="cursor"></span>
     </div>
     <h1 class="hero-name">
-        Welcome<br>
-        <span class="outline">Portfolio</span>
+        Orlando<br>
+        <span class="outline">Cogo</span>
     </h1>
     <p class="hero-sub">
         Étudiant en <em>Bachelor Informatique</em> · Spécialisation <em>Cybersécurité</em>
@@ -57,15 +67,214 @@
     <div class="hero-badges">
         <span class="badge">CTF Player</span>
         <span class="badge">Bachelor 1ère année</span>
-        <span class="badge">Open to opportunities</span>
+        <span class="badge badge--open"><span class="badge-dot"></span>Open to work</span>
+    </div>
+    <div class="scroll-hint">
+        <span>scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+    <div class="marquee-track">
+        <span>CYBERSECURITY</span><span class="sep">·</span>
+        <span>DÉVELOPPEMENT</span><span class="sep">·</span>
+        <span>INFRASTRUCTURE</span><span class="sep">·</span>
+        <span>OPEN TO WORK</span><span class="sep">·</span>
+        <span>CTF PLAYER</span><span class="sep">·</span>
+        <span>YNOV CAMPUS</span><span class="sep">·</span>
+        <span>BACHELOR B1</span><span class="sep">·</span>
+        <span>CYBERSECURITY</span><span class="sep">·</span>
+        <span>DÉVELOPPEMENT</span><span class="sep">·</span>
+        <span>INFRASTRUCTURE</span><span class="sep">·</span>
+        <span>OPEN TO WORK</span><span class="sep">·</span>
+        <span>CTF PLAYER</span><span class="sep">·</span>
+        <span>YNOV CAMPUS</span><span class="sep">·</span>
+        <span>BACHELOR B1</span><span class="sep">·</span>
+    </div>
+</div>
+
+<!-- STATS -->
+<section class="section">
+    <div class="section-num">01</div>
+    <div class="stats-grid">
+        <div class="stat-card reveal">
+            <span class="stat-val" data-target="12">0</span>
+            <span class="stat-unit">mois</span>
+            <span class="stat-label">En formation info</span>
+        </div>
+        <div class="stat-card reveal">
+            <span class="stat-val" data-target="8">0</span>
+            <span class="stat-unit">+</span>
+            <span class="stat-label">Outils maîtrisés</span>
+        </div>
+        <div class="stat-card reveal">
+            <span class="stat-val" data-target="5">0</span>
+            <span class="stat-unit">+</span>
+            <span class="stat-label">Projets réalisés</span>
+        </div>
+        <div class="stat-card reveal">
+            <span class="stat-val" id="live-timer">0</span>
+            <span class="stat-unit">j</span>
+            <span class="stat-label">Depuis reconversion</span>
+        </div>
+    </div>
+</section>
+
+<!-- WHAT I DO -->
+<section class="section">
+    <div class="section-num">02</div>
+    <div class="section-header">
+        <span class="section-tag">02 //</span>
+        <h2 class="section-title">Ce que je fais</h2>
+    </div>
+    <div class="whatido-grid">
+        <div class="whatido-card reveal">
+            <div class="whatido-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3 class="whatido-title">Développement</h3>
+            <p class="whatido-desc">Applications web avec Go et JavaScript. Architecture serveur, routing, templating et gestion des fichiers statiques.</p>
+            <div class="whatido-tags"><span>Go</span><span>JavaScript</span><span>SQL</span></div>
+        </div>
+        <div class="whatido-card reveal">
+            <div class="whatido-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 class="whatido-title">Cybersécurité</h3>
+            <p class="whatido-desc">Analyse de vulnérabilités, OSINT, CTF challenges. Apprentissage des techniques offensives et défensives.</p>
+            <div class="whatido-tags"><span>OSINT</span><span>CTF</span><span>Pentest</span></div>
+        </div>
+        <div class="whatido-card reveal">
+            <div class="whatido-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <h3 class="whatido-title">Infrastructure</h3>
+            <p class="whatido-desc">Configuration réseau Cisco, virtualisation VirtualBox, administration Linux. Bases solides en systèmes et réseaux.</p>
+            <div class="whatido-tags"><span>Linux</span><span>Cisco</span><span>VirtualBox</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- QUICK NAV -->
+<section class="section">
+    <div class="section-num">03</div>
+    <div class="section-header">
+        <span class="section-tag">03 //</span>
+        <h2 class="section-title">Explorer</h2>
+    </div>
+    <div class="quicknav-grid">
+        <a href="/about" class="quicknav-card reveal">
+            <div class="quicknav-top"><span class="quicknav-num">01</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+            <h3>À propos</h3>
+            <p>Mon parcours, d'Airbus à l'informatique.</p>
+        </a>
+        <a href="/skills" class="quicknav-card reveal">
+            <div class="quicknav-top"><span class="quicknav-num">02</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+            <h3>Compétences</h3>
+            <p>Go, JS, SQL, Cybersec, Linux et plus.</p>
+        </a>
+        <a href="/project" class="quicknav-card reveal">
+            <div class="quicknav-top"><span class="quicknav-num">03</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+            <h3>Projets</h3>
+            <p>Mes réalisations, ce portfolio inclus.</p>
+        </a>
+        <a href="/contact" class="quicknav-card reveal">
+            <div class="quicknav-top"><span class="quicknav-num">04</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+            <h3>Contact</h3>
+            <p>GitHub, LinkedIn, email — retrouvez-moi.</p>
+        </a>
+    </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section">
+    <div class="section-num">04</div>
+    <div class="section-header">
+        <span class="section-tag">04 //</span>
+        <h2 class="section-title">Certifications & Objectifs</h2>
+    </div>
+    <div class="certif-list">
+        <div class="certif-item reveal">
+            <div class="certif-left">
+                <span class="certif-name">CompTIA Security+</span>
+                <span class="certif-status status--planned">Planifié</span>
+            </div>
+            <div class="certif-bar-wrap">
+                <div class="certif-bar"><div class="certif-fill" style="--pct:0%"></div></div>
+                <span class="certif-pct">0%</span>
+            </div>
+        </div>
+        <div class="certif-item reveal">
+            <div class="certif-left">
+                <span class="certif-name">TryHackMe — Pre Security Path</span>
+                <span class="certif-status status--planned">Planifié</span>
+            </div>
+            <div class="certif-bar-wrap">
+                <div class="certif-bar"><div class="certif-fill" style="--pct:0%"></div></div>
+                <span class="certif-pct">0%</span>
+            </div>
+        </div>
+        <div class="certif-item reveal">
+            <div class="certif-left">
+                <span class="certif-name">CEH — Certified Ethical Hacker</span>
+                <span class="certif-status status--planned">Planifié</span>
+            </div>
+            <div class="certif-bar-wrap">
+                <div class="certif-bar"><div class="certif-fill" style="--pct:0%"></div></div>
+                <span class="certif-pct">0%</span>
+            </div>
+        </div>
+        <div class="certif-item reveal">
+            <div class="certif-left">
+                <span class="certif-name">Cisco CCNA</span>
+                <span class="certif-status status--planned">Planifié</span>
+            </div>
+            <div class="certif-bar-wrap">
+                <div class="certif-bar"><div class="certif-fill" style="--pct:0%"></div></div>
+                <span class="certif-pct">0%</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SETUP -->
+<section class="section">
+    <div class="section-num">05</div>
+    <div class="section-header">
+        <span class="section-tag">05 //</span>
+        <h2 class="section-title">Mon setup</h2>
+    </div>
+    <div class="setup-grid">
+        <div class="setup-card reveal"><span class="setup-key">OS</span><span class="setup-val">Windows 11 + Kali Linux (VM)</span></div>
+        <div class="setup-card reveal"><span class="setup-key">IDE</span><span class="setup-val">GoLand · VS Code</span></div>
+        <div class="setup-card reveal"><span class="setup-key">Terminal</span><span class="setup-val">PowerShell · Bash</span></div>
+        <div class="setup-card reveal"><span class="setup-key">Virt.</span><span class="setup-val">VirtualBox</span></div>
+        <div class="setup-card reveal"><span class="setup-key">Réseau</span><span class="setup-val">Cisco Packet Tracer</span></div>
+        <div class="setup-card reveal"><span class="setup-key">CTF</span><span class="setup-val">HackTheBox</span></div>
+    </div>
+</section>
+
+<!-- CURRENTLY LEARNING -->
+<section class="section">
+    <div class="section-num">06</div>
+    <div class="section-header">
+        <span class="section-tag">06 //</span>
+        <h2 class="section-title">Currently learning</h2>
+    </div>
+    <div class="learning-ticker reveal">
+        <span class="learning-label">~/learning $</span>
+        <span class="learning-text" id="learningText"></span>
+        <span class="cursor"></span>
     </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
     <span class="prompt">~/orlando.cogo $</span>
-    <span>exit 0</span>
     <a href="/" class="footer-back">← Retour</a>
+    <span>exit 0</span>
     <span class="footer-year">© 2026</span>
 </footer>
 
