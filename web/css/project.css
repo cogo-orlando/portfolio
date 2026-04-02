@@ -7,7 +7,7 @@
 :root {
     --bg: #080b0f;
     --accent: #00f5a0;
-    --accent2: #00c8f5;
+    --accent2: #000507;
     --text: #e8f0f8;
     --muted: #3a4a5a;
     --muted2: #5a7080;
@@ -16,9 +16,7 @@
     --border2: rgba(255, 255, 255, 0.07);
 }
 
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
     background: var(--bg);
@@ -28,17 +26,13 @@ body {
     overflow-x: hidden;
 }
 
-/* Scanlines */
 body::after {
     content: '';
     position: fixed;
     inset: 0;
     background: repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(0, 0, 0, 0.02) 2px,
-            rgba(0, 0, 0, 0.02) 4px
+            0deg, transparent, transparent 2px,
+            rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px
     );
     pointer-events: none;
     z-index: 500;
@@ -60,25 +54,20 @@ body::after {
 /* Blobs */
 .blob1 {
     position: fixed;
-    width: 600px;
-    height: 600px;
+    width: 600px; height: 600px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(0, 245, 160, 0.05) 0%, transparent 70%);
-    top: 20%;
-    left: 10%;
+    background: radial-gradient(circle, rgba(0,245,160,0.05) 0%, transparent 70%);
+    top: 10%; left: 5%;
     pointer-events: none;
     animation: drift1 10s ease-in-out infinite;
     z-index: 0;
 }
-
 .blob2 {
     position: fixed;
-    width: 500px;
-    height: 500px;
+    width: 500px; height: 500px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(0, 200, 245, 0.04) 0%, transparent 70%);
-    top: 60%;
-    right: 5%;
+    background: radial-gradient(circle, rgba(0,200,245,0.04) 0%, transparent 70%);
+    top: 55%; right: 0%;
     pointer-events: none;
     animation: drift2 12s ease-in-out infinite;
     z-index: 0;
@@ -87,8 +76,7 @@ body::after {
 /* Corners */
 .corner {
     position: fixed;
-    width: 28px;
-    height: 28px;
+    width: 28px; height: 28px;
     z-index: 10;
 }
 .corner--tl { top: 1.5rem; left: 1.5rem; border-top: 1px solid var(--muted); border-left: 1px solid var(--muted); }
@@ -99,9 +87,7 @@ body::after {
 /* ── NAV ── */
 .nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     z-index: 100;
     display: flex;
     align-items: center;
@@ -117,8 +103,10 @@ body::after {
     font-size: 13px;
     color: var(--text);
     letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: color 0.2s;
 }
-
+.nav-logo:hover { color: var(--accent); }
 .nav-logo .prompt { color: var(--accent); }
 
 .nav-links {
@@ -136,7 +124,6 @@ body::after {
     text-transform: uppercase;
     transition: color 0.2s;
 }
-
 .nav-links a:hover { color: var(--accent); }
 
 .nav-status {
@@ -150,8 +137,7 @@ body::after {
 }
 
 .status-dot {
-    width: 6px;
-    height: 6px;
+    width: 6px; height: 6px;
     border-radius: 50%;
     background: var(--accent);
     animation: blink 2s ease-in-out infinite;
@@ -161,11 +147,7 @@ body::after {
 .hero {
     position: relative;
     z-index: 10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 3rem 4rem;
+    padding: 10rem 3rem 4rem;
     max-width: 900px;
     margin: 0 auto;
 }
@@ -186,14 +168,13 @@ body::after {
 
 .cursor {
     display: inline-block;
-    width: 8px;
-    height: 14px;
+    width: 8px; height: 14px;
     background: var(--accent);
     animation: blink 1s step-end infinite;
 }
 
-.hero-name {
-    font-size: clamp(4rem, 10vw, 8rem);
+.hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 800;
     line-height: 0.9;
     letter-spacing: -0.04em;
@@ -207,131 +188,91 @@ body::after {
     -webkit-text-stroke: 1px var(--accent);
 }
 
-.hero-sub {
-    margin-top: 1.5rem;
+.hero-intro {
+    margin-top: 2rem;
     font-family: 'DM Mono', monospace;
     font-size: clamp(0.75rem, 1.6vw, 0.95rem);
     color: var(--muted2);
     line-height: 1.8;
+    max-width: 520px;
     opacity: 0;
     transform: translateY(12px);
     animation: fadeUp 0.7s ease forwards 0.8s;
 }
 
-.hero-sub em {
-    color: var(--accent2);
-    font-style: normal;
-}
-
-.hero-about {
-    margin-top: 1.5rem;
-    font-size: 1rem;
-    color: var(--muted2);
-    line-height: 1.8;
-    max-width: 560px;
-    opacity: 0;
-    transform: translateY(12px);
-    animation: fadeUp 0.7s ease forwards 1s;
-}
-
-.hero-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 2rem;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 1.2s;
-}
-
-.badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    border: 1px solid rgba(0, 245, 160, 0.3);
-    padding: 5px 14px;
-    letter-spacing: 0.08em;
-}
-
-/* ── SECTIONS ── */
-.section {
-    position: relative;
-    z-index: 10;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 5rem 3rem;
-    border-top: 1px solid var(--border2);
-}
-
-.section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 3rem;
-}
-
-.section-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-}
-
-.section-title {
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-}
-
-/* ── CONTACT ── */
-.contact-grid {
+/* ── PROJECTS ── */
+.projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1rem;
 }
 
-.contact-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.project-card {
     background: var(--surface);
     border: 1px solid var(--border2);
-    padding: 1.2rem 1.4rem;
-    text-decoration: none;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
     transition: border-color 0.2s, transform 0.2s;
 }
 
-.contact-card:hover {
+.project-card:hover {
     border-color: rgba(0, 245, 160, 0.25);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 }
 
-.contact-icon {
-    color: var(--accent);
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    background: rgba(0, 245, 160, 0.08);
+.project-top {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
 }
 
-.contact-label {
-    display: block;
+.project-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+}
+
+.project-tag {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
     color: var(--muted2);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 2px;
+    border: 1px solid var(--border2);
+    padding: 3px 10px;
+    letter-spacing: 0.06em;
 }
 
-.contact-value {
-    display: block;
-    font-size: 13px;
+.project-name {
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--text);
 }
+
+.project-desc {
+    font-size: 13px;
+    color: var(--muted2);
+    line-height: 1.7;
+    flex: 1;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.project-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: opacity 0.2s;
+}
+
+.project-link:hover { opacity: 0.7; }
 
 /* ── FOOTER ── */
 .footer {
@@ -347,10 +288,32 @@ body::after {
     font-family: 'DM Mono', monospace;
     font-size: 12px;
     color: var(--muted2);
+    flex-wrap: wrap;
 }
 
 .footer .prompt { color: var(--accent); }
+
+.footer-back {
+    margin-left: 2rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 12px;
+    transition: opacity 0.2s;
+}
+.footer-back:hover { opacity: 0.7; }
+
 .footer-year { margin-left: auto; }
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp {
@@ -370,19 +333,4 @@ body::after {
 @keyframes drift2 {
     0%, 100% { transform: scale(1) translate(0, 0); }
     50% { transform: scale(1.06) translate(-20px, 20px); }
-}
-@keyframes growBar {
-    from { width: 0; }
-    to { width: var(--pct); }
-}
-
-/* ── SCROLL REVEAL ── */
-.reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
 }
