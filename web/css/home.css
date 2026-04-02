@@ -282,57 +282,6 @@ body::after {
     letter-spacing: -0.02em;
 }
 
-/* ── CONTACT ── */
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
-}
-
-.contact-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    padding: 1.2rem 1.4rem;
-    text-decoration: none;
-    transition: border-color 0.2s, transform 0.2s;
-}
-
-.contact-card:hover {
-    border-color: rgba(0, 245, 160, 0.25);
-    transform: translateY(-2px);
-}
-
-.contact-icon {
-    color: var(--accent);
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    background: rgba(0, 245, 160, 0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.contact-label {
-    display: block;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--muted2);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 2px;
-}
-
-.contact-value {
-    display: block;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text);
-}
-
 /* ── FOOTER ── */
 .footer {
     position: relative;
