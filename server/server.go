@@ -11,7 +11,7 @@ func Start() {
 		switch r.URL.Path {
 
 		case "/":
-			WelcomeHandler(w, r)
+			IndexHandler(w, r)
 		case "/home":
 			HomeHandler(w, r)
 		case "/about":
