@@ -17,8 +17,8 @@ func renderTemplate(w http.ResponseWriter, file string) {
 	}
 }
 
-func WelcomeHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "welcome.html")
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "index.html")
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
