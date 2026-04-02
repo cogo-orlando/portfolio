@@ -29,6 +29,18 @@ func AboutHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "about.html")
 }
 
+func SkillsHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "skills.html")
+}
+
+func ProjectHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "project.html")
+}
+
+func ContactHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "contact.html")
+}
+
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 	renderTemplate(w, "404.html")

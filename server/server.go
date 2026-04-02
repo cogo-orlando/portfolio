@@ -16,6 +16,12 @@ func Start() {
 			HomeHandler(w, r)
 		case "/about":
 			AboutHandler(w, r)
+		case "/skills":
+			SkillsHandler(w, r)
+		case "/project":
+			ProjectHandler(w, r)
+		case "/contact":
+			ContactHandler(w, r)
 
 		//Error 404
 		default:

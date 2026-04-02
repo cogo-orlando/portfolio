@@ -1,12 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="../css/404.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page introuvable</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/404.css">
 </head>
 <body>
 
+<div class="blob1"></div>
+<div class="blob2"></div>
+<div class="grid"></div>
+
+<div class="corner corner--tl"></div>
+<div class="corner corner--tr"></div>
+<div class="corner corner--bl"></div>
+<div class="corner corner--br"></div>
+
+<div class="terminal-bar">
+    <div class="dot dot-r"></div>
+    <div class="dot dot-y"></div>
+    <div class="dot dot-g"></div>
+    <span class="terminal-title">orlando@portfolio ~ %</span>
+</div>
+
+<div class="wrapper">
+
+    <div class="glitch-wrap">
+        <h1 class="glitch" data-text="404">404</h1>
+    </div>
+
+    <div class="terminal-block">
+        <div class="terminal-line">
+            <span class="prompt">~/portfolio $</span>
+            <span class="cmd typed-cmd"></span>
+            <span class="cursor"></span>
+        </div>
+        <div class="terminal-output" id="term-output"></div>
+    </div>
+
+    <p class="subtitle">Cette page n'existe pas ou a été déplacée.</p>
+
+    <div class="actions">
+        <a href="/home" class="btn-primary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M12 7H2M2 7L6 3M2 7L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Retour à l'accueil</span>
+        </a>
+        <a href="/home#contact" class="btn-secondary">Me contacter</a>
+    </div>
+
+    <div class="status-row">
+        <span class="status-dot"></span>
+        <span class="status-text">Erreur 404 · Page introuvable</span>
+    </div>
+
+</div>
+
+<script src="/js/404.js"></script>
 </body>
 </html>
