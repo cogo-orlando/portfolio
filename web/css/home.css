@@ -193,7 +193,7 @@ body::after {
 }
 
 .hero-name {
-    font-size: clamp(4rem, 10vw, 8rem);
+    font-size: clamp(5rem, 9vw, 7rem);
     font-weight: 800;
     line-height: 0.9;
     letter-spacing: -0.04em;
@@ -205,6 +205,7 @@ body::after {
 .outline {
     color: transparent;
     -webkit-text-stroke: 1px var(--accent);
+    font-size: clamp(4rem, 7vw, 5rem);
 }
 
 .hero-sub {
@@ -296,9 +297,20 @@ body::after {
     font-family: 'DM Mono', monospace;
     font-size: 12px;
     color: var(--muted2);
+    flex-wrap: wrap;
 }
 
 .footer .prompt { color: var(--accent); }
+
+.footer-back {
+    margin-left: 2rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 12px;
+    transition: opacity 0.2s;
+}
+.footer-back:hover { opacity: 0.7; }
+
 .footer-year { margin-left: auto; }
 
 /* ── ANIMATIONS ── */
