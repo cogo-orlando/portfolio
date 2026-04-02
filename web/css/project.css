@@ -7,7 +7,7 @@
 :root {
     --bg: #080b0f;
     --accent: #00f5a0;
-    --accent2: #000507;
+    --accent2: #00f5a0;
     --text: #e8f0f8;
     --muted: #3a4a5a;
     --muted2: #5a7080;
@@ -38,7 +38,6 @@ body::after {
     z-index: 500;
 }
 
-/* Grid */
 .grid {
     position: fixed;
     inset: 0;
@@ -51,7 +50,6 @@ body::after {
     opacity: 0.6;
 }
 
-/* Blobs */
 .blob1 {
     position: fixed;
     width: 600px; height: 600px;
@@ -73,7 +71,6 @@ body::after {
     z-index: 0;
 }
 
-/* Corners */
 .corner {
     position: fixed;
     width: 28px; height: 28px;
@@ -174,7 +171,7 @@ body::after {
 }
 
 .hero-title {
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(3.5rem, 9vw, 7rem);
     font-weight: 800;
     line-height: 0.9;
     letter-spacing: -0.04em;
@@ -200,10 +197,20 @@ body::after {
     animation: fadeUp 0.7s ease forwards 0.8s;
 }
 
+/* ── SECTION ── */
+.section {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 3rem 5rem;
+    border-top: 1px solid var(--border2);
+}
+
 /* ── PROJECTS ── */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 1rem;
 }
 
@@ -271,7 +278,6 @@ body::after {
     letter-spacing: 0.06em;
     transition: opacity 0.2s;
 }
-
 .project-link:hover { opacity: 0.7; }
 
 /* ── FOOTER ── */
@@ -292,7 +298,6 @@ body::after {
 }
 
 .footer .prompt { color: var(--accent); }
-
 .footer-back {
     margin-left: 2rem;
     color: var(--accent);
@@ -301,7 +306,6 @@ body::after {
     transition: opacity 0.2s;
 }
 .footer-back:hover { opacity: 0.7; }
-
 .footer-year { margin-left: auto; }
 
 /* ── SCROLL REVEAL ── */
