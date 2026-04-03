@@ -393,6 +393,96 @@ body::after {
     line-height: 1.7;
 }
 
+/* ── NAV DROPDOWN ── */
+/* Ajoute ce bloc dans ton home.css (et tous tes autres CSS de pages) */
+
+.nav-dropdown { position: relative; list-style: none; }
+
+.nav-dropdown-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    transition: color 0.2s;
+}
+.nav-dropdown-btn:hover { color: var(--accent); }
+.nav-dropdown-btn svg { transition: transform 0.3s ease; }
+.nav-dropdown.open .nav-dropdown-btn { color: var(--accent); }
+.nav-dropdown.open .nav-dropdown-btn svg { transform: rotate(180deg); }
+
+/* APRÈS — un seul transform */
+.nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 1.2rem);
+    left: 50%;
+    width: 280px;
+    background: rgba(8, 11, 15, 0.97);
+    border: 1px solid var(--border2);
+    backdrop-filter: blur(16px);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 200;
+}
+
+.nav-dropdown.open .nav-dropdown-menu {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1.2rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border2);
+    transition: background 0.2s;
+}
+.dropdown-item:last-child { border-bottom: none; }
+.dropdown-item:hover { background: rgba(0, 245, 160, 0.05); }
+.dropdown-item:hover .dropdown-name { color: var(--accent); }
+
+.dropdown-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    min-width: 20px;
+}
+
+.dropdown-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.dropdown-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    transition: color 0.2s;
+}
+
+.dropdown-desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted2);
+    letter-spacing: 0.04em;
+}
+
 /* ── FOOTER ── */
 .footer {
     position: relative;
