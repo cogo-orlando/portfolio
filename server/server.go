@@ -22,6 +22,16 @@ func Start() {
 			ProjectHandler(w, r)
 		case "/contact":
 			ContactHandler(w, r)
+		case "/cv":
+			CvHandler(w, r)
+		case "/status":
+			StatusHandler(w, r)
+		case "/faq":
+			FaqHandler(w, r)
+		case "/blog":
+			BlogHandler(w, r)
+		case "/uses":
+			UsesHandler(w, r)
 
 		//Error 404
 		default:
