@@ -41,6 +41,26 @@ func ContactHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "contact.html")
 }
 
+func CvHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "cv.html")
+}
+
+func StatusHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "status.html")
+}
+
+func FaqHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "faq.html")
+}
+
+func BlogHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "blog.html")
+}
+
+func UsesHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "uses.html")
+}
+
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 	renderTemplate(w, "404.html")
