@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orlando Cogo — CV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/cv.css">
+</head>
+<body>
+
+<div class="blob1"></div>
+<div class="blob2"></div>
+<div class="grid"></div>
+<div class="corner corner--tl"></div>
+<div class="corner corner--tr"></div>
+<div class="corner corner--bl"></div>
+<div class="corner corner--br"></div>
+
+<!-- NAV -->
+<nav class="nav">
+    <a href="/home" class="nav-logo"><span class="prompt">~/</span>orlando.cogo</a>
+    <ul class="nav-links">
+        <li class="nav-dropdown">
+            <button class="nav-dropdown-btn">
+                pages
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <div class="nav-dropdown-menu">
+                <a href="/home" class="dropdown-item"><span class="dropdown-num">00</span><span class="dropdown-info"><span class="dropdown-name">Accueil</span><span class="dropdown-desc">Page principale</span></span></a>
+                <a href="/about" class="dropdown-item"><span class="dropdown-num">01</span><span class="dropdown-info"><span class="dropdown-name">À propos</span><span class="dropdown-desc">Mon parcours & ma reconversion</span></span></a>
+                <a href="/skills" class="dropdown-item"><span class="dropdown-num">02</span><span class="dropdown-info"><span class="dropdown-name">Compétences</span><span class="dropdown-desc">Go, JS, SQL, Cybersec, Linux...</span></span></a>
+                <a href="/project" class="dropdown-item"><span class="dropdown-num">03</span><span class="dropdown-info"><span class="dropdown-name">Projets</span><span class="dropdown-desc">Mes réalisations</span></span></a>
+                <a href="/contact" class="dropdown-item"><span class="dropdown-num">04</span><span class="dropdown-info"><span class="dropdown-name">Contact</span><span class="dropdown-desc">GitHub, LinkedIn, email</span></span></a>
+                <a href="/cv" class="dropdown-item"><span class="dropdown-num">05</span><span class="dropdown-info"><span class="dropdown-name">CV</span><span class="dropdown-desc">Mon curriculum vitae</span></span></a>
+            </div>
+        </li>
+    </ul>
+    <div class="nav-right">
+        <a href="/img/cv.png" class="cv-btn" download="CV_Orlando_Cogo.png">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v7M6.5 8l-2.5-2.5M6.5 8L9 5.5M1 11h11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Télécharger
+        </a>
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            <span>open to work</span>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-tag">
+        <span class="prompt">~/cv $</span>
+        <span class="typed"></span>
+        <span class="cursor"></span>
+    </div>
+    <h1 class="hero-title">Mon<br><span class="outline">CV</span></h1>
+    <p class="hero-intro">Présentation de mon cv · <span style="color:var(--accent)">Vous pouvez le télécharger</span> en haut de la page</p>
+</section>
+
+<!-- CV INTERACTIF -->
+<section class="section">
+    <div class="cv-layout">
+        <!-- CV image -->
+        <div class="cv-container">
+            <div class="cv-wrapper" id="cvWrapper">
+                <img src="/img/cv.png" alt="CV Orlando Cogo" class="cv-img" id="cvImg" draggable="false">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <span class="prompt">~/orlando.cogo $</span>
+    <span>cat cv.pdf</span>
+    <a href="/home" class="footer-back">← Retour à l'accueil</a>
+    <span class="footer-year">© 2026</span>
+</footer>
+
+<script src="/js/cv.js"></script>
+</body>
+</html>
