@@ -32,6 +32,8 @@ func Start() {
 			BlogHandler(w, r)
 		case "/uses":
 			UsesHandler(w, r)
+		case "/maintenance":
+			MaintenanceHandler(w, r)
 
 		//Error 404
 		default:
