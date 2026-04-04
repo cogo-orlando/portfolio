@@ -1,38 +1,73 @@
-const cmdEl    = document.querySelector('.typed-cmd');
-const outputEl = document.getElementById('term-output');
-const cursorEl = document.querySelector('.cursor');
-
-const command = 'cd ' + window.location.pathname;
-
-const lines = [
-    { cls: 'err', text: 'bash: cd: ' + window.location.pathname + ': La page est actuellement en maintenance' },
-    { cls: 'dim', text: '─────────────────────────────────────────────────' },
-    { cls: 'acc', text: 'Suggestion : retourner à /home' },
-];
-
-function addLine(cls, text) {
-    const d = document.createElement('div');
-    d.className = 't-line t-' + cls;
-    d.textContent = text;
-    outputEl.appendChild(d);
+// ── TYPING ──
+const typingEl = document.querySelector('.hero-tag .typed');
+const text = 'sudo maintenance --enable';
+if (typingEl) {
+    let i = 0;
+    setTimeout(() => {
+        const interval = setInterval(() => {
+            typingEl.textContent += text[i]; i++;
+            if (i >= text.length) clearInterval(interval);
+        }, 65);
+    }, 400);
 }
 
-// Type the command first
-let i = 0;
-setTimeout(() => {
-    const type = setInterval(() => {
-        cmdEl.textContent += command[i];
-        i++;
-        if (i >= command.length) {
-            clearInterval(type);
+// ── COUNTDOWN ──
+// Modifie cette date pour définir la fin de la maintenance
+const endTime = new Date();
+endTime.setHours(endTime.getHours() + 2); // Par défaut : 2h à partir de maintenant
 
-            // Hide cursor, show output
-            setTimeout(() => {
-                cursorEl.style.display = 'none';
-                lines.forEach((l, idx) => {
-                    setTimeout(() => addLine(l.cls, l.text), idx * 180);
-                });
-            }, 300);
-        }
-    }, 55);
-}, 700);
+function updateCountdown() {
+    const now  = new Date();
+    const diff = Math.max(0, endTime - now);
+    const h    = Math.floor(diff / (1000*60*60));
+    const m    = Math.floor((diff % (1000*60*60)) / (1000*60));
+    const s    = Math.floor((diff % (1000*60)) / 1000);
+
+    const cdH = document.getElementById('cdH');
+    const cdM = document.getElementById('cdM');
+    const cdS = document.getElementById('cdS');
+    if (cdH) cdH.textContent = String(h).padStart(2,'0');
+    if (cdM) cdM.textContent = String(m).padStart(2,'0');
+    if (cdS) cdS.textContent = String(s).padStart(2,'0');
+
+    const returnEl = document.getElementById('returnTime');
+    if (returnEl) {
+        returnEl.textContent = endTime.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+    }
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── DURÉE ──
+const durationEl = document.getElementById('duration');
+if (durationEl) durationEl.textContent = '~ 2 heures';
+
+// ── PROGRESS BAR ANIMÉE ──
+// Simule une progression réaliste
+const steps = [
+    { pct: 35, step: 'step1', label: 'step2' },
+    { pct: 65, step: 'step2', label: 'step3' },
+    { pct: 88, step: 'step3', label: 'step4' },
+];
+
+let currentStep = 0;
+const fillEl = document.getElementById('progressFill');
+const pctEl  = document.getElementById('progressPct');
+
+// Démarre à 35% (sauvegarde faite)
+setTimeout(() => {
+    if (fillEl) fillEl.style.width = '35%';
+    if (pctEl)  pctEl.textContent  = '35%';
+    document.getElementById('step1')?.classList.remove('active');
+    document.getElementById('step1')?.classList.add('done');
+    document.getElementById('step2')?.classList.add('active');
+}, 800);
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i * 0.1) + 's';
+    observer.observe(el);
+});

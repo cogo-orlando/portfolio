@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>En Maintenance — Page en cours de maintenance</title>
+    <title>Orlando Cogo — Maintenance</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/maintenance.css">
@@ -28,34 +28,107 @@
 
 <div class="wrapper">
 
-    <div class="glitch-wrap">
-        <h1 class="glitch" data-text="Maintenance">Maintenance</h1>
+    <!-- Icône animée -->
+    <div class="maint-icon reveal">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+            <path d="M32 4C16.536 4 4 16.536 4 32s12.536 28 28 28 28-12.536 28-28S47.464 4 32 4z" stroke="currentColor" stroke-width="2"/>
+            <path d="M20 32h24M32 20v24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="32" cy="32" r="6" stroke="currentColor" stroke-width="2"/>
+            <path d="M44 20l4-4M20 44l-4 4M44 44l4 4M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
     </div>
 
-    <div class="terminal-block">
-        <div class="terminal-line">
-            <span class="prompt">~/portfolio $</span>
-            <span class="cmd typed-cmd"></span>
-            <span class="cursor"></span>
+    <!-- Titre -->
+    <div class="hero-tag reveal">
+        <span class="prompt">~/portfolio $</span>
+        <span class="typed"></span>
+        <span class="cursor"></span>
+    </div>
+
+    <h1 class="title reveal">
+        En<br><span class="outline">Maintenance</span>
+    </h1>
+
+    <p class="subtitle reveal">
+        Le portfolio est temporairement hors ligne pour des améliorations.<br>
+        On revient très vite — encore mieux qu'avant.
+    </p>
+
+    <!-- Terminal block -->
+    <div class="terminal-block reveal">
+        <div class="term-line">
+            <span class="t-dim">$</span>
+            <span class="t-acc">sudo systemctl stop portfolio</span>
         </div>
-        <div class="terminal-output" id="term-output"></div>
+        <div class="term-line">
+            <span class="t-dim">#</span>
+            <span class="t-text">Arrêt du service en cours...</span>
+        </div>
+        <div class="term-line">
+            <span class="t-dim">#</span>
+            <span class="t-warn">Maintenance planifiée — mise à jour du système</span>
+        </div>
+        <div class="term-line">
+            <span class="t-dim">#</span>
+            <span class="t-text">Durée estimée : <span class="t-acc" id="duration">calcul...</span></span>
+        </div>
+        <div class="term-line">
+            <span class="t-dim">$</span>
+            <span class="t-text">Retour estimé : <span class="t-acc" id="returnTime">bientôt</span></span>
+        </div>
     </div>
 
-    <p class="subtitle">Cette page est actuellement en maintenance, retourner sur la page d'accueil ou contacter moi pour plus d'information</p>
+    <!-- Progress bar -->
+    <div class="progress-wrap reveal">
+        <div class="progress-header">
+            <span class="progress-label">Progression de la mise à jour</span>
+            <span class="progress-pct" id="progressPct">0%</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-steps">
+            <span class="step done" id="step1">Sauvegarde</span>
+            <span class="step active" id="step2">Mise à jour</span>
+            <span class="step" id="step3">Tests</span>
+            <span class="step" id="step4">Redémarrage</span>
+        </div>
+    </div>
 
-    <div class="actions">
-        <a href="/home" class="btn-primary">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M12 7H2M2 7L6 3M2 7L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span>Retour à l'accueil</span>
+    <!-- Countdown -->
+    <div class="countdown-wrap reveal">
+        <div class="countdown-label">Retour dans</div>
+        <div class="countdown">
+            <div class="cd-block">
+                <span class="cd-val" id="cdH">00</span>
+                <span class="cd-unit">heures</span>
+            </div>
+            <span class="cd-sep">:</span>
+            <div class="cd-block">
+                <span class="cd-val" id="cdM">00</span>
+                <span class="cd-unit">minutes</span>
+            </div>
+            <span class="cd-sep">:</span>
+            <div class="cd-block">
+                <span class="cd-val" id="cdS">00</span>
+                <span class="cd-unit">secondes</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-wrap reveal">
+        <p class="contact-text">Une urgence ? Contacte-moi directement :</p>
+        <a href="mailto:Orlando.cogo.pro@gmail.com" class="contact-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Orlando.cogo.pro@gmail.com
         </a>
-        <a href="/contact" class="btn-secondary">Me contacter</a>
     </div>
 
+    <!-- Status dot -->
     <div class="status-row">
-        <span class="status-dot"></span>
-        <span class="status-text">Maintenance · Offline</span>
+        <div class="status-dot-warn"></div>
+        <span>Maintenance en cours · Service temporairement indisponible</span>
     </div>
 
 </div>
