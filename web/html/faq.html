@@ -1,10 +1,405 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orlando Cogo — FAQ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/faq.css">
 </head>
 <body>
 
+<div class="blob1"></div>
+<div class="blob2"></div>
+<div class="grid"></div>
+<div class="corner corner--tl"></div>
+<div class="corner corner--tr"></div>
+<div class="corner corner--bl"></div>
+<div class="corner corner--br"></div>
+
+<!-- NAV -->
+<nav class="nav">
+    <a href="/home" class="nav-logo"><span class="prompt">~/</span>orlando.cogo</a>
+    <ul class="nav-links">
+        <li class="nav-dropdown">
+            <button class="nav-dropdown-btn">pages
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-dropdown-menu">
+                <a href="/home" class="dropdown-item"><span class="dropdown-num">00</span><span class="dropdown-info"><span class="dropdown-name">Accueil</span><span class="dropdown-desc">Page principale</span></span></a>
+                <a href="/about" class="dropdown-item"><span class="dropdown-num">01</span><span class="dropdown-info"><span class="dropdown-name">À propos</span><span class="dropdown-desc">Mon parcours & ma reconversion</span></span></a>
+                <a href="/skills" class="dropdown-item"><span class="dropdown-num">02</span><span class="dropdown-info"><span class="dropdown-name">Compétences</span><span class="dropdown-desc">Go, JS, SQL, Cybersec, Linux...</span></span></a>
+                <a href="/project" class="dropdown-item"><span class="dropdown-num">03</span><span class="dropdown-info"><span class="dropdown-name">Projets</span><span class="dropdown-desc">Mes réalisations</span></span></a>
+                <a href="/contact" class="dropdown-item"><span class="dropdown-num">04</span><span class="dropdown-info"><span class="dropdown-name">Contact</span><span class="dropdown-desc">GitHub, LinkedIn, email</span></span></a>
+                <a href="/cv" class="dropdown-item"><span class="dropdown-num">05</span><span class="dropdown-info"><span class="dropdown-name">CV</span><span class="dropdown-desc">Mon curriculum vitae</span></span></a>
+                <a href="/status" class="dropdown-item"><span class="dropdown-num">06</span><span class="dropdown-info"><span class="dropdown-name">Status</span><span class="dropdown-desc">État du système</span></span></a>
+                <a href="/faq" class="dropdown-item"><span class="dropdown-num">07</span><span class="dropdown-info"><span class="dropdown-name">FAQ</span><span class="dropdown-desc">Questions fréquentes</span></span></a>
+            </div>
+        </li>
+    </ul>
+    <div class="nav-right">
+        <div class="nav-status"><span class="status-dot"></span><span>open to work</span></div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-tag">
+        <span class="prompt">~/faq $</span>
+        <span class="typed"></span>
+        <span class="cursor"></span>
+    </div>
+    <h1 class="hero-title">FAQ<br><span class="outline">Questions</span></h1>
+    <p class="hero-intro">Tout ce que tu veux savoir · <span style="color:var(--accent)">sans filtre</span></p>
+
+    <!-- Compteur -->
+    <div class="faq-counter reveal">
+        <div class="fc-item"><span class="fc-val" id="totalQ">0</span><span class="fc-label">questions</span></div>
+        <div class="fc-sep">·</div>
+        <div class="fc-item"><span class="fc-val">4</span><span class="fc-label">catégories</span></div>
+        <div class="fc-sep">·</div>
+        <div class="fc-item"><span class="fc-val">1</span><span class="fc-label">reconversion assumée</span></div>
+    </div>
+</section>
+
+<!-- CONTROLS -->
+<section class="section">
+
+    <!-- Barre de progression -->
+    <div class="progress-wrap reveal">
+        <div class="progress-header">
+            <span class="progress-label">Questions explorées</span>
+            <span class="progress-pct"><span id="openCount">0</span>/<span id="totalCount">0</span></span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <!-- Recherche + actions -->
+    <div class="faq-controls reveal">
+        <div class="search-wrap">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input type="text" id="searchInput" class="search-input" placeholder="Rechercher une question... (essaie 'airbus')">
+        </div>
+        <div class="faq-actions">
+            <button class="action-btn" id="randomBtn">Question aléatoire</button>
+            <button class="action-btn" id="interviewBtn">Mode interview</button>
+            <button class="action-btn" id="expandAllBtn">Tout ouvrir</button>
+        </div>
+    </div>
+
+    <!-- Filtres catégories -->
+    <div class="cat-filters reveal">
+        <button class="cat-btn active" data-cat="all">Toutes</button>
+        <button class="cat-btn" data-cat="parcours" style="--cat-color:#00f5a0">Parcours</button>
+        <button class="cat-btn" data-cat="formation" style="--cat-color:#00c8f5">Formation</button>
+        <button class="cat-btn" data-cat="opportunites" style="--cat-color:#f5a000">Opportunités</button>
+        <button class="cat-btn" data-cat="portfolio" style="--cat-color:#c8a0f5">Portfolio & Tech</button>
+        <button class="cat-btn" data-cat="perso" style="--cat-color:#f500a0">Perso</button>
+    </div>
+
+</section>
+
+<!-- FAQ ITEMS -->
+<section class="section" id="faqSection">
+    <div class="faq-list" id="faqList">
+
+        <!-- ── PARCOURS ── -->
+        <div class="faq-item reveal" data-cat="parcours" data-color="#00f5a0">
+            <button class="faq-q">
+                <span class="faq-num">01</span>
+                <span class="faq-text">Pourquoi tu as quitté l'industrie aéronautique ?</span>
+                <span class="faq-cat-tag" style="--c:#00f5a0">Parcours</span>
+                <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-a">
+                <div class="faq-a-inner">
+                    <span class="faq-prompt">~/faq $</span>
+                    <p>J'ai passé plusieurs années dans l'aéronautique chez Airbus, d'abord à Toulouse puis à Marseille. C'était une expérience incroyable qui m'a appris la rigueur, la méthode et le travail en environnement exigeant. Mais j'ai réalisé que ma vraie passion était ailleurs — dans l'informatique, les systèmes, la sécurité. Quitter un secteur stable pour recommencer à zéro n'était pas une décision facile, mais c'était la bonne.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item reveal" data-cat="parcours" data-color="#00f5a0">
+            <button class="faq-q">
+                <span class="faq-num">02</span>
+                <span class="faq-text">Comment s'est passée ta reconversion ?</span>
+                <span class="faq-cat-tag" style="--c:#00f5a0">Parcours</span>
+                <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-a">
+                <div class="faq-a-inner">
+                    <span class="faq-prompt">~/faq $</span>
+                    <p>Après mon BTS CPRP obtenu en alternance chez Airbus Helicopters, j'ai pris la décision de me réorienter vers ce qui m'attirait vraiment. Je me suis inscrit en Bachelor Informatique à Ynov Campus Toulouse, spécialisation cybersécurité. C'est un nouveau départ complet, mais chaque jour confirme que c'était le bon choix.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item reveal" data-cat="parcours" data-color="#00f5a0" data-secret="airbus">
+            <button class="faq-q">
+                <span class="faq-num">03</span>
+                <span class="faq-text">Ce que t'a vraiment appris Airbus...</span>
+                <span class="faq-cat-tag" style="--c:#00f5a0">Parcours</span>
+                <span class="faq-secret-tag">Secret</span>
+                <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-a">
+                <div class="faq-a-inner">
+                    <span class="faq-prompt">~/faq $ # 🔓 Easter egg débloqué</span>
+                    <p>Travailler sur des pièces d'avions avec des tolérances de quelques microns t'apprend quelque chose d'essentiel : une erreur peut avoir des conséquences catastrophiques. Cette mentalité "zéro défaut" que j'ai apprise dans l'usinage, je l'applique directement à la cybersécurité. Un port ouvert non justifié, une config SSH mal sécurisée — c'est le même état d'esprit. Les avions et les systèmes informatiques ont plus en commun qu'on ne le croit.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── FORMATION ── -->
+        <div class="faq-item reveal" data-cat="formation" data-color="#00c8f5">
+            <button class="faq-q">
+                <span class="faq-num">04</span>
+                <span class="faq-text">Pourquoi la cybersécurité spécifiquement ?</span>
+                <span class="faq-cat-tag" style="--c:#00c8f5">Formation</span>
+                <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-a">
+                <div class="faq-a-inner">
+                    <span class="faq-prompt">~/faq $</span>
+                    <p>Pour moi, la cybersécurité c'est vraiment l'avenir. Avec l'arrivée de l'IA et toutes les nouvelles technologies, le secteur change régulièrement et c'est ça qui me passionne. Je suis convaincu qu'il est devenu essentiel de comprendre ces évolutions pour bien protéger les systèmes. C'est un domaine où on ne s'ennuie jamais — chaque jour apporte de nouvelles menaces à comprendre et à contrer.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item reveal" data-cat="formation" data-color="#00c8f5">
+            <button class="faq-q">
+                <span class="faq-num">05</span>
+                <span class="faq-text">Tu apprends quoi en ce moment ?</span>
+                <span class="faq-cat-tag" style="--c:#00c8f5">Formation</span>
+                <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-a">
+                <div class="faq-a-inner">
+                    <span class="faq-prompt">~/faq $</span>
+                    <p>En ce moment je travaille sur plusieurs fronts en parallèle : la sécurité des réseaux TCP/IP, l'administration Linux avancée, le développement web en Go, et les challenges CTF sur TryHackMe. Je prépare aussi le CompTIA Security+ pour avoir une première certification reconnue. Le tout en suivant la veille cybersec quotidiennement.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item reveal" data-cat="formation" data-color="#00c8f5">
+            <button class="faq-q">
+                <span class="faq-num">06</span>
+                <span class="faq-text">Quel est ton niveau actuel honnêtement ?</span>
+                <span class="faq-cat-tag" style="--c:#00c8f5">Formation</span>
+                <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-a">
+                <div class="faq-a-inner">
+                    <span class="faq-prompt">~/faq $</span>
+                    <p>Honnêtement ? Débutant avancé. Je suis en première année de Bachelor, donc je pose des bases solides. Je sais configurer un réseau sous Cisco, déployer une VM Linux, développer une application web en Go, et je commence à m'attaquer aux CTF. Je ne prétends pas tout savoir — c'est d'ailleurs ce qui me motive à apprendre chaque jour.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── OPPORTUNITÉS ── -->
+        <div class="faq-item reveal" data-cat="opportunites" data-color="#f5a000">
+            <button class="faq-q">
+                <span class="faq-num">07</span>
+                <span class="faq-text">Tu cherches quoi comme stage ?</span>
+                <span class="faq-cat-tag" style="--c:#f5a000">Opportunités</span>
+                <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-a">
+                <div class="faq-a-inner">
+                    <span class="faq-prompt">~/faq $</span>
+                    <p>Je recherche un stage dans les domaines des réseaux, systèmes ou cybersécurité. Idéalement dans une entreprise où je peux mettre les mains dans les configurations réelles, participer à des audits, ou contribuer à la sécurisation d'infrastructures. Je suis basé à Toulouse mais mobile.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item reveal" data-cat="opportunites" data-color="#f5a000">
+            <button class="faq-q">
+                <span class="faq-num">08</span>
+                <span class="faq-text">Quelle est ta disponibilité ?</span>
+                <span class="faq-cat-tag" style="--c:#f5a000">Opportunités</span>
+                <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-a">
+                <div class="faq-a-inner">
+                    <span class="faq-prompt">~/faq $</span>
+                    <p>Je suis actuellement en Bachelor 1ère année à Ynov Campus Toulouse. Je suis disponible pour un stage à partir de la période définie par mon école. N'hésite pas à me contacter directement pour qu'on en discute — la meilleure façon de le savoir c'est encore de me poser la question !</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── PORTFOLIO & TECH ── -->
+        <div class="faq-item reveal" data-cat="portfolio" data-color="#c8a0f5">
+            <button class="faq-q">
+                <span class="faq-num">09</span>
+                <span class="faq-text">Comment ce portfolio a été fait ?</span>
+                <span class="faq-cat-tag" style="--c:#c8a0f5">Portfolio</span>
+                <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-a">
+                <div class="faq-a-inner">
+                    <span class="faq-prompt">~/faq $</span>
+                    <p>Entièrement from scratch en Go pour le backend — serveur HTTP custom, routing manuel, gestion des fichiers statiques, middleware de maintenance, API de contact avec stockage JSON. Le front est en HTML/CSS/JS vanilla, sans framework. Pas de WordPress, pas de template. Chaque ligne a été écrite à la main, ce qui est un peu la point.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item reveal" data-cat="portfolio" data-color="#c8a0f5">
+            <button class="faq-q">
+                <span class="faq-num">10</span>
+                <span class="faq-text">Pourquoi Go et pas Node.js ou Python ?</span>
+                <span class="faq-cat-tag" style="--c:#c8a0f5">Portfolio</span>
+                <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-a">
+                <div class="faq-a-inner">
+                    <span class="faq-prompt">~/faq $</span>
+                    <p>Go m'a attiré pour plusieurs raisons : sa simplicité, ses performances, sa bibliothèque standard très complète pour le web, et surtout son utilisation croissante dans les outils de cybersécurité. Beaucoup d'outils offensifs et défensifs modernes sont écrits en Go — apprendre ce langage c'est investir dans mon futur métier.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── PERSO ── -->
+        <div class="faq-item reveal" data-cat="perso" data-color="#f500a0">
+            <button class="faq-q">
+                <span class="faq-num">11</span>
+                <span class="faq-text">C'est quoi tes hobbies en dehors du code ?</span>
+                <span class="faq-cat-tag" style="--c:#f500a0">Perso</span>
+                <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-a">
+                <div class="faq-a-inner">
+                    <span class="faq-prompt">~/faq $</span>
+                    <p>L'escalade — qui m'apprend la patience et la résolution de problèmes pas si différente du debugging. Les voyages — j'aime découvrir de nouveaux environnements et cultures. La musique — toujours un casque sur les oreilles. Les jeux vidéo — stratégie et exploration surtout. Et les sorties avec les amis évidemment.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item reveal" data-cat="perso" data-color="#f500a0">
+            <button class="faq-q">
+                <span class="faq-num">12</span>
+                <span class="faq-text">Un fait surprenant sur toi ?</span>
+                <span class="faq-cat-tag" style="--c:#f500a0">Perso</span>
+                <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-a">
+                <div class="faq-a-inner">
+                    <span class="faq-prompt">~/faq $</span>
+                    <p>J'ai participé aux Départementaux WorldSkills 2023 en Fraisage. WorldSkills c'est les "Olympiades des métiers" — des compétitions nationales et internationales de compétences professionnelles. Ça demande une précision extrême sur des machines CNC. Pas exactement ce qu'on attend d'un futur expert en cybersécurité, non ?</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Ce que je ne suis PAS -->
+    <div class="not-section reveal">
+        <div class="not-header">
+            <span class="section-tag">// Clarification</span>
+            <h2 class="section-title">Ce que je ne suis <span style="color:var(--accent)">pas</span></h2>
+        </div>
+        <div class="not-grid">
+            <div class="not-item"><span class="not-x">✗</span><span>Un expert qui prétend tout savoir</span></div>
+            <div class="not-item"><span class="not-x">✗</span><span>Quelqu'un qui abandonne face à un problème</span></div>
+            <div class="not-item"><span class="not-x">✗</span><span>Un dev qui refuse d'apprendre de nouvelles technos</span></div>
+            <div class="not-item"><span class="not-x">✗</span><span>Un hacker chapeau noir</span></div>
+            <div class="not-item"><span class="not-x">✗</span><span>Quelqu'un qui a peur de la reconversion</span></div>
+            <div class="not-item"><span class="not-x">✗</span><span>Un profil "classique" en informatique</span></div>
+        </div>
+    </div>
+
+    <!-- Mythes & Réalités -->
+    <div class="myths-section reveal">
+        <div class="myths-header">
+            <span class="section-tag">// Démystification</span>
+            <h2 class="section-title">Mythes & Réalités</h2>
+        </div>
+        <div class="myths-list">
+            <div class="myth-item">
+                <div class="myth-col myth">
+                    <span class="myth-tag">Mythe</span>
+                    <p>"La cybersécurité c'est juste du hacking"</p>
+                </div>
+                <div class="myth-sep">→</div>
+                <div class="myth-col reality">
+                    <span class="myth-tag reality-tag">Réalité</span>
+                    <p>C'est 80% de prévention, architecture, audit, et formation. Le pentest c'est une infime partie du domaine.</p>
+                </div>
+            </div>
+            <div class="myth-item">
+                <div class="myth-col myth">
+                    <span class="myth-tag">Mythe</span>
+                    <p>"Il faut être un génie pour faire de la sécu"</p>
+                </div>
+                <div class="myth-sep">→</div>
+                <div class="myth-col reality">
+                    <span class="myth-tag reality-tag">Réalité</span>
+                    <p>Il faut de la curiosité, de la rigueur et de la persévérance. La plupart des failles exploitées sont des erreurs de configuration basiques.</p>
+                </div>
+            </div>
+            <div class="myth-item">
+                <div class="myth-col myth">
+                    <span class="myth-tag">Mythe</span>
+                    <p>"Une reconversion en info c'est impossible après 20 ans"</p>
+                </div>
+                <div class="myth-sep">→</div>
+                <div class="myth-col reality">
+                    <span class="myth-tag reality-tag">Réalité</span>
+                    <p>La preuve par l'exemple. Un parcours atypique est souvent un avantage — on apporte une vision différente des profils classiques.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Soumettre une question -->
+    <div class="ask-section reveal">
+        <div class="ask-header">
+            <span class="section-tag">// Interaction</span>
+            <h2 class="section-title">Tu as une question ?</h2>
+        </div>
+        <div class="ask-form-wrap">
+            <div id="askSuccess" style="display:none" class="ask-success">
+                <span style="color:var(--accent)">[OK]</span> Question reçue, merci !
+            </div>
+            <div id="askForm" class="ask-form">
+                <input type="text" id="askInput" class="ask-input" placeholder="Pose ta question ici..." maxlength="200">
+                <button class="ask-btn" id="askBtn">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M12 7L8 3M12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    Envoyer
+                </button>
+            </div>
+            <span class="ask-note">Les questions sont stockées et peuvent être ajoutées à cette FAQ.</span>
+        </div>
+    </div>
+
+</section>
+
+<!-- MODE INTERVIEW OVERLAY -->
+<div class="interview-overlay" id="interviewOverlay">
+    <div class="interview-box">
+        <div class="interview-bar">
+            <div class="ft-dot" style="background:#ff5f57"></div>
+            <div class="ft-dot" style="background:#febc2e"></div>
+            <div class="ft-dot" style="background:#28c840"></div>
+            <span style="font-family:'DM Mono',monospace;font-size:11px;color:#5a7080;margin-left:8px">mode_interview.sh</span>
+            <button class="interview-close" id="interviewClose">ESC</button>
+        </div>
+        <div class="interview-body" id="interviewBody"></div>
+        <div class="interview-controls">
+            <button class="iv-btn" id="ivNext">Question suivante →</button>
+            <button class="iv-btn iv-exit" id="ivExit">Quitter</button>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <span class="prompt">~/orlando.cogo $</span>
+    <span>cat faq.md</span>
+    <a href="/home" class="footer-back">← Retour à l'accueil</a>
+    <span class="footer-year">© 2026</span>
+</footer>
+
+<script src="/js/faq.js"></script>
 </body>
 </html>
