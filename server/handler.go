@@ -65,7 +65,6 @@ func MaintenanceHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "maintenance.html")
 }
 
-// Error 404
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 	renderTemplate(w, "404.html")
