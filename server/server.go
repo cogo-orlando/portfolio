@@ -5,17 +5,63 @@ import (
 	"net/http"
 )
 
-// ── MAINTENANCE MODE ──
-// true  = site en maintenance
-// false = site normal
+// ══════════════════════════════════════════
+//  CONFIGURATION MAINTENANCE
+// ══════════════════════════════════════════
+
+// true  = page en maintenance
+// false = page accessible
+var maintenancePages = map[string]bool{
+	"/blog":    true,
+	"/ctf":     true,
+	"/uses":    true,
+	"/about":   false,
+	"/skills":  false,
+	"/contact": false,
+	"/cv":      false,
+	"/home":    false,
+	"/project": false,
+	"/faq":     false,
+	"/status":  false,
+}
+
+// true  = TOUT le site en maintenance
+// false = site accessible
 var MaintenanceMode = false
+
+// ══════════════════════════════════════════
+//  DÉMARRAGE DU SERVEUR
+// ══════════════════════════════════════════
 
 func Start() {
 	mux := http.NewServeMux()
 
-	// Routes
+	// ── API ──
 	mux.HandleFunc("/api/contact", ContactAPIHandler)
+	mux.HandleFunc("/api/faq-question", FAQQuestionHandler)
+
+	// ── FICHIERS STATIQUES ──
+	fs := http.FileServer(http.Dir("./web"))
+	mux.Handle("/css/", fs)
+	mux.Handle("/js/", fs)
+	mux.Handle("/img/", fs)
+
+	// ── ROUTES ──
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+
+		// Si le site entier est en maintenance → tout le monde voit maintenance.html
+		if MaintenanceMode {
+			http.ServeFile(w, r, "web/html/maintenance.html")
+			return
+		}
+
+		// Si la page demandée est en maintenance → affiche maintenance.html
+		if maintenancePages[r.URL.Path] {
+			http.ServeFile(w, r, "web/html/maintenance.html")
+			return
+		}
+
+		// Sinon → route normale
 		switch r.URL.Path {
 		case "/":
 			IndexHandler(w, r)
@@ -46,42 +92,8 @@ func Start() {
 		}
 	})
 
-	// Fichiers statiques
-	fs := http.FileServer(http.Dir("./web"))
-	mux.Handle("/css/", fs)
-	mux.Handle("/js/", fs)
-	mux.Handle("/img/", fs)
-
-	// Middleware maintenance — entoure tout le mux
-	var handler http.Handler = mux
-	if MaintenanceMode {
-		handler = maintenanceMiddleware(mux)
-	}
-
 	fmt.Println("Serveur lancé sur http://localhost:8080")
-	if err := http.ListenAndServe(":8080", handler); err != nil {
+	if err := http.ListenAndServe(":8080", mux); err != nil {
 		panic(err)
 	}
-}
-
-// maintenanceMiddleware redirige toutes les requêtes vers la page maintenance
-// sauf les fichiers statiques (css, js, img) pour que la page soit belle
-func maintenanceMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Laisse passer les fichiers statiques
-		if len(r.URL.Path) > 4 {
-			prefix := r.URL.Path[:5]
-			if prefix == "/css/" || prefix == "/img/" {
-				next.ServeHTTP(w, r)
-				return
-			}
-		}
-		if len(r.URL.Path) > 3 && r.URL.Path[:4] == "/js/" {
-			next.ServeHTTP(w, r)
-			return
-		}
-
-		// Tout le reste → page maintenance
-		http.ServeFile(w, r, "web/html/maintenance.html")
-	})
 }
