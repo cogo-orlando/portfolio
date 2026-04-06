@@ -53,14 +53,6 @@ func FaqHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "faq.html")
 }
 
-func BlogHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "blog.html")
-}
-
-func UsesHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "uses.html")
-}
-
 func MaintenanceHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "maintenance.html")
 }
