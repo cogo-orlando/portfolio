@@ -18,13 +18,11 @@ var maintenancePages = map[string]bool{
 	"/contact": false,
 	"/cv":      false,
 	"/home":    false,
-	"/project": false,
+	"/project": true,
 	"/faq":     false,
 	"/status":  false,
 }
 
-// true  = TOUT le site en maintenance
-// false = site accessible
 var MaintenanceMode = false
 
 // ══════════════════════════════════════════
@@ -59,7 +57,7 @@ func Start() {
 			return
 		}
 
-		// Sinon → route normale
+		// Routes
 		switch r.URL.Path {
 		case "/":
 			IndexHandler(w, r)
