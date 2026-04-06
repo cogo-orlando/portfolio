@@ -14,7 +14,7 @@ if (typingEl) {
 // ── COUNTDOWN ──
 // Modifie cette date pour définir la fin de la maintenance
 const endTime = new Date();
-endTime.setHours(endTime.getHours() + 2); // Par défaut : 2h à partir de maintenant
+endTime.setHours(endTime.getHours() + 2); // 2h à partir de maintenant
 
 function updateCountdown() {
     const now  = new Date();
@@ -40,7 +40,7 @@ setInterval(updateCountdown, 1000);
 
 // ── DURÉE ──
 const durationEl = document.getElementById('duration');
-if (durationEl) durationEl.textContent = '~ 2 heures';
+if (durationEl) durationEl.textContent = '~ pas de temps définie';
 
 // ── PROGRESS BAR ANIMÉE ──
 // Simule une progression réaliste
@@ -54,7 +54,7 @@ let currentStep = 0;
 const fillEl = document.getElementById('progressFill');
 const pctEl  = document.getElementById('progressPct');
 
-// Démarre à 35% (sauvegarde faite)
+// Démarre à 35%
 setTimeout(() => {
     if (fillEl) fillEl.style.width = '35%';
     if (pctEl)  pctEl.textContent  = '35%';
