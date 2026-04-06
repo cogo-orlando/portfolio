@@ -20,6 +20,7 @@ type ContactMessage struct {
 	ID        int    `json:"id"`
 	FirstName string `json:"firstname"`
 	LastName  string `json:"lastname"`
+	Mail      string `json:"mail"`
 	Subject   string `json:"subject"`
 	Message   string `json:"message"`
 	IP        string `json:"ip"`
@@ -92,6 +93,7 @@ func ContactAPIHandler(w http.ResponseWriter, r *http.Request) {
 	var input struct {
 		FirstName string `json:"firstname"`
 		LastName  string `json:"lastname"`
+		Mail      string `json:"mail"`
 		Subject   string `json:"subject"`
 		Message   string `json:"message"`
 	}
@@ -105,6 +107,7 @@ func ContactAPIHandler(w http.ResponseWriter, r *http.Request) {
 	// ── VALIDATION CÔTÉ SERVEUR ──
 	input.FirstName = strings.TrimSpace(input.FirstName)
 	input.LastName = strings.TrimSpace(input.LastName)
+	input.Mail = strings.TrimSpace(input.Mail)
 	input.Subject = strings.TrimSpace(input.Subject)
 	input.Message = strings.TrimSpace(input.Message)
 
@@ -123,6 +126,15 @@ func ContactAPIHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	if len(input.LastName) > 100 {
 		jsonError(w, "Nom trop long", http.StatusBadRequest)
+		return
+	}
+
+	if input.Mail == "" {
+		jsonError(w, "Un mail est requis", http.StatusBadRequest)
+		return
+	}
+	if len(input.Mail) > 1000 {
+		jsonError(w, "Le mail est trop long", http.StatusBadRequest)
 		return
 	}
 
@@ -145,6 +157,7 @@ func ContactAPIHandler(w http.ResponseWriter, r *http.Request) {
 	msg := ContactMessage{
 		FirstName: input.FirstName,
 		LastName:  input.LastName,
+		Mail:      input.Mail,
 		Subject:   input.Subject,
 		Message:   input.Message,
 		IP:        ip,
