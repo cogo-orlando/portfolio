@@ -79,19 +79,19 @@ function clearFieldError(inputId, errId) {
 // Live validation
 document.getElementById('firstname')?.addEventListener('blur', () => {
     const val = document.getElementById('firstname').value.trim();
-    if (!val) { setFieldError('name','nameErr','[ERR] Le prenom est requis'); addTermLine('ft-warn','#','Champ nom vide'); }
+    if (!val) { setFieldError('firstname','firstnameErr','[ERR] Le prenom est requis'); addTermLine('ft-warn','#','Champ nom vide'); }
     else { clearFieldError('name','nameErr'); addTermLine('ft-ok','#','Prenom : OK'); }
 });
 
 document.getElementById('lastname')?.addEventListener('blur', () => {
     const val = document.getElementById('lastname').value.trim();
-    if (!val) { setFieldError('name','nameErr','[ERR] Le nom de famille est requis'); addTermLine('ft-warn','#','Champ nom vide'); }
+    if (!val) { setFieldError('lastname','lastnameErr','[ERR] Le nom de famille est requis'); addTermLine('ft-warn','#','Champ nom vide'); }
     else { clearFieldError('name','nameErr'); addTermLine('ft-ok','#','Nom de famille : OK'); }
 });
 
 document.getElementById('mail')?.addEventListener('blur', () => {
     const val = document.getElementById('mail').value.trim();
-    if (!val) { setFieldError('email','nameErr','[ERR] Un mail est requis'); addTermLine('ft-warn','#','Champ nom vide'); }
+    if (!val) { setFieldError('mail','mailErr','[ERR] Un email est requis'); addTermLine('ft-warn','#','Champ nom vide'); }
     else { clearFieldError('email','nameErr'); addTermLine('ft-ok','#','email : OK'); }
 });
 
@@ -126,7 +126,7 @@ form?.addEventListener('submit', async (e) => {
     const lastname    = document.getElementById('lastname').value.trim();
     const subject = document.getElementById('subject').value;
     const message = document.getElementById('message').value.trim();
-    const email = document.getElementById('email').value.trim();
+    const mail = document.getElementById('mail').value.trim();
     const honey   = form.querySelector('input[name="website"]').value;
 
     // Honeypot check
@@ -137,7 +137,7 @@ form?.addEventListener('submit', async (e) => {
     if (!firstname)                        { setFieldError('firstname','firstnameErr','[ERR] Le prenom est requis'); valid = false; }
     if (!lastname)                        { setFieldError('lastname','lastnameErr','[ERR] Le nom est requis'); valid = false; }
     if (!subject)                     { setFieldError('subject','subjectErr','[ERR] Choisis un sujet'); valid = false; }
-    if (!email)                     { setFieldError('email','subjectErr','[ERR] Un email est requis'); valid = false; }
+    if (!mail)                     { setFieldError('mail','mailErr','[ERR] Un email est requis'); valid = false; }
     if (message.length < 10)          { setFieldError('message','messageErr','[ERR] Message trop court (min 10 caractères)'); valid = false; }
 
     if (!valid) {
