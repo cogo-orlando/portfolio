@@ -5,6 +5,7 @@ import (
 	"net/http"
 )
 
+// TEMPLATE
 func renderTemplate(w http.ResponseWriter, file string) {
 	tmpl, err := template.ParseFiles("web/html/" + file)
 	if err != nil {

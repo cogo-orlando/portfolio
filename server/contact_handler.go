@@ -3,7 +3,6 @@ package server
 import (
 	"encoding/json"
 	"fmt"
-	"net"
 	"net/http"
 	"os"
 	"strings"
@@ -23,9 +22,7 @@ type ContactMessage struct {
 	Mail      string `json:"mail"`
 	Subject   string `json:"subject"`
 	Message   string `json:"message"`
-	IP        string `json:"ip"`
 	Date      string `json:"date"`
-	Read      bool   `json:"read"`
 }
 
 type MessagesStore struct {
@@ -73,21 +70,6 @@ func ContactAPIHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-
-	// Récupère l'IP
-	ip, _, _ := net.SplitHostPort(r.RemoteAddr)
-	if forwarded := r.Header.Get("X-Forwarded-For"); forwarded != "" {
-		ip = strings.Split(forwarded, ",")[0]
-	}
-
-	// Rate limiting
-	if !rateLimiter.Allow(ip) {
-		w.WriteHeader(http.StatusTooManyRequests)
-		json.NewEncoder(w).Encode(map[string]string{
-			"error": "Trop de messages envoyés. Réessaie dans une heure.",
-		})
-		return
-	}
 
 	// Parse le body JSON
 	var input struct {
@@ -160,9 +142,7 @@ func ContactAPIHandler(w http.ResponseWriter, r *http.Request) {
 		Mail:      input.Mail,
 		Subject:   input.Subject,
 		Message:   input.Message,
-		IP:        ip,
 		Date:      time.Now().Format("2006-01-02 15:04:05"),
-		Read:      false,
 	}
 
 	if err := saveMessage(msg); err != nil {
@@ -187,11 +167,6 @@ func saveMessage(msg ContactMessage) error {
 	if data, err := os.ReadFile(messagesFile); err == nil {
 		json.Unmarshal(data, &store)
 	}
-
-	// Assigne un ID
-	msg.ID = store.Total + 1
-	store.Total++
-	store.Messages = append(store.Messages, msg)
 
 	// Écrit le fichier
 	data, err := json.MarshalIndent(store, "", "  ")
