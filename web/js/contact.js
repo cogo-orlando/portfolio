@@ -89,6 +89,12 @@ document.getElementById('lastname')?.addEventListener('blur', () => {
     else { clearFieldError('name','nameErr'); addTermLine('ft-ok','#','Nom de famille : OK'); }
 });
 
+document.getElementById('mail')?.addEventListener('blur', () => {
+    const val = document.getElementById('mail').value.trim();
+    if (!val) { setFieldError('email','nameErr','[ERR] Un mail est requis'); addTermLine('ft-warn','#','Champ nom vide'); }
+    else { clearFieldError('email','nameErr'); addTermLine('ft-ok','#','email : OK'); }
+});
+
 document.getElementById('subject')?.addEventListener('change', () => {
     const val = document.getElementById('subject').value;
     if (!val) { setFieldError('subject','subjectErr','[ERR] Choisis un sujet'); }
@@ -112,7 +118,7 @@ form?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // Reset erreurs
-    ['firstname', 'lastname', 'subject','message'].forEach(id => clearFieldError(id, id+'Err'));
+    ['firstname', 'lastname', 'subject','message', 'email'].forEach(id => clearFieldError(id, id+'Err'));
     document.getElementById('formError').style.display = 'none';
 
     // Récupère les valeurs
@@ -120,6 +126,7 @@ form?.addEventListener('submit', async (e) => {
     const lastname    = document.getElementById('lastname').value.trim();
     const subject = document.getElementById('subject').value;
     const message = document.getElementById('message').value.trim();
+    const email = document.getElementById('email').value.trim();
     const honey   = form.querySelector('input[name="website"]').value;
 
     // Honeypot check
@@ -128,8 +135,9 @@ form?.addEventListener('submit', async (e) => {
     // Validation
     let valid = true;
     if (!firstname)                        { setFieldError('firstname','firstnameErr','[ERR] Le prenom est requis'); valid = false; }
-    if (!lastname)                        { setFieldError('lastname','lastnameErr','[ERR] Le nom de famille est requis'); valid = false; }
+    if (!lastname)                        { setFieldError('lastname','lastnameErr','[ERR] Le nom est requis'); valid = false; }
     if (!subject)                     { setFieldError('subject','subjectErr','[ERR] Choisis un sujet'); valid = false; }
+    if (!email)                     { setFieldError('email','subjectErr','[ERR] Un email est requis'); valid = false; }
     if (message.length < 10)          { setFieldError('message','messageErr','[ERR] Message trop court (min 10 caractères)'); valid = false; }
 
     if (!valid) {
@@ -141,7 +149,7 @@ form?.addEventListener('submit', async (e) => {
         const res = await fetch('/api/contact', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ firstname, lastname, subject, message })
+            body: JSON.stringify({ firstname, lastname, subject, message, mail })
         });
 
         const data = await res.json();
