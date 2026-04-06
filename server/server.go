@@ -9,12 +9,10 @@ import (
 //  CONFIGURATION MAINTENANCE
 // ══════════════════════════════════════════
 
-// true  = page en maintenance
+// true = page en maintenance
 // false = page accessible
 var maintenancePages = map[string]bool{
-	"/blog":    true,
-	"/ctf":     true,
-	"/uses":    true,
+	"/blog":    false,
 	"/about":   false,
 	"/skills":  false,
 	"/contact": false,
@@ -81,10 +79,6 @@ func Start() {
 			StatusHandler(w, r)
 		case "/faq":
 			FaqHandler(w, r)
-		case "/blog":
-			BlogHandler(w, r)
-		case "/uses":
-			UsesHandler(w, r)
 		case "/maintenance":
 			MaintenanceHandler(w, r)
 		default:
