@@ -1,6 +1,6 @@
 // ── TYPING ──
 const typingEl = document.querySelector('.hero-tag .typed');
-const text = 'systemctl status portfolio';
+const text = ' site status portfolio';
 if (typingEl) {
     let i = 0;
     setTimeout(() => {

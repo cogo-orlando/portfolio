@@ -14,7 +14,7 @@ if (typingEl) {
 // ── COUNTDOWN ──
 // Modifie cette date pour définir la fin de la maintenance
 const endTime = new Date();
-endTime.setHours(endTime.getHours() + 2); // 2h à partir de maintenant
+endTime.setHours(endTime.getHours() + 0); // 2h à partir de maintenant
 
 function updateCountdown() {
     const now  = new Date();
@@ -54,10 +54,10 @@ let currentStep = 0;
 const fillEl = document.getElementById('progressFill');
 const pctEl  = document.getElementById('progressPct');
 
-// Démarre à 35%
+// Démarre à 20%
 setTimeout(() => {
-    if (fillEl) fillEl.style.width = '35%';
-    if (pctEl)  pctEl.textContent  = '35%';
+    if (fillEl) fillEl.style.width = '40%';
+    if (pctEl)  pctEl.textContent  = '40%';
     document.getElementById('step1')?.classList.remove('active');
     document.getElementById('step1')?.classList.add('done');
     document.getElementById('step2')?.classList.add('active');

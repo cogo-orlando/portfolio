@@ -370,6 +370,14 @@ body::after {
     letter-spacing: 0.04em;
 }
 
+h2 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.04em;
+}
+
 /* ── FOOTER ── */
 .footer {
     position: relative;
