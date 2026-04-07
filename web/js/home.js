@@ -173,7 +173,7 @@ window.addEventListener('scroll', () => {
 // ── CURRENTLY LEARNING TICKER ──
 const learningItems = [
     'Sécurité des réseaux TCP/IP...',
-    'SQL injection & prévention...',
+    'SQL...',
     'Administration Linux...',
     'Go — architecture web...',
     'CTF challenges...',
