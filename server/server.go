@@ -18,7 +18,7 @@ var maintenancePages = map[string]bool{
 	"/contact": false,
 	"/cv":      false,
 	"/home":    false,
-	"/project": true,
+	"/project": false,
 	"/faq":     false,
 	"/status":  false,
 }
