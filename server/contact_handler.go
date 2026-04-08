@@ -14,22 +14,6 @@ const (
 	messagesFile = "data/messages.json"
 )
 
-// ── STRUCTS ──
-type ContactMessage struct {
-	ID        int    `json:"id"`
-	FirstName string `json:"firstname"`
-	LastName  string `json:"lastname"`
-	Mail      string `json:"mail"`
-	Subject   string `json:"subject"`
-	Message   string `json:"message"`
-	Date      string `json:"date"`
-}
-
-type MessagesStore struct {
-	Messages []ContactMessage `json:"messages"`
-	Total    int              `json:"total"`
-}
-
 // ── RATE LIMITING ──
 type RateLimiter struct {
 	mu      sync.Mutex
