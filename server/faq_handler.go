@@ -10,18 +10,6 @@ import (
 
 const faqQuestionsFile = "data/faq_questions.json"
 
-type FAQQuestion struct {
-	ID       int    `json:"id"`
-	Question string `json:"question"`
-	Date     string `json:"date"`
-	IP       string `json:"ip"`
-}
-
-type FAQQuestionsStore struct {
-	Questions []FAQQuestion `json:"questions"`
-	Total     int           `json:"total"`
-}
-
 func FAQQuestionHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)

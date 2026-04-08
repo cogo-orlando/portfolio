@@ -32,6 +32,7 @@ var MaintenanceMode = false
 
 func Start() {
 	mux := http.NewServeMux()
+	mux.HandleFunc("/admin/messages", AdminHandler)
 
 	// ── API ──
 	mux.HandleFunc("/api/contact", ContactAPIHandler)
