@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"net/http"
+	"os"
 )
 
 // ══════════════════════════════════════════
@@ -85,7 +86,12 @@ func Start() {
 	})
 
 	fmt.Println("Serveur lancé sur http://localhost:8080")
-	if err := http.ListenAndServe(":8080", mux); err != nil {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	fmt.Println("Serveur lancé sur :" + port)
+	if err := http.ListenAndServe(":"+port, mux); err != nil {
 		panic(err)
 	}
 }
