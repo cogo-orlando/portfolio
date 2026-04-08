@@ -24,7 +24,7 @@ var maintenancePages = map[string]bool{
 	"/status":  false,
 }
 
-var MaintenanceMode = true
+var MaintenanceMode = false
 
 // ══════════════════════════════════════════
 //  DÉMARRAGE DU SERVEUR
