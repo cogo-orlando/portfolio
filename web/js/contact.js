@@ -51,8 +51,8 @@ function clearTerminal() {
 }
 
 // ── COMPTEUR DE CARACTÈRES ──
-const messageEl  = document.getElementById('message');
-const charCount  = document.getElementById('charCount');
+const messageEl = document.getElementById('message');
+const charCount = document.getElementById('charCount');
 if (messageEl && charCount) {
     messageEl.addEventListener('input', () => {
         const len = messageEl.value.length;
@@ -66,7 +66,6 @@ function setFieldError(inputId, errId, msg) {
     const err   = document.getElementById(errId);
     if (input) input.classList.add('invalid');
     if (err)   err.textContent = msg;
-    return false;
 }
 
 function clearFieldError(inputId, errId) {
@@ -76,23 +75,23 @@ function clearFieldError(inputId, errId) {
     if (err)   err.textContent = '';
 }
 
-// Live validation
+// ── LIVE VALIDATION ──
 document.getElementById('firstname')?.addEventListener('blur', () => {
     const val = document.getElementById('firstname').value.trim();
-    if (!val) { setFieldError('firstname','firstnameErr','[ERR] Le prenom est requis'); addTermLine('ft-warn','#','Champ nom vide'); }
-    else { clearFieldError('name','nameErr'); addTermLine('ft-ok','#','Prenom : OK'); }
+    if (!val) { setFieldError('firstname','firstnameErr','[ERR] Le prénom est requis'); addTermLine('ft-warn','#','Champ prénom vide'); }
+    else { clearFieldError('firstname','firstnameErr'); addTermLine('ft-ok','#','Prénom : OK'); }
 });
 
 document.getElementById('lastname')?.addEventListener('blur', () => {
     const val = document.getElementById('lastname').value.trim();
-    if (!val) { setFieldError('lastname','lastnameErr','[ERR] Le nom de famille est requis'); addTermLine('ft-warn','#','Champ nom vide'); }
-    else { clearFieldError('name','nameErr'); addTermLine('ft-ok','#','Nom de famille : OK'); }
+    if (!val) { setFieldError('lastname','lastnameErr','[ERR] Le nom est requis'); addTermLine('ft-warn','#','Champ nom vide'); }
+    else { clearFieldError('lastname','lastnameErr'); addTermLine('ft-ok','#','Nom : OK'); }
 });
 
-document.getElementById('mail')?.addEventListener('blur', () => {
-    const val = document.getElementById('mail').value.trim();
-    if (!val) { setFieldError('mail','mailErr','[ERR] Un email est requis'); addTermLine('ft-warn','#','Champ nom vide'); }
-    else { clearFieldError('email','nameErr'); addTermLine('ft-ok','#','email : OK'); }
+document.getElementById('email')?.addEventListener('blur', () => {
+    const val = document.getElementById('email').value.trim();
+    if (!val) { setFieldError('email','mailErr','[ERR] Un email est requis'); addTermLine('ft-warn','#','Champ email vide'); }
+    else { clearFieldError('email','mailErr'); addTermLine('ft-ok','#','Email : OK'); }
 });
 
 document.getElementById('subject')?.addEventListener('change', () => {
@@ -107,9 +106,9 @@ document.getElementById('message')?.addEventListener('blur', () => {
     else { clearFieldError('message','messageErr'); addTermLine('ft-ok','#','Message : ' + val.length + ' caractères'); }
 });
 
-// ── SOUMISSION DU FORMULAIRE ──
-const form       = document.getElementById('contactForm');
-const submitBtn  = document.getElementById('submitBtn');
+// ── SOUMISSION VIA FORMSPREE ──
+const form      = document.getElementById('contactForm');
+const submitBtn = document.getElementById('submitBtn');
 const submitText = submitBtn?.querySelector('.submit-text');
 const submitLoad = submitBtn?.querySelector('.submit-loading');
 const submitArr  = submitBtn?.querySelector('.submit-arrow');
@@ -118,59 +117,62 @@ form?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // Reset erreurs
-    ['firstname', 'lastname', 'subject','message', 'email'].forEach(id => clearFieldError(id, id+'Err'));
+    ['firstname','lastname','email','subject','message'].forEach(id => clearFieldError(id, id+'Err'));
     document.getElementById('formError').style.display = 'none';
 
     // Récupère les valeurs
-    const firstname    = document.getElementById('firstname').value.trim();
-    const lastname    = document.getElementById('lastname').value.trim();
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value.trim();
-    const mail = document.getElementById('mail').value.trim();
-    const honey   = form.querySelector('input[name="website"]').value;
+    const firstname = document.getElementById('firstname').value.trim();
+    const lastname  = document.getElementById('lastname').value.trim();
+    const email     = document.getElementById('email').value.trim();
+    const subject   = document.getElementById('subject').value;
+    const message   = document.getElementById('message').value.trim();
+    const honey     = form.querySelector('input[name="_gotcha"]')?.value;
 
     // Honeypot check
     if (honey) return;
 
     // Validation
     let valid = true;
-    if (!firstname)                        { setFieldError('firstname','firstnameErr','[ERR] Le prenom est requis'); valid = false; }
-    if (!lastname)                        { setFieldError('lastname','lastnameErr','[ERR] Le nom est requis'); valid = false; }
-    if (!subject)                     { setFieldError('subject','subjectErr','[ERR] Choisis un sujet'); valid = false; }
-    if (!mail)                     { setFieldError('mail','mailErr','[ERR] Un email est requis'); valid = false; }
-    if (message.length < 10)          { setFieldError('message','messageErr','[ERR] Message trop court (min 10 caractères)'); valid = false; }
+    if (!firstname)          { setFieldError('firstname','firstnameErr','[ERR] Le prénom est requis'); valid = false; }
+    if (!lastname)           { setFieldError('lastname','lastnameErr','[ERR] Le nom est requis'); valid = false; }
+    if (!email)              { setFieldError('email','mailErr','[ERR] Un email est requis'); valid = false; }
+    if (!subject)            { setFieldError('subject','subjectErr','[ERR] Choisis un sujet'); valid = false; }
+    if (message.length < 10) { setFieldError('message','messageErr','[ERR] Message trop court (min 10 caractères)'); valid = false; }
 
     if (!valid) {
         addTermLine('ft-err','#','[ERR] Validation échouée — corrige les champs');
         return;
     }
 
-    try {
-        const res = await fetch('/api/contact', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ firstname, lastname, subject, message, mail })
-        });
+    // UI loading
+    submitBtn.disabled       = true;
+    submitText.style.display = 'none';
+    submitArr.style.display  = 'none';
+    submitLoad.style.display = 'flex';
+    addTermLine('ft-warn','$','Connexion à Formspree...');
 
-        const data = await res.json();
+    try {
+        const res = await fetch(form.action, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: new FormData(form)
+        });
 
         if (res.ok) {
             addTermLine('ft-ok','#','[OK] Message envoyé avec succès');
-            addTermLine('ft-ok','#','[OK] Message sauvegardé dans messages.json');
+            addTermLine('ft-ok','#','[OK] Notification envoyée à Orlando');
 
-            // Reset du formulaire
             form.reset();
-            charCount.textContent = '0';
-
-            // Reset bouton
+            charCount.textContent    = '0';
             submitBtn.disabled       = false;
             submitText.style.display = 'inline';
             submitArr.style.display  = 'inline';
             submitLoad.style.display = 'none';
 
-            // Affiche le succès
             document.getElementById('formSuccess').style.display = 'block';
             form.style.display = 'none';
+        } else {
+            throw new Error('Erreur lors de l\'envoi');
         }
 
     } catch (err) {
@@ -178,7 +180,6 @@ form?.addEventListener('submit', async (e) => {
         document.getElementById('errorMsg').textContent = err.message;
         document.getElementById('formError').style.display = 'block';
 
-        // Reset bouton
         submitBtn.disabled       = false;
         submitText.style.display = 'inline';
         submitArr.style.display  = 'inline';
