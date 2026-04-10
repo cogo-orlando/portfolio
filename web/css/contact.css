@@ -107,7 +107,7 @@ body::after { content:''; position:fixed; inset:0; background:repeating-linear-g
 .select-wrap { position:relative; }
 .select-arrow { position:absolute; right:14px; top:50%; transform:translateY(-50%); color:var(--muted2); pointer-events:none; }
 .form-select { padding-right:36px; cursor:pointer; }
-.form-select option { background:#0d1117; color:var(--text); }
+.form-select option { background: #000507; color:var(--text); }
 .form-error-msg { font-family:'DM Mono',monospace; font-size:10px; color:var(--err); min-height:14px; letter-spacing:0.04em; }
 
 /* Submit */

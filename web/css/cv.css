@@ -4,7 +4,7 @@
     --bg: #080b0f;
     --accent: #00f5a0;
     --accent2: #00c8f5;
-    --text: #e8f0f8;
+    --text: #fcfcfc;
     --muted: #3a4a5a;
     --muted2: #5a7080;
     --surface: rgba(255,255,255,0.03);
@@ -146,7 +146,7 @@ body::after {
 .cv-wrapper {
     position: relative;
     display: inline-block;
-    width: 100%;
+    width: 150%;
     border: 1px solid var(--border2);
     cursor: crosshair;
 }
