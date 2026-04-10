@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"sync"
 )
 
 // ══════════════════════════════════════════
@@ -27,6 +28,15 @@ var maintenancePages = map[string]bool{
 var MaintenanceMode = false
 
 // ══════════════════════════════════════════
+//  COMPTEUR DE VISITES
+// ══════════════════════════════════════════
+
+var (
+	visitCount int
+	visitMu    sync.Mutex
+)
+
+// ══════════════════════════════════════════
 //  DÉMARRAGE DU SERVEUR
 // ══════════════════════════════════════════
 
@@ -36,6 +46,13 @@ func Start() {
 	// ── API ──
 	mux.HandleFunc("/api/contact", ContactAPIHandler)
 	mux.HandleFunc("/api/faq-question", FAQQuestionHandler)
+	mux.HandleFunc("/api/visits", func(w http.ResponseWriter, r *http.Request) {
+		visitMu.Lock()
+		count := visitCount
+		visitMu.Unlock()
+		w.Header().Set("Content-Type", "application/json")
+		fmt.Fprintf(w, `{"visits":%d}`, count)
+	})
 
 	// ── FICHIERS STATIQUES ──
 	fs := http.FileServer(http.Dir("./web"))
@@ -43,16 +60,32 @@ func Start() {
 	mux.Handle("/js/", fs)
 	mux.Handle("/img/", fs)
 
-	// ── ROUTES ──
+	// ── ROUTES PRINCIPALES ──
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
-		// Si le site entier est en maintenance → tout le monde voit maintenance.html
+		// Compteur de visites
+		cookie, err := r.Cookie("visited")
+		if err != nil || cookie == nil {
+			// Nouveau visiteur — on incrémente
+			visitMu.Lock()
+			visitCount++
+			visitMu.Unlock()
+			// On pose le cookie pour 24h
+			http.SetCookie(w, &http.Cookie{
+				Name:   "visited",
+				Value:  "1",
+				MaxAge: 86400, // 24 heures
+				Path:   "/",
+			})
+		}
+
+		// Site entier en maintenance
 		if MaintenanceMode {
 			http.ServeFile(w, r, "web/html/maintenance.html")
 			return
 		}
 
-		// Si la page demandée est en maintenance → affiche maintenance.html
+		// Page spécifique en maintenance
 		if maintenancePages[r.URL.Path] {
 			http.ServeFile(w, r, "web/html/maintenance.html")
 			return
@@ -90,7 +123,6 @@ func Start() {
 	if port == "" {
 		port = "8080"
 	}
-	fmt.Println("Serveur lancé sur :" + port)
 	if err := http.ListenAndServe(":"+port, mux); err != nil {
 		panic(err)
 	}
