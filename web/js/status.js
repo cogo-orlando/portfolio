@@ -142,6 +142,18 @@ function typeLearning() {
 }
 setTimeout(typeLearning, 1500);
 
+// ── COMPTEUR DE VISITES ──
+fetch('/api/visits')
+    .then(r => r.json())
+    .then(data => {
+        const el = document.getElementById('visitCount');
+        if (el) el.textContent = data.visits;
+    })
+    .catch(() => {
+        const el = document.getElementById('visitCount');
+        if (el) el.textContent = '--';
+    });
+
 // ── SCROLL REVEAL ──
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });

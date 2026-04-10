@@ -230,24 +230,5 @@ document.getElementById('ivNext')?.addEventListener('click', () => {
     renderIVQuestion(ivIndex);
 });
 
-// ── SOUMETTRE UNE QUESTION ──
-document.getElementById('askBtn')?.addEventListener('click', async () => {
-    const input = document.getElementById('askInput');
-    const val   = input?.value.trim();
-    if (!val || val.length < 5) return;
-
-    try {
-        await fetch('/api/faq-question', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ question: val })
-        });
-    } catch {}
-
-    // Affiche succès peu importe le résultat serveur
-    document.getElementById('askForm').style.display   = 'none';
-    document.getElementById('askSuccess').style.display = 'block';
-});
-
 // ── INITIALISATION ──
 updateProgress();
