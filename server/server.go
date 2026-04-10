@@ -45,7 +45,6 @@ func Start() {
 
 	// ── API ──
 	mux.HandleFunc("/api/contact", ContactAPIHandler)
-	mux.HandleFunc("/api/faq-question", FAQQuestionHandler)
 	mux.HandleFunc("/api/visits", func(w http.ResponseWriter, r *http.Request) {
 		visitMu.Lock()
 		count := visitCount
@@ -66,7 +65,7 @@ func Start() {
 		// Compteur de visites
 		cookie, err := r.Cookie("visited")
 		if err != nil || cookie == nil {
-			// Nouveau visiteur — on incrémente
+			// Nouveau visiteur
 			visitMu.Lock()
 			visitCount++
 			visitMu.Unlock()
@@ -113,6 +112,8 @@ func Start() {
 			FaqHandler(w, r)
 		case "/maintenance":
 			MaintenanceHandler(w, r)
+		case "/demo/zoo":
+			DemoZooHandler(w, r)
 		default:
 			NotFoundHandler(w, r)
 		}
