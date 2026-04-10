@@ -68,6 +68,11 @@ func MaintenanceHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "maintenance.html")
 }
 
+// PAGE DEMO ZOO
+func DemoZooHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "demo-zoo.html")
+}
+
 // PAGE ERROR 404
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
