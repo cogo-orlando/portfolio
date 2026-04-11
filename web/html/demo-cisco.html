@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cisco — Demo</title>
+    <title>Réseau Multi-Sites — Cisco Packet Tracer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/demo-cisco.css">
@@ -22,141 +22,373 @@
 <nav class="nav">
     <a href="/project" class="nav-logo"><span class="prompt">~/</span>projects</a>
     <div class="nav-right">
-        <a href="https://github.com/Bibounet31/ZOO-topie-" target="_blank" class="cv-btn">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-            GitHub
-        </a>
-        <div class="nav-status"><span class="status-dot"></span><span>Cisco · Réseau</span></div>
+        <div class="nav-status"><span class="status-dot"></span><span>Cisco · Infra · Réseau</span></div>
     </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
     <div class="hero-tag">
-        <span class="prompt">~/projects/zoo $</span>
+        <span class="prompt">~/projects/cisco $</span>
         <span class="typed"></span>
         <span class="cursor"></span>
     </div>
-    <h1 class="hero-title">Cisco<br><span class="outline">Captures</span></h1>
-    <p class="hero-intro">Le projet consiste à créer, sur Cisco Packet Tracer, un réseau réparti sur 4 sites : organisationnel, finance, production et hébergement des serveurs (DNS, Web)</p>
-
+    <h1 class="hero-title">Réseau<br><span class="outline">Multi-Sites</span></h1>
+    <p class="hero-intro">
+        Architecture réseau d'entreprise répartie sur 4 sites internationaux — conçue et configurée intégralement sous Cisco Packet Tracer. Routage statique, VLANs, DHCP sur Switch L3, redondance WiFi, DNS et serveur Web.
+    </p>
     <div class="hero-badges">
-        <span class="badge">IP</span>
-        <span class="badge">DNS / WEB</span>
-        <span class="badge">VLAN / WAN</span>
-        <span class="badge">ROUTEUR / SWITCH</span>
+        <span class="badge">Cisco Packet Tracer</span>
+        <span class="badge">Routes statiques</span>
+        <span class="badge">VLANs</span>
+        <span class="badge">DHCP L3</span>
+        <span class="badge">DNS · Web</span>
+        <span class="badge">Solo</span>
     </div>
 </section>
 
-<!-- GALERIE -->
+<!-- TOPOLOGIE PRINCIPALE -->
 <section class="section">
     <div class="section-header">
-        <span class="section-tag">// Captures d'écran</span>
-        <h2 class="section-title">Aperçu du reseau</h2>
+        <span class="section-tag">01 //</span>
+        <h2 class="section-title">Topologie globale</h2>
     </div>
+    <div class="topology-wrap reveal">
+        <div class="topology-img-wrap">
+            <img src="/img/projects/cisco/topology.png" alt="Topologie réseau Cisco Packet Tracer" class="topology-img">
+            <div class="topology-legend">
+                <div class="legend-item" style="--c:#f5a000"><span class="legend-dot"></span>Strasbourg — Siège social</div>
+                <div class="legend-item" style="--c:#00c8f5"><span class="legend-dot"></span>Bruxelles — Gestion financière</div>
+                <div class="legend-item" style="--c:#f500a0"><span class="legend-dot"></span>Casablanca — Centre opérationnel</div>
+                <div class="legend-item" style="--c:#00f5a0"><span class="legend-dot"></span>Stockholm — Serveurs & R&D</div>
+            </div>
+        </div>
+    </div>
+</section>
 
+<!-- SITES -->
+<section class="section">
+    <div class="section-header">
+        <span class="section-tag">02 //</span>
+        <h2 class="section-title">Les 4 sites</h2>
+    </div>
+    <div class="sites-grid">
+
+        <div class="site-card reveal" style="--site-color:#f5a000">
+            <div class="site-header">
+                <div class="site-dot"></div>
+                <span class="site-city">Strasbourg</span>
+                <span class="site-role">Siège social</span>
+            </div>
+            <div class="site-rows">
+                <div class="site-row"><span class="site-key">VLANs</span><span class="site-val">VLAN10 · VLAN20 · VLAN30</span></div>
+                <div class="site-row"><span class="site-key">Adressage</span><span class="site-val">192.168.10.x / 20.x / 30.x</span></div>
+                <div class="site-row"><span class="site-key">Switch L3</span><span class="site-val">3650-24PS (Switch L3 1)</span></div>
+                <div class="site-row"><span class="site-key">Switch L2</span><span class="site-val">2960-24TT (Switch1)</span></div>
+                <div class="site-row"><span class="site-key">WiFi</span><span class="site-val">3 AP + 3 AP redondants</span></div>
+                <div class="site-row"><span class="site-key">WAN</span><span class="site-val">192.168.1.2 → 192.168.1.1</span></div>
+                <div class="site-row"><span class="site-key">Routeur</span><span class="site-val">Router1 → Router0 (10.0.0.1 → 10.0.0.2)</span></div>
+            </div>
+        </div>
+
+        <div class="site-card reveal" style="--site-color:#00c8f5">
+            <div class="site-header">
+                <div class="site-dot"></div>
+                <span class="site-city">Bruxelles</span>
+                <span class="site-role">Gestion financière</span>
+            </div>
+            <div class="site-rows">
+                <div class="site-row"><span class="site-key">VLANs</span><span class="site-val">VLAN40 · VLAN50</span></div>
+                <div class="site-row"><span class="site-key">Adressage</span><span class="site-val">172.16.40.x / 50.x</span></div>
+                <div class="site-row"><span class="site-key">Switch L3</span><span class="site-val">3650-24PS (Switch L3 2)</span></div>
+                <div class="site-row"><span class="site-key">Switch L2</span><span class="site-val">2960-24TT (Switch2 · Switch3)</span></div>
+                <div class="site-row"><span class="site-key">WiFi</span><span class="site-val">2 AP + 2 AP redondants</span></div>
+                <div class="site-row"><span class="site-key">WAN</span><span class="site-val">172.16.1.2 → 172.16.1.1</span></div>
+                <div class="site-row"><span class="site-key">Routeur</span><span class="site-val">Router2 → Router0 (10.0.0.5 → 10.0.0.6)</span></div>
+            </div>
+        </div>
+
+        <div class="site-card reveal" style="--site-color:#f500a0">
+            <div class="site-header">
+                <div class="site-dot"></div>
+                <span class="site-city">Casablanca</span>
+                <span class="site-role">Centre opérationnel de production</span>
+            </div>
+            <div class="site-rows">
+                <div class="site-row"><span class="site-key">VLANs</span><span class="site-val">VLAN60 · VLAN70 · VLAN80</span></div>
+                <div class="site-row"><span class="site-key">Adressage</span><span class="site-val">150.80.60.x / 70.x / 80.x</span></div>
+                <div class="site-row"><span class="site-key">Switch L3</span><span class="site-val">3650-24PS (Switch L3 3)</span></div>
+                <div class="site-row"><span class="site-key">Switch L2</span><span class="site-val">2960-24TT (Switch4 · Switch5)</span></div>
+                <div class="site-row"><span class="site-key">WiFi</span><span class="site-val">3 AP + 3 AP redondants</span></div>
+                <div class="site-row"><span class="site-key">WAN</span><span class="site-val">150.80.1.1 → 150.80.1.2</span></div>
+                <div class="site-row"><span class="site-key">Routeur</span><span class="site-val">Router3 → Router0 (10.0.0.9 → 10.0.0.10)</span></div>
+            </div>
+        </div>
+
+        <div class="site-card reveal" style="--site-color:#00f5a0">
+            <div class="site-header">
+                <div class="site-dot"></div>
+                <span class="site-city">Stockholm</span>
+                <span class="site-role">Serveurs & R&D</span>
+            </div>
+            <div class="site-rows">
+                <div class="site-row"><span class="site-key">VLANs</span><span class="site-val">VLAN90 · VLAN100</span></div>
+                <div class="site-row"><span class="site-key">Adressage</span><span class="site-val">140.50.90.x / 100.x</span></div>
+                <div class="site-row"><span class="site-key">Switch L3</span><span class="site-val">3650-24PS (Switch L3 4)</span></div>
+                <div class="site-row"><span class="site-key">Switch L2</span><span class="site-val">2960-24TT (Switch6 · Switch7)</span></div>
+                <div class="site-row"><span class="site-key">Serveur DNS</span><span class="site-val">192.168.100.10</span></div>
+                <div class="site-row"><span class="site-key">Serveur Web</span><span class="site-val">192.168.100.20</span></div>
+                <div class="site-row"><span class="site-key">WAN</span><span class="site-val">140.50.1.1 → 140.50.1.2</span></div>
+                <div class="site-row"><span class="site-key">Routeur</span><span class="site-val">Router4 → Router0 (10.0.0.13 → 10.0.0.14)</span></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ARCHITECTURE TECHNIQUE -->
+<section class="section">
+    <div class="section-header">
+        <span class="section-tag">03 //</span>
+        <h2 class="section-title">Architecture technique</h2>
+    </div>
+    <div class="tech-grid">
+
+        <div class="tech-card reveal">
+            <div class="tech-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <div class="tech-info">
+                <span class="tech-title">Routage statique</span>
+                <p class="tech-desc">Routes statiques configurées sur chaque routeur de site vers Router0 (hub central). Interconnexion WAN via sous-réseaux 10.0.0.x dédiés entre chaque site et le routeur central.</p>
+            </div>
+        </div>
+
+        <div class="tech-card reveal">
+            <div class="tech-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M4 17l6-6-6-6M12 19h8"/></svg>
+            </div>
+            <div class="tech-info">
+                <span class="tech-title">VLANs & Segmentation</span>
+                <p class="tech-desc">10 VLANs répartis sur les 4 sites (VLAN10 à VLAN100). Chaque VLAN correspond à un segment réseau isolé avec son propre adressage IP. Routage inter-VLAN assuré par les switchs L3 (3650-24PS).</p>
+            </div>
+        </div>
+
+        <div class="tech-card reveal">
+            <div class="tech-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            </div>
+            <div class="tech-info">
+                <span class="tech-title">DHCP sur Switch L3</span>
+                <p class="tech-desc">Le service DHCP est configuré directement sur les switchs Layer 3 (3650-24PS) de chaque site. Chaque VLAN dispose de son propre pool DHCP, distribuant automatiquement les adresses IP aux hôtes.</p>
+            </div>
+        </div>
+
+        <div class="tech-card reveal">
+            <div class="tech-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+            </div>
+            <div class="tech-info">
+                <span class="tech-title">DNS & Serveur Web</span>
+                <p class="tech-desc">Serveur DNS (192.168.100.10) et serveur Web (192.168.100.20) hébergés sur le site de Stockholm. Accessibles depuis tous les sites via le routage inter-sites configuré.</p>
+            </div>
+        </div>
+
+        <div class="tech-card reveal">
+            <div class="tech-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg>
+            </div>
+            <div class="tech-info">
+                <span class="tech-title">Redondance WiFi</span>
+                <p class="tech-desc">Chaque point d'accès WiFi est doublé par un AP redondant sur tous les sites. En cas de défaillance d'un AP, la connectivité sans fil est maintenue via l'AP de secours sur le même VLAN.</p>
+            </div>
+        </div>
+
+        <div class="tech-card reveal">
+            <div class="tech-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="tech-info">
+                <span class="tech-title">Interconnexion WAN</span>
+                <p class="tech-desc">Architecture hub-and-spoke avec Router0 comme nœud central. 4 liaisons WAN dédiées : 10.0.0.1↔2 (Strasbourg), 10.0.0.5↔6 (Bruxelles), 10.0.0.9↔10 (Casablanca), 10.0.0.13↔14 (Stockholm).</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ADRESSAGE IP -->
+<section class="section">
+    <div class="section-header">
+        <span class="section-tag">04 //</span>
+        <h2 class="section-title">Plan d'adressage IP</h2>
+    </div>
+    <div class="ip-table-wrap reveal">
+        <table class="ip-table">
+            <thead>
+            <tr>
+                <th>Site</th>
+                <th>VLAN</th>
+                <th>Réseau</th>
+                <th>Plage DHCP</th>
+                <th>Passerelle</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="row-strasbourg">
+                <td rowspan="3">Strasbourg</td>
+                <td>VLAN10</td>
+                <td>192.168.10.0/24</td>
+                <td>192.168.10.11 – .12</td>
+                <td>192.168.10.1</td>
+            </tr>
+            <tr class="row-strasbourg">
+                <td>VLAN20</td>
+                <td>192.168.20.0/24</td>
+                <td>192.168.20.11 – .12</td>
+                <td>192.168.20.1</td>
+            </tr>
+            <tr class="row-strasbourg">
+                <td>VLAN30</td>
+                <td>192.168.30.0/24</td>
+                <td>192.168.30.11 – .12</td>
+                <td>192.168.30.1</td>
+            </tr>
+            <tr class="row-bruxelles">
+                <td rowspan="2">Bruxelles</td>
+                <td>VLAN40</td>
+                <td>172.16.40.0/24</td>
+                <td>172.16.40.1 – .2</td>
+                <td>172.16.40.1</td>
+            </tr>
+            <tr class="row-bruxelles">
+                <td>VLAN50</td>
+                <td>172.16.50.0/24</td>
+                <td>172.16.50.1 – .2</td>
+                <td>172.16.50.1</td>
+            </tr>
+            <tr class="row-casablanca">
+                <td rowspan="3">Casablanca</td>
+                <td>VLAN60</td>
+                <td>150.80.60.0/24</td>
+                <td>150.80.60.1 – .2</td>
+                <td>150.80.60.1</td>
+            </tr>
+            <tr class="row-casablanca">
+                <td>VLAN70</td>
+                <td>150.80.70.0/24</td>
+                <td>150.80.70.1 – .2</td>
+                <td>150.80.70.1</td>
+            </tr>
+            <tr class="row-casablanca">
+                <td>VLAN80</td>
+                <td>150.80.80.0/24</td>
+                <td>150.80.80.1 – .2</td>
+                <td>150.80.80.1</td>
+            </tr>
+            <tr class="row-stockholm">
+                <td rowspan="2">Stockholm</td>
+                <td>VLAN90</td>
+                <td>140.50.90.0/24</td>
+                <td>140.50.90.1 – .2</td>
+                <td>140.50.90.1</td>
+            </tr>
+            <tr class="row-stockholm">
+                <td>VLAN100</td>
+                <td>140.50.100.0/24</td>
+                <td>140.50.100.1 – .2</td>
+                <td>140.50.100.1</td>
+            </tr>
+            <tr class="row-stockholm">
+                <td>Stockholm</td>
+                <td>Servers</td>
+                <td>192.168.100.0/24</td>
+                <td>DNS .10 · Web .20</td>
+                <td>192.168.100.1</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- CAPTURES SUPPLÉMENTAIRES -->
+<section class="section">
+    <div class="section-header">
+        <span class="section-tag">05 //</span>
+        <h2 class="section-title">Captures d'écran</h2>
+        <span class="section-soon">À venir</span>
+    </div>
     <div class="gallery-grid">
 
-        <div class="gallery-card reveal" data-index="0">
-            <div class="gallery-img-wrap">
-                <img src="/img/cisco/cisco1.png" alt="Vu d'ensemble des 4 sites" class="gallery-img" loading="lazy">
-                <div class="gallery-overlay">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                    <span>Agrandir</span>
-                </div>
-            </div>
-            <div class="gallery-caption">
-                <span class="caption-num">01</span>
-                <span class="caption-text">text</span>
+        <!-- Capture 1 — placeholder -->
+        <div class="gallery-placeholder reveal">
+            <div class="placeholder-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Config DHCP Switch L3</span>
+                <span class="placeholder-hint">Capture à ajouter</span>
             </div>
         </div>
 
-        <div class="gallery-card reveal" data-index="1">
-            <div class="gallery-img-wrap">
-                <img src="/img/cisco/cisco2.png" alt="Mise en avant côte server" class="gallery-img" loading="lazy">
-                <div class="gallery-overlay">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                    <span>Agrandir</span>
-                </div>
-            </div>
-            <div class="gallery-caption">
-                <span class="caption-num">02</span>
-                <span class="caption-text">text</span>
+        <div class="gallery-placeholder reveal">
+            <div class="placeholder-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Config VLANs</span>
+                <span class="placeholder-hint">Capture à ajouter</span>
             </div>
         </div>
 
-        <div class="gallery-card reveal" data-index="2">
-            <div class="gallery-img-wrap">
-                <img src="/img/cisco/cisco3.png" alt="PDF du compte rendu final" class="gallery-img" loading="lazy">
-                <div class="gallery-overlay">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                    <span>Agrandir</span>
-                </div>
-            </div>
-            <div class="gallery-caption">
-                <span class="caption-num">03</span>
-                <span class="caption-text">text</span>
+        <div class="gallery-placeholder reveal">
+            <div class="placeholder-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Routes statiques</span>
+                <span class="placeholder-hint">Capture à ajouter</span>
             </div>
         </div>
 
-        <div class="gallery-card reveal" data-index="3">
-            <div class="gallery-img-wrap">
-                <img src="/img/cisco/cisco4.png" alt="Prochainement..." class="gallery-img" loading="lazy">
-                <div class="gallery-overlay">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                    <span>Agrandir</span>
-                </div>
+        <div class="gallery-placeholder reveal">
+            <div class="placeholder-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Tests de connectivité (ping)</span>
+                <span class="placeholder-hint">Capture à ajouter</span>
             </div>
-            <div class="gallery-caption">
-                <span class="caption-num">04</span>
-                <span class="caption-text">text</span>
+        </div>
+
+        <div class="gallery-placeholder reveal">
+            <div class="placeholder-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Config DNS & Web</span>
+                <span class="placeholder-hint">Capture à ajouter</span>
+            </div>
+        </div>
+
+        <div class="gallery-placeholder reveal">
+            <div class="placeholder-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Redondance WiFi</span>
+                <span class="placeholder-hint">Capture à ajouter</span>
             </div>
         </div>
 
     </div>
 </section>
 
-<!-- INFOS PROJET -->
+<!-- CE QUE J'AI APPRIS -->
 <section class="section">
     <div class="section-header">
-        <span class="section-tag">// Détails</span>
-        <h2 class="section-title">À propos du projet</h2>
+        <span class="section-tag">06 //</span>
+        <h2 class="section-title">Ce que j'ai appris</h2>
     </div>
-    <div class="details-grid">
-        <div class="detail-card reveal">
-            <span class="detail-key">Stack</span>
-            <span class="detail-val">VLAN · DHCP · DNS</span>
-        </div>
-        <div class="detail-card reveal">
-            <span class="detail-key">solo</span>
-            <span class="detail-val">solo</span>
-        </div>
+    <div class="learned-grid">
+        <div class="learned-item reveal"><span class="learned-dot"></span><span>Conception d'une architecture réseau multi-sites from scratch</span></div>
+        <div class="learned-item reveal"><span class="learned-dot"></span><span>Configuration du DHCP directement sur un switch Layer 3</span></div>
+        <div class="learned-item reveal"><span class="learned-dot"></span><span>Routage inter-VLAN via switch L3 (3650-24PS)</span></div>
+        <div class="learned-item reveal"><span class="learned-dot"></span><span>Mise en place de routes statiques entre 5 routeurs</span></div>
+        <div class="learned-item reveal"><span class="learned-dot"></span><span>Segmentation réseau avec 10 VLANs sur 4 sites</span></div>
+        <div class="learned-item reveal"><span class="learned-dot"></span><span>Déploiement d'un serveur DNS et d'un serveur Web</span></div>
+        <div class="learned-item reveal"><span class="learned-dot"></span><span>Redondance WiFi avec points d'accès de secours</span></div>
+        <div class="learned-item reveal"><span class="learned-dot"></span><span>Plan d'adressage IP cohérent sur plusieurs classes</span></div>
     </div>
 </section>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-    <div class="lightbox-overlay" id="lightboxOverlay"></div>
-    <div class="lightbox-box">
-        <div class="lightbox-header">
-            <span class="lightbox-title" id="lightboxTitle"></span>
-            <button class="lightbox-close" id="lightboxClose">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                ESC
-            </button>
-        </div>
-        <div class="lightbox-img-wrap">
-            <button class="lightbox-nav prev" id="lightboxPrev">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </button>
-            <img src="" alt="" class="lightbox-img" id="lightboxImg">
-            <button class="lightbox-nav next" id="lightboxNext">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </button>
-        </div>
-        <div class="lightbox-counter" id="lightboxCounter">1 / 4</div>
-    </div>
-</div>
 
 <!-- FOOTER -->
 <footer class="footer">
