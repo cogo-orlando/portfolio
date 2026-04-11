@@ -14,15 +14,20 @@ import (
 // true = page en maintenance
 // false = page accessible
 var maintenancePages = map[string]bool{
-	"/blog":    false,
-	"/about":   false,
-	"/skills":  false,
-	"/contact": false,
-	"/cv":      false,
-	"/home":    false,
-	"/project": false,
-	"/faq":     false,
-	"/status":  false,
+	"/blog":         false,
+	"/about":        false,
+	"/skills":       false,
+	"/contact":      false,
+	"/cv":           false,
+	"/home":         false,
+	"/project":      false,
+	"/faq":          false,
+	"/status":       false,
+	"/demo/netflix": true,
+	"/demo/zoo":     false,
+	"/demo/power4":  true,
+	"/demo/groupie": true,
+	"/demo/cisco":   true,
 }
 
 var MaintenanceMode = false
@@ -92,6 +97,7 @@ func Start() {
 
 		// Routes
 		switch r.URL.Path {
+
 		case "/":
 			IndexHandler(w, r)
 		case "/home":
@@ -114,6 +120,16 @@ func Start() {
 			MaintenanceHandler(w, r)
 		case "/demo/zoo":
 			DemoZooHandler(w, r)
+		case "/demo/netflix":
+			DemoNetflixHandler(w, r)
+		case "/demo/groupie":
+			DemoGroupieHandler(w, r)
+		case "/demo/power4":
+			DemoPower4Handler(w, r)
+		case "/demo/cisco":
+			DemoCiscoHandler(w, r)
+
+		//Error 404
 		default:
 			NotFoundHandler(w, r)
 		}

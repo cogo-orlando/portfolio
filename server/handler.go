@@ -73,6 +73,26 @@ func DemoZooHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "demo-zoo.html")
 }
 
+// PAGE DEMO NETFLIX LIGHT
+func DemoNetflixHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "demo-netflix.html")
+}
+
+// PAGE DEMO GROUPIE TRACKER
+func DemoGroupieHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "demo-groupie.html")
+}
+
+// PAGE DEMO POWER4
+func DemoPower4Handler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "demo-power4.html")
+}
+
+// PAGE DEMO CISCO
+func DemoCiscoHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "demo-cisco.html")
+}
+
 // PAGE ERROR 404
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
