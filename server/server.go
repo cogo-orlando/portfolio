@@ -23,10 +23,10 @@ var maintenancePages = map[string]bool{
 	"/project":      false,
 	"/faq":          false,
 	"/status":       false,
-	"/demo/netflix": true,
+	"/demo/netflix": false,
 	"/demo/zoo":     false,
-	"/demo/power4":  true,
-	"/demo/groupie": true,
+	"/demo/power4":  false,
+	"/demo/groupie": false,
 	"/demo/cisco":   false,
 }
 
