@@ -22,15 +22,13 @@
 <nav class="nav">
     <a href="/project" class="nav-logo"><span class="prompt">~/</span>projects</a>
     <div class="nav-right">
-        <!-- MODIFIER : lien GitHub du projet -->
-        <a href="https://github.com/cogo-orlando/NOM_REPO" target="_blank" class="cv-btn">
+        <a href="https://github.com/cogo-orlando/NETFLIXLight" target="_blank" class="cv-btn">
             <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
             GitHub
         </a>
-        <!-- MODIFIER : tags du projet ex: "Go · Web" -->
         <div class="nav-status">
             <span class="status-dot"></span>
-            <span>Go · Web</span>
+            <span>Js · Web</span>
         </div>
     </div>
 </nav>
@@ -45,18 +43,16 @@
     <h1 class="hero-title">NetflixLight<br><span class="outline">Demo</span></h1>
     <p class="hero-intro">Plateforme de streaming dynamique utilisant l'API TMDB pour la récupération de données en temps réel. Système de recherche fluide, catégories personnalisées et interface responsive.</p>
     <div class="hero-badges">
-        <!-- MODIFIER : ajoute/retire des badges selon le projet -->
-        <span class="badge">BADGE_1</span>
-        <span class="badge">BADGE_2</span>
-        <span class="badge">Solo</span>
+        <span class="badge">JavaScript</span>
+        <span class="badge">API TMDB</span>
+        <span class="badge">Node</span>
     </div>
 </section>
 
-<!-- CAPTURE PRINCIPALE — cliquable vers le site -->
 <section class="section">
     <div class="section-header">
         <span class="section-tag">// Aperçu</span>
-        <h2 class="section-title">Le projet en action</h2>
+        <h2 class="section-title">Le projet</h2>
     </div>
 
     <a href="https://netflixlight.onrender.com" target="_blank" class="preview-link reveal">
@@ -71,7 +67,7 @@
         </div>
         <div class="preview-caption">
             <span class="caption-url">https://netflixlight.onrender.com</span>
-            <span class="caption-hint">Cliquer pour ouvrir →</span>
+            <span class="caption-hint">Cliquer pour accéder au site →</span>
         </div>
     </a>
 </section>
@@ -80,7 +76,7 @@
 <section class="section" id="gallery">
     <div class="section-header">
         <span class="section-tag">// Captures</span>
-        <h2 class="section-title">Screenshots</h2>
+        <h2 class="section-title">Images</h2>
     </div>
 
     <div class="gallery-grid">
@@ -95,7 +91,7 @@
             </div>
             <div class="gallery-caption">
                 <span class="caption-num">01</span>
-                <span class="caption-text">Description de la capture</span>
+                <span class="caption-text">Page d'accueil du site</span>
             </div>
         </div>
 
@@ -109,7 +105,7 @@
             </div>
             <div class="gallery-caption">
                 <span class="caption-num">02</span>
-                <span class="caption-text">Description de la capture</span>
+                <span class="caption-text">Possibilité de mettre en favoris des films</span>
             </div>
         </div>
 
@@ -123,7 +119,21 @@
             </div>
             <div class="gallery-caption">
                 <span class="caption-num">03</span>
-                <span class="caption-text">Description de la capture</span>
+                <span class="caption-text">Voir les details d'un film (acteurs, note, trailer, synopsie...)</span>
+            </div>
+        </div>
+
+        <div class="gallery-card reveal" data-index="3">
+            <div class="gallery-img-wrap">
+                <img src="/img/projects/netflix/screen4.png" alt="Screenshot 3" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                    <span>Agrandir</span>
+                </div>
+            </div>
+            <div class="gallery-caption">
+                <span class="caption-num">04</span>
+                <span class="caption-text">Il est possible de créer un compte</span>
             </div>
         </div>
 
@@ -138,12 +148,12 @@
     </div>
     <div class="details-grid">
         <div class="detail-card reveal">
-            <span class="detail-key">Stack</span>
-            <span class="detail-val">STACK</span>
+            <span class="detail-key">Données</span>
+            <span class="detail-val">API TMDB (The Movie Database)</span>
         </div>
         <div class="detail-card reveal">
             <span class="detail-key">Équipe</span>
-            <span class="detail-val">Solo</span>
+            <span class="detail-val">Seul</span>
         </div>
         <div class="detail-card reveal">
             <span class="detail-key">Statut</span>
@@ -151,12 +161,22 @@
         </div>
         <div class="detail-card reveal">
             <span class="detail-key">Appris</span>
-            <span class="detail-val">CE_QUE_TU_AS_APPRIS</span>
+            <span class="detail-val">Serveur en Js</span>
+        </div>
+        <div class="detail-card reveal">
+            <span class="detail-key">Langage</span>
+            <span class="detail-val">Js, HTML, CSS,</span>
+        </div>
+        <div class="detail-card reveal">
+            <span class="detail-key">Déploiement</span>
+            <span class="detail-val">Render</span>
         </div>
     </div>
 
     <div class="project-desc reveal">
-        <p>DESCRIPTION_LONGUE_DU_PROJET</p>
+        <p>NetflixLight est une plateforme de streaming moderne et immersive conçue pour offrir une expérience utilisateur fluide et dynamique. Ce projet est né de la volonté de recréer une interface complexe de type "Single Page Application" (SPA) en s'appuyant sur des données réelles et massives provenant de l'industrie cinématographique.
+            L'objectif principal était de relever le défi technique de l'intégration d'API tierces tout en garantissant une performance optimale et une interface visuellement percutante, fidèle aux standards du web actuel.
+            Note : Le projet est actuellement entièrement fonctionnel et déployé, démontrant ma capacité à mener un développement de l'idéation jusqu'à la mise en production.</p>
     </div>
 </section>
 
@@ -192,12 +212,12 @@
     <span class="footer-year">© 2026</span>
 </footer>
 
-<!-- MODIFIER : adapte le tableau images dans le JS -->
 <script>
     window.projectImages = [
-        { src: '/img/projects/netflix/screen1.png', title: '01 — Description' },
-        { src: '/img/projects/netflix/screen2.png', title: '02 — Description' },
-        { src: '/img/projects/netflix/screen3.png', title: '03 — Description' },
+        { src: '/img/projects/netflix/screen1.png', title: '01 — Pade d accueil du site' },
+        { src: '/img/projects/netflix/screen2.png', title: '02 — Possibilité de mettre en favoris des films' },
+        { src: '/img/projects/netflix/screen3.png', title: '03 — Voir les details d un film (acteurs, note, trailer, synopsie...)' },
+        { src: '/img/projects/netflix/screen4.png', title: '04 — Il est possible de créer un compte' },
     ];
     window.typingText = 'cat netflixlight.md';
 </script>
