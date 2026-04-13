@@ -43,18 +43,16 @@
     <h1 class="hero-title">Groupie Tracker<br><span class="outline">Demo</span></h1>
     <p class="hero-intro">Intégration d'une API REST pour afficher des données complexes : biographies d'artistes, calendriers de tournées et géolocalisation des salles de concert.</p>
     <div class="hero-badges">
-        <!-- MODIFIER : ajoute/retire des badges selon le projet -->
-        <span class="badge">BADGE_1</span>
-        <span class="badge">BADGE_2</span>
-        <span class="badge">Solo</span>
+        <span class="badge">API TMDB</span>
+        <span class="badge">GO</span>
+        <span class="badge">A deux</span>
     </div>
 </section>
 
-<!-- CAPTURE PRINCIPALE — cliquable vers le site -->
 <section class="section">
     <div class="section-header">
         <span class="section-tag">// Aperçu</span>
-        <h2 class="section-title">Le projet en action</h2>
+        <h2 class="section-title">Le projet</h2>
     </div>
 
     <a href="https://groupie-tracker-vbqs.onrender.com" target="_blank" class="preview-link reveal">
@@ -74,11 +72,10 @@
     </a>
 </section>
 
-<!-- GALERIE CAPTURES SUPPLÉMENTAIRES -->
 <section class="section" id="gallery">
     <div class="section-header">
         <span class="section-tag">// Captures</span>
-        <h2 class="section-title">Screenshots</h2>
+        <h2 class="section-title">Images</h2>
     </div>
 
     <div class="gallery-grid">
@@ -93,7 +90,7 @@
             </div>
             <div class="gallery-caption">
                 <span class="caption-num">01</span>
-                <span class="caption-text">Description de la capture</span>
+                <span class="caption-text">Page des artistes</span>
             </div>
         </div>
 
@@ -107,7 +104,7 @@
             </div>
             <div class="gallery-caption">
                 <span class="caption-num">02</span>
-                <span class="caption-text">Description de la capture</span>
+                <span class="caption-text">Détails des artistes (chanteurs, localisation des concerts, lien spotify...)</span>
             </div>
         </div>
 
@@ -121,7 +118,21 @@
             </div>
             <div class="gallery-caption">
                 <span class="caption-num">03</span>
-                <span class="caption-text">Description de la capture</span>
+                <span class="caption-text">Possibilité de mettre des artistes en favoris</span>
+            </div>
+        </div>
+
+        <div class="gallery-card reveal" data-index="2">
+            <div class="gallery-img-wrap">
+                <img src="/img/projects/groupie/screen4.png" alt="Screenshot 4" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                    <span>Agrandir</span>
+                </div>
+            </div>
+            <div class="gallery-caption">
+                <span class="caption-num">04</span>
+                <span class="caption-text">Filtre et barre de recherche (année mini et maxi, nombres d'artistes)</span>
             </div>
         </div>
 
@@ -136,12 +147,12 @@
     </div>
     <div class="details-grid">
         <div class="detail-card reveal">
-            <span class="detail-key">Stack</span>
-            <span class="detail-val">STACK</span>
+            <span class="detail-key">Langage</span>
+            <span class="detail-val">GO, CSS, HTML</span>
         </div>
         <div class="detail-card reveal">
             <span class="detail-key">Équipe</span>
-            <span class="detail-val">Solo</span>
+            <span class="detail-val">A deux</span>
         </div>
         <div class="detail-card reveal">
             <span class="detail-key">Statut</span>
@@ -149,7 +160,7 @@
         </div>
         <div class="detail-card reveal">
             <span class="detail-key">Appris</span>
-            <span class="detail-val">CE_QUE_TU_AS_APPRIS</span>
+            <span class="detail-val">Gérer UNE API TMDB</span>
         </div>
     </div>
 
@@ -190,12 +201,12 @@
     <span class="footer-year">© 2026</span>
 </footer>
 
-<!-- MODIFIER : adapte le tableau images dans le JS -->
 <script>
     window.projectImages = [
-        { src: '/img/projects/groupie/screen1.png', title: '01 — Description' },
-        { src: '/img/projects/groupie/screen2.png', title: '02 — Description' },
-        { src: '/img/projects/groupie/screen3.png', title: '03 — Description' },
+        { src: '/img/projects/groupie/screen1.png', title: '01 — Page des artistes' },
+        { src: '/img/projects/groupie/screen2.png', title: '02 — Détails des artistes (chanteurs, localisation des concerts, lien spotify...)' },
+        { src: '/img/projects/groupie/screen3.png', title: '03 — Possibilité de mettre des artistes en favoris' },
+        { src: '/img/projects/groupie/screen4.png', title: '04 — Filtre et barre de recherche (année mini et maxi, nombres d artistes)' },
     ];
     window.typingText = 'cat groupietracker.md';
 </script>
