@@ -6,7 +6,7 @@ WORKDIR /app
 COPY go.mod ./
 RUN go mod download
 
-COPY . .
+COPY . /app
 
 RUN go build -ldflags="-s -w" -o main .
 
