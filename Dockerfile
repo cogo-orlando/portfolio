@@ -6,7 +6,7 @@ WORKDIR /app
 COPY go.mod ./
 RUN go mod download
 
-COPY . /app
+COPY . .
 
 RUN go build -ldflags="-s -w" -o main .
 
@@ -19,6 +19,8 @@ RUN adduser -D appuser
 USER appuser
 
 COPY --from=builder /app/main .
+
+COPY --from=builder /app/web ./web
 
 EXPOSE 8080
 
