@@ -48,7 +48,7 @@ var (
 func Start() {
 	mux := http.NewServeMux()
 
-	// ── HEALTH CHECK ──
+	// ── HEALTH CHECK (ENDPOINT) ──
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		visitMu.Lock()
