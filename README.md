@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-#portfolio orlando
-=======
 # 🛡️ Portfolio — Orlando Cogo
 
 ---
