@@ -48,6 +48,15 @@ var (
 func Start() {
 	mux := http.NewServeMux()
 
+	// ── HEALTH CHECK ──
+	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		visitMu.Lock()
+		visits := visitCount
+		visitMu.Unlock()
+		fmt.Fprintf(w, `{"status":"ok","service":"portfolio","visits":%d}`, visits)
+	})
+
 	// ── API ──
 	mux.HandleFunc("/api/contact", ContactAPIHandler)
 	mux.HandleFunc("/api/visits", func(w http.ResponseWriter, r *http.Request) {
