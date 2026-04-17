@@ -93,6 +93,11 @@ func DemoCiscoHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "demo-cisco.html")
 }
 
+// PAGE ANNUAIRE
+func AnnuaireHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "demo-annuaire.html")
+}
+
 // PAGE ERROR 404
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)

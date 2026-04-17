@@ -14,20 +14,21 @@ import (
 // true = page en maintenance
 // false = page accessible
 var maintenancePages = map[string]bool{
-	"/blog":         false,
-	"/about":        false,
-	"/skills":       false,
-	"/contact":      false,
-	"/cv":           false,
-	"/home":         false,
-	"/project":      false,
-	"/faq":          false,
-	"/status":       false,
-	"/demo/netflix": false,
-	"/demo/zoo":     false,
-	"/demo/power4":  false,
-	"/demo/groupie": false,
-	"/demo/cisco":   false,
+	"/blog":          false,
+	"/about":         false,
+	"/skills":        false,
+	"/contact":       false,
+	"/cv":            false,
+	"/home":          false,
+	"/project":       false,
+	"/faq":           false,
+	"/status":        false,
+	"/demo/annuaire": true,
+	"/demo/netflix":  false,
+	"/demo/zoo":      false,
+	"/demo/power4":   false,
+	"/demo/groupie":  false,
+	"/demo/cisco":    false,
 }
 
 var MaintenanceMode = false
@@ -137,6 +138,8 @@ func Start() {
 			DemoPower4Handler(w, r)
 		case "/demo/cisco":
 			DemoCiscoHandler(w, r)
+		case "/demo/annuaire":
+			AnnuaireHandler(w, r)
 
 		//Error 404
 		default:
