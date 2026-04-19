@@ -23,7 +23,7 @@ var maintenancePages = map[string]bool{
 	"/project":       false,
 	"/faq":           false,
 	"/status":        false,
-	"/demo/annuaire": true,
+	"/demo/annuaire": false,
 	"/demo/netflix":  false,
 	"/demo/zoo":      false,
 	"/demo/power4":   false,
