@@ -74,3 +74,15 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') nextImage();
     if (e.key === 'Escape')     closeLightbox();
 });
+
+// ── DESCRIPTION TOGGLE ──
+const descContent = document.getElementById('descContent');
+const descToggle  = document.getElementById('descToggle');
+const descText    = document.getElementById('descToggleText');
+const descArrow   = document.getElementById('descArrow');
+
+descToggle?.addEventListener('click', () => {
+    const expanded = descContent.classList.toggle('expanded');
+    descText.textContent = expanded ? 'Réduire' : 'Lire la suite';
+    descArrow.classList.toggle('rotated', expanded);
+});

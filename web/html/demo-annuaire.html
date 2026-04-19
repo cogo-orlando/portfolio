@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partage Réseau + Annuaire — Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/demo-annuaire.css">
+</head>
+<body>
+
+<div class="blob1"></div>
+<div class="blob2"></div>
+<div class="grid"></div>
+<div class="corner corner--tl"></div>
+<div class="corner corner--tr"></div>
+<div class="corner corner--bl"></div>
+<div class="corner corner--br"></div>
+
+<!-- NAV -->
+<nav class="nav">
+    <a href="/project" class="nav-logo"><span class="prompt">~/</span>projects</a>
+    <div class="nav-right">
+        <div class="nav-status-warn">
+            <span class="status-dot-warn"></span>
+            <span>En cours</span>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-tag">
+        <span class="prompt">~/projects/samba $</span>
+        <span class="typed"></span>
+        <span class="cursor"></span>
+    </div>
+    <h1 class="hero-title">Partage Réseau<br><span class="outline">+ Annuaire</span></h1>
+    <p class="hero-intro">
+        Mise en place d'un espace de partage de fichiers centralisé avec authentification via annuaire — Samba, gestion des accès par équipe, traçabilité des actions et monitoring.
+    </p>
+    <div class="hero-badges">
+        <span class="badge">Samba</span>
+        <span class="badge">Linux Server</span>
+        <span class="badge">Proxmox</span>
+        <span class="badge">Annuaire</span>
+        <span class="badge">Logs & Monitoring</span>
+    </div>
+
+    <!-- Statut du projet -->
+    <div class="project-status reveal">
+        <div class="ps-header">
+            <span class="ps-label">~/projet $</span>
+            <span class="ps-status">En cours</span>
+        </div>
+        <div class="ps-steps">
+            <div class="ps-step done">
+                <span class="ps-dot"></span>
+                <span class="ps-name">Analyse du sujet & brief client</span>
+                <span class="ps-check">✓</span>
+            </div>
+            <div class="ps-step done">
+                <span class="ps-dot"></span>
+                <span class="ps-name">Mise en place de l'environnement Proxmox</span>
+                <span class="ps-check">✓</span>
+            </div>
+            <div class="ps-step inprog">
+                <span class="ps-dot"></span>
+                <span class="ps-name">Configuration du serveur Samba</span>
+                <span class="ps-check">…</span>
+            </div>
+            <div class="ps-step inprog">
+                <span class="ps-dot"></span>
+                <span class="ps-name">Mise en place de l'annuaire</span>
+                <span class="ps-check">…</span>
+            </div>
+            <div class="ps-step pending">
+                <span class="ps-dot"></span>
+                <span class="ps-name">Configuration des droits d'accès par équipe</span>
+                <span class="ps-check">—</span>
+            </div>
+            <div class="ps-step pending">
+                <span class="ps-dot"></span>
+                <span class="ps-name">Traçabilité des logs (full_audit)</span>
+                <span class="ps-check">—</span>
+            </div>
+            <div class="ps-step pending">
+                <span class="ps-dot"></span>
+                <span class="ps-name">Réflexion sauvegarde & monitoring</span>
+                <span class="ps-check">—</span>
+            </div>
+            <div class="ps-step pending">
+                <span class="ps-dot"></span>
+                <span class="ps-name">Documentation d'administration</span>
+                <span class="ps-check">—</span>
+            </div>
+            <div class="ps-step pending">
+                <span class="ps-dot"></span>
+                <span class="ps-name">Tests & démonstration finale</span>
+                <span class="ps-check">—</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTEXTE -->
+<section class="section">
+    <div class="section-header">
+        <span class="section-tag">01 //</span>
+        <h2 class="section-title">Contexte & Objectifs</h2>
+    </div>
+    <div class="context-grid">
+        <div class="context-card reveal">
+            <div class="context-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <div>
+                <span class="context-title">Brief client</span>
+                <p class="context-desc">Plusieurs équipes doivent accéder à des ressources communes ou spécifiques via le réseau. L'accès est contrôlé via un annuaire centralisé.</p>
+            </div>
+        </div>
+        <div class="context-card reveal">
+            <div class="context-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div>
+                <span class="context-title">Livrables attendus</span>
+                <p class="context-desc">Serveur de fichiers Samba fonctionnel, annuaire pour la gestion des utilisateurs, documentation d'admin, vue sur les logs et réflexion sur la sauvegarde.</p>
+            </div>
+        </div>
+        <div class="context-card reveal">
+            <div class="context-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+                <span class="context-title">Sécurité</span>
+                <p class="context-desc">Les actions des utilisateurs (connexion, modification, suppression) doivent pouvoir être tracées via les logs d'accès Samba.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="section">
+    <div class="section-header">
+        <span class="section-tag">02 //</span>
+        <h2 class="section-title">Architecture Proxmox</h2>
+    </div>
+    <div class="arch-grid reveal">
+
+        <div class="arch-vm" style="--vm-color:#00f5a0">
+            <div class="vm-header">
+                <div class="vm-dot"></div>
+                <span class="vm-name">VM Serveur Linux</span>
+                <span class="vm-badge">Proxmox</span>
+            </div>
+            <div class="vm-rows">
+                <div class="vm-row"><span class="vm-key">OS</span><span class="vm-val">Linux (Debian / Ubuntu Server)</span></div>
+                <div class="vm-row"><span class="vm-key">Services</span><span class="vm-val">Samba · Annuaire</span></div>
+                <div class="vm-row"><span class="vm-key">Rôle</span><span class="vm-val">Serveur de fichiers + Auth</span></div>
+                <div class="vm-row"><span class="vm-key">IP</span><span class="vm-val">À définir</span></div>
+            </div>
+        </div>
+
+        <div class="arch-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <span>SMB / LDAP</span>
+        </div>
+
+        <div class="arch-vm" style="--vm-color:#00c8f5">
+            <div class="vm-header">
+                <div class="vm-dot"></div>
+                <span class="vm-name">VM Client 1</span>
+                <span class="vm-badge">Proxmox</span>
+            </div>
+            <div class="vm-rows">
+                <div class="vm-row"><span class="vm-key">OS</span><span class="vm-val">Linux / Windows</span></div>
+                <div class="vm-row"><span class="vm-key">Rôle</span><span class="vm-val">Utilisateur équipe A</span></div>
+                <div class="vm-row"><span class="vm-key">Accès</span><span class="vm-val">Partages réseau Samba</span></div>
+                <div class="vm-row"><span class="vm-key">Auth</span><span class="vm-val">Via annuaire centralisé</span></div>
+            </div>
+        </div>
+
+        <div class="arch-arrow arch-arrow--planned">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <span>Prévu</span>
+        </div>
+
+        <div class="arch-vm arch-vm--planned" style="--vm-color:#5a7080">
+            <div class="vm-header">
+                <div class="vm-dot"></div>
+                <span class="vm-name">VM Client 2</span>
+                <span class="vm-badge vm-badge--planned">Planifié</span>
+            </div>
+            <div class="vm-rows">
+                <div class="vm-row"><span class="vm-key">OS</span><span class="vm-val">À définir</span></div>
+                <div class="vm-row"><span class="vm-key">Rôle</span><span class="vm-val">Utilisateur équipe B</span></div>
+                <div class="vm-row"><span class="vm-key">Accès</span><span class="vm-val">Partages réseau Samba</span></div>
+                <div class="vm-row"><span class="vm-key">Auth</span><span class="vm-val">Via annuaire centralisé</span></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- STACK TECHNIQUE -->
+<section class="section">
+    <div class="section-header">
+        <span class="section-tag">03 //</span>
+        <h2 class="section-title">Stack technique</h2>
+    </div>
+    <div class="tech-grid">
+        <div class="tech-card reveal">
+            <div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
+            <div class="tech-info">
+                <span class="tech-title">Samba</span>
+                <p class="tech-desc">Serveur de fichiers compatible SMB/CIFS. Partages par équipe avec droits différenciés, module full_audit pour la traçabilité des accès.</p>
+                <div class="tech-tags"><span>SMB</span><span>CIFS</span><span>full_audit</span></div>
+            </div>
+        </div>
+        <div class="tech-card reveal">
+            <div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+            <div class="tech-info">
+                <span class="tech-title">Annuaire</span>
+                <p class="tech-desc">Gestion centralisée des utilisateurs et groupes. Authentification unique (SSO) pour accéder aux partages selon les droits définis.</p>
+                <div class="tech-tags"><span>OpenLDAP</span><span>ou AD</span><span>En cours</span></div>
+            </div>
+        </div>
+        <div class="tech-card reveal">
+            <div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+            <div class="tech-info">
+                <span class="tech-title">Proxmox VE</span>
+                <p class="tech-desc">Hyperviseur de virtualisation permettant à Orlando et Rémi de travailler sur les mêmes VMs simultanément depuis leurs machines respectives.</p>
+                <div class="tech-tags"><span>KVM</span><span>VMs partagées</span><span>Réseau virtuel</span></div>
+            </div>
+        </div>
+        <div class="tech-card reveal">
+            <div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <div class="tech-info">
+                <span class="tech-title">Logs & Monitoring</span>
+                <p class="tech-desc">Traçabilité des connexions et modifications via les logs Samba. Réflexion sur la mise en place d'un outil de monitoring (Zabbix, Grafana...).</p>
+                <div class="tech-tags"><span>auditd</span><span>Logs Samba</span><span>Monitoring</span></div>
+            </div>
+        </div>
+        <div class="tech-card reveal">
+            <div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+            <div class="tech-info">
+                <span class="tech-title">Sauvegarde</span>
+                <p class="tech-desc">Réflexion sur une stratégie de sauvegarde des données partagées — rsync + cron, snapshots Proxmox, ou solution plus avancée.</p>
+                <div class="tech-tags"><span>rsync</span><span>cron</span><span>Snapshots</span></div>
+            </div>
+        </div>
+        <div class="tech-card reveal">
+            <div class="tech-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div class="tech-info">
+                <span class="tech-title">Sécurité des accès</span>
+                <p class="tech-desc">Droits différenciés par équipe sur les partages Samba. Politique de mots de passe via l'annuaire, chiffrement des communications SMB.</p>
+                <div class="tech-tags"><span>ACL</span><span>Chiffrement</span><span>Politiques</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CAPTURES — PLACEHOLDERS -->
+<section class="section">
+    <div class="section-header">
+        <span class="section-tag">04 //</span>
+        <h2 class="section-title">Captures d'écran</h2>
+        <span class="section-soon">À compléter</span>
+    </div>
+    <div class="gallery-grid">
+
+        <div class="gallery-placeholder reveal" data-label="Config Samba (smb.conf)">
+            <div class="placeholder-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Config Samba</span>
+                <code>smb.conf</code>
+                <span class="placeholder-hint">À ajouter</span>
+            </div>
+        </div>
+
+        <div class="gallery-placeholder reveal" data-label="Partages réseau créés">
+            <div class="placeholder-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Partages créés</span>
+                <code>smbclient -L</code>
+                <span class="placeholder-hint">À ajouter</span>
+            </div>
+        </div>
+
+        <div class="gallery-placeholder reveal" data-label="Config annuaire — utilisateurs & groupes">
+            <div class="placeholder-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Annuaire</span>
+                <code>Users & Groupes</code>
+                <span class="placeholder-hint">À ajouter</span>
+            </div>
+        </div>
+
+        <div class="gallery-placeholder reveal" data-label="Connexion client au partage">
+            <div class="placeholder-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Connexion client</span>
+                <code>mount SMB</code>
+                <span class="placeholder-hint">À ajouter</span>
+            </div>
+        </div>
+
+        <div class="gallery-placeholder reveal" data-label="Logs d'accès Samba">
+            <div class="placeholder-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Logs d'accès</span>
+                <code>/var/log/samba/</code>
+                <span class="placeholder-hint">À ajouter</span>
+            </div>
+        </div>
+
+        <div class="gallery-placeholder reveal" data-label="Droits différenciés par équipe">
+            <div class="placeholder-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Droits d'accès</span>
+                <code>ACL par équipe</code>
+                <span class="placeholder-hint">À ajouter</span>
+            </div>
+        </div>
+
+        <div class="gallery-placeholder reveal" data-label="Dashboard monitoring">
+            <div class="placeholder-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Monitoring</span>
+                <code>Zabbix / Grafana</code>
+                <span class="placeholder-hint">À ajouter</span>
+            </div>
+        </div>
+
+        <div class="gallery-placeholder reveal" data-label="Sauvegarde rsync">
+            <div class="placeholder-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Sauvegarde</span>
+                <code>rsync + cron</code>
+                <span class="placeholder-hint">À ajouter</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- COMMANDES CLÉS -->
+<section class="section">
+    <div class="section-header">
+        <span class="section-tag">05 //</span>
+        <h2 class="section-title">Commandes & Config clés</h2>
+    </div>
+    <div class="commands-list">
+
+        <div class="cmd-block reveal">
+            <div class="cmd-header">
+                <span class="cmd-title">Installation Samba</span>
+                <span class="cmd-tag">Serveur</span>
+            </div>
+            <pre class="cmd-code"><code>sudo apt update
+sudo apt install samba samba-common-bin
+sudo systemctl enable smbd nmbd
+sudo systemctl start smbd nmbd</code></pre>
+        </div>
+
+        <div class="cmd-block reveal">
+            <div class="cmd-header">
+                <span class="cmd-title">Structure smb.conf — Partage par équipe</span>
+                <span class="cmd-tag">/etc/samba/smb.conf</span>
+            </div>
+            <pre class="cmd-code"><code>[global]
+   workgroup = WORKGROUP
+   log level = 2
+   log file = /var/log/samba/%m.log
+
+[equipe-A]
+   path = /srv/samba/equipe-a
+   valid users = @equipe-a
+   read only = no
+   browseable = yes
+
+[commun]
+   path = /srv/samba/commun
+   valid users = @equipe-a @equipe-b
+   read only = no</code></pre>
+        </div>
+
+        <div class="cmd-block reveal">
+            <div class="cmd-header">
+                <span class="cmd-title">Activer les logs d'accès (full_audit)</span>
+                <span class="cmd-tag">Traçabilité</span>
+            </div>
+            <pre class="cmd-code"><code>[equipe-A]
+   vfs objects = full_audit
+   full_audit:prefix = %u|%I|%m|%S
+   full_audit:success = open read write rename unlink
+   full_audit:failure = connect
+   full_audit:facility = LOCAL5
+   full_audit:priority = NOTICE</code></pre>
+        </div>
+
+        <div class="cmd-block reveal">
+            <div class="cmd-header">
+                <span class="cmd-title">Vérifier la config & tester</span>
+                <span class="cmd-tag">Debug</span>
+            </div>
+            <pre class="cmd-code"><code># Vérifier la config Samba
+testparm
+
+# Lister les partages disponibles
+smbclient -L localhost -U utilisateur
+
+# Vérifier les logs
+tail -f /var/log/samba/log.smbd
+
+# Status du service
+sudo systemctl status smbd</code></pre>
+        </div>
+
+        <div class="cmd-block reveal">
+            <div class="cmd-header">
+                <span class="cmd-title">Sauvegarde rsync automatique</span>
+                <span class="cmd-tag">Backup · cron</span>
+            </div>
+            <pre class="cmd-code"><code># Script de sauvegarde
+rsync -avz --delete /srv/samba/ /backup/samba/
+
+# Automatiser avec cron (toutes les nuits à 2h)
+0 2 * * * /usr/bin/rsync -avz --delete /srv/samba/ /backup/samba/</code></pre>
+        </div>
+
+    </div>
+</section>
+
+<!-- RÉFLEXION SAUVEGARDE & MONITORING -->
+<section class="section">
+    <div class="section-header">
+        <span class="section-tag">06 //</span>
+        <h2 class="section-title">Sauvegarde & Monitoring</h2>
+        <span class="section-soon">En réflexion</span>
+    </div>
+    <div class="reflect-grid">
+
+        <div class="reflect-card reveal">
+            <div class="reflect-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span>Stratégie de sauvegarde</span>
+            </div>
+            <div class="reflect-rows">
+                <div class="reflect-row">
+                    <span class="reflect-opt">Option 1</span>
+                    <span class="reflect-desc">rsync + cron — Simple, efficace, planifiable</span>
+                </div>
+                <div class="reflect-row">
+                    <span class="reflect-opt">Option 2</span>
+                    <span class="reflect-desc">Snapshots Proxmox — Sauvegarde au niveau VM</span>
+                </div>
+                <div class="reflect-row">
+                    <span class="reflect-opt">Option 3</span>
+                    <span class="reflect-desc">Bacula / Amanda — Solution entreprise complète</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="reflect-card reveal">
+            <div class="reflect-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                <span>Outils de monitoring</span>
+            </div>
+            <div class="reflect-rows">
+                <div class="reflect-row">
+                    <span class="reflect-opt">Zabbix</span>
+                    <span class="reflect-desc">Monitoring réseau & serveurs, alertes, dashboards</span>
+                </div>
+                <div class="reflect-row">
+                    <span class="reflect-opt">Grafana</span>
+                    <span class="reflect-desc">Visualisation des métriques, intégration Prometheus</span>
+                </div>
+                <div class="reflect-row">
+                    <span class="reflect-opt">auditd</span>
+                    <span class="reflect-desc">Audit système Linux, complément aux logs Samba</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ÉQUIPE -->
+<section class="section">
+    <div class="section-header">
+        <span class="section-tag">07 //</span>
+        <h2 class="section-title">Équipe</h2>
+    </div>
+    <div class="team-grid">
+        <div class="team-card reveal">
+            <div class="team-avatar">OC</div>
+            <div class="team-info">
+                <span class="team-name">Orlando Cogo</span>
+                <span class="team-role">Bachelor Informatique · Ynov Campus</span>
+            </div>
+        </div>
+        <div class="team-card reveal">
+            <div class="team-avatar">R</div>
+            <div class="team-info">
+                <span class="team-name">Rémi</span>
+                <span class="team-role">Bachelor Informatique · Ynov Campus</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <span class="prompt">~/projects $</span>
+    <span>cd samba</span>
+    <a href="/project" class="footer-back">← Retour aux projets</a>
+    <span class="footer-year">© 2026</span>
+</footer>
+
+<script src="/js/demo-annuaire.js"></script>
+</body>
+</html>
