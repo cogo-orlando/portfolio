@@ -120,12 +120,12 @@ setTimeout(() => {
 const learningItems = [
     'Sécurité des réseaux TCP/IP...',
     'Cryptographie appliquée...',
-    'SQL injection & prévention...',
-    'Administration Linux avancée...',
+    'SQL...',
+    'Administration Linux...',
     'Go — architecture web...',
-    'CTF challenges TryHackMe...',
-    'OWASP Top 10...',
+    'CTF challenges HackTheBox...',
 ];
+
 const learningEl = document.getElementById('learningText');
 let lIdx = 0, lChar = 0, lDeleting = false;
 function typeLearning() {

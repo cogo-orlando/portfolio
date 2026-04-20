@@ -37,10 +37,8 @@ const bootLines  = document.getElementById('bootLines');
 
 const bootMessages = [
     { text: 'Initialisation du système...', cls: 'dim' },
-    { text: 'Montage des partitions...', cls: 'ok' },
     { text: 'Démarrage des services réseau...', cls: 'ok' },
     { text: 'Connexion à orlando.cogo...', cls: 'ok' },
-    { text: 'Chargement des modules de sécurité...', cls: 'ok' },
     { text: 'Système prêt.', cls: '' },
 ];
 
@@ -176,7 +174,7 @@ const learningItems = [
     'SQL...',
     'Administration Linux...',
     'Go — architecture web...',
-    'CTF challenges...',
+    'CTF challenges HackTheBox...',
 ];
 
 const learningEl = document.getElementById('learningText');
