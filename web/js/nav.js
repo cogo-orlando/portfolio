@@ -1,8 +1,3 @@
-// ═══════════════════════════════════════════════
-//  NAV.JS — Script partagé sur toutes les pages
-//  Charge ce fichier + background.js sur chaque page
-// ═══════════════════════════════════════════════
-
 // ── PAGE ACTIVE ──
 const currentPath = window.location.pathname;
 document.querySelectorAll('.nav-link').forEach(link => {

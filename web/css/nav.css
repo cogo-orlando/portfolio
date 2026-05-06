@@ -1,8 +1,3 @@
-/* ═══════════════════════════════════════════════
-   NAV.CSS — Styles partagés sur toutes les pages
-   Charge ce fichier sur chaque page HTML
-   ═══════════════════════════════════════════════ */
-
 /* ── BASE ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
