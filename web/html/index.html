@@ -6,6 +6,7 @@
     <title>Orlando Cogo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -13,11 +14,12 @@
 <div class="blob1"></div>
 <div class="blob2"></div>
 <div class="grid"></div>
-
 <div class="corner corner--tl"></div>
 <div class="corner corner--tr"></div>
 <div class="corner corner--bl"></div>
 <div class="corner corner--br"></div>
+
+<canvas id="matrix" class="matrix-canvas"></canvas>
 
 <div class="terminal-bar">
     <div class="dot dot-r"></div>
@@ -72,6 +74,7 @@
     <span>Système en ligne — 2026</span>
 </div>
 
+<script src="/js/background.js"></script>
 <script type="module" src="/js/index.js"></script>
 </body>
 </html>

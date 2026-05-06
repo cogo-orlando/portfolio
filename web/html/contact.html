@@ -6,6 +6,7 @@
     <title>Orlando Cogo — Contact</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/contact.css">
 </head>
 <body>
@@ -18,40 +19,48 @@
 <div class="corner corner--bl"></div>
 <div class="corner corner--br"></div>
 
-<!-- NAVIGATION -->
+<canvas id="matrix" class="matrix-canvas"></canvas>
+
+<!-- NAV -->
 <nav class="nav">
     <a href="/home" class="nav-logo"><span class="prompt">~/</span>orlando.cogo</a>
     <ul class="nav-links">
-        <li class="nav-dropdown">
-            <button class="nav-dropdown-btn">
-                pages
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                    <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+        <li><a href="/about" class="nav-link">À propos</a></li>
+        <li><a href="/skills" class="nav-link">Compétences</a></li>
+        <li><a href="/project" class="nav-link">Projets</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+        <li><a href="/cv" class="nav-link">CV</a></li>
+        <li class="nav-more">
+            <button class="nav-more-btn" id="navMoreBtn">
+                Plus
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="nav-dropdown-menu">
-                <a href="/home" class="dropdown-item"><span class="dropdown-num">00</span><span class="dropdown-info"><span class="dropdown-name">Accueil</span><span class="dropdown-desc">Page principale</span></span></a>
-                <a href="/about" class="dropdown-item"><span class="dropdown-num">01</span><span class="dropdown-info"><span class="dropdown-name">À propos</span><span class="dropdown-desc">Mon parcours & ma reconversion</span></span></a>
-                <a href="/skills" class="dropdown-item"><span class="dropdown-num">02</span><span class="dropdown-info"><span class="dropdown-name">Compétences</span><span class="dropdown-desc">Go, JS, SQL, Cybersec, Linux...</span></span></a>
-                <a href="/project" class="dropdown-item"><span class="dropdown-num">03</span><span class="dropdown-info"><span class="dropdown-name">Projets</span><span class="dropdown-desc">Mes réalisations</span></span></a>
-                <a href="/contact" class="dropdown-item"><span class="dropdown-num">04</span><span class="dropdown-info"><span class="dropdown-name">Contact</span><span class="dropdown-desc">GitHub, LinkedIn, email</span></span></a>
-                <a href="/cv" class="dropdown-item"><span class="dropdown-num">05</span><span class="dropdown-info"><span class="dropdown-name">CV</span><span class="dropdown-desc">Mon curriculum vitae</span></span></a>
-                <a href="/status" class="dropdown-item"><span class="dropdown-num">06</span><span class="dropdown-info"><span class="dropdown-name">Status</span><span class="dropdown-desc">État du système</span></span></a>
-                <a href="/faq" class="dropdown-item"><span class="dropdown-num">07</span><span class="dropdown-info"><span class="dropdown-name">Faq</span><span class="dropdown-desc">Question / Réponse</span></span></a>
+            <div class="nav-more-menu" id="navMoreMenu">
+                <a href="/status" class="more-item"><span class="more-num">06</span><span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
+                <a href="/faq" class="more-item"><span class="more-num">07</span><span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions / Réponses</span></span></a>
             </div>
         </li>
     </ul>
+    <button class="nav-burger" id="navBurger"><span></span><span></span><span></span></button>
     <div class="nav-right">
-        <div class="nav-status">
-            <span class="status-dot"></span>
-            <span>open to work</span>
-        </div>
+        <div class="nav-status"><span class="status-dot"></span><span>open to work</span></div>
     </div>
 </nav>
 
-<!-- HAUT DE LA PAGE -->
+<!-- Menu mobile -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="/about" class="mobile-link"><span class="mobile-num">01</span>À propos</a>
+    <a href="/skills" class="mobile-link"><span class="mobile-num">02</span>Compétences</a>
+    <a href="/project" class="mobile-link"><span class="mobile-num">03</span>Projets</a>
+    <a href="/contact" class="mobile-link"><span class="mobile-num">04</span>Contact</a>
+    <a href="/cv" class="mobile-link"><span class="mobile-num">05</span>CV</a>
+    <a href="/status" class="mobile-link"><span class="mobile-num">06</span>Status</a>
+    <a href="/faq" class="mobile-link"><span class="mobile-num">07</span>FAQ</a>
+</div>
+
+<!-- HERO -->
 <section class="hero">
-    <div class="hero-tag">
+    <div class="hero-tag" data-typed="cat contact.md">
         <span class="prompt">~/contact $</span>
         <span class="typed"></span>
         <span class="cursor"></span>
@@ -219,7 +228,7 @@
     </div>
 </section>
 
-<!-- BAS DE LA PAGE -->
+<!-- FOOTER -->
 <footer class="footer">
     <span class="prompt">~/orlando.cogo $</span>
     <span>cd ../home</span>
@@ -227,6 +236,8 @@
     <span class="footer-year">© 2026</span>
 </footer>
 
+<script src="/js/background.js"></script>
+<script src="/js/nav.js"></script>
 <script src="/js/contact.js"></script>
 </body>
 </html>

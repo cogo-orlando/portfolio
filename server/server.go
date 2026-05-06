@@ -11,8 +11,6 @@ import (
 //  CONFIGURATION MAINTENANCE
 // ══════════════════════════════════════════
 
-// true = page en maintenance
-// false = page accessible
 var maintenancePages = map[string]bool{
 	"/blog":          false,
 	"/about":         false,
@@ -29,6 +27,7 @@ var maintenancePages = map[string]bool{
 	"/demo/power4":   false,
 	"/demo/groupie":  false,
 	"/demo/cisco":    false,
+	"/demo/artemis":  false,
 }
 
 var MaintenanceMode = false
@@ -43,30 +42,43 @@ var (
 )
 
 // ══════════════════════════════════════════
+//  TABLE DE ROUTAGE
+// ══════════════════════════════════════════
+
+// Pour ajouter une page : une seule ligne ici
+var routes = map[string]http.HandlerFunc{
+	"/":              IndexHandler,
+	"/home":          HomeHandler,
+	"/about":         AboutHandler,
+	"/skills":        SkillsHandler,
+	"/project":       ProjectHandler,
+	"/contact":       ContactHandler,
+	"/cv":            CvHandler,
+	"/status":        StatusHandler,
+	"/faq":           FaqHandler,
+	"/maintenance":   MaintenanceHandler,
+	"/demo/zoo":      DemoZooHandler,
+	"/demo/netflix":  DemoNetflixHandler,
+	"/demo/groupie":  DemoGroupieHandler,
+	"/demo/power4":   DemoPower4Handler,
+	"/demo/cisco":    DemoCiscoHandler,
+	"/demo/artemis":  DemoArtemisHandler,
+	"/demo/annuaire": AnnuaireHandler,
+}
+
+// ══════════════════════════════════════════
 //  DÉMARRAGE DU SERVEUR
 // ══════════════════════════════════════════
 
 func Start() {
 	mux := http.NewServeMux()
 
-	// ── HEALTH CHECK (ENDPOINT) ──
-	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		visitMu.Lock()
-		visits := visitCount
-		visitMu.Unlock()
-		fmt.Fprintf(w, `{"status":"ok","service":"portfolio","visits":%d}`, visits)
-	})
+	// ── HEALTH CHECK ──
+	mux.HandleFunc("/health", healthHandler)
 
 	// ── API ──
 	mux.HandleFunc("/api/contact", ContactAPIHandler)
-	mux.HandleFunc("/api/visits", func(w http.ResponseWriter, r *http.Request) {
-		visitMu.Lock()
-		count := visitCount
-		visitMu.Unlock()
-		w.Header().Set("Content-Type", "application/json")
-		fmt.Fprintf(w, `{"visits":%d}`, count)
-	})
+	mux.HandleFunc("/api/visits", visitsHandler)
 
 	// ── FICHIERS STATIQUES ──
 	fs := http.FileServer(http.Dir("./web"))
@@ -75,77 +87,7 @@ func Start() {
 	mux.Handle("/img/", fs)
 
 	// ── ROUTES PRINCIPALES ──
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-
-		// Compteur de visites
-		cookie, err := r.Cookie("visited")
-		if err != nil || cookie == nil {
-			// Nouveau visiteur
-			visitMu.Lock()
-			visitCount++
-			visitMu.Unlock()
-			// On pose le cookie pour 24h
-			http.SetCookie(w, &http.Cookie{
-				Name:   "visited",
-				Value:  "1",
-				MaxAge: 86400, // 24 heures
-				Path:   "/",
-			})
-		}
-
-		// Site entier en maintenance
-		if MaintenanceMode {
-			http.ServeFile(w, r, "web/html/maintenance.html")
-			return
-		}
-
-		// Page spécifique en maintenance
-		if maintenancePages[r.URL.Path] {
-			http.ServeFile(w, r, "web/html/maintenance.html")
-			return
-		}
-
-		// Routes
-		switch r.URL.Path {
-
-		case "/":
-			IndexHandler(w, r)
-		case "/home":
-			HomeHandler(w, r)
-		case "/about":
-			AboutHandler(w, r)
-		case "/skills":
-			SkillsHandler(w, r)
-		case "/project":
-			ProjectHandler(w, r)
-		case "/contact":
-			ContactHandler(w, r)
-		case "/cv":
-			CvHandler(w, r)
-		case "/status":
-			StatusHandler(w, r)
-		case "/faq":
-			FaqHandler(w, r)
-		case "/maintenance":
-			MaintenanceHandler(w, r)
-		case "/demo/zoo":
-			DemoZooHandler(w, r)
-		case "/demo/netflix":
-			DemoNetflixHandler(w, r)
-		case "/demo/groupie":
-			DemoGroupieHandler(w, r)
-		case "/demo/power4":
-			DemoPower4Handler(w, r)
-		case "/demo/cisco":
-			DemoCiscoHandler(w, r)
-		case "/demo/annuaire":
-			AnnuaireHandler(w, r)
-
-		//Error 404
-		default:
-			NotFoundHandler(w, r)
-		}
-	})
+	mux.HandleFunc("/", mainHandler)
 
 	fmt.Println("Serveur lancé sur http://localhost:8080")
 	port := os.Getenv("PORT")
@@ -155,4 +97,58 @@ func Start() {
 	if err := http.ListenAndServe(":"+port, mux); err != nil {
 		panic(err)
 	}
+}
+
+// ── HANDLER PRINCIPAL ──
+func mainHandler(w http.ResponseWriter, r *http.Request) {
+	// Compteur — 1 visite par 24h via cookie
+	if _, err := r.Cookie("visited"); err != nil {
+		visitMu.Lock()
+		visitCount++
+		visitMu.Unlock()
+		http.SetCookie(w, &http.Cookie{
+			Name:   "visited",
+			Value:  "1",
+			MaxAge: 86400,
+			Path:   "/",
+		})
+	}
+
+	// Maintenance globale
+	if MaintenanceMode {
+		http.ServeFile(w, r, "web/html/maintenance.html")
+		return
+	}
+
+	// Maintenance par page
+	if maintenancePages[r.URL.Path] {
+		http.ServeFile(w, r, "web/html/maintenance.html")
+		return
+	}
+
+	// Lookup dans la table de routage
+	if handler, ok := routes[r.URL.Path]; ok {
+		handler(w, r)
+		return
+	}
+
+	NotFoundHandler(w, r)
+}
+
+// ── HEALTH ──
+func healthHandler(w http.ResponseWriter, r *http.Request) {
+	visitMu.Lock()
+	visits := visitCount
+	visitMu.Unlock()
+	w.Header().Set("Content-Type", "application/json")
+	fmt.Fprintf(w, `{"status":"ok","service":"portfolio","visits":%d}`, visits)
+}
+
+// ── VISITS ──
+func visitsHandler(w http.ResponseWriter, r *http.Request) {
+	visitMu.Lock()
+	count := visitCount
+	visitMu.Unlock()
+	w.Header().Set("Content-Type", "application/json")
+	fmt.Fprintf(w, `{"visits":%d}`, count)
 }

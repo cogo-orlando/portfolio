@@ -10,9 +10,7 @@ import (
 	"time"
 )
 
-const (
-	messagesFile = "data/messages.json"
-)
+const messagesFile = "data/messages.json"
 
 // ── RATE LIMITING ──
 type RateLimiter struct {
@@ -29,7 +27,7 @@ func (rl *RateLimiter) Allow(ip string) bool {
 	now := time.Now()
 	window := time.Hour
 
-	// Nettoie les vieilles entrées
+	// Garde uniquement les entrées dans la fenêtre d'une heure
 	var recent []time.Time
 	for _, t := range rl.records[ip] {
 		if now.Sub(t) < window {
@@ -38,11 +36,25 @@ func (rl *RateLimiter) Allow(ip string) bool {
 	}
 
 	// Max 3 messages par heure par IP
-	if len(recent) >= 100 {
+	if len(recent) >= 3 {
 		return false
 	}
 
 	rl.records[ip] = append(recent, now)
+	return true
+}
+
+// ── VALIDATION ──
+// validateField vérifie qu'un champ est non vide et dans la limite de taille
+func validateField(w http.ResponseWriter, value, name string, maxLen int) bool {
+	if strings.TrimSpace(value) == "" {
+		jsonError(w, name+" est requis", http.StatusBadRequest)
+		return false
+	}
+	if len(value) > maxLen {
+		jsonError(w, name+" est trop long", http.StatusBadRequest)
+		return false
+	}
 	return true
 }
 
@@ -52,7 +64,6 @@ func ContactAPIHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
-
 	w.Header().Set("Content-Type", "application/json")
 
 	// Parse le body JSON
@@ -63,44 +74,26 @@ func ContactAPIHandler(w http.ResponseWriter, r *http.Request) {
 		Subject   string `json:"subject"`
 		Message   string `json:"message"`
 	}
-
 	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(map[string]string{"error": "Données invalides"})
+		jsonError(w, "Données invalides", http.StatusBadRequest)
 		return
 	}
 
-	// ── VALIDATION CÔTÉ SERVEUR ──
+	// Trim tous les champs
 	input.FirstName = strings.TrimSpace(input.FirstName)
 	input.LastName = strings.TrimSpace(input.LastName)
 	input.Mail = strings.TrimSpace(input.Mail)
 	input.Subject = strings.TrimSpace(input.Subject)
 	input.Message = strings.TrimSpace(input.Message)
 
-	if input.FirstName == "" {
-		jsonError(w, "Le nom est requis", http.StatusBadRequest)
+	// Validation factorisée
+	if !validateField(w, input.FirstName, "Le prénom", 100) {
 		return
 	}
-	if len(input.FirstName) > 100 {
-		jsonError(w, "Nom trop long", http.StatusBadRequest)
+	if !validateField(w, input.LastName, "Le nom", 100) {
 		return
 	}
-
-	if input.LastName == "" {
-		jsonError(w, "Le nom est requis", http.StatusBadRequest)
-		return
-	}
-	if len(input.LastName) > 100 {
-		jsonError(w, "Nom trop long", http.StatusBadRequest)
-		return
-	}
-
-	if input.Mail == "" {
-		jsonError(w, "Un mail est requis", http.StatusBadRequest)
-		return
-	}
-	if len(input.Mail) > 1000 {
-		jsonError(w, "Le mail est trop long", http.StatusBadRequest)
+	if !validateField(w, input.Mail, "L'email", 254) {
 		return
 	}
 
@@ -111,15 +104,22 @@ func ContactAPIHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(input.Message) < 10 {
-		jsonError(w, "Message trop court", http.StatusBadRequest)
+		jsonError(w, "Message trop court (min 10 caractères)", http.StatusBadRequest)
 		return
 	}
 	if len(input.Message) > 1000 {
-		jsonError(w, "Message trop long", http.StatusBadRequest)
+		jsonError(w, "Message trop long (max 1000 caractères)", http.StatusBadRequest)
 		return
 	}
 
-	// ── SAUVEGARDE EN JSON ──
+	// Rate limiting par IP
+	ip := r.RemoteAddr
+	if !rateLimiter.Allow(ip) {
+		jsonError(w, "Trop de messages envoyés, réessaie dans une heure", http.StatusTooManyRequests)
+		return
+	}
+
+	// Sauvegarde
 	msg := ContactMessage{
 		FirstName: input.FirstName,
 		LastName:  input.LastName,
@@ -127,6 +127,7 @@ func ContactAPIHandler(w http.ResponseWriter, r *http.Request) {
 		Subject:   input.Subject,
 		Message:   input.Message,
 		Date:      time.Now().Format("2006-01-02 15:04:05"),
+		IP:        ip,
 	}
 
 	if err := saveMessage(msg); err != nil {
@@ -134,33 +135,36 @@ func ContactAPIHandler(w http.ResponseWriter, r *http.Request) {
 		jsonError(w, "Erreur lors de la sauvegarde", http.StatusInternalServerError)
 		return
 	}
-	json.NewEncoder(w).Encode(map[string]string{
-		"status": "ok",
-	})
+
+	json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
 }
 
 // ── SAUVEGARDE JSON ──
 func saveMessage(msg ContactMessage) error {
-	// Crée le dossier data/ si nécessaire
 	if err := os.MkdirAll("data", 0755); err != nil {
 		return err
 	}
 
-	// Lit le fichier existant ou crée un nouveau store
+	// Charge le store existant
 	store := MessagesStore{}
 	if data, err := os.ReadFile(messagesFile); err == nil {
 		json.Unmarshal(data, &store)
 	}
+
+	// Assigne un ID et ajoute le message
+	msg.ID = store.Total + 1
+	store.Total++
+	store.Messages = append(store.Messages, msg)
 
 	// Écrit le fichier
 	data, err := json.MarshalIndent(store, "", "  ")
 	if err != nil {
 		return err
 	}
-
 	return os.WriteFile(messagesFile, data, 0644)
 }
 
+// ── HELPER ──
 func jsonError(w http.ResponseWriter, msg string, code int) {
 	w.WriteHeader(code)
 	json.NewEncoder(w).Encode(map[string]string{"error": msg})
