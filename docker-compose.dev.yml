@@ -1,0 +1,17 @@
+services:
+
+  # ── Portfolio — Mode Développement ───────────────────────────────────────────
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev     # Utilise le Dockerfile de dev avec Air
+    container_name: portfolio_dev
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: "8080"
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-changeme}
+    volumes:
+      - .:/app                       # Monte tout le projet — Go + web + data
+      - /app/tmp                     # Exclut le dossier tmp d'Air du montage

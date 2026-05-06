@@ -1,0 +1,22 @@
+# ── CONFIGURATION AIR — Hot reload Go ────────────────────────────────────────
+root = "."
+tmp_dir = "tmp"
+
+[build]
+# Commande de build
+cmd = "go build -o ./tmp/main ."
+# Binaire à lancer
+bin = "./tmp/main"
+# Fichiers à surveiller
+include_ext = ["go"]
+# Dossiers à ignorer
+exclude_dir = ["tmp", "web", "data", "content"]
+# Délai avant rebuild (évite les rebuilds en cascade)
+delay = 500
+
+[screen]
+clear_on_rebuild = true
+keep_scroll = true
+
+[log]
+time = true

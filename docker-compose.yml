@@ -1,10 +1,10 @@
 services:
 
-  # ── Portfolio Go ─────────────────────────────────────────────────────────────
+  # ── Portfolio — Mode Production ───────────────────────────────────────────────
   portfolio:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile         # Utilise le Dockerfile de prod optimisé
     container_name: portfolio
     restart: unless-stopped
     ports:
@@ -13,8 +13,7 @@ services:
       PORT: "8080"
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-changeme}
     volumes:
-      # Persiste les messages de contact et questions FAQ
-      - portfolio_data:/app/data
+      - portfolio_data:/app/data     # Persiste les messages JSON
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/health"]
       interval: 30s
