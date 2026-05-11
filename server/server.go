@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"sync"
+	"time"
 )
 
 // ══════════════════════════════════════════
@@ -45,7 +46,6 @@ var (
 //  TABLE DE ROUTAGE
 // ══════════════════════════════════════════
 
-// Pour ajouter une page : une seule ligne ici
 var routes = map[string]http.HandlerFunc{
 	"/":              IndexHandler,
 	"/home":          HomeHandler,
@@ -80,6 +80,9 @@ func Start() {
 	mux.HandleFunc("/api/contact", ContactAPIHandler)
 	mux.HandleFunc("/api/visits", visitsHandler)
 
+	// ── ADMIN ──
+	mux.HandleFunc("/admin/messages", AdminHandler)
+
 	// ── FICHIERS STATIQUES ──
 	fs := http.FileServer(http.Dir("./web"))
 	mux.Handle("/css/", fs)
@@ -89,12 +92,24 @@ func Start() {
 	// ── ROUTES PRINCIPALES ──
 	mux.HandleFunc("/", mainHandler)
 
+	// ── APPLIQUE LE MIDDLEWARE ──
+	handler := Chain(mux)
+
 	fmt.Println("Serveur lancé sur http://localhost:8080")
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
-	if err := http.ListenAndServe(":"+port, mux); err != nil {
+
+	srv := &http.Server{
+		Addr:         ":" + port,
+		Handler:      handler,
+		ReadTimeout:  15 * time.Second,
+		WriteTimeout: 30 * time.Second,
+		IdleTimeout:  60 * time.Second,
+	}
+
+	if err := srv.ListenAndServe(); err != nil {
 		panic(err)
 	}
 }
@@ -107,10 +122,13 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 		visitCount++
 		visitMu.Unlock()
 		http.SetCookie(w, &http.Cookie{
-			Name:   "visited",
-			Value:  "1",
-			MaxAge: 86400,
-			Path:   "/",
+			Name:     "visited",
+			Value:    "1",
+			MaxAge:   86400,
+			Path:     "/",
+			Secure:   true,
+			HttpOnly: true,
+			SameSite: http.SameSiteStrictMode,
 		})
 	}
 
@@ -135,16 +153,7 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 	NotFoundHandler(w, r)
 }
 
-// ── HEALTH ──
-func healthHandler(w http.ResponseWriter, r *http.Request) {
-	visitMu.Lock()
-	visits := visitCount
-	visitMu.Unlock()
-	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprintf(w, `{"status":"ok","service":"portfolio","visits":%d}`, visits)
-}
-
-// ── VISITS ──
+// ── API VISITS ──
 func visitsHandler(w http.ResponseWriter, r *http.Request) {
 	visitMu.Lock()
 	count := visitCount
