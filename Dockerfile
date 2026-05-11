@@ -2,18 +2,19 @@ FROM golang:1.23-alpine
 
 WORKDIR /app
 
-RUN go install github.com/air-verse/air@v1.61.7
-
 # Copie les dépendances
-COPY go.mod ./
+COPY go.mod go.sum ./
 RUN go mod download
 
 # Copie le code source
 COPY . .
 
+# Build le binaire
+RUN go build -o main .
+
 EXPOSE 8080
 
 ENV PORT=8080
 
-# Lance Air qui surveille les fichiers Go et relance le serveur automatiquement
-CMD ["air"]
+# Lance le binaire compilé
+CMD ["./main"]
