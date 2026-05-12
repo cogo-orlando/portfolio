@@ -3,19 +3,21 @@ package middleware
 import (
 	"compress/gzip"
 	"context"
+	"crypto/rand"
+	"encoding/hex"
 	"fmt"
 	"io"
 	"log/slog"
 	"net/http"
 	"os"
+	"runtime/debug"
 	"strings"
 	"sync"
 	"time"
 )
 
 // ══════════════════════════════════════════
-//  INIT SLOG — JSON structuré vers stdout
-//  Lisible directement dans Render Logs
+//  INIT SLOG
 // ══════════════════════════════════════════
 
 func init() {
@@ -23,6 +25,159 @@ func init() {
 		Level: slog.LevelInfo,
 	}))
 	slog.SetDefault(logger)
+}
+
+// ══════════════════════════════════════════
+//  REQUEST ID
+//  Chaque requête reçoit un ID unique
+//  visible dans tous les logs
+// ══════════════════════════════════════════
+
+type contextKey string
+
+const RequestIDKey contextKey = "request_id"
+
+func generateRequestID() string {
+	b := make([]byte, 8)
+	rand.Read(b)
+	return hex.EncodeToString(b)
+}
+
+func RequestIDMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		id := generateRequestID()
+		w.Header().Set("X-Request-ID", id)
+		ctx := context.WithValue(r.Context(), RequestIDKey, id)
+		next.ServeHTTP(w, r.WithContext(ctx))
+	})
+}
+
+func GetRequestID(ctx context.Context) string {
+	if id, ok := ctx.Value(RequestIDKey).(string); ok {
+		return id
+	}
+	return "-"
+}
+
+// ══════════════════════════════════════════
+//  PANIC RECOVERY
+//  Si une route panic, renvoie un 500 propre
+//  sans crasher le serveur
+// ══════════════════════════════════════════
+
+func RecoveryMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		defer func() {
+			if err := recover(); err != nil {
+				id := GetRequestID(r.Context())
+				slog.Error("panic récupéré",
+					"request_id", id,
+					"path", r.URL.Path,
+					"error", fmt.Sprintf("%v", err),
+					"stack", string(debug.Stack()),
+				)
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprint(w, "500 — Erreur interne du serveur")
+			}
+		}()
+		next.ServeHTTP(w, r)
+	})
+}
+
+// ══════════════════════════════════════════
+//  HONEYPOT
+//  Routes fausses qui attirent les bots/scanners
+//  Toute IP qui y accède est loguée comme suspecte
+// ══════════════════════════════════════════
+
+// Liste des routes honeypot — jamais visitées par un humain normal
+var honeypotRoutes = map[string]bool{
+	"/admin/login":   true,
+	"/admin":         true,
+	"/wp-admin":      true,
+	"/wp-login.php":  true,
+	"/wp-config.php": true,
+	"/.env":          true,
+	"/config.php":    true,
+	"/phpinfo.php":   true,
+	"/.git/config":   true,
+	"/etc/passwd":    true,
+	"/api/admin":     true,
+	"/administrator": true,
+	"/login":         true,
+	"/shell":         true,
+	"/console":       true,
+}
+
+// Blacklist en mémoire des IPs suspectes
+type blacklist struct {
+	mu      sync.RWMutex
+	records map[string]time.Time // ip → expiration
+}
+
+var ipBlacklist = &blacklist{records: make(map[string]time.Time)}
+
+func (bl *blacklist) add(ip string) {
+	bl.mu.Lock()
+	defer bl.mu.Unlock()
+	bl.records[ip] = time.Now().Add(24 * time.Hour)
+}
+
+func (bl *blacklist) has(ip string) bool {
+	bl.mu.RLock()
+	defer bl.mu.RUnlock()
+	exp, ok := bl.records[ip]
+	return ok && time.Now().Before(exp)
+}
+
+// Nettoyage auto toutes les heures
+func init() { //nolint:gochecknoinits
+	go func() {
+		for range time.Tick(time.Hour) {
+			ipBlacklist.mu.Lock()
+			now := time.Now()
+			for ip, exp := range ipBlacklist.records {
+				if now.After(exp) {
+					delete(ipBlacklist.records, ip)
+				}
+			}
+			ipBlacklist.mu.Unlock()
+		}
+	}()
+}
+
+func HoneypotMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		ip := GetIP(r)
+
+		// Bloque les IPs déjà blacklistées
+		if ipBlacklist.has(ip) {
+			slog.Warn("ip blacklistée bloquée",
+				"ip", ip,
+				"path", r.URL.Path,
+				"request_id", GetRequestID(r.Context()),
+			)
+			http.Error(w, "Forbidden", http.StatusForbidden)
+			return
+		}
+
+		// Vérifie si la route est un honeypot
+		if honeypotRoutes[r.URL.Path] {
+			ipBlacklist.add(ip)
+			slog.Warn("honeypot déclenché — IP blacklistée 24h",
+				"ip", ip,
+				"path", r.URL.Path,
+				"method", r.Method,
+				"user_agent", r.UserAgent(),
+				"request_id", GetRequestID(r.Context()),
+			)
+			// Répond comme si la route n'existait pas
+			http.NotFound(w, r)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
 }
 
 // ══════════════════════════════════════════
@@ -53,11 +208,12 @@ func LoggerMiddleware(next http.Handler) http.Handler {
 		next.ServeHTTP(rw, r)
 		ms := time.Since(start).Milliseconds()
 		ip := GetIP(r)
+		id := GetRequestID(r.Context())
 
-		// Niveau de log selon le status HTTP
 		switch {
 		case rw.status >= 500:
 			slog.Error("request",
+				"request_id", id,
 				"method", r.Method,
 				"path", r.URL.Path,
 				"status", rw.status,
@@ -66,6 +222,7 @@ func LoggerMiddleware(next http.Handler) http.Handler {
 			)
 		case rw.status >= 400:
 			slog.Warn("request",
+				"request_id", id,
 				"method", r.Method,
 				"path", r.URL.Path,
 				"status", rw.status,
@@ -74,6 +231,7 @@ func LoggerMiddleware(next http.Handler) http.Handler {
 			)
 		default:
 			slog.Info("request",
+				"request_id", id,
 				"method", r.Method,
 				"path", r.URL.Path,
 				"status", rw.status,
@@ -225,7 +383,11 @@ func RateLimitMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ip := GetIP(r)
 		if !globalRateLimiter.allow(ip) {
-			slog.Warn("rate limit global dépassé", "ip", ip, "path", r.URL.Path)
+			slog.Warn("rate limit global dépassé",
+				"ip", ip,
+				"path", r.URL.Path,
+				"request_id", GetRequestID(r.Context()),
+			)
 			w.Header().Set("Retry-After", "60")
 			http.Error(w, "Too Many Requests", http.StatusTooManyRequests)
 			return
@@ -256,8 +418,11 @@ func Chain(h http.Handler) http.Handler {
 	h = CacheMiddleware(h)
 	h = GzipMiddleware(h)
 	h = SecurityMiddleware(h)
+	h = HoneypotMiddleware(h)
 	h = RateLimitMiddleware(h)
 	h = RedirectHTTPS(h)
+	h = RecoveryMiddleware(h)
+	h = RequestIDMiddleware(h)
 	h = LoggerMiddleware(h)
 	return h
 }
@@ -276,10 +441,8 @@ func HealthHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // ══════════════════════════════════════════
-//  CONTEXT KEY (pour passer le logger aux handlers)
+//  CONTEXT LOGGER
 // ══════════════════════════════════════════
-
-type contextKey string
 
 const LoggerKey contextKey = "logger"
 

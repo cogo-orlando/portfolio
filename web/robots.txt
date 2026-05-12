@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /health
+Disallow: /api/
+
+User-agent: *
+Disallow: /wp-admin
+Disallow: /wp-login.php
+Disallow: /.env
+Disallow: /.git
+
+Sitemap: https://orlandocogo.com/sitemap.xml

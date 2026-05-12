@@ -79,6 +79,7 @@ func Start() {
 	mux.Handle("/css/", fs)
 	mux.Handle("/js/", fs)
 	mux.Handle("/img/", fs)
+	mux.Handle("/robots.txt", http.FileServer(http.Dir("./web")))
 	mux.HandleFunc("/", mainHandler)
 
 	h := middleware.Chain(mux)
