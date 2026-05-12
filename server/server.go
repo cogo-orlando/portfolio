@@ -71,6 +71,9 @@ func Start() {
 
 	mux.HandleFunc("/health", middleware.HealthHandler)
 	mux.HandleFunc("/api/visits", visitsHandler)
+	mux.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "./web/img/favicon.ico")
+	})
 
 	fs := http.FileServer(http.Dir("./web"))
 	mux.Handle("/css/", fs)
