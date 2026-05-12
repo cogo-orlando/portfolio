@@ -10,11 +10,18 @@ const navMoreBtn = document.getElementById('navMoreBtn');
 
 navMoreBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
-    navMore.classList.toggle('open');
+    const open = navMore.classList.toggle('open');
+    navMoreBtn.setAttribute('aria-expanded', open);
 });
-document.addEventListener('click', () => navMore?.classList.remove('open'));
+document.addEventListener('click', () => {
+    navMore?.classList.remove('open');
+    navMoreBtn?.setAttribute('aria-expanded', 'false');
+});
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') navMore?.classList.remove('open');
+    if (e.key === 'Escape') {
+        navMore?.classList.remove('open');
+        navMoreBtn?.setAttribute('aria-expanded', 'false');
+    }
 });
 
 // ── HAMBURGER MOBILE ──
@@ -22,13 +29,17 @@ const navBurger  = document.getElementById('navBurger');
 const mobileMenu = document.getElementById('mobileMenu');
 
 navBurger?.addEventListener('click', () => {
-    navBurger.classList.toggle('open');
+    const open = navBurger.classList.toggle('open');
     mobileMenu?.classList.toggle('open');
+    navBurger.setAttribute('aria-expanded', open);
+    mobileMenu?.setAttribute('aria-hidden', !open);
 });
 document.querySelectorAll('.mobile-link').forEach(link => {
     link.addEventListener('click', () => {
         navBurger?.classList.remove('open');
         mobileMenu?.classList.remove('open');
+        navBurger?.setAttribute('aria-expanded', 'false');
+        mobileMenu?.setAttribute('aria-hidden', 'true');
     });
 });
 
@@ -39,7 +50,6 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 // ── TYPING ANIMATION ──
-// Usage : <div class="hero-tag" data-typed="cat about.md">
 (function initTyping() {
     const tag = document.querySelector('.hero-tag');
     const el  = tag?.querySelector('.typed');
@@ -65,9 +75,11 @@ document.addEventListener('keydown', (e) => {
 
 function triggerKonami() {
     const overlay = document.createElement('div');
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-label', 'Easter egg trouvé');
     overlay.style.cssText = 'position:fixed;inset:0;background:rgba(8,11,15,0.95);z-index:9999;display:flex;align-items:center;justify-content:center;font-family:"DM Mono",monospace;color:#00f5a0;text-align:center;cursor:pointer;';
     overlay.innerHTML = `<div>
-        <pre style="font-size:clamp(8px,1.5vw,13px);line-height:1.4;margin-bottom:2rem;">
+        <pre style="font-size:clamp(8px,1.5vw,13px);line-height:1.4;margin-bottom:2rem;" aria-hidden="true">
   ██████╗ ██████╗ ██╗      █████╗ ███╗   ██╗██████╗  ██████╗
  ██╔═══██╗██╔══██╗██║     ██╔══██╗████╗  ██║██╔══██╗██╔═══██╗
  ██║   ██║██████╔╝██║     ███████║██╔██╗ ██║██║  ██║██║   ██║

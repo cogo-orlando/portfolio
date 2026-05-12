@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-<!DOCTYPE html>
-<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +11,7 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://orlandocogo.com/home">
 
-    <!-- ── Open Graph (partage LinkedIn, Discord, etc.) ── -->
+    <!-- ── Open Graph ── -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orlandocogo.com/home">
     <meta property="og:title" content="Orlando Cogo — Étudiant Cybersécurité & Développeur Go">
@@ -32,10 +30,10 @@
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <link rel="apple-touch-icon" href="/img/favicon.png">
 
-    <!-- ── Fonts optimisées — font-display:swap évite le render blocking ── -->
+    <!-- ── Fonts non-bloquantes ── -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet"></noscript>
 
     <!-- ── CSS ── -->
@@ -48,49 +46,53 @@
 </head>
 <body>
 
-<div class="blob1"></div>
-<div class="blob2"></div>
-<div class="grid"></div>
-<div class="corner corner--tl"></div>
-<div class="corner corner--tr"></div>
-<div class="corner corner--bl"></div>
-<div class="corner corner--br"></div>
-
-<canvas id="matrix" class="matrix-canvas"></canvas>
+<div class="blob1" aria-hidden="true"></div>
+<div class="blob2" aria-hidden="true"></div>
+<div class="grid" aria-hidden="true"></div>
+<div class="corner corner--tl" aria-hidden="true"></div>
+<div class="corner corner--tr" aria-hidden="true"></div>
+<div class="corner corner--bl" aria-hidden="true"></div>
+<div class="corner corner--br" aria-hidden="true"></div>
+<canvas id="matrix" class="matrix-canvas" aria-hidden="true"></canvas>
 
 <!-- Boot screen -->
-<div class="boot-screen" id="bootScreen">
+<div class="boot-screen" id="bootScreen" role="status" aria-live="polite">
     <div class="boot-lines" id="bootLines"></div>
 </div>
 
 <!-- NAVIGATION -->
-<nav class="nav">
-    <a href="/home" class="nav-logo"><span class="prompt">~/</span>orlando.cogo</a>
+<nav class="nav" aria-label="Navigation principale">
+    <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
+        <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
+    </a>
 
-    <!-- Liens directs visibles -->
-    <ul class="nav-links">
+    <ul class="nav-links" role="list">
         <li><a href="/about" class="nav-link">À propos</a></li>
         <li><a href="/skills" class="nav-link">Compétences</a></li>
         <li><a href="/project" class="nav-link">Projets</a></li>
         <li><a href="/contact" class="nav-link">Contact</a></li>
         <li><a href="/cv" class="nav-link">CV</a></li>
         <li class="nav-more">
-            <button class="nav-more-btn" id="navMoreBtn">
+            <button class="nav-more-btn" id="navMoreBtn"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    aria-controls="navMoreMenu"
+                    aria-label="Plus de pages">
                 Plus
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
                     <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
-            <div class="nav-more-menu" id="navMoreMenu">
-                <a href="/status" class="more-item">
-                    <span class="more-num">06</span>
+            <div class="nav-more-menu" id="navMoreMenu" role="menu">
+                <a href="/status" class="more-item" role="menuitem">
+                    <span class="more-num" aria-hidden="true">06</span>
                     <span class="more-info">
                         <span class="more-name">Status</span>
                         <span class="more-desc">État du système</span>
                     </span>
                 </a>
-                <a href="/faq" class="more-item">
-                    <span class="more-num">07</span>
+                <a href="/faq" class="more-item" role="menuitem">
+                    <span class="more-num" aria-hidden="true">07</span>
                     <span class="more-info">
                         <span class="more-name">FAQ</span>
                         <span class="more-desc">Questions / Réponses</span>
@@ -100,267 +102,278 @@
         </li>
     </ul>
 
-    <!-- Hamburger mobile -->
-    <button class="nav-burger" id="navBurger">
-        <span></span><span></span><span></span>
+    <button class="nav-burger" id="navBurger"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+            aria-controls="mobileMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
     </button>
 
     <div class="nav-right">
-        <div class="nav-status">
-            <span class="status-dot"></span>
+        <div class="nav-status" aria-label="Disponible pour travailler">
+            <span class="status-dot" aria-hidden="true"></span>
             <span>open to work</span>
         </div>
     </div>
 </nav>
 
 <!-- Menu mobile -->
-<div class="mobile-menu" id="mobileMenu">
-    <a href="/about" class="mobile-link"><span class="mobile-num">01</span>À propos</a>
-    <a href="/skills" class="mobile-link"><span class="mobile-num">02</span>Compétences</a>
-    <a href="/project" class="mobile-link"><span class="mobile-num">03</span>Projets</a>
-    <a href="/contact" class="mobile-link"><span class="mobile-num">04</span>Contact</a>
-    <a href="/cv" class="mobile-link"><span class="mobile-num">05</span>CV</a>
-    <a href="/status" class="mobile-link"><span class="mobile-num">06</span>Status</a>
-    <a href="/faq" class="mobile-link"><span class="mobile-num">07</span>FAQ</a>
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>À propos</a>
+    <a href="/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Compétences</a>
+    <a href="/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Projets</a>
+    <a href="/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Contact</a>
+    <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>CV</a>
+    <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>Status</a>
+    <a href="/faq" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>FAQ</a>
 </div>
 
-<!-- HEADER -->
-<section class="hero">
-    <div class="hero-tag" data-typed="cat ">
-        <span class="prompt">~/home $</span>
-        <span class="typed"></span>
-        <span class="cursor"></span>
-    </div>
-    <h1 class="hero-name">
-        Orlando<br>
-        <span class="outline">Cogo</span>
-    </h1>
-    <p class="hero-sub">
-        Étudiant en <em>Bachelor Informatique</em> · Spécialisation <em>Cybersécurité</em>
-    </p>
-    <p class="hero-about">
-        Passionné par la sécurité des systèmes et des réseaux, j'explore les vulnérabilités
-        pour mieux construire des défenses robustes. Curieux, rigoureux, toujours en apprentissage.
-    </p>
-    <div class="hero-badges">
-        <span class="badge">Bachelor 1ère année</span>
-        <span class="badge badge--open"><span class="badge-dot"></span>Open to work</span>
-    </div>
-    <div class="scroll-hint">
-        <span>scroll</span>
-        <div class="scroll-line"></div>
-    </div>
-</section>
+<!-- CONTENU PRINCIPAL -->
+<main id="main-content">
 
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-    <div class="marquee-track">
-        <span>CYBERSECURITY</span><span class="sep">·</span>
-        <span>DÉVELOPPEMENT</span><span class="sep">·</span>
-        <span>INFRASTRUCTURE</span><span class="sep">·</span>
-        <span>SECURITE</span><span class="sep">·</span>
-        <span>OPEN TO WORK</span><span class="sep">·</span>
-        <span>YNOV CAMPUS</span><span class="sep">·</span>
-        <span>BACHELOR B1</span><span class="sep">·</span>
-        <span>CYBERSECURITY</span><span class="sep">·</span>
-        <span>DÉVELOPPEMENT</span><span class="sep">·</span>
-        <span>INFRASTRUCTURE</span><span class="sep">·</span>
-        <span>SECURITE</span><span class="sep">·</span>
-        <span>OPEN TO WORK</span><span class="sep">·</span>
-        <span>YNOV CAMPUS</span><span class="sep">·</span>
-        <span>BACHELOR B1</span><span class="sep">·</span>
-    </div>
-</div>
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-tag" data-typed="ls -la" aria-hidden="true">
+            <span class="prompt">~/home $</span>
+            <span class="typed"></span>
+            <span class="cursor"></span>
+        </div>
+        <h1 class="hero-name" id="hero-title">
+            Orlando<br>
+            <span class="outline">Cogo</span>
+        </h1>
+        <p class="hero-sub">
+            Étudiant en <em>Bachelor Informatique</em> · Spécialisation <em>Cybersécurité</em>
+        </p>
+        <p class="hero-about">
+            Passionné par la sécurité des systèmes et des réseaux, j'explore les vulnérabilités
+            pour mieux construire des défenses robustes. Curieux, rigoureux, toujours en apprentissage.
+        </p>
+        <div class="hero-badges" aria-label="Statut actuel">
+            <span class="badge">Bachelor 1ère année</span>
+            <span class="badge badge--open"><span class="badge-dot" aria-hidden="true"></span>Open to work</span>
+        </div>
+        <div class="scroll-hint" aria-hidden="true">
+            <span>scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
 
-<!-- STATS -->
-<section class="section">
-    <div class="section-num">01</div>
-    <div class="stats-grid">
-        <div class="stat-card reveal">
-            <span class="stat-val" data-target="8">0</span>
-            <span class="stat-unit">mois</span>
-            <span class="stat-label">En formation informatique</span>
-        </div>
-        <div class="stat-card reveal">
-            <span class="stat-val" data-target=5>0</span>
-            <span class="stat-unit">+</span>
-            <span class="stat-label">Outils maîtrisés</span>
-        </div>
-        <div class="stat-card reveal">
-            <span class="stat-val" data-target="7">0</span>
-            <span class="stat-unit">+</span>
-            <span class="stat-label">Projets réalisés</span>
-        </div>
-        <div class="stat-card reveal">
-            <span class="stat-val" id="live-timer">0</span>
-            <span class="stat-unit">jours</span>
-            <span class="stat-label">Depuis reconversion</span>
+    <!-- MARQUEE -->
+    <div class="marquee-wrap" aria-hidden="true">
+        <div class="marquee-track">
+            <span>CYBERSECURITY</span><span class="sep">·</span>
+            <span>DÉVELOPPEMENT</span><span class="sep">·</span>
+            <span>INFRASTRUCTURE</span><span class="sep">·</span>
+            <span>SECURITE</span><span class="sep">·</span>
+            <span>OPEN TO WORK</span><span class="sep">·</span>
+            <span>YNOV CAMPUS</span><span class="sep">·</span>
+            <span>BACHELOR B1</span><span class="sep">·</span>
+            <span>CYBERSECURITY</span><span class="sep">·</span>
+            <span>DÉVELOPPEMENT</span><span class="sep">·</span>
+            <span>INFRASTRUCTURE</span><span class="sep">·</span>
+            <span>SECURITE</span><span class="sep">·</span>
+            <span>OPEN TO WORK</span><span class="sep">·</span>
+            <span>YNOV CAMPUS</span><span class="sep">·</span>
+            <span>BACHELOR B1</span><span class="sep">·</span>
         </div>
     </div>
-</section>
 
-<!-- WHAT I DO -->
-<section class="section">
-    <div class="section-num">02</div>
-    <div class="section-header">
-        <span class="section-tag">02 //</span>
-        <h2 class="section-title">Ce que je fais</h2>
-    </div>
-    <div class="whatido-grid">
-        <div class="whatido-card reveal">
-            <div class="whatido-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+    <!-- STATS -->
+    <section class="section" aria-label="Statistiques">
+        <div class="section-num" aria-hidden="true">01</div>
+        <div class="stats-grid">
+            <div class="stat-card reveal">
+                <span class="stat-val" data-target="8">0</span>
+                <span class="stat-unit">mois</span>
+                <span class="stat-label">En formation informatique</span>
             </div>
-            <h3 class="whatido-title">Développement</h3>
-            <p class="whatido-desc">Applications web avec Go et JavaScript. Architecture serveur, routing, templating et gestion des fichiers statiques.</p>
-            <div class="whatido-tags"><span>Go</span><span>JavaScript</span><span>SQL</span></div>
-        </div>
-        <div class="whatido-card reveal">
-            <div class="whatido-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div class="stat-card reveal">
+                <span class="stat-val" data-target="5">0</span>
+                <span class="stat-unit">+</span>
+                <span class="stat-label">Outils maîtrisés</span>
             </div>
-            <h3 class="whatido-title">Cybersécurité</h3>
-            <p class="whatido-desc">Analyse de vulnérabilités, OSINT, CTF challenges. Apprentissage des techniques offensives et défensives.</p>
-            <div class="whatido-tags"><span>OSINT</span><span>CTF</span><span>Pentest</span></div>
-        </div>
-        <div class="whatido-card reveal">
-            <div class="whatido-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            <div class="stat-card reveal">
+                <span class="stat-val" data-target="7">0</span>
+                <span class="stat-unit">+</span>
+                <span class="stat-label">Projets réalisés</span>
             </div>
-            <h3 class="whatido-title">Infrastructure</h3>
-            <p class="whatido-desc">Configuration réseau Cisco, virtualisation VirtualBox, administration Linux. Bases solides en systèmes et réseaux.</p>
-            <div class="whatido-tags"><span>Linux</span><span>Cisco</span><span>VirtualBox</span></div>
+            <div class="stat-card reveal">
+                <span class="stat-val" id="live-timer">0</span>
+                <span class="stat-unit">jours</span>
+                <span class="stat-label">Depuis reconversion</span>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- EXPLORER -->
-<section class="section">
-    <div class="section-num">03</div>
-    <div class="section-header">
-        <span class="section-tag">03 //</span>
-        <h2 class="section-title">Explorer</h2>
-    </div>
-    <div class="quicknav-grid">
-        <a href="/about" class="quicknav-card reveal">
-            <div class="quicknav-top"><span class="quicknav-num">01</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-            <h3>À propos</h3>
-            <p>Mon parcours, d'Airbus à l'informatique.</p>
-        </a>
-        <a href="/skills" class="quicknav-card reveal">
-            <div class="quicknav-top"><span class="quicknav-num">02</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-            <h3>Compétences</h3>
-            <p>Go, JS, SQL, VirtualBox, Linux et plus.</p>
-        </a>
-        <a href="/project" class="quicknav-card reveal">
-            <div class="quicknav-top"><span class="quicknav-num">03</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-            <h3>Projets</h3>
-            <p>Mes réalisations, ce portfolio inclus.</p>
-        </a>
-        <a href="/contact" class="quicknav-card reveal">
-            <div class="quicknav-top"><span class="quicknav-num">04</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-            <h3>Contact</h3>
-            <p>GitHub, LinkedIn, email — retrouvez-moi.</p>
-        </a>
-        <a href="/cv" class="quicknav-card reveal">
-            <div class="quicknav-top"><span class="quicknav-num">05</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-            <h3>CV</h3>
-            <p>Retrouve mon CV</p>
-        </a>
-        <a href="/status" class="quicknav-card reveal">
-            <div class="quicknav-top"><span class="quicknav-num">06</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-            <h3>Status</h3>
-            <p>Status en direct du site.</p>
-        </a>
-        <a href="/faq" class="quicknav-card reveal">
-            <div class="quicknav-top"><span class="quicknav-num">07</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-            <h3>FAQ</h3>
-            <p>Questions / Réponses</p>
-        </a>
-    </div>
-</section>
+    <!-- WHAT I DO -->
+    <section class="section" aria-labelledby="whatido-title">
+        <div class="section-num" aria-hidden="true">02</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">02 //</span>
+            <h2 class="section-title" id="whatido-title">Ce que je fais</h2>
+        </div>
+        <div class="whatido-grid">
+            <article class="whatido-card reveal">
+                <div class="whatido-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <h3 class="whatido-title">Développement</h3>
+                <p class="whatido-desc">Applications web avec Go et JavaScript. Architecture serveur, routing, templating et gestion des fichiers statiques.</p>
+                <div class="whatido-tags" aria-label="Technologies : Go, JavaScript, SQL"><span>Go</span><span>JavaScript</span><span>SQL</span></div>
+            </article>
+            <article class="whatido-card reveal">
+                <div class="whatido-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3 class="whatido-title">Cybersécurité</h3>
+                <p class="whatido-desc">Analyse de vulnérabilités, OSINT, CTF challenges. Apprentissage des techniques offensives et défensives.</p>
+                <div class="whatido-tags" aria-label="Domaines : OSINT, CTF, Pentest"><span>OSINT</span><span>CTF</span><span>Pentest</span></div>
+            </article>
+            <article class="whatido-card reveal">
+                <div class="whatido-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                </div>
+                <h3 class="whatido-title">Infrastructure</h3>
+                <p class="whatido-desc">Configuration réseau Cisco, virtualisation VirtualBox, administration Linux. Bases solides en systèmes et réseaux.</p>
+                <div class="whatido-tags" aria-label="Outils : Linux, Cisco, VirtualBox"><span>Linux</span><span>Cisco</span><span>VirtualBox</span></div>
+            </article>
+        </div>
+    </section>
 
-<!-- CERTIFICATIONS -->
-<section class="section">
-    <div class="section-num">04</div>
-    <div class="section-header">
-        <span class="section-tag">04 //</span>
-        <h2 class="section-title">Certifications & Objectifs</h2>
-    </div>
-    <div class="certif-list">
-        <div class="certif-item reveal">
-            <div class="certif-left">
-                <span class="certif-name">CompTIA A+</span>
-                <span class="certif-status status--planned">Planifié</span>
+    <!-- EXPLORER -->
+    <section class="section" aria-labelledby="explorer-title">
+        <div class="section-num" aria-hidden="true">03</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">03 //</span>
+            <h2 class="section-title" id="explorer-title">Explorer</h2>
+        </div>
+        <nav class="quicknav-grid" aria-label="Navigation rapide">
+            <a href="/about" class="quicknav-card reveal">
+                <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">01</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+                <h3>À propos</h3>
+                <p>Mon parcours, d'Airbus à l'informatique.</p>
+            </a>
+            <a href="/skills" class="quicknav-card reveal">
+                <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">02</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+                <h3>Compétences</h3>
+                <p>Go, JS, SQL, VirtualBox, Linux et plus.</p>
+            </a>
+            <a href="/project" class="quicknav-card reveal">
+                <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">03</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+                <h3>Projets</h3>
+                <p>Mes réalisations, ce portfolio inclus.</p>
+            </a>
+            <a href="/contact" class="quicknav-card reveal">
+                <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">04</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+                <h3>Contact</h3>
+                <p>GitHub, LinkedIn, email — retrouvez-moi.</p>
+            </a>
+            <a href="/cv" class="quicknav-card reveal">
+                <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">05</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+                <h3>CV</h3>
+                <p>Retrouve mon CV</p>
+            </a>
+            <a href="/status" class="quicknav-card reveal">
+                <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">06</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+                <h3>Status</h3>
+                <p>Status en direct du site.</p>
+            </a>
+            <a href="/faq" class="quicknav-card reveal">
+                <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">07</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+                <h3>FAQ</h3>
+                <p>Questions / Réponses</p>
+            </a>
+        </nav>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="section" aria-labelledby="certif-title">
+        <div class="section-num" aria-hidden="true">04</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">04 //</span>
+            <h2 class="section-title" id="certif-title">Certifications & Objectifs</h2>
+        </div>
+        <div class="certif-list">
+            <div class="certif-item reveal">
+                <div class="certif-left">
+                    <span class="certif-name">CompTIA A+</span>
+                    <span class="certif-status status--planned">Planifié</span>
+                </div>
+                <div class="certif-bar-wrap">
+                    <div class="certif-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progression CompTIA A+">
+                        <div class="certif-fill" style="--pct:0%"></div>
+                    </div>
+                    <span class="certif-pct" aria-hidden="true">0%</span>
+                </div>
             </div>
-            <div class="certif-bar-wrap">
-                <div class="certif-bar"><div class="certif-fill" style="--pct:0%"></div></div>
-                <span class="certif-pct">0%</span>
+            <div class="certif-item reveal">
+                <div class="certif-left">
+                    <span class="certif-name">Cisco CCNA</span>
+                    <span class="certif-status status--planned">Planifié</span>
+                </div>
+                <div class="certif-bar-wrap">
+                    <div class="certif-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progression Cisco CCNA">
+                        <div class="certif-fill" style="--pct:0%"></div>
+                    </div>
+                    <span class="certif-pct" aria-hidden="true">0%</span>
+                </div>
+            </div>
+            <div class="certif-item reveal">
+                <div class="certif-left">
+                    <span class="certif-name">Amazon Web Services (AWS)</span>
+                    <span class="certif-status status--planned">Planifié</span>
+                </div>
+                <div class="certif-bar-wrap">
+                    <div class="certif-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progression AWS">
+                        <div class="certif-fill" style="--pct:0%"></div>
+                    </div>
+                    <span class="certif-pct" aria-hidden="true">0%</span>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="certif-list">
-        <div class="certif-item reveal">
-            <div class="certif-left">
-                <span class="certif-name">Cisco CCNA</span>
-                <span class="certif-status status--planned">Planifié</span>
-            </div>
-            <div class="certif-bar-wrap">
-                <div class="certif-bar"><div class="certif-fill" style="--pct:0%"></div></div>
-                <span class="certif-pct">0%</span>
-            </div>
+    </section>
+
+    <!-- SETUP -->
+    <section class="section" aria-labelledby="setup-title">
+        <div class="section-num" aria-hidden="true">05</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">05 //</span>
+            <h2 class="section-title" id="setup-title">Mon setup</h2>
         </div>
-    </div>
-    <div class="certif-list">
-        <div class="certif-item reveal">
-            <div class="certif-left">
-                <span class="certif-name">Amazon Web Service (AWS)</span>
-                <span class="certif-status status--planned">Planifié</span>
-            </div>
-            <div class="certif-bar-wrap">
-                <div class="certif-bar"><div class="certif-fill" style="--pct:0%"></div></div>
-                <span class="certif-pct">0%</span>
-            </div>
+        <div class="setup-grid">
+            <div class="setup-card reveal"><span class="setup-key">OS</span><span class="setup-val">Windows 11 pro + Linux (VM)</span></div>
+            <div class="setup-card reveal"><span class="setup-key">IDE</span><span class="setup-val">GoLand · VS Code</span></div>
+            <div class="setup-card reveal"><span class="setup-key">Terminal</span><span class="setup-val">PowerShell · Bash</span></div>
+            <div class="setup-card reveal"><span class="setup-key">VM</span><span class="setup-val">VirtualBox</span></div>
+            <div class="setup-card reveal"><span class="setup-key">Réseau</span><span class="setup-val">Cisco Packet Tracer</span></div>
+            <div class="setup-card reveal"><span class="setup-key">CTF</span><span class="setup-val">HackTheBox</span></div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- SETUP -->
-<section class="section">
-    <div class="section-num">05</div>
-    <div class="section-header">
-        <span class="section-tag">05 //</span>
-        <h2 class="section-title">Mon setup</h2>
-    </div>
-    <div class="setup-grid">
-        <div class="setup-card reveal"><span class="setup-key">OS</span><span class="setup-val">Windows 11 pro + Linux (VM)</span></div>
-        <div class="setup-card reveal"><span class="setup-key">IDE</span><span class="setup-val">GoLand · VS Code</span></div>
-        <div class="setup-card reveal"><span class="setup-key">Terminal</span><span class="setup-val">PowerShell · Bash</span></div>
-        <div class="setup-card reveal"><span class="setup-key">VM</span><span class="setup-val">VirtualBox</span></div>
-        <div class="setup-card reveal"><span class="setup-key">Réseau</span><span class="setup-val">Cisco Packet Tracer</span></div>
-        <div class="setup-card reveal"><span class="setup-key">CTF</span><span class="setup-val">HackTheBox</span></div>
-    </div>
-</section>
+    <!-- CURRENTLY LEARNING -->
+    <section class="section" aria-labelledby="learning-title">
+        <div class="section-num" aria-hidden="true">06</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">06 //</span>
+            <h2 class="section-title" id="learning-title">Currently learning</h2>
+        </div>
+        <div class="learning-ticker reveal" aria-live="polite" aria-label="En cours d'apprentissage">
+            <span class="learning-label" aria-hidden="true">~/learning $</span>
+            <span class="learning-text" id="learningText"></span>
+            <span class="cursor" aria-hidden="true"></span>
+        </div>
+    </section>
 
-<!-- CURRENTLY LEARNING -->
-<section class="section">
-    <div class="section-num">06</div>
-    <div class="section-header">
-        <span class="section-tag">06 //</span>
-        <h2 class="section-title">Currently learning</h2>
-    </div>
-    <div class="learning-ticker reveal">
-        <span class="learning-label">~/learning $</span>
-        <span class="learning-text" id="learningText"></span>
-        <span class="cursor"></span>
-    </div>
-</section>
+</main>
 
-<!-- Footer -->
-<footer class="footer">
-    <span class="prompt">~/orlando.cogo $</span>
-    <a href="/" class="footer-back">← Retour</a>
-    <span>exit 0</span>
+<!-- FOOTER -->
+<footer class="footer" aria-label="Pied de page">
+    <span class="prompt" aria-hidden="true">~/orlando.cogo $</span>
+    <a href="/" class="footer-back">← Retour à l'accueil</a>
+    <span aria-hidden="true">exit 0</span>
     <span class="footer-year">© 2026</span>
 </footer>
 
