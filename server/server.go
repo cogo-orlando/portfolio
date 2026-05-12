@@ -9,6 +9,7 @@ import (
 	"os/signal"
 	"portfo/server/handler"
 	"portfo/server/middleware"
+	"runtime"
 	"sync"
 	"syscall"
 	"time"
@@ -34,8 +35,9 @@ var MaintenanceMode = false
 // ══════════════════════════════════════════
 
 var (
-	visitCount int
-	visitMu    sync.Mutex
+	visitCount  int
+	visitMu     sync.Mutex
+	serverStart = time.Now()
 )
 
 // ══════════════════════════════════════════
@@ -69,7 +71,8 @@ var routes = map[string]http.HandlerFunc{
 func Start() {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/health", middleware.HealthHandler)
+	mux.HandleFunc("/health", healthHandler)
+	mux.HandleFunc("/sitemap.xml", sitemapHandler)
 	mux.HandleFunc("/api/visits", visitsHandler)
 	mux.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./web/img/favicon.ico")
@@ -105,7 +108,6 @@ func Start() {
 		}
 	}()
 
-	// Écoute SIGINT (Ctrl+C) et SIGTERM (Render deploy)
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	sig := <-quit
@@ -155,6 +157,78 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	handler.NotFoundHandler(w, r)
+}
+
+// ══════════════════════════════════════════
+//  HEALTH — enrichi avec métriques Go
+// ══════════════════════════════════════════
+
+func healthHandler(w http.ResponseWriter, r *http.Request) {
+	var mem runtime.MemStats
+	runtime.ReadMemStats(&mem)
+
+	visitMu.Lock()
+	visits := visitCount
+	visitMu.Unlock()
+
+	w.Header().Set("Content-Type", "application/json")
+	fmt.Fprintf(w, `{`+
+		`"status":"ok",`+
+		`"service":"portfolio",`+
+		`"uptime":"%s",`+
+		`"visits":%d,`+
+		`"go_version":"%s",`+
+		`"goroutines":%d,`+
+		`"memory_mb":%.2f,`+
+		`"gc_cycles":%d`+
+		`}`,
+		time.Since(serverStart).Round(time.Second).String(),
+		visits,
+		runtime.Version(),
+		runtime.NumGoroutine(),
+		float64(mem.Alloc)/1024/1024,
+		mem.NumGC,
+	)
+}
+
+// ══════════════════════════════════════════
+//  SITEMAP XML — généré automatiquement
+// ══════════════════════════════════════════
+
+// Pages publiques indexables par Google
+var sitemapURLs = []struct {
+	path     string
+	priority string
+	freq     string
+}{
+	{"/home", "1.0", "weekly"},
+	{"/about", "0.9", "monthly"},
+	{"/skills", "0.9", "monthly"},
+	{"/project", "0.9", "weekly"},
+	{"/contact", "0.8", "monthly"},
+	{"/cv", "0.8", "monthly"},
+	{"/faq", "0.7", "monthly"},
+}
+
+func sitemapHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/xml; charset=utf-8")
+
+	now := time.Now().Format("2006-01-02")
+	base := "https://orlandocogo.com"
+
+	fmt.Fprint(w, `<?xml version="1.0" encoding="UTF-8"?>`+"\n")
+	fmt.Fprint(w, `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`+"\n")
+
+	for _, u := range sitemapURLs {
+		fmt.Fprintf(w, "  <url>\n")
+		fmt.Fprintf(w, "    <loc>%s%s</loc>\n", base, u.path)
+		fmt.Fprintf(w, "    <lastmod>%s</lastmod>\n", now)
+		fmt.Fprintf(w, "    <changefreq>%s</changefreq>\n", u.freq)
+		fmt.Fprintf(w, "    <priority>%s</priority>\n", u.priority)
+		fmt.Fprintf(w, "  </url>\n")
+	}
+
+	fmt.Fprint(w, `</urlset>`)
 }
 
 // ══════════════════════════════════════════
