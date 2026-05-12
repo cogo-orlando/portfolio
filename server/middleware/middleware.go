@@ -2,17 +2,31 @@ package middleware
 
 import (
 	"compress/gzip"
+	"context"
 	"fmt"
 	"io"
-	"log"
+	"log/slog"
 	"net/http"
+	"os"
 	"strings"
 	"sync"
 	"time"
 )
 
 // ══════════════════════════════════════════
-//  LOGGING
+//  INIT SLOG — JSON structuré vers stdout
+//  Lisible directement dans Render Logs
+// ══════════════════════════════════════════
+
+func init() {
+	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+		Level: slog.LevelInfo,
+	}))
+	slog.SetDefault(logger)
+}
+
+// ══════════════════════════════════════════
+//  LOGGING MIDDLEWARE
 // ══════════════════════════════════════════
 
 type responseWriter struct {
@@ -37,21 +51,49 @@ func LoggerMiddleware(next http.Handler) http.Handler {
 		start := time.Now()
 		rw := &responseWriter{ResponseWriter: w, status: 200}
 		next.ServeHTTP(rw, r)
-		log.Printf("[%s] %s %s %d %dms %s",
-			time.Now().Format("2006-01-02 15:04:05"),
-			r.Method, r.URL.Path, rw.status,
-			time.Since(start).Milliseconds(),
-			GetIP(r),
-		)
+		ms := time.Since(start).Milliseconds()
+		ip := GetIP(r)
+
+		// Niveau de log selon le status HTTP
+		switch {
+		case rw.status >= 500:
+			slog.Error("request",
+				"method", r.Method,
+				"path", r.URL.Path,
+				"status", rw.status,
+				"duration_ms", ms,
+				"ip", ip,
+			)
+		case rw.status >= 400:
+			slog.Warn("request",
+				"method", r.Method,
+				"path", r.URL.Path,
+				"status", rw.status,
+				"duration_ms", ms,
+				"ip", ip,
+			)
+		default:
+			slog.Info("request",
+				"method", r.Method,
+				"path", r.URL.Path,
+				"status", rw.status,
+				"duration_ms", ms,
+				"ip", ip,
+			)
+		}
 	})
 }
 
+// ══════════════════════════════════════════
+//  IP RÉELLE (Cloudflare en priorité)
+// ══════════════════════════════════════════
+
 func GetIP(r *http.Request) string {
-	if ip := r.Header.Get("X-Forwarded-For"); ip != "" {
-		return strings.Split(ip, ",")[0]
+	if ip := r.Header.Get("CF-Connecting-IP"); ip != "" {
+		return strings.TrimSpace(ip)
 	}
-	if ip := r.Header.Get("X-Real-IP"); ip != "" {
-		return ip
+	if ip := r.Header.Get("X-Forwarded-For"); ip != "" {
+		return strings.TrimSpace(strings.Split(ip, ",")[0])
 	}
 	return r.RemoteAddr
 }
@@ -129,7 +171,7 @@ func CacheMiddleware(next http.Handler) http.Handler {
 }
 
 // ══════════════════════════════════════════
-//  RATE LIMITER
+//  RATE LIMITER (120 req/min/IP)
 // ══════════════════════════════════════════
 
 type globalLimiter struct {
@@ -156,7 +198,7 @@ func (gl *globalLimiter) allow(ip string) bool {
 	return true
 }
 
-func init() {
+func init() { //nolint:gochecknoinits
 	go func() {
 		for range time.Tick(5 * time.Minute) {
 			globalRateLimiter.mu.Lock()
@@ -181,7 +223,9 @@ func init() {
 
 func RateLimitMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if !globalRateLimiter.allow(GetIP(r)) {
+		ip := GetIP(r)
+		if !globalRateLimiter.allow(ip) {
+			slog.Warn("rate limit global dépassé", "ip", ip, "path", r.URL.Path)
 			w.Header().Set("Retry-After", "60")
 			http.Error(w, "Too Many Requests", http.StatusTooManyRequests)
 			return
@@ -219,7 +263,7 @@ func Chain(h http.Handler) http.Handler {
 }
 
 // ══════════════════════════════════════════
-//  HEALTH — exporté, sans import server
+//  HEALTH
 // ══════════════════════════════════════════
 
 var startTime = time.Now()
@@ -229,6 +273,25 @@ func HealthHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, `{"status":"ok","service":"portfolio","uptime":"%s"}`,
 		time.Since(startTime).Round(time.Second).String(),
 	)
+}
+
+// ══════════════════════════════════════════
+//  CONTEXT KEY (pour passer le logger aux handlers)
+// ══════════════════════════════════════════
+
+type contextKey string
+
+const LoggerKey contextKey = "logger"
+
+func WithLogger(ctx context.Context, logger *slog.Logger) context.Context {
+	return context.WithValue(ctx, LoggerKey, logger)
+}
+
+func FromContext(ctx context.Context) *slog.Logger {
+	if l, ok := ctx.Value(LoggerKey).(*slog.Logger); ok {
+		return l
+	}
+	return slog.Default()
 }
 
 // ══════════════════════════════════════════

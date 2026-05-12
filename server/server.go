@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 	"fmt"
-	"log"
+	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
@@ -63,7 +63,7 @@ var routes = map[string]http.HandlerFunc{
 }
 
 // ══════════════════════════════════════════
-//  START — avec graceful shutdown
+//  START
 // ══════════════════════════════════════════
 
 func Start() {
@@ -93,29 +93,28 @@ func Start() {
 		IdleTimeout:  60 * time.Second,
 	}
 
-	// ── Lance le serveur dans une goroutine ──
 	go func() {
-		fmt.Printf("[SERVER] Démarrage sur http://localhost:%s\n", port)
+		slog.Info("serveur démarré", "port", port, "url", fmt.Sprintf("http://localhost:%s", port))
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Fatalf("[SERVER] Erreur fatale : %v", err)
+			slog.Error("erreur fatale serveur", "error", err)
+			os.Exit(1)
 		}
 	}()
 
-	// ── Écoute les signaux système (CTRL+C, kill, Render deploy) ──
+	// Écoute SIGINT (Ctrl+C) et SIGTERM (Render deploy)
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	sig := <-quit
 
-	log.Printf("[SERVER] Signal reçu (%s) — arrêt gracieux en cours...", sig)
+	slog.Info("arrêt gracieux en cours", "signal", sig.String())
 
-	// ── Donne 10 secondes aux requêtes en cours pour se terminer ──
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	if err := srv.Shutdown(ctx); err != nil {
-		log.Printf("[SERVER] Arrêt forcé : %v", err)
+		slog.Error("arrêt forcé", "error", err)
 	} else {
-		log.Println("[SERVER] Arrêt propre — toutes les requêtes terminées")
+		slog.Info("arrêt propre — toutes les requêtes terminées")
 	}
 }
 
