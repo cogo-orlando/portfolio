@@ -3,36 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ── SEO ── -->
+    <title>Orlando Cogo — Maintenance</title>
+    <meta name="description" content="Le portfolio d'Orlando Cogo est temporairement en maintenance. Retour bientôt.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- ── Favicon ── -->
     <link rel="icon" href="/img/favicon.ico">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <link rel="apple-touch-icon" href="/img/favicon.png">
-    <title>Orlando Cogo — Maintenance</title>
+
+    <!-- ── Fonts ── -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+    <!-- ── CSS ── -->
     <link rel="stylesheet" href="/css/maintenance.css">
 </head>
 <body>
 
-<div class="blob1"></div>
-<div class="blob2"></div>
-<div class="grid"></div>
+<div class="blob1" aria-hidden="true"></div>
+<div class="blob2" aria-hidden="true"></div>
+<div class="grid" aria-hidden="true"></div>
+<div class="corner corner--tl" aria-hidden="true"></div>
+<div class="corner corner--tr" aria-hidden="true"></div>
+<div class="corner corner--bl" aria-hidden="true"></div>
+<div class="corner corner--br" aria-hidden="true"></div>
 
-<div class="corner corner--tl"></div>
-<div class="corner corner--tr"></div>
-<div class="corner corner--bl"></div>
-<div class="corner corner--br"></div>
-
-<div class="terminal-bar">
+<div class="terminal-bar" aria-hidden="true">
     <div class="dot dot-r"></div>
     <div class="dot dot-y"></div>
     <div class="dot dot-g"></div>
     <span class="terminal-title">orlando@portfolio ~ %</span>
 </div>
 
-<div class="wrapper">
+<main id="main-content" class="wrapper">
 
-    <!-- Icône animée -->
-    <div class="maint-icon reveal">
+    <div class="maint-icon reveal" aria-hidden="true">
         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
             <path d="M32 4C16.536 4 4 16.536 4 32s12.536 28 28 28 28-12.536 28-28S47.464 4 32 4z" stroke="currentColor" stroke-width="2"/>
             <path d="M20 32h24M32 20v24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -41,8 +50,7 @@
         </svg>
     </div>
 
-    <!-- Titre -->
-    <div class="hero-tag reveal">
+    <div class="hero-tag reveal" aria-hidden="true">
         <span class="prompt">~/portfolio $</span>
         <span class="typed"></span>
         <span class="cursor"></span>
@@ -53,11 +61,11 @@
     </h1>
 
     <p class="subtitle reveal">
-        Cette page est temporairement hors ligne pour des améliorations/modification.<br>
+        Cette page est temporairement hors ligne pour des améliorations.
     </p>
 
     <!-- Terminal block -->
-    <div class="terminal-block reveal">
+    <div class="terminal-block reveal" aria-hidden="true">
         <div class="term-line">
             <span class="t-dim">$</span>
             <span class="t-acc">sudo systemctl stop portfolio</span>
@@ -81,15 +89,15 @@
     </div>
 
     <!-- Progress bar -->
-    <div class="progress-wrap reveal">
+    <div class="progress-wrap reveal" aria-label="Progression de la maintenance">
         <div class="progress-header">
             <span class="progress-label">Progression de la mise à jour</span>
-            <span class="progress-pct" id="progressPct">0%</span>
+            <span class="progress-pct" id="progressPct" aria-live="polite">0%</span>
         </div>
-        <div class="progress-bar">
+        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progression maintenance">
             <div class="progress-fill" id="progressFill"></div>
         </div>
-        <div class="progress-steps">
+        <div class="progress-steps" aria-label="Étapes de maintenance">
             <span class="step done" id="step1">Sauvegarde</span>
             <span class="step active" id="step2">Mise à jour</span>
             <span class="step" id="step3">Tests</span>
@@ -98,19 +106,19 @@
     </div>
 
     <!-- Countdown -->
-    <div class="countdown-wrap reveal">
+    <div class="countdown-wrap reveal" aria-label="Compte à rebours avant retour en ligne">
         <div class="countdown-label">Retour dans</div>
-        <div class="countdown">
+        <div class="countdown" aria-live="polite">
             <div class="cd-block">
                 <span class="cd-val" id="cdH">00</span>
                 <span class="cd-unit">heures</span>
             </div>
-            <span class="cd-sep">:</span>
+            <span class="cd-sep" aria-hidden="true">:</span>
             <div class="cd-block">
                 <span class="cd-val" id="cdM">00</span>
                 <span class="cd-unit">minutes</span>
             </div>
-            <span class="cd-sep">:</span>
+            <span class="cd-sep" aria-hidden="true">:</span>
             <div class="cd-block">
                 <span class="cd-val" id="cdS">00</span>
                 <span class="cd-unit">secondes</span>
@@ -121,27 +129,25 @@
     <!-- Contact -->
     <div class="contact-wrap reveal">
         <p class="contact-text">Une urgence ? Contacte-moi directement :</p>
-        <a href="mailto:Orlando.cogo.pro@gmail.com" class="contact-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:Orlando.cogo.pro@gmail.com" class="contact-link" aria-label="Envoyer un email à Orlando Cogo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             Orlando.cogo.pro@gmail.com
         </a>
     </div>
 
-    <!-- BOUTON RETOUR -->
-    <a href="/home" class="back-btn reveal">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <a href="/home" class="back-btn reveal" aria-label="Retour à l'accueil du portfolio">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
             <path d="M12 7H2M2 7L6 3M2 7L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         Retour à l'accueil
     </a>
 
-    <!-- Status dot -->
-    <div class="status-row">
-        <div class="status-dot-warn"></div>
+    <div class="status-row" aria-label="Statut maintenance">
+        <div class="status-dot-warn" aria-hidden="true"></div>
         <span>Maintenance en cours · Service temporairement indisponible</span>
     </div>
 
-</div>
+</main>
 
 <script src="/js/maintenance.js"></script>
 </body>

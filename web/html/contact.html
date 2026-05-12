@@ -3,243 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/img/favicon.ico">
-    <link rel="icon" type="image/png" href="/img/favicon.png">
-    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- ── SEO ── -->
     <title>Orlando Cogo — Contact</title>
     <meta name="description" content="Contactez Orlando Cogo — étudiant en cybersécurité open to work. GitHub, LinkedIn, email disponibles.">
+    <meta name="author" content="Orlando Cogo">
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://orlandocogo.com/contact">
+
+    <!-- ── Open Graph ── -->
+    <meta property="og:type" content="website">
     <meta property="og:url" content="https://orlandocogo.com/contact">
     <meta property="og:title" content="Orlando Cogo — Contact">
     <meta property="og:description" content="Contactez Orlando Cogo — étudiant cybersécurité open to work. GitHub, LinkedIn, email.">
+    <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
+    <meta property="og:locale" content="fr_FR">
+
+    <!-- ── Twitter Card ── -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Orlando Cogo — Contact">
+    <meta name="twitter:description" content="Contactez Orlando Cogo — étudiant cybersécurité open to work. GitHub, LinkedIn, email.">
+    <meta name="twitter:image" content="https://orlandocogo.com/img/og-image.png">
+
+    <!-- ── Favicon ── -->
+    <link rel="icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- ── Fonts ── -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+    <!-- ── CSS ── -->
     <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/contact.css">
 </head>
 <body>
 
-<div class="blob1"></div>
-<div class="blob2"></div>
-<div class="grid"></div>
-<div class="corner corner--tl"></div>
-<div class="corner corner--tr"></div>
-<div class="corner corner--bl"></div>
-<div class="corner corner--br"></div>
-
-<canvas id="matrix" class="matrix-canvas"></canvas>
+<div class="blob1" aria-hidden="true"></div>
+<div class="blob2" aria-hidden="true"></div>
+<div class="grid" aria-hidden="true"></div>
+<div class="corner corner--tl" aria-hidden="true"></div>
+<div class="corner corner--tr" aria-hidden="true"></div>
+<div class="corner corner--bl" aria-hidden="true"></div>
+<div class="corner corner--br" aria-hidden="true"></div>
+<canvas id="matrix" class="matrix-canvas" aria-hidden="true"></canvas>
 
 <!-- NAV -->
-<nav class="nav">
-    <a href="/home" class="nav-logo"><span class="prompt">~/</span>orlando.cogo</a>
-    <ul class="nav-links">
+<nav class="nav" aria-label="Navigation principale">
+    <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
+        <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
+    </a>
+    <ul class="nav-links" role="list">
         <li><a href="/about" class="nav-link">À propos</a></li>
         <li><a href="/skills" class="nav-link">Compétences</a></li>
         <li><a href="/project" class="nav-link">Projets</a></li>
         <li><a href="/contact" class="nav-link">Contact</a></li>
         <li><a href="/cv" class="nav-link">CV</a></li>
         <li class="nav-more">
-            <button class="nav-more-btn" id="navMoreBtn">
+            <button class="nav-more-btn" id="navMoreBtn"
+                    aria-haspopup="true" aria-expanded="false"
+                    aria-controls="navMoreMenu" aria-label="Plus de pages">
                 Plus
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                    <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </button>
-            <div class="nav-more-menu" id="navMoreMenu">
-                <a href="/status" class="more-item"><span class="more-num">06</span><span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
-                <a href="/faq" class="more-item"><span class="more-num">07</span><span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions / Réponses</span></span></a>
+            <div class="nav-more-menu" id="navMoreMenu" role="menu">
+                <a href="/status" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">06</span><span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
+                <a href="/faq" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">07</span><span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions / Réponses</span></span></a>
             </div>
         </li>
     </ul>
-    <button class="nav-burger" id="navBurger"><span></span><span></span><span></span></button>
+    <button class="nav-burger" id="navBurger"
+            aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
     <div class="nav-right">
-        <div class="nav-status"><span class="status-dot"></span><span>open to work</span></div>
+        <div class="nav-status" aria-label="Disponible pour travailler">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>open to work</span>
+        </div>
     </div>
 </nav>
 
 <!-- Menu mobile -->
-<div class="mobile-menu" id="mobileMenu">
-    <a href="/about" class="mobile-link"><span class="mobile-num">01</span>À propos</a>
-    <a href="/skills" class="mobile-link"><span class="mobile-num">02</span>Compétences</a>
-    <a href="/project" class="mobile-link"><span class="mobile-num">03</span>Projets</a>
-    <a href="/contact" class="mobile-link"><span class="mobile-num">04</span>Contact</a>
-    <a href="/cv" class="mobile-link"><span class="mobile-num">05</span>CV</a>
-    <a href="/status" class="mobile-link"><span class="mobile-num">06</span>Status</a>
-    <a href="/faq" class="mobile-link"><span class="mobile-num">07</span>FAQ</a>
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>À propos</a>
+    <a href="/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Compétences</a>
+    <a href="/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Projets</a>
+    <a href="/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Contact</a>
+    <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>CV</a>
+    <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>Status</a>
+    <a href="/faq" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>FAQ</a>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-    <div class="hero-tag" data-typed="cat contact.md">
-        <span class="prompt">~/contact $</span>
-        <span class="typed"></span>
-        <span class="cursor"></span>
-    </div>
-    <h1 class="hero-title">Me<br><span class="outline">Contacter</span></h1>
-    <p class="hero-intro">
-        Disponible pour un stage · Une opportunité · Une question ? · Contacter moi !
-    </p>
-</section>
+<main id="main-content">
 
-<!-- LIENS -->
-<section class="section">
-    <div class="contact-grid">
-        <a href="https://github.com/cogo-orlando" target="_blank" class="contact-card reveal">
-            <span class="contact-icon">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-            </span>
-            <div>
-                <span class="contact-label">GitHub</span>
-                <span class="contact-value">github.com/cogo-orlando</span>
-            </div>
-        </a>
-        <a href="https://www.linkedin.com/in/orlando-liautard-cogo" target="_blank" class="contact-card reveal">
-            <span class="contact-icon">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </span>
-            <div>
-                <span class="contact-label">LinkedIn</span>
-                <span class="contact-value">orlando-liautard-cogo</span>
-            </div>
-        </a>
-        <a href="mailto:Orlando.cogo.pro@gmail.com" class="contact-card reveal">
-            <span class="contact-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </span>
-            <div>
-                <span class="contact-label">Email</span>
-                <span class="contact-value">Orlando.cogo.pro@gmail.com</span>
-            </div>
-        </a>
-        <a href="tel:+33786913745" class="contact-card reveal">
-            <span class="contact-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.09-1.26a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
-            </span>
-            <div>
-                <span class="contact-label">Téléphone</span>
-                <span class="contact-value">07 86 91 37 45</span>
-            </div>
-        </a>
-    </div>
-</section>
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-tag" data-typed="cat contact.md" aria-hidden="true">
+            <span class="prompt">~/contact $</span>
+            <span class="typed"></span>
+            <span class="cursor"></span>
+        </div>
+        <h1 class="hero-title" id="hero-title">Me<br><span class="outline">Contacter</span></h1>
+        <p class="hero-intro">Disponible pour un stage · Une opportunité · Une question ? · Contactez-moi !</p>
+    </section>
 
-<!-- FORMULAIRE -->
-<section class="section">
-    <div class="section-header">
-        <span class="section-tag">// Formulaire</span>
-        <h2 class="section-title">Envoyer un message</h2>
-    </div>
+    <!-- LIENS -->
+    <section class="section" aria-label="Liens de contact">
+        <div class="contact-grid">
+            <a href="https://github.com/cogo-orlando" target="_blank" rel="noopener noreferrer" class="contact-card reveal" aria-label="Profil GitHub de Orlando Cogo">
+                <span class="contact-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                </span>
+                <div>
+                    <span class="contact-label">GitHub</span>
+                    <span class="contact-value">github.com/cogo-orlando</span>
+                </div>
+            </a>
+            <a href="https://www.linkedin.com/in/orlando-liautard-cogo" target="_blank" rel="noopener noreferrer" class="contact-card reveal" aria-label="Profil LinkedIn de Orlando Cogo">
+                <span class="contact-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </span>
+                <div>
+                    <span class="contact-label">LinkedIn</span>
+                    <span class="contact-value">orlando-liautard-cogo</span>
+                </div>
+            </a>
+            <a href="mailto:Orlando.cogo.pro@gmail.com" class="contact-card reveal" aria-label="Envoyer un email à Orlando Cogo">
+                <span class="contact-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </span>
+                <div>
+                    <span class="contact-label">Email</span>
+                    <span class="contact-value">Orlando.cogo.pro@gmail.com</span>
+                </div>
+            </a>
+            <a href="tel:+33786913745" class="contact-card reveal" aria-label="Appeler Orlando Cogo">
+                <span class="contact-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.09-1.26a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
+                </span>
+                <div>
+                    <span class="contact-label">Téléphone</span>
+                    <span class="contact-value">07 86 91 37 45</span>
+                </div>
+            </a>
+        </div>
+    </section>
 
-    <div class="form-layout">
-
-        <!-- Terminal feedback -->
-        <div class="form-terminal" id="formTerminal">
-            <div class="ft-bar">
-                <div class="ft-dot" style="background:#ff5f57"></div>
-                <div class="ft-dot" style="background:#febc2e"></div>
-                <div class="ft-dot" style="background:#28c840"></div>
-                <span class="ft-title">message.go</span>
-            </div>
-            <div class="ft-body" id="ftBody">
-                <div class="ft-line"><span class="ft-dim">$</span> <span class="ft-acc">./send_message</span></div>
-                <div class="ft-line"><span class="ft-dim">#</span> <span class="ft-muted">En attente de saisie...</span></div>
-            </div>
+    <!-- FORMULAIRE -->
+    <section class="section" aria-labelledby="form-title">
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">// Formulaire</span>
+            <h2 class="section-title" id="form-title">Envoyer un message</h2>
         </div>
 
-        <!-- Formulaire -->
-        <div class="form-wrap reveal">
-            <div id="formSuccess" class="form-success" style="display:none">
-                <div class="success-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><polyline points="20 6 9 17 4 12"/></svg>
+        <div class="form-layout">
+
+            <!-- Terminal feedback -->
+            <div class="form-terminal" id="formTerminal" aria-hidden="true">
+                <div class="ft-bar">
+                    <div class="ft-dot" style="background:#ff5f57"></div>
+                    <div class="ft-dot" style="background:#febc2e"></div>
+                    <div class="ft-dot" style="background:#28c840"></div>
+                    <span class="ft-title">message.go</span>
                 </div>
-                <p class="success-title">[OK] Message envoyé avec succès</p>
-                <p class="success-sub">Message bien reçu, je vous répondrai dès que possible.</p>
-                <button class="success-reset" id="formReset">Envoyer un autre message</button>
+                <div class="ft-body" id="ftBody">
+                    <div class="ft-line"><span class="ft-dim">$</span> <span class="ft-acc">./send_message</span></div>
+                    <div class="ft-line"><span class="ft-dim">#</span> <span class="ft-muted">En attente de saisie...</span></div>
+                </div>
             </div>
 
-            <div id="formError" class="form-error" style="display:none">
-                <p class="error-title">[ERR] Échec de l'envoi</p>
-                <p class="error-sub" id="errorMsg">Une erreur est survenue. Réessaie.</p>
+            <!-- Formulaire -->
+            <div class="form-wrap reveal">
+                <div id="formSuccess" class="form-success" style="display:none" role="alert">
+                    <div class="success-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <p class="success-title">[OK] Message envoyé avec succès</p>
+                    <p class="success-sub">Message bien reçu, je vous répondrai dès que possible.</p>
+                    <button class="success-reset" id="formReset">Envoyer un autre message</button>
+                </div>
+
+                <div id="formError" class="form-error" style="display:none" role="alert">
+                    <p class="error-title">[ERR] Échec de l'envoi</p>
+                    <p class="error-sub" id="errorMsg">Une erreur est survenue. Réessaie.</p>
+                </div>
+
+                <form id="contactForm" action="https://formspree.io/f/xwvwjrov" method="POST" novalidate aria-label="Formulaire de contact">
+
+                    <!-- Honeypot anti-bot -->
+                    <div style="display:none" aria-hidden="true">
+                        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+                    </div>
+                    <input type="hidden" name="_subject" value="Nouveau message — Portfolio Orlando Cogo">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="firstname">
+                                <span class="label-num" aria-hidden="true">01</span> Prénom
+                            </label>
+                            <input type="text" id="firstname" name="firstname" class="form-input"
+                                   placeholder="Prénom" required autocomplete="given-name"
+                                   aria-required="true" aria-describedby="firstnameErr">
+                            <span class="form-error-msg" id="firstnameErr" role="alert"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="lastname">
+                                <span class="label-num" aria-hidden="true">02</span> Nom
+                            </label>
+                            <input type="text" id="lastname" name="lastname" class="form-input"
+                                   placeholder="Nom" required autocomplete="family-name"
+                                   aria-required="true" aria-describedby="lastnameErr">
+                            <span class="form-error-msg" id="lastnameErr" role="alert"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="email">
+                                <span class="label-num" aria-hidden="true">03</span> Email
+                            </label>
+                            <input type="email" id="email" name="email" class="form-input"
+                                   placeholder="email@exemple.com" required autocomplete="email"
+                                   aria-required="true" aria-describedby="mailErr">
+                            <span class="form-error-msg" id="mailErr" role="alert"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="subject">
+                            <span class="label-num" aria-hidden="true">04</span> Sujet
+                        </label>
+                        <div class="select-wrap">
+                            <select id="subject" name="subject" class="form-select" required
+                                    aria-required="true" aria-describedby="subjectErr">
+                                <option value="">Choisir un sujet...</option>
+                                <option value="stage">Opportunité de stage</option>
+                                <option value="alternance">Alternance</option>
+                                <option value="emploi">Offre d'emploi</option>
+                                <option value="projet">Proposition de projet</option>
+                                <option value="question">Question</option>
+                                <option value="feedback">Retour / Feedback</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                            <svg class="select-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                        </div>
+                        <span class="form-error-msg" id="subjectErr" role="alert"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="message">
+                            <span class="label-num" aria-hidden="true">05</span> Message
+                            <span class="char-counter" aria-live="polite"><span id="charCount">0</span>/1000</span>
+                        </label>
+                        <textarea id="message" name="message" class="form-textarea"
+                                  placeholder="Bonjour Orlando, je souhaite..." maxlength="1000" rows="6"
+                                  required aria-required="true" aria-describedby="messageErr"></textarea>
+                        <span class="form-error-msg" id="messageErr" role="alert"></span>
+                    </div>
+
+                    <button type="submit" class="form-submit" id="submitBtn">
+                        <span class="submit-text">Envoyer le message</span>
+                        <span class="submit-loading" style="display:none" aria-live="polite">
+                            <span class="loading-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                            Envoi en cours...
+                        </span>
+                        <svg class="submit-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7H12M12 7L8 3M12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </button>
+                </form>
             </div>
-
-            <form id="contactForm" action="https://formspree.io/f/xwvwjrov" method="POST" novalidate>
-
-                <!-- Honeypot anti-bot -->
-                <div style="display:none" aria-hidden="true">
-                    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
-                </div>
-
-                <!-- Champ email caché pour Formspree -->
-                <input type="hidden" name="_subject" value="Nouveau message — Portfolio Orlando Cogo">
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label" for="firstname">
-                            <span class="label-num">01</span> Prénom
-                        </label>
-                        <input type="text" id="firstname" name="firstname" class="form-input" placeholder="Prénom" required>
-                        <span class="form-error-msg" id="firstnameErr"></span>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="lastname">
-                            <span class="label-num">02</span> Nom
-                        </label>
-                        <input type="text" id="lastname" name="lastname" class="form-input" placeholder="Nom" required>
-                        <span class="form-error-msg" id="lastnameErr"></span>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="email">
-                            <span class="label-num">03</span> Email
-                        </label>
-                        <input type="email" id="email" name="email" class="form-input" placeholder="email@exemple.com" required>
-                        <span class="form-error-msg" id="mailErr"></span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="subject">
-                        <span class="label-num">04</span> Sujet
-                    </label>
-                    <div class="select-wrap">
-                        <select id="subject" name="subject" class="form-select" required>
-                            <option value="">Choisir un sujet...</option>
-                            <option value="stage">Opportunité de stage</option>
-                            <option value="alternance">Alternance</option>
-                            <option value="emploi">Offre d'emploi</option>
-                            <option value="projet">Proposition de projet</option>
-                            <option value="question">Question</option>
-                            <option value="feedback">Retour / Feedback</option>
-                            <option value="autre">Autre</option>
-                        </select>
-                        <svg class="select-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-                    </div>
-                    <span class="form-error-msg" id="subjectErr"></span>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label" for="message">
-                        <span class="label-num">05</span> Message
-                        <span class="char-counter"><span id="charCount">0</span>/1000</span>
-                    </label>
-                    <textarea id="message" name="message" class="form-textarea" placeholder="Bonjour Orlando, je souhaite..." maxlength="1000" rows="6" required></textarea>
-                    <span class="form-error-msg" id="messageErr"></span>
-                </div>
-
-                <button type="submit" class="form-submit" id="submitBtn">
-                    <span class="submit-text">Envoyer le message</span>
-                    <span class="submit-loading" style="display:none">
-            <span class="loading-dots"><span></span><span></span><span></span></span>
-            Envoi en cours...
-        </span>
-                    <svg class="submit-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M12 7L8 3M12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                </button>
-            </form>
         </div>
-    </div>
-</section>
+    </section>
+
+</main>
 
 <!-- FOOTER -->
-<footer class="footer">
-    <span class="prompt">~/orlando.cogo $</span>
-    <span>cd ../home</span>
+<footer class="footer" aria-label="Pied de page">
+    <span class="prompt" aria-hidden="true">~/orlando.cogo $</span>
+    <span aria-hidden="true">cd ../home</span>
     <a href="/home" class="footer-back">← Retour à l'accueil</a>
     <span class="footer-year">© 2026</span>
 </footer>
