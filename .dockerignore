@@ -1,0 +1,43 @@
+# ══════════════════════════════════════════
+#  .dockerignore
+#  Exclut les fichiers inutiles du build context
+#  Réduit la taille de l'image et accélère le build
+# ══════════════════════════════════════════
+
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Environnement local
+.env
+.env.*
+!.env.example
+
+# Air (hot-reload dev)
+tmp/
+.air.toml
+
+# Docker (pas besoin dans l'image)
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tests Go
+*_test.go
+testdata/
+
+# Données locales (montées via volume en prod)
+data/

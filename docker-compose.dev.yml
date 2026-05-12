@@ -1,17 +1,24 @@
+# ══════════════════════════════════════════
+#  DOCKER COMPOSE — Développement
+#  Usage : docker compose -f docker-compose.dev.yml up
+# ══════════════════════════════════════════
 services:
 
-  # ── Portfolio — Mode Développement ───────────────────────────────────────────
   portfolio:
     build:
       context: .
-      dockerfile: Dockerfile.dev     # Utilise le Dockerfile de dev avec Air
+      dockerfile: Dockerfile.dev
+    image: portfolio:dev
     container_name: portfolio_dev
     restart: unless-stopped
     ports:
       - "8080:8080"
     environment:
       PORT: "8080"
-      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-changeme}
+      TZ: "Europe/Paris"
     volumes:
-      - .:/app                       # Monte tout le projet — Go + web + data
-      - /app/tmp                     # Exclut le dossier tmp d'Air du montage
+      # Monte tout le projet pour le hot-reload Air
+      - .:/app
+      # Exclut le dossier tmp d'Air du montage
+      - /app/tmp
+    # Pas de healthcheck en dev pour ne pas polluer les logs

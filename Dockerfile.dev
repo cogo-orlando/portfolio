@@ -1,8 +1,27 @@
+# ══════════════════════════════════════════
+#  DOCKERFILE DEV — Hot reload avec Air
+#  Ne jamais utiliser en production
+# ══════════════════════════════════════════
 FROM golang:1.23-alpine
+
+# Dépendances système
+RUN apk add --no-cache git
+
 WORKDIR /app
+
+# Installe Air pour le hot-reload
 RUN go install github.com/air-verse/air@v1.61.7
-COPY go.mod ./
+
+# Copie les dépendances Go
+COPY go.mod go.sum ./
 RUN go mod download
-COPY . .
+
+# Le code source est monté via volume dans docker-compose.dev.yml
+# On ne copie pas ici pour bénéficier du hot-reload
+
 EXPOSE 8080
+
+ENV PORT=8080 \
+    TZ=Europe/Paris
+
 CMD ["air"]
