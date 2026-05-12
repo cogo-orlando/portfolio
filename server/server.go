@@ -1,14 +1,22 @@
 package server
 
 import (
+	"context"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
+	"os/signal"
 	"portfo/server/handler"
 	"portfo/server/middleware"
 	"sync"
+	"syscall"
 	"time"
 )
+
+// ══════════════════════════════════════════
+//  MAINTENANCE
+// ══════════════════════════════════════════
 
 var maintenancePages = map[string]bool{
 	"/blog": false, "/about": false, "/skills": false,
@@ -21,10 +29,18 @@ var maintenancePages = map[string]bool{
 
 var MaintenanceMode = false
 
+// ══════════════════════════════════════════
+//  COMPTEUR DE VISITES
+// ══════════════════════════════════════════
+
 var (
 	visitCount int
 	visitMu    sync.Mutex
 )
+
+// ══════════════════════════════════════════
+//  ROUTES
+// ══════════════════════════════════════════
 
 var routes = map[string]http.HandlerFunc{
 	"/":              handler.IndexHandler,
@@ -46,13 +62,15 @@ var routes = map[string]http.HandlerFunc{
 	"/demo/annuaire": handler.AnnuaireHandler,
 }
 
+// ══════════════════════════════════════════
+//  START — avec graceful shutdown
+// ══════════════════════════════════════════
+
 func Start() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/health", middleware.HealthHandler)
-	mux.HandleFunc("/api/contact", handler.ContactAPIHandler)
 	mux.HandleFunc("/api/visits", visitsHandler)
-	mux.HandleFunc("/admin/messages", handler.AdminHandler)
 
 	fs := http.FileServer(http.Dir("./web"))
 	mux.Handle("/css/", fs)
@@ -66,7 +84,6 @@ func Start() {
 	if port == "" {
 		port = "8080"
 	}
-	fmt.Println("Serveur lancé sur http://localhost:" + port)
 
 	srv := &http.Server{
 		Addr:         ":" + port,
@@ -75,10 +92,36 @@ func Start() {
 		WriteTimeout: 30 * time.Second,
 		IdleTimeout:  60 * time.Second,
 	}
-	if err := srv.ListenAndServe(); err != nil {
-		panic(err)
+
+	// ── Lance le serveur dans une goroutine ──
+	go func() {
+		fmt.Printf("[SERVER] Démarrage sur http://localhost:%s\n", port)
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("[SERVER] Erreur fatale : %v", err)
+		}
+	}()
+
+	// ── Écoute les signaux système (CTRL+C, kill, Render deploy) ──
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	sig := <-quit
+
+	log.Printf("[SERVER] Signal reçu (%s) — arrêt gracieux en cours...", sig)
+
+	// ── Donne 10 secondes aux requêtes en cours pour se terminer ──
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Printf("[SERVER] Arrêt forcé : %v", err)
+	} else {
+		log.Println("[SERVER] Arrêt propre — toutes les requêtes terminées")
 	}
 }
+
+// ══════════════════════════════════════════
+//  MAIN HANDLER
+// ══════════════════════════════════════════
 
 func mainHandler(w http.ResponseWriter, r *http.Request) {
 	if _, err := r.Cookie("visited"); err != nil {
@@ -95,6 +138,7 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 			SameSite: http.SameSiteStrictMode,
 		})
 	}
+
 	if MaintenanceMode {
 		http.ServeFile(w, r, "web/html/maintenance.html")
 		return
@@ -109,6 +153,10 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	handler.NotFoundHandler(w, r)
 }
+
+// ══════════════════════════════════════════
+//  API VISITS
+// ══════════════════════════════════════════
 
 func visitsHandler(w http.ResponseWriter, r *http.Request) {
 	visitMu.Lock()
