@@ -1,4 +1,4 @@
-package server
+package middleware
 
 import (
 	"compress/gzip"
@@ -12,7 +12,7 @@ import (
 )
 
 // ══════════════════════════════════════════
-//  LOGGING MIDDLEWARE
+//  LOGGING
 // ══════════════════════════════════════════
 
 type responseWriter struct {
@@ -37,20 +37,16 @@ func LoggerMiddleware(next http.Handler) http.Handler {
 		start := time.Now()
 		rw := &responseWriter{ResponseWriter: w, status: 200}
 		next.ServeHTTP(rw, r)
-		duration := time.Since(start)
-		ip := getIP(r)
 		log.Printf("[%s] %s %s %d %dms %s",
 			time.Now().Format("2006-01-02 15:04:05"),
-			r.Method,
-			r.URL.Path,
-			rw.status,
-			duration.Milliseconds(),
-			ip,
+			r.Method, r.URL.Path, rw.status,
+			time.Since(start).Milliseconds(),
+			GetIP(r),
 		)
 	})
 }
 
-func getIP(r *http.Request) string {
+func GetIP(r *http.Request) string {
 	if ip := r.Header.Get("X-Forwarded-For"); ip != "" {
 		return strings.Split(ip, ",")[0]
 	}
@@ -61,54 +57,20 @@ func getIP(r *http.Request) string {
 }
 
 // ══════════════════════════════════════════
-//  SECURITY HEADERS MIDDLEWARE
+//  SECURITY
 // ══════════════════════════════════════════
 
 func SecurityMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		h := w.Header()
-
-		// Force HTTPS
-		h.Set("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload")
-
-		// Empêche le MIME sniffing
-		h.Set("X-Content-Type-Options", "nosniff")
-
-		// Empêche le clickjacking
-		h.Set("X-Frame-Options", "DENY")
-
-		// XSS protection basique
-		h.Set("X-XSS-Protection", "1; mode=block")
-
-		// Contrôle les informations de référence
-		h.Set("Referrer-Policy", "strict-origin-when-cross-origin")
-
-		// Désactive les fonctionnalités navigateur non nécessaires
-		h.Set("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=()")
-
-		// Content Security Policy
-		h.Set("Content-Security-Policy", strings.Join([]string{
-			"default-src 'self'",
-			"script-src 'self' 'unsafe-inline'",
-			"style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-			"font-src 'self' https://fonts.gstatic.com",
-			"img-src 'self' data: https:",
-			"connect-src 'self' https://api.open-meteo.com https://formspree.io",
-			"frame-ancestors 'none'",
-			"base-uri 'self'",
-			"form-action 'self' https://formspree.io",
-		}, "; "))
-
-		// Supprime le header qui expose Go
 		h.Del("X-Powered-By")
-		w.Header().Set("Server", "")
-
+		h.Set("Server", "")
 		next.ServeHTTP(w, r)
 	})
 }
 
 // ══════════════════════════════════════════
-//  GZIP MIDDLEWARE
+//  GZIP
 // ══════════════════════════════════════════
 
 type gzipWriter struct {
@@ -116,10 +78,7 @@ type gzipWriter struct {
 	gz *gzip.Writer
 }
 
-func (gw *gzipWriter) Write(b []byte) (int, error) {
-	return gw.gz.Write(b)
-}
-
+func (gw *gzipWriter) Write(b []byte) (int, error) { return gw.gz.Write(b) }
 func (gw *gzipWriter) WriteHeader(status int) {
 	gw.ResponseWriter.Header().Del("Content-Length")
 	gw.ResponseWriter.WriteHeader(status)
@@ -127,86 +86,50 @@ func (gw *gzipWriter) WriteHeader(status int) {
 
 func GzipMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Ne compresse pas si le client ne supporte pas
 		if !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
 			next.ServeHTTP(w, r)
 			return
 		}
-
-		// Ne compresse pas les images (déjà compressées)
-		path := r.URL.Path
-		if strings.HasSuffix(path, ".png") || strings.HasSuffix(path, ".jpg") ||
-			strings.HasSuffix(path, ".jpeg") || strings.HasSuffix(path, ".gif") ||
-			strings.HasSuffix(path, ".ico") || strings.HasSuffix(path, ".webp") {
-			next.ServeHTTP(w, r)
-			return
+		for _, ext := range []string{".png", ".jpg", ".jpeg", ".gif", ".ico", ".webp"} {
+			if strings.HasSuffix(r.URL.Path, ext) {
+				next.ServeHTTP(w, r)
+				return
+			}
 		}
-
 		gz, err := gzip.NewWriterLevel(w, gzip.BestSpeed)
 		if err != nil {
 			next.ServeHTTP(w, r)
 			return
 		}
 		defer gz.Close()
-
 		w.Header().Set("Content-Encoding", "gzip")
 		w.Header().Set("Vary", "Accept-Encoding")
 		w.Header().Del("Content-Length")
-
 		next.ServeHTTP(&gzipWriter{ResponseWriter: w, gz: gz}, r)
 	})
 }
 
 // ══════════════════════════════════════════
-//  CACHE MIDDLEWARE (fichiers statiques)
+//  CACHE
 // ══════════════════════════════════════════
 
 func CacheMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		path := r.URL.Path
-
 		switch {
-		// Images — 1 an
-		case strings.HasPrefix(path, "/img/"):
+		case strings.HasPrefix(r.URL.Path, "/img/"):
 			w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
-
-		// CSS et JS — 1 semaine (peut changer lors des déploiements)
-		case strings.HasPrefix(path, "/css/") || strings.HasPrefix(path, "/js/"):
+		case strings.HasPrefix(r.URL.Path, "/css/") || strings.HasPrefix(r.URL.Path, "/js/"):
 			w.Header().Set("Cache-Control", "public, max-age=604800")
-
-		// Pages HTML — pas de cache (contenu dynamique)
 		default:
 			w.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
 			w.Header().Set("Pragma", "no-cache")
 		}
-
 		next.ServeHTTP(w, r)
 	})
 }
 
 // ══════════════════════════════════════════
-//  TIMEOUT MIDDLEWARE
-// ══════════════════════════════════════════
-
-func TimeoutMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Timeout de 30 secondes par requête
-		done := make(chan struct{})
-		go func() {
-			next.ServeHTTP(w, r)
-			close(done)
-		}()
-		select {
-		case <-done:
-			return
-		case <-time.After(30 * time.Second):
-			http.Error(w, "Request timeout", http.StatusGatewayTimeout)
-		}
-	})
-}
-
-// ══════════════════════════════════════════
-//  RATE LIMITER GLOBAL (par IP)
+//  RATE LIMITER
 // ══════════════════════════════════════════
 
 type globalLimiter struct {
@@ -219,27 +142,20 @@ var globalRateLimiter = &globalLimiter{records: make(map[string][]time.Time)}
 func (gl *globalLimiter) allow(ip string) bool {
 	gl.mu.Lock()
 	defer gl.mu.Unlock()
-
 	now := time.Now()
-	window := time.Minute
-
 	var recent []time.Time
 	for _, t := range gl.records[ip] {
-		if now.Sub(t) < window {
+		if now.Sub(t) < time.Minute {
 			recent = append(recent, t)
 		}
 	}
-
-	// Max 120 requêtes par minute par IP
 	if len(recent) >= 120 {
 		return false
 	}
-
 	gl.records[ip] = append(recent, now)
 	return true
 }
 
-// Nettoie les vieilles entrées toutes les 5 minutes
 func init() {
 	go func() {
 		for range time.Tick(5 * time.Minute) {
@@ -265,8 +181,7 @@ func init() {
 
 func RateLimitMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		ip := getIP(r)
-		if !globalRateLimiter.allow(ip) {
+		if !globalRateLimiter.allow(GetIP(r)) {
 			w.Header().Set("Retry-After", "60")
 			http.Error(w, "Too Many Requests", http.StatusTooManyRequests)
 			return
@@ -276,16 +191,13 @@ func RateLimitMiddleware(next http.Handler) http.Handler {
 }
 
 // ══════════════════════════════════════════
-//  REDIRECT HTTP → HTTPS
+//  REDIRECT HTTPS
 // ══════════════════════════════════════════
 
 func RedirectHTTPS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Sur Render, X-Forwarded-Proto indique si la requête est HTTP ou HTTPS
-		proto := r.Header.Get("X-Forwarded-Proto")
-		if proto == "http" {
-			target := "https://" + r.Host + r.URL.RequestURI()
-			http.Redirect(w, r, target, http.StatusMovedPermanently)
+		if r.Header.Get("X-Forwarded-Proto") == "http" {
+			http.Redirect(w, r, "https://"+r.Host+r.URL.RequestURI(), http.StatusMovedPermanently)
 			return
 		}
 		next.ServeHTTP(w, r)
@@ -293,11 +205,10 @@ func RedirectHTTPS(next http.Handler) http.Handler {
 }
 
 // ══════════════════════════════════════════
-//  CHAIN — Applique tous les middlewares
+//  CHAIN
 // ══════════════════════════════════════════
 
 func Chain(h http.Handler) http.Handler {
-	// Ordre d'application (du dernier au premier)
 	h = CacheMiddleware(h)
 	h = GzipMiddleware(h)
 	h = SecurityMiddleware(h)
@@ -308,24 +219,20 @@ func Chain(h http.Handler) http.Handler {
 }
 
 // ══════════════════════════════════════════
-//  HEALTH CHECK ENRICHI
+//  HEALTH — exporté, sans import server
 // ══════════════════════════════════════════
 
-func healthHandler(w http.ResponseWriter, r *http.Request) {
-	visitMu.Lock()
-	visits := visitCount
-	visitMu.Unlock()
+var startTime = time.Now()
+
+func HealthHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprintf(w, `{"status":"ok","service":"portfolio","visits":%d,"uptime":"%s"}`,
-		visits,
+	fmt.Fprintf(w, `{"status":"ok","service":"portfolio","uptime":"%s"}`,
 		time.Since(startTime).Round(time.Second).String(),
 	)
 }
 
-var startTime = time.Now()
-
 // ══════════════════════════════════════════
-//  WRITER HELPER pour TimeoutMiddleware
+//  TIMEOUT WRITER
 // ══════════════════════════════════════════
 
 type timeoutWriter struct {
