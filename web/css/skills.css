@@ -17,22 +17,107 @@
 
 /* ── SKILLS GRID ── */
 .skills-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1rem; }
-.skill-card { background:var(--surface); border:1px solid var(--border2); padding:1.2rem 1.4rem; display:flex; align-items:flex-start; gap:14px; transition:border-color 0.2s,transform 0.2s; }
-.skill-card:hover { border-color:rgba(0,245,160,0.25); transform:translateY(-2px); }
+
+.skill-card {
+    background:var(--surface);
+    border:1px solid var(--border2);
+    padding:1.2rem 1.4rem;
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    position:relative;
+    overflow:hidden;
+    transition:
+            border-color 0.35s ease,
+            transform 0.35s ease,
+            box-shadow 0.35s ease;
+}
+
+.skill-card::after {
+    content:'';
+    position:absolute;
+    top:0; left:0; right:0;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Bordure lumineuse au hover */
+.skill-card::before {
+    content:'';
+    position:absolute;
+    top:-40px; right:-40px;
+    width:120px; height:120px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(0,245,160,0.08) 0%, transparent 70%);
+    opacity:0;
+    transition:opacity 0.4s ease, transform 0.4s ease;
+    transform:scale(0.5);
+    pointer-events:none;
+}
+
+.skill-card:hover {
+    border-color:rgba(0,245,160,0.3);
+    transform:translateY(-3px);
+    box-shadow:
+            0 12px 40px rgba(0,0,0,0.4),
+            0 0 0 1px rgba(0,245,160,0.08),
+            0 4px 16px rgba(0,245,160,0.06);
+}
+
+.skill-card:hover::after { transform:scaleX(1); }
+.skill-card:hover::before { opacity:1; transform:scale(1); }
+
 .skill-icon { font-family:'DM Mono',monospace; font-size:10px; font-weight:700; width:48px; height:48px; min-width:48px; display:flex; align-items:center; justify-content:center; letter-spacing:0.03em; text-align:center; }
 .skill-body { flex:1; display:flex; flex-direction:column; gap:6px; min-width:0; }
 .skill-info { display:flex; justify-content:space-between; align-items:center; }
 .skill-name { font-size:14px; font-weight:700; color:var(--text); }
 .skill-level { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted2); letter-spacing:0.06em; }
-.skill-bar { height:2px; background:var(--muted); }
-.skill-fill { height:100%; width:0; background:var(--accent); animation:growBar 1.2s cubic-bezier(0.4,0,0.2,1) forwards 0.3s; }
+
+/* ── BARRE DE PROGRESSION — animée au scroll ── */
+.skill-bar {
+    height:2px;
+    background:var(--muted);
+    position:relative;
+    overflow:hidden;
+}
+
+.skill-fill {
+    height:100%;
+    width:0; /* Démarre à 0 */
+    background:linear-gradient(90deg, var(--accent), var(--accent2));
+    transition:width 1s cubic-bezier(0.4,0,0.2,1);
+    position:relative;
+}
+
+/* Effet de brillance qui traverse la barre */
+.skill-fill::after {
+    content:'';
+    position:absolute;
+    top:0; right:0; bottom:0;
+    width:30px;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+    animation:shimmer 1.5s ease-in-out infinite;
+    opacity:0;
+    transition:opacity 0.3s;
+}
+
+.skill-card:hover .skill-fill::after { opacity:1; }
+
+/* Classe ajoutée par JS quand la card est visible */
+.skill-card.bar-animated .skill-fill {
+    width:var(--pct);
+}
+
 .skill-details { display:flex; flex-wrap:wrap; gap:4px; margin-top:4px; }
 .skill-details span { font-family:'DM Mono',monospace; font-size:9px; color:var(--accent2); border:1px solid rgba(0,200,245,0.2); padding:2px 6px; letter-spacing:0.04em; }
 
 /* ── TOOLS ── */
 .tools-grid { display:flex; flex-wrap:wrap; gap:8px; }
-.tool-badge { display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--border2); padding:10px 16px; font-family:'DM Mono',monospace; font-size:12px; color:var(--text); transition:border-color 0.2s,color 0.2s; }
-.tool-badge:hover { border-color:rgba(0,245,160,0.3); color:var(--accent); }
+.tool-badge { display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--border2); padding:10px 16px; font-family:'DM Mono',monospace; font-size:12px; color:var(--text); transition:border-color 0.2s,color 0.2s,box-shadow 0.2s; }
+.tool-badge:hover { border-color:rgba(0,245,160,0.3); color:var(--accent); box-shadow:0 0 12px rgba(0,245,160,0.06); }
 .tool-icon { color:var(--accent); display:flex; align-items:center; }
 
 /* ── LEARNING TICKER ── */
@@ -59,8 +144,9 @@
 .planned-badge { color:var(--muted2); border:1px solid var(--border2); }
 .roadmap-desc { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted2); line-height:1.7; letter-spacing:0.02em; }
 
-/* ── ANIMATIONS SPÉCIFIQUES ── */
+/* ── ANIMATIONS ── */
 @keyframes growBar { to { width:var(--pct); } }
+@keyframes shimmer { 0% { transform:translateX(-100%); } 100% { transform:translateX(200%); } }
 
 /* ── RESPONSIVE ── */
 @media (max-width:700px) {

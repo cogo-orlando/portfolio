@@ -1,3 +1,9 @@
+// ── GLASSMORPHISM NAV AU SCROLL ──
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+    nav?.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
 // ── PAGE ACTIVE ──
 const currentPath = window.location.pathname;
 document.querySelectorAll('.nav-link').forEach(link => {

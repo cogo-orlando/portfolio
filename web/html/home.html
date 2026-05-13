@@ -60,19 +60,17 @@
     <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
         <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
     </a>
-
     <ul class="nav-links" role="list">
         <li><a href="/about" class="nav-link">À propos</a></li>
+        <li><a href="/tech" class="nav-link">Infrastructure</a></li>
         <li><a href="/skills" class="nav-link">Compétences</a></li>
         <li><a href="/project" class="nav-link">Projets</a></li>
         <li><a href="/contact" class="nav-link">Contact</a></li>
         <li><a href="/cv" class="nav-link">CV</a></li>
         <li class="nav-more">
             <button class="nav-more-btn" id="navMoreBtn"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    aria-controls="navMoreMenu"
-                    aria-label="Plus de pages">
+                    aria-haspopup="true" aria-expanded="false"
+                    aria-controls="navMoreMenu" aria-label="Plus de pages">
                 Plus
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
                     <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -81,31 +79,19 @@
             <div class="nav-more-menu" id="navMoreMenu" role="menu">
                 <a href="/status" class="more-item" role="menuitem">
                     <span class="more-num" aria-hidden="true">06</span>
-                    <span class="more-info">
-                        <span class="more-name">Status</span>
-                        <span class="more-desc">État du système</span>
-                    </span>
+                    <span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span>
                 </a>
                 <a href="/faq" class="more-item" role="menuitem">
                     <span class="more-num" aria-hidden="true">07</span>
-                    <span class="more-info">
-                        <span class="more-name">FAQ</span>
-                        <span class="more-desc">Questions / Réponses</span>
-                    </span>
+                    <span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions / Réponses</span></span>
                 </a>
             </div>
         </li>
     </ul>
-
     <button class="nav-burger" id="navBurger"
-            aria-label="Ouvrir le menu"
-            aria-expanded="false"
-            aria-controls="mobileMenu">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+            aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
     </button>
-
     <div class="nav-right">
         <div class="nav-status" aria-label="Disponible pour travailler">
             <span class="status-dot" aria-hidden="true"></span>
@@ -125,7 +111,6 @@
     <a href="/faq" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>FAQ</a>
 </div>
 
-<!-- CONTENU PRINCIPAL -->
 <main id="main-content">
 
     <!-- HERO -->
@@ -238,11 +223,174 @@
         </div>
     </section>
 
-    <!-- EXPLORER -->
-    <section class="section" aria-labelledby="explorer-title">
+    <!-- INFRASTRUCTURE & DÉPLOIEMENT -->
+    <section class="section" aria-labelledby="infra-title">
         <div class="section-num" aria-hidden="true">03</div>
         <div class="section-header">
             <span class="section-tag" aria-hidden="true">03 //</span>
+            <h2 class="section-title" id="infra-title">Infrastructure & Déploiement</h2>
+        </div>
+
+        <!-- Schéma d'architecture -->
+        <div class="arch-diagram reveal" aria-label="Schéma d'architecture du portfolio">
+            <div class="arch-step">
+                <div class="arch-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                </div>
+                <span class="arch-label">Visiteur</span>
+            </div>
+            <div class="arch-arrow" aria-hidden="true">↓</div>
+            <div class="arch-step arch-step--highlight">
+                <div class="arch-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <span class="arch-label">Cloudflare</span>
+                <span class="arch-sub">WAF · DDoS · HTTPS · CDN</span>
+            </div>
+            <div class="arch-arrow" aria-hidden="true">↓</div>
+            <div class="arch-step">
+                <div class="arch-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+                </div>
+                <span class="arch-label">Render</span>
+                <span class="arch-sub">PaaS · Auto-deploy</span>
+            </div>
+            <div class="arch-arrow" aria-hidden="true">↓</div>
+            <div class="arch-step">
+                <div class="arch-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                </div>
+                <span class="arch-label">Docker</span>
+                <span class="arch-sub">Multi-stage · ~60MB</span>
+            </div>
+            <div class="arch-arrow" aria-hidden="true">↓</div>
+            <div class="arch-step arch-step--accent">
+                <div class="arch-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <span class="arch-label">Go Backend</span>
+                <span class="arch-sub">HTTP natif · Middleware · Slog</span>
+            </div>
+        </div>
+
+        <!-- Stack cards -->
+        <div class="infra-grid reveal">
+
+            <div class="infra-card">
+                <div class="infra-card-top">
+                    <div class="infra-icon infra-icon--go" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <span class="infra-name">Go Backend</span>
+                    <span class="infra-badge infra-badge--green">Production</span>
+                </div>
+                <p class="infra-desc">Serveur HTTP natif sans framework. Routing manuel, middleware chain, template cache, graceful shutdown.</p>
+                <div class="infra-tags"><span>Zéro dépendance</span><span>slog JSON</span><span>Tests unitaires</span></div>
+            </div>
+
+            <div class="infra-card">
+                <div class="infra-card-top">
+                    <div class="infra-icon infra-icon--docker" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                    </div>
+                    <span class="infra-name">Docker</span>
+                    <span class="infra-badge infra-badge--blue">Containerisé</span>
+                </div>
+                <p class="infra-desc">Multi-stage build — image finale ~60MB depuis scratch. Binaire statique compilé, utilisateur non-root.</p>
+                <div class="infra-tags"><span>Multi-stage</span><span>Non-root</span><span>~60MB</span></div>
+            </div>
+
+            <div class="infra-card">
+                <div class="infra-card-top">
+                    <div class="infra-icon infra-icon--cloudflare" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <span class="infra-name">Cloudflare</span>
+                    <span class="infra-badge infra-badge--orange">Sécurisé</span>
+                </div>
+                <p class="infra-desc">WAF, DDoS protection, SSL Full Strict, headers de sécurité. Score A+ sur securityheaders.com.</p>
+                <div class="infra-tags"><span>WAF</span><span>Score A</span><span>HTTPS</span></div>
+            </div>
+
+            <div class="infra-card">
+                <div class="infra-card-top">
+                    <div class="infra-icon infra-icon--render" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+                    </div>
+                    <span class="infra-name">Render</span>
+                    <span class="infra-badge infra-badge--purple">Déployé</span>
+                </div>
+                <p class="infra-desc">Déploiement automatique depuis GitHub. Auto-deploy sur chaque push, monitoring via UptimeRobot.</p>
+                <div class="infra-tags"><span>Auto-deploy</span><span>UptimeRobot</span><span>100% uptime</span></div>
+            </div>
+
+            <div class="infra-card">
+                <div class="infra-card-top">
+                    <div class="infra-icon infra-icon--ci" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                    </div>
+                    <span class="infra-name">GitHub Actions</span>
+                    <span class="infra-badge infra-badge--green">CI/CD</span>
+                </div>
+                <p class="infra-desc">47 tests unitaires lancés automatiquement à chaque push. Scan gosec inclus — 0 vulnérabilité détectée.</p>
+                <div class="infra-tags"><span>47 tests</span><span>gosec</span><span>Go 1.23</span></div>
+            </div>
+
+            <div class="infra-card">
+                <div class="infra-card-top">
+                    <div class="infra-icon infra-icon--security" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <span class="infra-name">Sécurité Go</span>
+                    <span class="infra-badge infra-badge--green">Hardened</span>
+                </div>
+                <p class="infra-desc">Honeypot, rate limiting, panic recovery, request ID, IP Cloudflare, sanitisation des inputs.</p>
+                <div class="infra-tags"><span>Honeypot</span><span>Rate limit</span><span>Recovery</span></div>
+            </div>
+
+        </div>
+
+        <!-- Métriques de sécurité -->
+        <div class="security-checks reveal" aria-label="Vérifications de sécurité">
+            <div class="check-item">
+                <span class="check-icon" aria-hidden="true">✓</span>
+                <span>HTTPS — SSL Full Strict via Cloudflare</span>
+            </div>
+            <div class="check-item">
+                <span class="check-icon" aria-hidden="true">✓</span>
+                <span>Headers de sécurité — Score A securityheaders.com</span>
+            </div>
+            <div class="check-item">
+                <span class="check-icon" aria-hidden="true">✓</span>
+                <span>Docker — image non-root, binaire statique</span>
+            </div>
+            <div class="check-item">
+                <span class="check-icon" aria-hidden="true">✓</span>
+                <span>CI/CD — 47 tests + gosec à chaque push</span>
+            </div>
+            <div class="check-item">
+                <span class="check-icon" aria-hidden="true">✓</span>
+                <span>Honeypot — blacklist automatique des scanners</span>
+            </div>
+            <div class="check-item">
+                <span class="check-icon" aria-hidden="true">✓</span>
+                <span>Rate limiting — 120 req/min/IP + protection contact</span>
+            </div>
+        </div>
+
+        <div class="infra-cta reveal">
+            <a href="/tech" class="infra-link">
+                Voir l'architecture complète →
+            </a>
+        </div>
+
+    </section>
+
+    <!-- EXPLORER -->
+    <section class="section" aria-labelledby="explorer-title">
+        <div class="section-num" aria-hidden="true">04</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">04 //</span>
             <h2 class="section-title" id="explorer-title">Explorer</h2>
         </div>
         <nav class="quicknav-grid" aria-label="Navigation rapide">
@@ -286,9 +434,9 @@
 
     <!-- CERTIFICATIONS -->
     <section class="section" aria-labelledby="certif-title">
-        <div class="section-num" aria-hidden="true">04</div>
+        <div class="section-num" aria-hidden="true">05</div>
         <div class="section-header">
-            <span class="section-tag" aria-hidden="true">04 //</span>
+            <span class="section-tag" aria-hidden="true">05 //</span>
             <h2 class="section-title" id="certif-title">Certifications & Objectifs</h2>
         </div>
         <div class="certif-list">
@@ -333,9 +481,9 @@
 
     <!-- SETUP -->
     <section class="section" aria-labelledby="setup-title">
-        <div class="section-num" aria-hidden="true">05</div>
+        <div class="section-num" aria-hidden="true">06</div>
         <div class="section-header">
-            <span class="section-tag" aria-hidden="true">05 //</span>
+            <span class="section-tag" aria-hidden="true">06 //</span>
             <h2 class="section-title" id="setup-title">Mon setup</h2>
         </div>
         <div class="setup-grid">
@@ -350,9 +498,9 @@
 
     <!-- CURRENTLY LEARNING -->
     <section class="section" aria-labelledby="learning-title">
-        <div class="section-num" aria-hidden="true">06</div>
+        <div class="section-num" aria-hidden="true">07</div>
         <div class="section-header">
-            <span class="section-tag" aria-hidden="true">06 //</span>
+            <span class="section-tag" aria-hidden="true">07 //</span>
             <h2 class="section-title" id="learning-title">Currently learning</h2>
         </div>
         <div class="learning-ticker reveal" aria-live="polite" aria-label="En cours d'apprentissage">

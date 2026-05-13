@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ── SEO ── -->
+    <title>Orlando Cogo — Architecture & Infrastructure</title>
+    <meta name="description" content="Architecture technique du portfolio d'Orlando Cogo — Go, Docker, Cloudflare, Render, GitHub Actions, sécurité et tests.">
+    <meta name="author" content="Orlando Cogo">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orlandocogo.com/tech">
+
+    <!-- ── Open Graph ── -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orlandocogo.com/tech">
+    <meta property="og:title" content="Orlando Cogo — Architecture & Infrastructure">
+    <meta property="og:description" content="Architecture technique du portfolio — Go, Docker, Cloudflare, GitHub Actions.">
+    <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
+    <meta property="og:locale" content="fr_FR">
+
+    <!-- ── Favicon ── -->
+    <link rel="icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- ── Fonts ── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+    <!-- ── CSS ── -->
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/tech.css">
+</head>
+<body>
+
+<div class="blob1" aria-hidden="true"></div>
+<div class="blob2" aria-hidden="true"></div>
+<div class="grid" aria-hidden="true"></div>
+<div class="corner corner--tl" aria-hidden="true"></div>
+<div class="corner corner--tr" aria-hidden="true"></div>
+<div class="corner corner--bl" aria-hidden="true"></div>
+<div class="corner corner--br" aria-hidden="true"></div>
+<canvas id="matrix" class="matrix-canvas" aria-hidden="true"></canvas>
+
+<!-- NAV -->
+<nav class="nav" aria-label="Navigation principale">
+    <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
+        <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
+    </a>
+    <ul class="nav-links" role="list">
+        <li><a href="/about" class="nav-link">À propos</a></li>
+        <li><a href="/tech" class="nav-link">Infrastructure</a></li>
+        <li><a href="/skills" class="nav-link">Compétences</a></li>
+        <li><a href="/project" class="nav-link">Projets</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+        <li><a href="/cv" class="nav-link">CV</a></li>
+        <li class="nav-more">
+            <button class="nav-more-btn" id="navMoreBtn"
+                    aria-haspopup="true" aria-expanded="false"
+                    aria-controls="navMoreMenu" aria-label="Plus de pages">
+                Plus
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                    <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <div class="nav-more-menu" id="navMoreMenu" role="menu">
+                <a href="/status" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">06</span><span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
+                <a href="/faq" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">07</span><span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions / Réponses</span></span></a>
+            </div>
+        </li>
+    </ul>
+    <button class="nav-burger" id="navBurger"
+            aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+    <div class="nav-right">
+        <div class="nav-status" aria-label="Disponible pour travailler">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>open to work</span>
+        </div>
+    </div>
+</nav>
+
+<!-- Menu mobile -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>À propos</a>
+    <a href="/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Compétences</a>
+    <a href="/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Projets</a>
+    <a href="/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Contact</a>
+    <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>CV</a>
+    <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>Status</a>
+    <a href="/faq" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>FAQ</a>
+</div>
+
+<main id="main-content">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-tag" data-typed="cat architecture.md" aria-hidden="true">
+            <span class="prompt">~/tech $</span>
+            <span class="typed"></span>
+            <span class="cursor"></span>
+        </div>
+        <h1 class="hero-title" id="hero-title">Architecture<br><span class="outline">& Infrastructure</span></h1>
+        <p class="hero-intro">
+            Ce portfolio n'est pas qu'un site vitrine — c'est un projet backend complet avec sécurité, tests, CI/CD et déploiement containerisé.
+        </p>
+    </section>
+
+    <!-- ARCHITECTURE COMPLÈTE -->
+    <section class="section" aria-labelledby="arch-title">
+        <div class="section-num" aria-hidden="true">01</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">01 //</span>
+            <h2 class="section-title" id="arch-title">Schéma d'architecture</h2>
+        </div>
+
+        <div class="arch-full reveal">
+            <!-- Colonne gauche — flux requête -->
+            <div class="arch-col">
+                <h3 class="arch-col-title">Flux d'une requête</h3>
+                <div class="arch-flow">
+
+                    <div class="arch-node arch-node--user">
+                        <div class="arch-node-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                        </div>
+                        <div class="arch-node-info">
+                            <span class="arch-node-name">Visiteur</span>
+                            <span class="arch-node-desc">Navigateur web</span>
+                        </div>
+                    </div>
+
+                    <div class="arch-connector">
+                        <div class="arch-connector-line"></div>
+                        <span class="arch-connector-label">HTTPS</span>
+                    </div>
+
+                    <div class="arch-node arch-node--cloudflare">
+                        <div class="arch-node-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <div class="arch-node-info">
+                            <span class="arch-node-name">Cloudflare</span>
+                            <span class="arch-node-desc">WAF · DDoS · CDN · SSL</span>
+                        </div>
+                        <div class="arch-node-badges">
+                            <span class="arch-badge">Score A+</span>
+                            <span class="arch-badge">HSTS</span>
+                            <span class="arch-badge">CSP</span>
+                        </div>
+                    </div>
+
+                    <div class="arch-connector">
+                        <div class="arch-connector-line"></div>
+                        <span class="arch-connector-label">Proxy</span>
+                    </div>
+
+                    <div class="arch-node arch-node--render">
+                        <div class="arch-node-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+                        </div>
+                        <div class="arch-node-info">
+                            <span class="arch-node-name">Render</span>
+                            <span class="arch-node-desc">PaaS · Auto-deploy · Free tier</span>
+                        </div>
+                    </div>
+
+                    <div class="arch-connector">
+                        <div class="arch-connector-line"></div>
+                        <span class="arch-connector-label">Docker run</span>
+                    </div>
+
+                    <div class="arch-node arch-node--docker">
+                        <div class="arch-node-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                        </div>
+                        <div class="arch-node-info">
+                            <span class="arch-node-name">Docker Container</span>
+                            <span class="arch-node-desc">Image scratch · ~60MB · Non-root</span>
+                        </div>
+                        <div class="arch-node-badges">
+                            <span class="arch-badge">Multi-stage</span>
+                            <span class="arch-badge">USER 1001</span>
+                        </div>
+                    </div>
+
+                    <div class="arch-connector">
+                        <div class="arch-connector-line"></div>
+                        <span class="arch-connector-label">HTTP :8080</span>
+                    </div>
+
+                    <div class="arch-node arch-node--go">
+                        <div class="arch-node-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        </div>
+                        <div class="arch-node-info">
+                            <span class="arch-node-name">Go Backend</span>
+                            <span class="arch-node-desc">net/http natif · Zéro framework</span>
+                        </div>
+                        <div class="arch-node-badges">
+                            <span class="arch-badge arch-badge--accent">Go 1.23</span>
+                            <span class="arch-badge arch-badge--accent">Middleware chain</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Colonne droite — middleware chain -->
+            <div class="arch-col">
+                <h3 class="arch-col-title">Middleware chain</h3>
+                <div class="middleware-chain">
+                    <div class="mw-item reveal">
+                        <span class="mw-num" aria-hidden="true">1</span>
+                        <div class="mw-info">
+                            <span class="mw-name">LoggerMiddleware</span>
+                            <span class="mw-desc">slog JSON · IP · status · duration_ms · request_id</span>
+                        </div>
+                    </div>
+                    <div class="mw-item reveal">
+                        <span class="mw-num" aria-hidden="true">2</span>
+                        <div class="mw-info">
+                            <span class="mw-name">RequestIDMiddleware</span>
+                            <span class="mw-desc">ID unique 16 chars hex par requête — tracabilité logs</span>
+                        </div>
+                    </div>
+                    <div class="mw-item reveal">
+                        <span class="mw-num" aria-hidden="true">3</span>
+                        <div class="mw-info">
+                            <span class="mw-name">RecoveryMiddleware</span>
+                            <span class="mw-desc">Panic recovery — stack trace loguée, 500 propre</span>
+                        </div>
+                    </div>
+                    <div class="mw-item reveal">
+                        <span class="mw-num" aria-hidden="true">4</span>
+                        <div class="mw-info">
+                            <span class="mw-name">RateLimitMiddleware</span>
+                            <span class="mw-desc">120 req/min/IP — blacklist automatique</span>
+                        </div>
+                    </div>
+                    <div class="mw-item mw-item--security reveal">
+                        <span class="mw-num" aria-hidden="true">5</span>
+                        <div class="mw-info">
+                            <span class="mw-name">HoneypotMiddleware</span>
+                            <span class="mw-desc">15 routes piège — blacklist IP 24h — détecte les scanners</span>
+                        </div>
+                    </div>
+                    <div class="mw-item reveal">
+                        <span class="mw-num" aria-hidden="true">6</span>
+                        <div class="mw-info">
+                            <span class="mw-name">SecurityMiddleware</span>
+                            <span class="mw-desc">Supprime Server header et X-Powered-By</span>
+                        </div>
+                    </div>
+                    <div class="mw-item reveal">
+                        <span class="mw-num" aria-hidden="true">7</span>
+                        <div class="mw-info">
+                            <span class="mw-name">GzipMiddleware</span>
+                            <span class="mw-desc">Compression HTML/CSS/JS — skip images</span>
+                        </div>
+                    </div>
+                    <div class="mw-item reveal">
+                        <span class="mw-num" aria-hidden="true">8</span>
+                        <div class="mw-info">
+                            <span class="mw-name">CacheMiddleware</span>
+                            <span class="mw-desc">img: 1 an · css/js: 1 semaine · html: no-cache</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CI/CD PIPELINE -->
+    <section class="section" aria-labelledby="cicd-title">
+        <div class="section-num" aria-hidden="true">02</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">02 //</span>
+            <h2 class="section-title" id="cicd-title">Pipeline CI/CD</h2>
+        </div>
+
+        <div class="pipeline reveal">
+            <div class="pipeline-step">
+                <div class="pipeline-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <span class="pipeline-label">git push</span>
+                <span class="pipeline-sub">main branch</span>
+            </div>
+            <div class="pipeline-arrow" aria-hidden="true">→</div>
+            <div class="pipeline-step">
+                <div class="pipeline-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                </div>
+                <span class="pipeline-label">GitHub Actions</span>
+                <span class="pipeline-sub">CI déclenché</span>
+            </div>
+            <div class="pipeline-arrow" aria-hidden="true">→</div>
+            <div class="pipeline-step">
+                <div class="pipeline-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+                </div>
+                <span class="pipeline-label">go build</span>
+                <span class="pipeline-sub">Compilation vérifiée</span>
+            </div>
+            <div class="pipeline-arrow" aria-hidden="true">→</div>
+            <div class="pipeline-step pipeline-step--accent">
+                <div class="pipeline-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <span class="pipeline-label">47 tests</span>
+                <span class="pipeline-sub">handler + middleware</span>
+            </div>
+            <div class="pipeline-arrow" aria-hidden="true">→</div>
+            <div class="pipeline-step pipeline-step--security">
+                <div class="pipeline-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <span class="pipeline-label">gosec scan</span>
+                <span class="pipeline-sub">0 vulnérabilité</span>
+            </div>
+            <div class="pipeline-arrow" aria-hidden="true">→</div>
+            <div class="pipeline-step pipeline-step--deploy">
+                <div class="pipeline-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+                </div>
+                <span class="pipeline-label">Render deploy</span>
+                <span class="pipeline-sub">Auto depuis GitHub</span>
+            </div>
+        </div>
+
+        <!-- Stats CI -->
+        <div class="ci-stats reveal">
+            <div class="ci-stat">
+                <span class="ci-val">47</span>
+                <span class="ci-label">Tests unitaires</span>
+            </div>
+            <div class="ci-stat">
+                <span class="ci-val">0</span>
+                <span class="ci-label">Vulnérabilités gosec</span>
+            </div>
+            <div class="ci-stat">
+                <span class="ci-val">~1m30</span>
+                <span class="ci-label">Durée pipeline</span>
+            </div>
+            <div class="ci-stat">
+                <span class="ci-val">Go 1.23</span>
+                <span class="ci-label">Version cible</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SÉCURITÉ -->
+    <section class="section" aria-labelledby="security-title">
+        <div class="section-num" aria-hidden="true">03</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">03 //</span>
+            <h2 class="section-title" id="security-title">Sécurité en détail</h2>
+        </div>
+
+        <div class="security-grid">
+
+            <div class="security-block reveal">
+                <h3 class="security-block-title">
+                    <span class="security-block-icon" aria-hidden="true">🛡</span>
+                    Cloudflare
+                </h3>
+                <div class="security-items">
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>SSL Full Strict — certificat Google Trust Services</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Always Use HTTPS — redirection automatique</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>WAF Rate limiting — /admin protégé, 5 req/10s</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>DDoS protection automatique niveau 3/4/7</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Headers : HSTS · X-Frame-Options · CSP · Referrer-Policy</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Permissions-Policy : camera=() microphone=() geolocation=()</span></div>
+                    <div class="security-item si-score"><span>Score securityheaders.com :</span><span class="si-badge">A+</span></div>
+                </div>
+            </div>
+
+            <div class="security-block reveal">
+                <h3 class="security-block-title">
+                    <span class="security-block-icon" aria-hidden="true">⚙</span>
+                    Go Backend
+                </h3>
+                <div class="security-items">
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Honeypot — 15 routes piège, blacklist IP 24h en mémoire</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Rate limiting global — 120 req/min/IP avec cleanup auto</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Panic recovery — stack trace loguée, 500 propre, no crash</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Request ID — hex 16 chars, traçabilité complète dans slog</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>IP réelle via CF-Connecting-IP — résistant au spoofing</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>MaxBytesReader 10KB — protection contre les gros payloads</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>gosec scan — 0 issue détectée sur tout le codebase</span></div>
+                </div>
+            </div>
+
+            <div class="security-block reveal">
+                <h3 class="security-block-title">
+                    <span class="security-block-icon" aria-hidden="true">🐳</span>
+                    Docker
+                </h3>
+                <div class="security-items">
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Multi-stage build — SDK Go absent de l'image finale</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Image scratch — aucun OS, aucun shell, surface minimale</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>USER 1001 — process non-root en production</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Binaire statique — CGO_ENABLED=0, pas de libc</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>-ldflags="-s -w" — symbols debug supprimés</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Image finale ~60MB vs ~350MB image Alpine standard</span></div>
+                </div>
+            </div>
+
+            <div class="security-block reveal">
+                <h3 class="security-block-title">
+                    <span class="security-block-icon" aria-hidden="true">📊</span>
+                    Monitoring
+                </h3>
+                <div class="security-items">
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>UptimeRobot — ping toutes les 5 minutes, alerte email</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Google Search Console — indexation et SEO</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>/health endpoint — uptime, goroutines, mémoire, GC cycles</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>slog JSON structuré — compatible Render Logs, filtrable</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Graceful shutdown — 10s pour terminer les requêtes en cours</span></div>
+                    <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Sitemap XML auto — soumis à Google Search Console</span></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- STACK TECHNIQUE -->
+    <section class="section" aria-labelledby="stack-title">
+        <div class="section-num" aria-hidden="true">04</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">04 //</span>
+            <h2 class="section-title" id="stack-title">Stack complète</h2>
+        </div>
+
+        <div class="stack-table reveal">
+            <div class="stack-row stack-row--header">
+                <span>Couche</span>
+                <span>Technologie</span>
+                <span>Détail</span>
+            </div>
+            <div class="stack-row">
+                <span class="stack-layer">Backend</span>
+                <span class="stack-tech">Go 1.23</span>
+                <span class="stack-detail">net/http natif · zéro framework · zéro dépendance</span>
+            </div>
+            <div class="stack-row">
+                <span class="stack-layer">Frontend</span>
+                <span class="stack-tech">HTML · CSS · JS</span>
+                <span class="stack-detail">Vanilla · Syne + DM Mono · zéro framework</span>
+            </div>
+            <div class="stack-row">
+                <span class="stack-layer">Container</span>
+                <span class="stack-tech">Docker</span>
+                <span class="stack-detail">Multi-stage · scratch · ~60MB · USER 1001</span>
+            </div>
+            <div class="stack-row">
+                <span class="stack-layer">Déploiement</span>
+                <span class="stack-tech">Render</span>
+                <span class="stack-detail">PaaS · auto-deploy GitHub · free tier</span>
+            </div>
+            <div class="stack-row">
+                <span class="stack-layer">CDN / Sécurité</span>
+                <span class="stack-tech">Cloudflare</span>
+                <span class="stack-detail">WAF · DDoS · SSL Full Strict · headers · score A</span>
+            </div>
+            <div class="stack-row">
+                <span class="stack-layer">CI/CD</span>
+                <span class="stack-tech">GitHub Actions</span>
+                <span class="stack-detail">build · 47 tests · gosec · auto-deploy</span>
+            </div>
+            <div class="stack-row">
+                <span class="stack-layer">Formulaire</span>
+                <span class="stack-tech">Formspree</span>
+                <span class="stack-detail">Email sécurisé · honeypot anti-bot</span>
+            </div>
+            <div class="stack-row">
+                <span class="stack-layer">Monitoring</span>
+                <span class="stack-tech">UptimeRobot</span>
+                <span class="stack-detail">Ping 5min · alerte email · 100% uptime</span>
+            </div>
+            <div class="stack-row">
+                <span class="stack-layer">Logs</span>
+                <span class="stack-tech">slog (stdlib Go)</span>
+                <span class="stack-detail">JSON structuré · niveaux INFO/WARN/ERROR</span>
+            </div>
+            <div class="stack-row">
+                <span class="stack-layer">SEO</span>
+                <span class="stack-tech">Google Search Console</span>
+                <span class="stack-detail">Sitemap soumis · domaine validé</span>
+            </div>
+            <div class="stack-row">
+                <span class="stack-layer">Scanner sécu</span>
+                <span class="stack-tech">gosec + ZAP</span>
+                <span class="stack-detail">0 vulnérabilité · 6 alertes CSP mineurs</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- STRUCTURE PROJET -->
+    <section class="section" aria-labelledby="structure-title">
+        <div class="section-num" aria-hidden="true">05</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">05 //</span>
+            <h2 class="section-title" id="structure-title">Structure du projet</h2>
+        </div>
+
+        <div class="code-block reveal" aria-label="Structure des fichiers du projet">
+            <div class="code-bar" aria-hidden="true">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-title">portfolio/</span>
+            </div>
+            <pre class="code-content"><code>portfolio/
+├── main.go                        <span class="code-comment"># Point d'entrée</span>
+├── server/
+│   ├── server.go                  <span class="code-comment"># Router · Graceful shutdown · Health · Sitemap</span>
+│   ├── handler/
+│   │   ├── pages.go               <span class="code-comment"># Handlers HTML + template cache sync.RWMutex</span>
+│   │   └── pages_test.go          <span class="code-comment"># 26 tests unitaires handlers</span>
+│   └── middleware/
+│       ├── middleware.go          <span class="code-comment"># Logger · RequestID · Recovery · RateLimit · Honeypot · Gzip · Cache</span>
+│       └── middleware_test.go     <span class="code-comment"># 21 tests unitaires middleware</span>
+├── web/
+│   ├── html/                      <span class="code-comment"># Templates HTML (10 pages + demos)</span>
+│   ├── css/                       <span class="code-comment"># Feuilles de style par page</span>
+│   ├── js/                        <span class="code-comment"># Scripts vanilla (nav · background · home · skills...)</span>
+│   └── img/                       <span class="code-comment"># Favicon · og-image · screenshots projets</span>
+├── .github/
+│   └── workflows/
+│       └── ci.yml                 <span class="code-comment"># GitHub Actions : build · tests · gosec</span>
+├── Dockerfile                     <span class="code-comment"># Multi-stage : builder golang:1.23-alpine → scratch</span>
+├── Dockerfile.dev                 <span class="code-comment"># Dev : golang:1.23-alpine + Air hot-reload</span>
+├── docker-compose.yml             <span class="code-comment"># Production : healthcheck · logs rotation · 256MB limit</span>
+├── docker-compose.dev.yml         <span class="code-comment"># Développement : volume mount · hot-reload</span>
+└── go.mod                         <span class="code-comment"># Module portfo · Go 1.23 · zéro dépendance externe</span></code></pre>
+        </div>
+    </section>
+
+    <!-- MÉTRIQUES LIGHTHOUSE -->
+    <section class="section" aria-labelledby="lighthouse-title">
+        <div class="section-num" aria-hidden="true">06</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">06 //</span>
+            <h2 class="section-title" id="lighthouse-title">Scores Lighthouse</h2>
+        </div>
+
+        <div class="lighthouse-grid reveal">
+            <div class="lh-card">
+                <div class="lh-score lh-score--green">96</div>
+                <span class="lh-label">Performance</span>
+            </div>
+            <div class="lh-card">
+                <div class="lh-score lh-score--green">92</div>
+                <span class="lh-label">Accessibilité</span>
+            </div>
+            <div class="lh-card">
+                <div class="lh-score lh-score--green">96</div>
+                <span class="lh-label">Best Practices</span>
+            </div>
+            <div class="lh-card">
+                <div class="lh-score lh-score--green">100</div>
+                <span class="lh-label">SEO</span>
+            </div>
+        </div>
+
+        <div class="lh-details reveal">
+            <div class="lh-detail-item"><span class="lh-detail-key">First Contentful Paint</span><span class="lh-detail-val lh-green">1.6s</span></div>
+            <div class="lh-detail-item"><span class="lh-detail-key">Largest Contentful Paint</span><span class="lh-detail-val lh-yellow">2.8s</span></div>
+            <div class="lh-detail-item"><span class="lh-detail-key">Total Blocking Time</span><span class="lh-detail-val lh-green">0ms</span></div>
+            <div class="lh-detail-item"><span class="lh-detail-key">Cumulative Layout Shift</span><span class="lh-detail-val lh-green">0.002</span></div>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" aria-label="Pied de page">
+    <span class="prompt" aria-hidden="true">~/orlando.cogo $</span>
+    <a href="/home" class="footer-back">← Retour à l'accueil</a>
+    <span aria-hidden="true">exit 0</span>
+    <span class="footer-year">© 2026</span>
+</footer>
+
+<script src="/js/background.js"></script>
+<script src="/js/nav.js"></script>
+</body>
+</html>

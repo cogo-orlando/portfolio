@@ -30,3 +30,14 @@ document.querySelectorAll('.skill-icon').forEach(icon => {
     icon.style.borderColor = color + '33';
     icon.style.color = color;
 });
+
+// ── ANIMATION BARRES AU SCROLL ──
+const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('bar-animated');
+            barObserver.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.3 });
+document.querySelectorAll('.skill-card').forEach(card => barObserver.observe(card));

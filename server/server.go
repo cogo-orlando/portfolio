@@ -23,6 +23,7 @@ var maintenancePages = map[string]bool{
 	"/blog": false, "/about": false, "/skills": false,
 	"/contact": false, "/cv": false, "/home": false,
 	"/project": false, "/faq": false, "/status": false,
+	"/tech":          false,
 	"/demo/annuaire": false, "/demo/netflix": false,
 	"/demo/zoo": false, "/demo/power4": false,
 	"/demo/groupie": false, "/demo/cisco": false, "/demo/artemis": false,
@@ -54,6 +55,7 @@ var routes = map[string]http.HandlerFunc{
 	"/cv":            handler.CvHandler,
 	"/status":        handler.StatusHandler,
 	"/faq":           handler.FaqHandler,
+	"/tech":          handler.TechHandler,
 	"/maintenance":   handler.MaintenanceHandler,
 	"/demo/zoo":      handler.DemoZooHandler,
 	"/demo/netflix":  handler.DemoNetflixHandler,
@@ -192,10 +194,9 @@ func healthHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // ══════════════════════════════════════════
-//  SITEMAP XML — généré automatiquement
+//  SITEMAP XML
 // ══════════════════════════════════════════
 
-// Pages publiques indexables par Google
 var sitemapURLs = []struct {
 	path     string
 	priority string
@@ -208,6 +209,7 @@ var sitemapURLs = []struct {
 	{"/contact", "0.8", "monthly"},
 	{"/cv", "0.8", "monthly"},
 	{"/faq", "0.7", "monthly"},
+	{"/tech", "0.8", "monthly"},
 }
 
 func sitemapHandler(w http.ResponseWriter, r *http.Request) {

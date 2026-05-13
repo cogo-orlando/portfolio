@@ -16,7 +16,6 @@ var (
 )
 
 func renderTemplate(w http.ResponseWriter, r *http.Request, file string) {
-	// Seul GET et HEAD sont acceptés pour les pages
 	if r.Method != http.MethodGet && r.Method != http.MethodHead {
 		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		return
@@ -75,6 +74,9 @@ func StatusHandler(w http.ResponseWriter, r *http.Request) {
 func FaqHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "faq.html")
 }
+func TechHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, r, "tech.html")
+}
 func MaintenanceHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "maintenance.html")
 }
@@ -99,7 +101,6 @@ func DemoArtemisHandler(w http.ResponseWriter, r *http.Request) {
 func AnnuaireHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "demo-annuaire.html")
 }
-
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 	renderTemplate(w, r, "404.html")

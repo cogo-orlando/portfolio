@@ -28,7 +28,35 @@ body::after { content:''; position:fixed; inset:0; background:repeating-linear-g
 .corner--br { bottom:1.5rem; right:1.5rem; border-bottom:1px solid var(--muted); border-right:1px solid var(--muted); }
 
 /* ── NAV ── */
-.nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:1.1rem 2.5rem; background:rgba(8,11,15,0.9); backdrop-filter:blur(12px); border-bottom:1px solid var(--border2); gap:1rem; }
+.nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.1rem 2.5rem;
+    gap:1rem;
+
+    /* État initial — transparent */
+    background: rgba(8,11,15,0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid transparent;
+
+    /* Transition fluide */
+    transition:
+            background 0.4s ease,
+            backdrop-filter 0.4s ease,
+            border-color 0.4s ease,
+            box-shadow 0.4s ease;
+}
+
+/* État scrollé — glassmorphism complet */
+.nav.scrolled {
+    background: rgba(8,11,15,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border2);
+    box-shadow: 0 4px 32px rgba(0,0,0,0.4), 0 1px 0 rgba(0,245,160,0.05);
+}
+
 .nav-logo { font-family:'DM Mono',monospace; font-size:13px; color:var(--text); letter-spacing:0.05em; text-decoration:none; transition:color 0.2s; flex-shrink:0; }
 .nav-logo:hover { color:var(--accent); }
 .nav-logo .prompt { color:var(--accent); }
