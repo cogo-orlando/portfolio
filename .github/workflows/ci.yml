@@ -15,13 +15,17 @@ jobs:
       # 1. Récupère le code
       - name: Checkout
         uses: actions/checkout@v4
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
       # 2. Configure Go
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
           go-version: '1.23'
-          cache: true
+          cache: false
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
       # 3. Vérifie que le code compile
       - name: Build
