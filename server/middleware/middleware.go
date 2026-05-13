@@ -397,20 +397,6 @@ func RateLimitMiddleware(next http.Handler) http.Handler {
 }
 
 // ══════════════════════════════════════════
-//  REDIRECT HTTPS
-// ══════════════════════════════════════════
-
-func RedirectHTTPS(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.Header.Get("X-Forwarded-Proto") == "http" {
-			http.Redirect(w, r, "https://"+r.Host+r.URL.RequestURI(), http.StatusMovedPermanently)
-			return
-		}
-		next.ServeHTTP(w, r)
-	})
-}
-
-// ══════════════════════════════════════════
 //  CHAIN
 // ══════════════════════════════════════════
 
@@ -420,7 +406,6 @@ func Chain(h http.Handler) http.Handler {
 	h = SecurityMiddleware(h)
 	h = HoneypotMiddleware(h)
 	h = RateLimitMiddleware(h)
-	h = RedirectHTTPS(h)
 	h = RecoveryMiddleware(h)
 	h = RequestIDMiddleware(h)
 	h = LoggerMiddleware(h)
