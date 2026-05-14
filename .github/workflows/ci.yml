@@ -34,6 +34,8 @@ jobs:
       # 4. Lance tous les tests
       - name: Tests
         run: go test ./server/handler/... ./server/middleware/... -v
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       # 5. Couverture de code
       - name: Couverture
