@@ -10,6 +10,7 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+	"portfo/server/db"
 	"runtime/debug"
 	"strings"
 	"sync"
@@ -29,8 +30,6 @@ func init() {
 
 // ══════════════════════════════════════════
 //  REQUEST ID
-//  Chaque requête reçoit un ID unique
-//  visible dans tous les logs
 // ══════════════════════════════════════════
 
 type contextKey string
@@ -61,8 +60,6 @@ func GetRequestID(ctx context.Context) string {
 
 // ══════════════════════════════════════════
 //  PANIC RECOVERY
-//  Si une route panic, renvoie un 500 propre
-//  sans crasher le serveur
 // ══════════════════════════════════════════
 
 func RecoveryMiddleware(next http.Handler) http.Handler {
@@ -86,11 +83,8 @@ func RecoveryMiddleware(next http.Handler) http.Handler {
 
 // ══════════════════════════════════════════
 //  HONEYPOT
-//  Routes fausses qui attirent les bots/scanners
-//  Toute IP qui y accède est loguée comme suspecte
 // ══════════════════════════════════════════
 
-// Liste des routes honeypot — jamais visitées par un humain normal
 var honeypotRoutes = map[string]bool{
 	"/admin/login":   true,
 	"/admin":         true,
@@ -109,10 +103,9 @@ var honeypotRoutes = map[string]bool{
 	"/console":       true,
 }
 
-// Blacklist en mémoire des IPs suspectes
 type blacklist struct {
 	mu      sync.RWMutex
-	records map[string]time.Time // ip → expiration
+	records map[string]time.Time
 }
 
 var ipBlacklist = &blacklist{records: make(map[string]time.Time)}
@@ -130,7 +123,6 @@ func (bl *blacklist) has(ip string) bool {
 	return ok && time.Now().Before(exp)
 }
 
-// Nettoyage auto toutes les heures
 func init() { //nolint:gochecknoinits
 	go func() {
 		for range time.Tick(time.Hour) {
@@ -150,7 +142,6 @@ func HoneypotMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ip := GetIP(r)
 
-		// Bloque les IPs déjà blacklistées
 		if ipBlacklist.has(ip) {
 			slog.Warn("ip blacklistée bloquée",
 				"ip", ip,
@@ -161,7 +152,6 @@ func HoneypotMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		// Vérifie si la route est un honeypot
 		if honeypotRoutes[r.URL.Path] {
 			ipBlacklist.add(ip)
 			slog.Warn("honeypot déclenché — IP blacklistée 24h",
@@ -171,7 +161,9 @@ func HoneypotMiddleware(next http.Handler) http.Handler {
 				"user_agent", r.UserAgent(),
 				"request_id", GetRequestID(r.Context()),
 			)
-			// Répond comme si la route n'existait pas
+			// Log en DB
+			db.LogHoneypot(ip, r.URL.Path, r.UserAgent())
+
 			http.NotFound(w, r)
 			return
 		}
@@ -239,6 +231,15 @@ func LoggerMiddleware(next http.Handler) http.Handler {
 				"ip", ip,
 			)
 		}
+
+		// Log en DB — détermine le type d'événement
+		eventType := db.EventRequest
+		if rw.status >= 500 {
+			eventType = db.EventError
+		} else if rw.status >= 400 {
+			eventType = db.EventError
+		}
+		db.LogEvent(ip, r.Method, r.URL.Path, rw.status, r.UserAgent(), eventType)
 	})
 }
 
@@ -388,6 +389,9 @@ func RateLimitMiddleware(next http.Handler) http.Handler {
 				"path", r.URL.Path,
 				"request_id", GetRequestID(r.Context()),
 			)
+			// Log en DB
+			db.LogRateLimit(ip, r.URL.Path)
+
 			w.Header().Set("Retry-After", "60")
 			http.Error(w, "Too Many Requests", http.StatusTooManyRequests)
 			return
