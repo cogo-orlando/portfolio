@@ -397,7 +397,6 @@
 
             <div class="security-block reveal">
                 <h3 class="security-block-title">
-                    <span class="security-block-icon" aria-hidden="true">🐳</span>
                     Docker
                 </h3>
                 <div class="security-items">
@@ -412,7 +411,6 @@
 
             <div class="security-block reveal">
                 <h3 class="security-block-title">
-                    <span class="security-block-icon" aria-hidden="true">📊</span>
                     Monitoring
                 </h3>
                 <div class="security-items">
@@ -575,6 +573,50 @@
             <div class="lh-detail-item"><span class="lh-detail-key">Cumulative Layout Shift</span><span class="lh-detail-val lh-green">0.002</span></div>
         </div>
     </section>
+
+    <!-- WHAT I LEARNED -->
+    <section class="section" aria-labelledby="learned-title">
+        <div class="section-num" aria-hidden="true">07</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">07 //</span>
+            <h2 class="section-title" id="learned-title">Ce que j'ai appris</h2>
+        </div>
+
+        <div class="learned-grid">
+            <div class="learned-card reveal">
+                <div class="learned-num" aria-hidden="true">01</div>
+                <h3 class="learned-name">Architecture serveur Go</h3>
+                <p class="learned-desc">Construire un serveur HTTP from scratch sans framework m'a forcé à comprendre vraiment comment fonctionne le web — routing, middleware chain, template cache, graceful shutdown. Pas de magie, chaque ligne a une raison d'être.</p>
+            </div>
+            <div class="learned-card reveal">
+                <div class="learned-num" aria-hidden="true">02</div>
+                <h3 class="learned-name">Conteneurisation Docker</h3>
+                <p class="learned-desc">Le multi-stage build m'a appris que la taille d'une image n'est pas une fatalité — passer de 350MB à 60MB en séparant la compilation du runtime. Et qu'un process ne devrait jamais tourner en root, même en local.</p>
+            </div>
+            <div class="learned-card reveal">
+                <div class="learned-num" aria-hidden="true">03</div>
+                <h3 class="learned-name">Sécurité web concrète</h3>
+                <p class="learned-desc">La théorie c'est bien, la pratique c'est mieux. Implémenter un honeypot, du rate limiting, un panic recovery et des headers de sécurité m'a montré que la sécurité c'est une couche par couche — pas un interrupteur on/off.</p>
+            </div>
+            <div class="learned-card reveal">
+                <div class="learned-num" aria-hidden="true">04</div>
+                <h3 class="learned-name">Cloudflare & reverse proxy</h3>
+                <p class="learned-desc">Comprendre ce que fait vraiment Cloudflare — WAF, DDoS, SSL termination, cache — m'a donné une vision claire de ce qui se passe entre un navigateur et un serveur. L'infrastructure n'est pas une boîte noire.</p>
+            </div>
+            <div class="learned-card reveal">
+                <div class="learned-num" aria-hidden="true">05</div>
+                <h3 class="learned-name">CI/CD & tests automatiques</h3>
+                <p class="learned-desc">Écrire 47 tests unitaires et les faire tourner automatiquement à chaque push avec GitHub Actions m'a convaincu que les tests ne sont pas une contrainte — c'est ce qui te permet de modifier du code sans avoir peur de tout casser.</p>
+            </div>
+            <div class="learned-card reveal">
+                <div class="learned-num" aria-hidden="true">06</div>
+                <h3 class="learned-name">Logs & observabilité</h3>
+                <p class="learned-desc">slog JSON structuré, request ID, métriques /health — j'ai compris que sans logs exploitables, un serveur en production c'est une boîte noire. Savoir ce qui se passe en temps réel change complètement la façon de déboguer.</p>
+            </div>
+        </div>
+    </section>
+
+</main>
 
 </main>
 

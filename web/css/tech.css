@@ -568,3 +568,62 @@
     .lighthouse-grid { grid-template-columns:repeat(2,1fr); }
     .lh-details { grid-template-columns:1fr; }
 }
+
+/* ── WHAT I LEARNED ── */
+.learned-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:1rem;
+}
+
+.learned-card {
+    background:var(--surface);
+    border:1px solid var(--border2);
+    padding:1.5rem;
+    display:flex;
+    flex-direction:column;
+    gap:0.75rem;
+    position:relative;
+    overflow:hidden;
+    transition:border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.learned-card::after {
+    content:'';
+    position:absolute;
+    top:0; left:0; right:0;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.learned-card:hover {
+    border-color:rgba(0,245,160,0.25);
+    transform:translateY(-3px);
+    box-shadow:0 8px 32px rgba(0,0,0,0.3), 0 4px 16px rgba(0,245,160,0.05);
+}
+
+.learned-card:hover::after { transform:scaleX(1); }
+
+.learned-num {
+    font-family:'DM Mono',monospace;
+    font-size:10px;
+    color:var(--accent);
+    letter-spacing:0.1em;
+}
+
+.learned-name {
+    font-size:14px;
+    font-weight:700;
+    color:var(--text);
+    letter-spacing:-0.01em;
+}
+
+.learned-desc {
+    font-size:12px;
+    color:var(--muted2);
+    line-height:1.8;
+    flex:1;
+}
