@@ -105,3 +105,7 @@ func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 	renderTemplate(w, r, "404.html")
 }
+
+func SecurityDashboardHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, r, "projects/security-dashboard.html")
+}

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Security Dashboard — Orlando Cogo</title>
+    <meta name="description" content="Security Dashboard — plateforme de monitoring et supervision de sécurité en temps réel. Go, PostgreSQL, Docker, Supabase. Projet flagship d'Orlando Cogo.">
+    <meta name="author" content="Orlando Cogo">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orlandocogo.com/projects/security-dashboard">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orlandocogo.com/projects/security-dashboard">
+    <meta property="og:title" content="Security Dashboard — Orlando Cogo">
+    <meta property="og:description" content="Plateforme de monitoring et supervision de sécurité en temps réel — Go, PostgreSQL, Docker, Supabase.">
+    <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Security Dashboard — Orlando Cogo">
+    <meta name="twitter:description" content="Plateforme de monitoring et supervision de sécurité en temps réel.">
+
+    <link rel="icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/security-dashboard.css">
+</head>
+<body>
+
+<div class="blob1" aria-hidden="true"></div>
+<div class="blob2" aria-hidden="true"></div>
+<div class="grid" aria-hidden="true"></div>
+<canvas id="matrix" class="matrix-canvas" aria-hidden="true"></canvas>
+
+<!-- NAV -->
+<nav class="nav" aria-label="Navigation principale">
+    <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
+        <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
+    </a>
+    <ul class="nav-links" role="list">
+        <li><a href="/about" class="nav-link">À propos</a></li>
+        <li><a href="/skills" class="nav-link">Compétences</a></li>
+        <li><a href="/project" class="nav-link">Projets</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+        <li><a href="/cv" class="nav-link">CV</a></li>
+        <li class="nav-more">
+            <button class="nav-more-btn" id="navMoreBtn" aria-haspopup="true" aria-expanded="false" aria-controls="navMoreMenu" aria-label="Plus de pages">
+                Plus
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-more-menu" id="navMoreMenu" role="menu">
+                <a href="/tech" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">05</span><span class="more-info"><span class="more-name">Infrastructure</span><span class="more-desc">Stack technique</span></span></a>
+                <a href="/status" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">06</span><span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
+                <a href="/faq" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">07</span><span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions / Réponses</span></span></a>
+            </div>
+        </li>
+    </ul>
+    <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+    <div class="nav-right">
+        <div class="nav-status" aria-label="Disponible pour travailler">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>open to work</span>
+        </div>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>À propos</a>
+    <a href="/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Compétences</a>
+    <a href="/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Projets</a>
+    <a href="/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Contact</a>
+    <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>CV</a>
+    <a href="/tech" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>Infrastructure</a>
+    <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>Status</a>
+</div>
+
+<main id="main-content">
+
+    <!-- ── HERO ── -->
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-breadcrumb">
+            <a href="/project" class="breadcrumb-link">← Projets</a>
+            <span class="breadcrumb-sep" aria-hidden="true">/</span>
+            <span class="breadcrumb-current">Security Dashboard</span>
+        </div>
+
+        <div class="hero-tag" aria-hidden="true">
+            <span class="prompt">~/projects/security-dashboard $</span>
+            <span class="cursor"></span>
+        </div>
+
+        <div class="hero-top">
+            <div class="hero-labels">
+                <span class="flagship-badge">Flagship</span>
+                <span class="status-badge-hero">En cours</span>
+            </div>
+            <h1 class="hero-title" id="hero-title">Security<br><span class="outline">Dashboard</span></h1>
+            <p class="hero-intro">Plateforme de monitoring et supervision de sécurité en temps réel — connectée au portfolio en production. Supervise chaque requête, détecte les menaces, affiche les métriques système Go et analyse le trafic.</p>
+        </div>
+
+        <!-- Métriques hero -->
+        <div class="hero-metrics reveal" aria-label="Métriques du projet">
+            <div class="hmetric">
+                <span class="hmetric-val">28</span>
+                <span class="hmetric-label">Tests unitaires</span>
+            </div>
+            <div class="hmetric-sep" aria-hidden="true">·</div>
+            <div class="hmetric">
+                <span class="hmetric-val">15MB</span>
+                <span class="hmetric-label">Image Docker</span>
+            </div>
+            <div class="hmetric-sep" aria-hidden="true">·</div>
+            <div class="hmetric">
+                <span class="hmetric-val">0</span>
+                <span class="hmetric-label">Issues gosec</span>
+            </div>
+            <div class="hmetric-sep" aria-hidden="true">·</div>
+            <div class="hmetric">
+                <span class="hmetric-val">8</span>
+                <span class="hmetric-label">Sections dashboard</span>
+            </div>
+            <div class="hmetric-sep" aria-hidden="true">·</div>
+            <div class="hmetric">
+                <span class="hmetric-val">CI</span>
+                <span class="hmetric-label hmetric-label--green">Vert ✓</span>
+            </div>
+        </div>
+
+        <!-- Liens -->
+        <div class="hero-links reveal">
+            <a href="https://github.com/cogo-orlando/security-dashboard" target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn--gh" aria-label="Voir sur GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub
+            </a>
+            <a href="/tech" class="hero-btn hero-btn--outline">Infrastructure portfolio →</a>
+        </div>
+    </section>
+
+    <!-- ── 01 CONTEXTE ── -->
+    <section class="section" aria-labelledby="context-title">
+        <div class="section-num" aria-hidden="true">01</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">01 //</span>
+            <h2 class="section-title" id="context-title">Contexte</h2>
+        </div>
+        <div class="context-block reveal">
+            <p class="context-text">Mon portfolio est déployé en production sur <strong>orlandocogo.com</strong> — il reçoit du trafic réel, des bots, des scans automatiques et des tentatives d'accès à des routes sensibles. J'avais besoin d'un outil pour <strong>superviser ce qui se passe réellement</strong> sur mon infrastructure.</p>
+            <p class="context-text">Le Security Dashboard est né de ce besoin concret — ce n'est pas un projet fictif, c'est un outil que j'utilise vraiment pour surveiller mon portfolio en temps réel.</p>
+            <div class="context-quote">
+                <span class="context-quote-bar" aria-hidden="true"></span>
+                <p>"Je supervise et sécurise ma propre infrastructure — chaque ligne de code a une utilité réelle."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 02 ARCHITECTURE ── -->
+    <section class="section" aria-labelledby="arch-title">
+        <div class="section-num" aria-hidden="true">02</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">02 //</span>
+            <h2 class="section-title" id="arch-title">Architecture</h2>
+        </div>
+
+        <!-- Flux de données -->
+        <div class="arch-flow reveal" aria-label="Flux de données entre les composants">
+            <div class="arch-node arch-node--cf">
+                <div class="arch-node-icon" aria-hidden="true">☁</div>
+                <span class="arch-node-name">Cloudflare</span>
+                <span class="arch-node-sub">WAF · SSL · CDN</span>
+            </div>
+            <div class="arch-arrow" aria-hidden="true">→</div>
+            <div class="arch-node arch-node--render">
+                <div class="arch-node-icon" aria-hidden="true">⬡</div>
+                <span class="arch-node-name">Render</span>
+                <span class="arch-node-sub">Hébergement</span>
+            </div>
+            <div class="arch-arrow" aria-hidden="true">→</div>
+            <div class="arch-node arch-node--docker">
+                <div class="arch-node-icon" aria-hidden="true">🐳</div>
+                <span class="arch-node-name">Docker</span>
+                <span class="arch-node-sub">15MB · scratch</span>
+            </div>
+            <div class="arch-arrow" aria-hidden="true">→</div>
+            <div class="arch-node arch-node--go">
+                <div class="arch-node-icon" aria-hidden="true">Go</div>
+                <span class="arch-node-name">Backend Go</span>
+                <span class="arch-node-sub">HTTP · API REST</span>
+            </div>
+            <div class="arch-arrow" aria-hidden="true">→</div>
+            <div class="arch-node arch-node--db">
+                <div class="arch-node-icon" aria-hidden="true">🗄</div>
+                <span class="arch-node-name">Supabase</span>
+                <span class="arch-node-sub">PostgreSQL · RLS</span>
+            </div>
+        </div>
+
+        <!-- Connexion portfolio -->
+        <div class="arch-connection reveal">
+            <div class="arch-conn-label">
+                <span class="arch-conn-tag" aria-hidden="true">→</span>
+                Connexion live avec le portfolio
+            </div>
+            <p class="arch-conn-desc">Le portfolio envoie chaque événement (requêtes, honeypots, rate limits) vers Supabase via l'utilisateur <code>security_app</code> (INSERT only). Le dashboard lit ces données avec l'utilisateur <code>postgres</code> (full access). Principe du moindre privilège.</p>
+        </div>
+    </section>
+
+    <!-- ── 03 FONCTIONNALITÉS ── -->
+    <section class="section" aria-labelledby="features-title">
+        <div class="section-num" aria-hidden="true">03</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">03 //</span>
+            <h2 class="section-title" id="features-title">Fonctionnalités</h2>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-num" aria-hidden="true">01</div>
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                </div>
+                <h3 class="feature-name">Vue d'ensemble</h3>
+                <p class="feature-desc">KPI temps réel — total événements, requêtes 24h, honeypots déclenchés, IPs blacklistées. Graphique trafic par heure, top IPs et top paths avec barres de progression. Tendances ↑↓ comparées aux 24h précédentes.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-num" aria-hidden="true">02</div>
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <h3 class="feature-name">Événements</h3>
+                <p class="feature-desc">Liste des 100 dernières requêtes avec filtres par type (honeypot, erreur, rate limit, brute force) et recherche en temps réel par IP ou path. Export CSV des 7 derniers jours.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-num" aria-hidden="true">03</div>
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+                </div>
+                <h3 class="feature-name">Blacklist</h3>
+                <p class="feature-desc">IPs automatiquement blacklistées 24h après avoir déclenché un honeypot ou tenté une attaque brute force. Date de création et d'expiration affichées.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-num" aria-hidden="true">04</div>
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <h3 class="feature-name">Trafic</h3>
+                <p class="feature-desc">Flux des 20 dernières requêtes en temps réel — IP, méthode HTTP, path, status code, type d'événement. Auto-refresh toutes les 15 secondes.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-num" aria-hidden="true">05</div>
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72"/></svg>
+                </div>
+                <h3 class="feature-name">User Agents</h3>
+                <p class="feature-desc">Répartition des navigateurs et bots — Chrome, Firefox, Bot, curl, Python, Go HTTP. Cards avec barres de progression et graphique donut interactif canvas.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-num" aria-hidden="true">06</div>
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+                </div>
+                <h3 class="feature-name">Erreurs groupées</h3>
+                <p class="feature-desc">Top 20 erreurs 4xx/5xx groupées par path et status code. Barres visuelles proportionnelles et indicateur de niveau (Critique / Attention).</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-num" aria-hidden="true">07</div>
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><rect x="2" y="3" width="6" height="18"/><rect x="9" y="8" width="6" height="13"/><rect x="16" y="13" width="6" height="8"/></svg>
+                </div>
+                <h3 class="feature-name">Métriques système</h3>
+                <p class="feature-desc">Données live depuis le runtime Go — goroutines actives, mémoire allouée, cycles GC, uptime, version Go, OS, architecture. Tableau infrastructure complet.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-num" aria-hidden="true">08</div>
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                </div>
+                <h3 class="feature-name">Security Score</h3>
+                <p class="feature-desc">Score de sécurité 90/100 basé sur 10 critères — HTTPS, headers, rate limiting, honeypot, bcrypt, cookies, WAF, Docker hardening, DB sécurisée, alertes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 04 STACK ── -->
+    <section class="section" aria-labelledby="stack-title">
+        <div class="section-num" aria-hidden="true">04</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">04 //</span>
+            <h2 class="section-title" id="stack-title">Stack technique</h2>
+        </div>
+
+        <div class="stack-grid reveal">
+            <div class="stack-group">
+                <span class="stack-group-label">Backend</span>
+                <div class="stack-items">
+                    <span class="stack-item">Go 1.25</span>
+                    <span class="stack-item">HTTP stdlib</span>
+                    <span class="stack-item">lib/pq</span>
+                    <span class="stack-item">bcrypt</span>
+                    <span class="stack-item">godotenv</span>
+                </div>
+            </div>
+            <div class="stack-group">
+                <span class="stack-group-label">Base de données</span>
+                <div class="stack-items">
+                    <span class="stack-item">PostgreSQL</span>
+                    <span class="stack-item">Supabase</span>
+                    <span class="stack-item">RLS activé</span>
+                    <span class="stack-item">sslmode=require</span>
+                </div>
+            </div>
+            <div class="stack-group">
+                <span class="stack-group-label">Infrastructure</span>
+                <div class="stack-items">
+                    <span class="stack-item">Docker multi-stage</span>
+                    <span class="stack-item">Image scratch 15MB</span>
+                    <span class="stack-item">no-new-privileges</span>
+                    <span class="stack-item">read_only filesystem</span>
+                </div>
+            </div>
+            <div class="stack-group">
+                <span class="stack-group-label">CI/CD & Qualité</span>
+                <div class="stack-items">
+                    <span class="stack-item">GitHub Actions</span>
+                    <span class="stack-item">28 tests unitaires</span>
+                    <span class="stack-item">gosec 0 issues</span>
+                    <span class="stack-item">Couverture de code</span>
+                </div>
+            </div>
+            <div class="stack-group">
+                <span class="stack-group-label">Frontend</span>
+                <div class="stack-items">
+                    <span class="stack-item">HTML vanilla</span>
+                    <span class="stack-item">CSS custom</span>
+                    <span class="stack-item">Canvas charts</span>
+                    <span class="stack-item">Syne + DM Mono</span>
+                </div>
+            </div>
+            <div class="stack-group">
+                <span class="stack-group-label">Sécurité</span>
+                <div class="stack-items">
+                    <span class="stack-item">bcrypt cost 10</span>
+                    <span class="stack-item">Sessions mémoire</span>
+                    <span class="stack-item">Rate limit login</span>
+                    <span class="stack-item">Security headers</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 05 SÉCURITÉ ── -->
+    <section class="section" aria-labelledby="security-title">
+        <div class="section-num" aria-hidden="true">05</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">05 //</span>
+            <h2 class="section-title" id="security-title">Sécurité</h2>
+        </div>
+
+        <div class="security-list reveal">
+            <div class="security-item">
+                <span class="security-check" aria-hidden="true">✓</span>
+                <div class="security-info">
+                    <span class="security-name">Authentification bcrypt</span>
+                    <span class="security-desc">Mot de passe admin hashé bcrypt cost 10 — stocké en variable d'environnement, jamais en clair dans le code</span>
+                </div>
+            </div>
+            <div class="security-item">
+                <span class="security-check" aria-hidden="true">✓</span>
+                <div class="security-info">
+                    <span class="security-name">Sessions sécurisées</span>
+                    <span class="security-desc">Cookies HttpOnly + Secure + SameSite=Strict — sessions en mémoire avec TTL 8h, nettoyage automatique</span>
+                </div>
+            </div>
+            <div class="security-item">
+                <span class="security-check" aria-hidden="true">✓</span>
+                <div class="security-info">
+                    <span class="security-name">Rate limiting login</span>
+                    <span class="security-desc">10 tentatives max en 5 minutes par IP — blacklist automatique après 5 tentatives brute force</span>
+                </div>
+            </div>
+            <div class="security-item">
+                <span class="security-check" aria-hidden="true">✓</span>
+                <div class="security-info">
+                    <span class="security-name">Headers de sécurité</span>
+                    <span class="security-desc">X-Frame-Options DENY, CSP, X-Content-Type-Options nosniff, Referrer-Policy, Permissions-Policy</span>
+                </div>
+            </div>
+            <div class="security-item">
+                <span class="security-check" aria-hidden="true">✓</span>
+                <div class="security-info">
+                    <span class="security-name">Base de données sécurisée</span>
+                    <span class="security-desc">RLS activé sur 3 tables, utilisateur dédié security_app (INSERT only), sslmode=require, API JWT désactivée</span>
+                </div>
+            </div>
+            <div class="security-item">
+                <span class="security-check" aria-hidden="true">✓</span>
+                <div class="security-info">
+                    <span class="security-name">Docker hardening</span>
+                    <span class="security-desc">no-new-privileges, read_only filesystem, tmpfs /tmp, USER 1001, image scratch 15MB</span>
+                </div>
+            </div>
+            <div class="security-item">
+                <span class="security-check" aria-hidden="true">✓</span>
+                <div class="security-info">
+                    <span class="security-name">gosec 0 issues</span>
+                    <span class="security-desc">Scan de sécurité statique automatique à chaque push — G104, G124, G201, G202, G701 tous corrigés</span>
+                </div>
+            </div>
+            <div class="security-item">
+                <span class="security-check" aria-hidden="true">✓</span>
+                <div class="security-info">
+                    <span class="security-name">MaxBytesReader</span>
+                    <span class="security-desc">Limite 1MB par requête — protection contre les payloads malformés et les attaques par saturation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 06 MÉTRIQUES ── -->
+    <section class="section" aria-labelledby="metrics-title">
+        <div class="section-num" aria-hidden="true">06</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">06 //</span>
+            <h2 class="section-title" id="metrics-title">Métriques</h2>
+        </div>
+
+        <div class="metrics-grid reveal">
+            <div class="metric-card">
+                <span class="metric-val">28</span>
+                <span class="metric-label">Tests unitaires</span>
+                <span class="metric-sub">auth + middleware — 100% PASS</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-val">15MB</span>
+                <span class="metric-label">Image Docker</span>
+                <span class="metric-sub">multi-stage scratch</span>
+            </div>
+            <div class="metric-card metric-card--green">
+                <span class="metric-val">0</span>
+                <span class="metric-label">Issues gosec</span>
+                <span class="metric-sub">G104 · G124 · G701 corrigés</span>
+            </div>
+            <div class="metric-card metric-card--green">
+                <span class="metric-val">CI</span>
+                <span class="metric-label">GitHub Actions</span>
+                <span class="metric-sub">Build · Tests · gosec · vert ✓</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-val">8</span>
+                <span class="metric-label">Sections dashboard</span>
+                <span class="metric-sub">Overview · Events · Blacklist · Traffic · Agents · Errors · Metrics · Score</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-val">90/100</span>
+                <span class="metric-label">Security Score</span>
+                <span class="metric-sub">Grade A — 10 critères</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 07 CE QUE J'AI APPRIS ── -->
+    <section class="section" aria-labelledby="learned-title">
+        <div class="section-num" aria-hidden="true">07</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">07 //</span>
+            <h2 class="section-title" id="learned-title">Ce que j'ai appris</h2>
+        </div>
+
+        <div class="learned-grid">
+            <div class="learned-card reveal">
+                <div class="learned-num" aria-hidden="true">01</div>
+                <h3 class="learned-name">PostgreSQL en production</h3>
+                <p class="learned-desc">Concevoir un schéma DB, activer RLS, créer des utilisateurs avec droits limités, forcer SSL — pas juste "connecter une DB" mais la sécuriser correctement pour la production.</p>
+            </div>
+            <div class="learned-card reveal">
+                <div class="learned-num" aria-hidden="true">02</div>
+                <h3 class="learned-name">Sécurité applicative concrète</h3>
+                <p class="learned-desc">Implémenter bcrypt, sessions sécurisées, rate limiting, headers HTTP — et corriger les vrais problèmes détectés par gosec. La sécurité c'est couche par couche, pas un paramètre.</p>
+            </div>
+            <div class="learned-card reveal">
+                <div class="learned-num" aria-hidden="true">03</div>
+                <h3 class="learned-name">Architecture multi-services</h3>
+                <p class="learned-desc">Faire communiquer deux applications Go distinctes via une base de données partagée, avec des utilisateurs et des droits différents selon le service — principe du moindre privilège en pratique.</p>
+            </div>
+            <div class="learned-card reveal">
+                <div class="learned-num" aria-hidden="true">04</div>
+                <h3 class="learned-name">Tests unitaires Go</h3>
+                <p class="learned-desc">Écrire 28 tests pour auth et middleware — tester les sessions expirées, le rate limiting, les cookies, les panics. Les tests ne sont pas une contrainte, c'est ce qui permet de modifier sans casser.</p>
+            </div>
+            <div class="learned-card reveal">
+                <div class="learned-num" aria-hidden="true">05</div>
+                <h3 class="learned-name">Charts canvas from scratch</h3>
+                <p class="learned-desc">Construire un graphique en barres et un donut chart sans librairie externe — canvas API, DPR, gradients, légendes. Comprendre ce que font vraiment Chart.js et D3 sous le capot.</p>
+            </div>
+            <div class="learned-card reveal">
+                <div class="learned-num" aria-hidden="true">06</div>
+                <h3 class="learned-name">Monitoring d'infrastructure réelle</h3>
+                <p class="learned-desc">Superviser un système en production — pas des données simulées mais de vrais événements, de vraies IPs, de vrais bots. Comprendre ce que signifie "observabilité" quand c'est ton propre serveur.</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" aria-label="Pied de page">
+    <span class="prompt" aria-hidden="true">~/orlando.cogo $</span>
+    <a href="/project" class="footer-back">← Retour aux projets</a>
+    <span aria-hidden="true">exit 0</span>
+    <span class="footer-year">© 2026</span>
+</footer>
+
+<script src="/js/background.js"></script>
+<script src="/js/nav.js"></script>
+</body>
+</html>

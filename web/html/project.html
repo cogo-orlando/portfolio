@@ -6,7 +6,7 @@
 
     <!-- ── SEO ── -->
     <title>Orlando Cogo — Projets & Réalisations</title>
-    <meta name="description" content="Projets réalisés par Orlando Cogo : portfolio Go, simulateur de fusées Java, réseau Cisco multi-sites, ZOOTopie C#. Étudiant cybersécurité Ynov Campus.">
+    <meta name="description" content="Projets réalisés par Orlando Cogo : portfolio Go, security dashboard, simulateur de fusées Java, réseau Cisco multi-sites, ZOOTopie C#. Étudiant cybersécurité Ynov Campus.">
     <meta name="author" content="Orlando Cogo">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://orlandocogo.com/project">
@@ -15,14 +15,14 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orlandocogo.com/project">
     <meta property="og:title" content="Orlando Cogo — Projets & Réalisations">
-    <meta property="og:description" content="Portfolio Go, simulateur Java, réseau Cisco, ZOOTopie C# — les projets d'Orlando Cogo.">
+    <meta property="og:description" content="Portfolio Go, security dashboard, simulateur Java, réseau Cisco — les projets d'Orlando Cogo.">
     <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
     <meta property="og:locale" content="fr_FR">
 
     <!-- ── Twitter Card ── -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Orlando Cogo — Projets & Réalisations">
-    <meta name="twitter:description" content="Portfolio Go, simulateur Java, réseau Cisco, ZOOTopie C# — les projets d'Orlando Cogo.">
+    <meta name="twitter:description" content="Portfolio Go, security dashboard, simulateur Java, réseau Cisco — les projets d'Orlando Cogo.">
     <meta name="twitter:image" content="https://orlandocogo.com/img/og-image.png">
 
     <!-- ── Favicon ── -->
@@ -71,6 +71,7 @@
                 </svg>
             </button>
             <div class="nav-more-menu" id="navMoreMenu" role="menu">
+                <a href="/tech" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">05</span><span class="more-info"><span class="more-name">Infrastructure</span><span class="more-desc">Stack technique</span></span></a>
                 <a href="/status" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">06</span><span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
                 <a href="/faq" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">07</span><span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions / Réponses</span></span></a>
             </div>
@@ -91,13 +92,13 @@
 <!-- Menu mobile -->
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <a href="/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>À propos</a>
-    <a href="/tech" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Infrastructure</a>
     <a href="/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Compétences</a>
     <a href="/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Projets</a>
     <a href="/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Contact</a>
     <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>CV</a>
-    <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>Status</a>
-    <a href="/faq" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>FAQ</a>
+    <a href="/tech" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>Infrastructure</a>
+    <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>Status</a>
+    <a href="/faq" class="mobile-link"><span class="mobile-num" aria-hidden="true">08</span>FAQ</a>
 </div>
 
 <main id="main-content">
@@ -114,280 +115,381 @@
         <div class="hero-stats reveal" aria-label="Statistiques projets">
             <div class="hstat"><span class="hstat-val">9</span><span class="hstat-label">Projets</span></div>
             <div class="hstat-sep" aria-hidden="true">·</div>
-            <div class="hstat"><span class="hstat-val">6</span><span class="hstat-label">Terminés</span></div>
+            <div class="hstat"><span class="hstat-val">7</span><span class="hstat-label">Terminés</span></div>
             <div class="hstat-sep" aria-hidden="true">·</div>
             <div class="hstat"><span class="hstat-val">2</span><span class="hstat-label">En cours</span></div>
             <div class="hstat-sep" aria-hidden="true">·</div>
-            <div class="hstat"><span class="hstat-val">4</span><span class="hstat-label">Solo</span></div>
+            <div class="hstat"><span class="hstat-val">5</span><span class="hstat-label">Solo</span></div>
             <div class="hstat-sep" aria-hidden="true">·</div>
             <div class="hstat"><span class="hstat-val">4</span><span class="hstat-label">En équipe</span></div>
         </div>
     </section>
 
-    <!-- FILTRES -->
-    <section class="section section--controls" aria-label="Filtres projets">
-        <div class="filters reveal" role="group" aria-label="Filtrer par catégorie">
-            <button class="filter-btn active" data-filter="all">Tous</button>
-            <button class="filter-btn" data-filter="solo">Solo</button>
-            <button class="filter-btn" data-filter="equipe">Équipe</button>
-            <button class="filter-btn" data-filter="go">Go</button>
-            <button class="filter-btn" data-filter="js">JavaScript</button>
-            <button class="filter-btn" data-filter="cs">C#</button>
+    <!-- ── ANNÉE B1 ── -->
+    <section class="section" aria-labelledby="b1-title">
+
+        <!-- Card année -->
+        <div class="year-card reveal" id="year-b1">
+            <div class="year-card-header" id="yearB1Btn" role="button" tabindex="0" aria-expanded="true" aria-controls="year-b1-content">
+                <div class="year-card-left">
+                    <span class="year-badge">B1</span>
+                    <div class="year-info">
+                        <h2 class="year-title" id="b1-title">Bachelor 1 — Informatique</h2>
+                        <span class="year-sub">Ynov Campus Toulouse · 2025 — 2026</span>
+                    </div>
+                </div>
+                <div class="year-card-right">
+                    <div class="year-stats">
+                        <span class="year-stat"><span class="year-stat-val">9</span><span class="year-stat-label">projets</span></span>
+                        <span class="year-stat"><span class="year-stat-val">5</span><span class="year-stat-label">dev</span></span>
+                        <span class="year-stat"><span class="year-stat-val">4</span><span class="year-stat-label">infra</span></span>
+                    </div>
+                    <svg class="year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="year-content" id="year-b1-content">
+
+                <!-- ── SOUS-SECTION DÉVELOPPEMENT ── -->
+                <div class="subsection">
+                    <div class="subsection-header">
+                        <div class="subsection-line" aria-hidden="true"></div>
+                        <span class="subsection-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                            Développement
+                        </span>
+                        <div class="subsection-line" aria-hidden="true"></div>
+                    </div>
+
+                    <div class="projects-grid">
+
+                        <!-- NetflixLight -->
+                        <article class="project-card reveal" data-filter="solo js">
+                            <div class="project-header">
+                                <div class="project-top">
+                                    <span class="project-num" aria-hidden="true">01</span>
+                                    <div class="project-badges">
+                                        <span class="project-tag">JS</span>
+                                        <span class="project-tag">HTML</span>
+                                        <span class="project-tag">CSS</span>
+                                        <span class="project-tag">API TMDB</span>
+                                        <span class="status-badge done">Terminé</span>
+                                    </div>
+                                </div>
+                                <div class="project-type" aria-label="Projet solo">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    Solo
+                                </div>
+                            </div>
+                            <h3 class="project-name">NetflixLight</h3>
+                            <p class="project-desc">Plateforme de streaming dynamique utilisant l'API TMDB pour la récupération de données en temps réel. Système de recherche fluide, catégories personnalisées et interface responsive.</p>
+                            <div class="project-details">
+                                <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">JavaScript · API REST · HTML · CSS</span></div>
+                                <div class="detail-row"><span class="detail-key">Appris</span><span class="detail-val">Fetch API · JSON · Node.js</span></div>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/cogo-orlando/NETFLIXLight" target="_blank" rel="noopener noreferrer" class="project-link project-link--gh" aria-label="Voir NetflixLight sur GitHub">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                                    GitHub
+                                </a>
+                                <a href="/demo/netflix" class="project-link">Détails →</a>
+                            </div>
+                        </article>
+
+                        <!-- Groupie Tracker -->
+                        <article class="project-card reveal" data-filter="equipe go">
+                            <div class="project-header">
+                                <div class="project-top">
+                                    <span class="project-num" aria-hidden="true">02</span>
+                                    <div class="project-badges">
+                                        <span class="project-tag">Go</span>
+                                        <span class="project-tag">API</span>
+                                        <span class="project-tag">HTML</span>
+                                        <span class="status-badge done">Terminé</span>
+                                    </div>
+                                </div>
+                                <div class="project-type" aria-label="Projet en équipe de 2">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                                    Équipe · 2 pers.
+                                </div>
+                            </div>
+                            <h3 class="project-name">Groupie Tracker</h3>
+                            <p class="project-desc">Intégration d'une API REST pour afficher des données complexes : biographies d'artistes, calendriers de tournées et géolocalisation des salles de concert.</p>
+                            <div class="project-details">
+                                <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">Go · API REST · HTML · CSS</span></div>
+                                <div class="detail-row"><span class="detail-key">Appris</span><span class="detail-val">Requêtes asynchrones · Géolocalisation · Templates Go</span></div>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Bibounet31/Groupie-Tracker" target="_blank" rel="noopener noreferrer" class="project-link project-link--gh" aria-label="Voir Groupie Tracker sur GitHub">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                                    GitHub
+                                </a>
+                                <a href="/demo/groupie" class="project-link">Détails →</a>
+                            </div>
+                        </article>
+
+                        <!-- Power4 -->
+                        <article class="project-card reveal" data-filter="equipe go">
+                            <div class="project-header">
+                                <div class="project-top">
+                                    <span class="project-num" aria-hidden="true">03</span>
+                                    <div class="project-badges">
+                                        <span class="project-tag">Go</span>
+                                        <span class="project-tag">HTML</span>
+                                        <span class="project-tag">CSS</span>
+                                        <span class="status-badge done">Terminé</span>
+                                    </div>
+                                </div>
+                                <div class="project-type" aria-label="Projet en équipe de 2">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    Équipe · 2 pers.
+                                </div>
+                            </div>
+                            <h3 class="project-name">Power4</h3>
+                            <p class="project-desc">Puissance 4 jouable entièrement via HTML et CSS, sans JavaScript. Défi technique de repousser les limites du CSS pour simuler une logique applicative complexe — gestion des interactions et états de jeu en CSS pur.</p>
+                            <div class="project-details">
+                                <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">HTML · CSS · Server Go</span></div>
+                                <div class="detail-row"><span class="detail-key">Défi</span><span class="detail-val">Zéro JavaScript · CSS-only logic</span></div>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/cogo-orlando/PROJETPower4" target="_blank" rel="noopener noreferrer" class="project-link project-link--gh" aria-label="Voir Power4 sur GitHub">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                                    GitHub
+                                </a>
+                                <a href="/demo/power4" class="project-link">Détails →</a>
+                            </div>
+                        </article>
+
+                        <!-- ZOOTopie -->
+                        <article class="project-card reveal" data-filter="equipe cs">
+                            <div class="project-header">
+                                <div class="project-top">
+                                    <span class="project-num" aria-hidden="true">04</span>
+                                    <div class="project-badges">
+                                        <span class="project-tag">C#</span>
+                                        <span class="status-badge done">Terminé</span>
+                                    </div>
+                                </div>
+                                <div class="project-type" aria-label="Projet en équipe de 2">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                                    Équipe · 2 pers.
+                                </div>
+                            </div>
+                            <h3 class="project-name">ZOOTopie</h3>
+                            <p class="project-desc">Jeu de gestion de zoo au tour par tour en console C#. Architecture orientée objet pour gérer les espèces, leurs besoins physiologiques et l'économie du parc. Système d'événements aléatoires et boucle de jeu logique.</p>
+                            <div class="project-details">
+                                <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">C# · Console · POO</span></div>
+                                <div class="detail-row"><span class="detail-key">Appris</span><span class="detail-val">Héritage · Polymorphisme · Architecture OOP</span></div>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Bibounet31/ZOO-topie-" target="_blank" rel="noopener noreferrer" class="project-link project-link--gh" aria-label="Voir ZOOTopie sur GitHub">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                                    GitHub
+                                </a>
+                                <a href="/demo/zoo" class="project-link">Détails →</a>
+                            </div>
+                        </article>
+
+                        <!-- ArtemisIII -->
+                        <article class="project-card reveal" data-filter="solo java">
+                            <div class="project-header">
+                                <div class="project-top">
+                                    <span class="project-num" aria-hidden="true">05</span>
+                                    <div class="project-badges">
+                                        <span class="project-tag">Java</span>
+                                        <span class="status-badge done">Terminé</span>
+                                    </div>
+                                </div>
+                                <div class="project-type" aria-label="Projet solo">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    Solo
+                                </div>
+                            </div>
+                            <h3 class="project-name">ArtemisIII</h3>
+                            <p class="project-desc">Simulateur de lancements de fusées spatiales en Java console. L'utilisateur configure une fusée, choisit une mission et simule le lancement avec gestion des paramètres physiques.</p>
+                            <div class="project-details">
+                                <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">Java · Console · POO</span></div>
+                                <div class="detail-row"><span class="detail-key">Appris</span><span class="detail-val">Héritage · Polymorphisme · Architecture OOP</span></div>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/cogo-orlando/ArtemisIII" target="_blank" rel="noopener noreferrer" class="project-link project-link--gh" aria-label="Voir ArtemisIII sur GitHub">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                                    GitHub
+                                </a>
+                                <a href="/demo/artemis" class="project-link">Détails →</a>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+
+                <!-- ── SOUS-SECTION INFRASTRUCTURE & SÉCURITÉ ── -->
+                <div class="subsection">
+                    <div class="subsection-header">
+                        <div class="subsection-line" aria-hidden="true"></div>
+                        <span class="subsection-tag subsection-tag--infra">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                            Infrastructure & Sécurité
+                        </span>
+                        <div class="subsection-line" aria-hidden="true"></div>
+                    </div>
+
+                    <div class="projects-grid">
+
+                        <!-- Portfolio -->
+                        <article class="project-card project-card--featured reveal" data-filter="solo go js">
+                            <div class="project-header">
+                                <div class="project-top">
+                                    <span class="project-num" aria-hidden="true">06</span>
+                                    <div class="project-badges">
+                                        <span class="project-tag">Go</span>
+                                        <span class="project-tag">Docker</span>
+                                        <span class="project-tag">Cloudflare</span>
+                                        <span class="project-tag">CI/CD</span>
+                                        <span class="status-badge inprog">En cours</span>
+                                    </div>
+                                </div>
+                                <div class="project-type" aria-label="Projet solo">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    Solo
+                                </div>
+                            </div>
+                            <div class="featured-tag">Ce site</div>
+                            <h3 class="project-name">Portfolio — orlandocogo.com</h3>
+                            <p class="project-desc">Serveur HTTP Go from scratch — routing, middleware chain, honeypot, rate limiting, panic recovery. Conteneurisé Docker multi-stage (60MB), déployé sur Render avec Cloudflare WAF. 47 tests unitaires, gosec 0 issues, Lighthouse 96+.</p>
+                            <div class="project-details">
+                                <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">Go · Docker · Cloudflare · Render · GitHub Actions</span></div>
+                                <div class="detail-row"><span class="detail-key">Sécurité</span><span class="detail-val">Honeypot · Rate limiting · Security headers · WAF</span></div>
+                                <div class="detail-row"><span class="detail-key">Métriques</span><span class="detail-val">47 tests · 60MB image · gosec 0 issues · Lighthouse 96</span></div>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/cogo-orlando/portfolio" target="_blank" rel="noopener noreferrer" class="project-link project-link--gh" aria-label="Voir le portfolio sur GitHub">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                                    GitHub
+                                </a>
+                                <a href="/tech" class="project-link">Architecture →</a>
+                            </div>
+                        </article>
+
+                        <!-- Security Dashboard -->
+                        <article class="project-card project-card--flagship reveal" data-filter="solo go">
+                            <div class="project-header">
+                                <div class="project-top">
+                                    <span class="project-num" aria-hidden="true">07</span>
+                                    <div class="project-badges">
+                                        <span class="project-tag">Go</span>
+                                        <span class="project-tag">PostgreSQL</span>
+                                        <span class="project-tag">Docker</span>
+                                        <span class="project-tag">Supabase</span>
+                                        <span class="status-badge inprog">En cours</span>
+                                    </div>
+                                </div>
+                                <div class="project-type" aria-label="Projet solo">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    Solo
+                                </div>
+                            </div>
+                            <div class="featured-tag featured-tag--flagship">Flagship</div>
+                            <h3 class="project-name">Security Dashboard</h3>
+                            <p class="project-desc">Plateforme de monitoring et supervision de sécurité en temps réel — connectée au portfolio en production. Logs tous les événements (honeypots, rate limits, brute force), affiche métriques système Go, user agents, tendances 24h/48h. Auth bcrypt, Docker 15MB, 28 tests.</p>
+                            <div class="project-details">
+                                <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">Go · PostgreSQL · Supabase · Docker · GitHub Actions</span></div>
+                                <div class="detail-row"><span class="detail-key">Features</span><span class="detail-val">8 sections · Export CSV · Security Score · Métriques Go</span></div>
+                                <div class="detail-row"><span class="detail-key">Sécurité</span><span class="detail-val">RLS · SSL · bcrypt · Rate limit · gosec 0 issues</span></div>
+                                <div class="detail-row"><span class="detail-key">Métriques</span><span class="detail-val">28 tests · 15MB image Docker · CI/CD vert</span></div>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/cogo-orlando/security-dashboard" target="_blank" rel="noopener noreferrer" class="project-link project-link--gh" aria-label="Voir le security dashboard sur GitHub">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                                    GitHub
+                                    <a href="/projects/security-dashboard" class="project-link">Détails →</a>
+                                </a>
+                            </div>
+                        </article>
+
+                        <!-- Partage réseau + Annuaire -->
+                        <article class="project-card reveal" data-filter="equipe">
+                            <div class="project-header">
+                                <div class="project-top">
+                                    <span class="project-num" aria-hidden="true">08</span>
+                                    <div class="project-badges">
+                                        <span class="project-tag">Linux</span>
+                                        <span class="project-tag">Samba</span>
+                                        <span class="project-tag">Proxmox</span>
+                                        <span class="status-badge inprog">En cours</span>
+                                    </div>
+                                </div>
+                                <div class="project-type" aria-label="Projet en équipe de 2">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                                    Équipe · 2 pers.
+                                </div>
+                            </div>
+                            <h3 class="project-name">Partage réseau + Annuaire</h3>
+                            <p class="project-desc">Mise en place d'un espace de partage de fichiers centralisé avec authentification via annuaire — Samba, gestion des accès par équipe, traçabilité des actions et monitoring.</p>
+                            <div class="project-details">
+                                <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">ArchLinux · Proxmox · VM</span></div>
+                                <div class="detail-row"><span class="detail-key">Appris</span><span class="detail-val">Server Samba · Client · SSH</span></div>
+                            </div>
+                            <div class="project-links">
+                                <a href="/demo/annuaire" class="project-link">Détails →</a>
+                            </div>
+                        </article>
+
+                        <!-- Réseau Cisco -->
+                        <article class="project-card reveal" data-filter="solo">
+                            <div class="project-header">
+                                <div class="project-top">
+                                    <span class="project-num" aria-hidden="true">09</span>
+                                    <div class="project-badges">
+                                        <span class="project-tag">Réseau</span>
+                                        <span class="project-tag">Cisco</span>
+                                        <span class="status-badge done">Terminé</span>
+                                    </div>
+                                </div>
+                                <div class="project-type" aria-label="Projet solo">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    Solo
+                                </div>
+                            </div>
+                            <h3 class="project-name">Réseau Cisco — 4 sites</h3>
+                            <p class="project-desc">Réseau réparti sur 4 sites : organisationnel, finance, production et hébergement des serveurs (DNS, Web) sur Cisco Packet Tracer. Configuration complète DHCP, DNS, routage inter-VLAN.</p>
+                            <div class="project-details">
+                                <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">DHCP · DNS · Switch · Router · Cisco</span></div>
+                                <div class="detail-row"><span class="detail-key">Appris</span><span class="detail-val">Routage · VLAN · DHCP · DNS · Packet Tracer</span></div>
+                            </div>
+                            <div class="project-links">
+                                <a href="/demo/cisco" class="project-link">Détails →</a>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
+
     </section>
 
-    <!-- PROJETS -->
-    <section class="section" id="projects" aria-labelledby="projects-title">
-        <div class="projects-grid" id="projectsGrid">
-
-            <!-- NetflixLight -->
-            <article class="project-card reveal" data-filter="solo js">
-                <div class="project-header">
-                    <div class="project-top">
-                        <span class="project-num" aria-hidden="true">01</span>
-                        <div class="project-badges">
-                            <span class="project-tag">JS</span>
-                            <span class="project-tag">HTML</span>
-                            <span class="project-tag">CSS</span>
-                            <span class="project-tag">API TMDB</span>
-                            <span class="status-badge done">Terminé</span>
-                        </div>
-                    </div>
-                    <div class="project-type" aria-label="Projet solo">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                        Solo
+    <!-- ── ANNÉE B2 — À VENIR ── -->
+    <section class="section" aria-labelledby="b2-title">
+        <div class="year-card year-card--locked reveal">
+            <div class="year-card-header">
+                <div class="year-card-left">
+                    <span class="year-badge year-badge--locked">B2</span>
+                    <div class="year-info">
+                        <h2 class="year-title" id="b2-title">Bachelor 2 — Informatique</h2>
+                        <span class="year-sub">Ynov Campus Toulouse · 2026 — 2027</span>
                     </div>
                 </div>
-                <h3 class="project-name">NetflixLight</h3>
-                <p class="project-desc">Plateforme de streaming dynamique utilisant l'API TMDB pour la récupération de données en temps réel. Système de recherche fluide, catégories personnalisées et interface responsive.</p>
-                <div class="project-details">
-                    <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">JavaScript · API REST · HTML · CSS</span></div>
-                    <div class="detail-row"><span class="detail-key">Appris</span><span class="detail-val">Fetch API · JSON · Node.js</span></div>
+                <div class="year-card-right">
+                    <span class="year-locked-label">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                        Bientôt
+                    </span>
                 </div>
-                <div class="project-links">
-                    <a href="https://github.com/cogo-orlando/NETFLIXLight" target="_blank" rel="noopener noreferrer" class="project-link project-link--gh" aria-label="Voir NetflixLight sur GitHub">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                        GitHub
-                    </a>
-                    <a href="/demo/netflix" class="project-link">Demo →</a>
-                </div>
-            </article>
-
-            <!-- Groupie Tracker -->
-            <article class="project-card reveal" data-filter="equipe go">
-                <div class="project-header">
-                    <div class="project-top">
-                        <span class="project-num" aria-hidden="true">02</span>
-                        <div class="project-badges">
-                            <span class="project-tag">Go</span>
-                            <span class="project-tag">API</span>
-                            <span class="project-tag">HTML</span>
-                            <span class="status-badge done">Terminé</span>
-                        </div>
-                    </div>
-                    <div class="project-type" aria-label="Projet en équipe de 2">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-                        Équipe · 2 pers.
-                    </div>
-                </div>
-                <h3 class="project-name">Groupie Tracker</h3>
-                <p class="project-desc">Intégration d'une API REST pour afficher des données complexes : biographies d'artistes, calendriers de tournées et géolocalisation des salles de concert.</p>
-                <div class="project-details">
-                    <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">Go · API REST · HTML · CSS</span></div>
-                    <div class="detail-row"><span class="detail-key">Appris</span><span class="detail-val">Requêtes asynchrones · Géolocalisation · Templates Go</span></div>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/Bibounet31/Groupie-Tracker" target="_blank" rel="noopener noreferrer" class="project-link project-link--gh" aria-label="Voir Groupie Tracker sur GitHub">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                        GitHub
-                    </a>
-                    <a href="/demo/groupie" class="project-link">Demo →</a>
-                </div>
-            </article>
-
-            <!-- Power4 -->
-            <article class="project-card reveal" data-filter="equipe go">
-                <div class="project-header">
-                    <div class="project-top">
-                        <span class="project-num" aria-hidden="true">03</span>
-                        <div class="project-badges">
-                            <span class="project-tag">Go</span>
-                            <span class="project-tag">HTML</span>
-                            <span class="project-tag">CSS</span>
-                            <span class="status-badge done">Terminé</span>
-                        </div>
-                    </div>
-                    <div class="project-type" aria-label="Projet en équipe de 2">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                        Équipe · 2 pers.
-                    </div>
-                </div>
-                <h3 class="project-name">Power4</h3>
-                <p class="project-desc">Puissance 4 jouable entièrement via HTML et CSS, sans JavaScript. Défi technique de repousser les limites du CSS pour simuler une logique applicative complexe — gestion des interactions et états de jeu en CSS pur.</p>
-                <div class="project-details">
-                    <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">HTML · CSS · Server Go</span></div>
-                    <div class="detail-row"><span class="detail-key">Défi</span><span class="detail-val">Zéro JavaScript · CSS-only logic</span></div>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/cogo-orlando/PROJETPower4" target="_blank" rel="noopener noreferrer" class="project-link project-link--gh" aria-label="Voir Power4 sur GitHub">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                        GitHub
-                    </a>
-                    <a href="/demo/power4" class="project-link">Demo →</a>
-                </div>
-            </article>
-
-            <!-- ZOOTopie -->
-            <article class="project-card reveal" data-filter="equipe cs">
-                <div class="project-header">
-                    <div class="project-top">
-                        <span class="project-num" aria-hidden="true">04</span>
-                        <div class="project-badges">
-                            <span class="project-tag">C#</span>
-                            <span class="status-badge done">Terminé</span>
-                        </div>
-                    </div>
-                    <div class="project-type" aria-label="Projet en équipe de 2">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-                        Équipe · 2 pers.
-                    </div>
-                </div>
-                <h3 class="project-name">ZOOTopie</h3>
-                <p class="project-desc">Jeu de gestion de zoo au tour par tour en console C#. Architecture orientée objet pour gérer les espèces, leurs besoins physiologiques et l'économie du parc. Système d'événements aléatoires et boucle de jeu logique.</p>
-                <div class="project-details">
-                    <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">C# · Console · POO</span></div>
-                    <div class="detail-row"><span class="detail-key">Appris</span><span class="detail-val">Héritage · Polymorphisme · Architecture OOP</span></div>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/Bibounet31/ZOO-topie-" target="_blank" rel="noopener noreferrer" class="project-link project-link--gh" aria-label="Voir ZOOTopie sur GitHub">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                        GitHub
-                    </a>
-                    <a href="/demo/zoo" class="project-link">Captures →</a>
-                </div>
-            </article>
-
-            <!-- ArtemisIII -->
-            <article class="project-card reveal" data-filter="solo java">
-                <div class="project-header">
-                    <div class="project-top">
-                        <span class="project-num" aria-hidden="true">05</span>
-                        <div class="project-badges">
-                            <span class="project-tag">Java</span>
-                            <span class="status-badge done">Terminé</span>
-                        </div>
-                    </div>
-                    <div class="project-type" aria-label="Projet solo">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                        Solo
-                    </div>
-                </div>
-                <h3 class="project-name">ArtemisIII</h3>
-                <p class="project-desc">Java en console simulant des lancements de fusées spatiales. L'utilisateur configure une fusée, choisit une mission et simule le lancement.</p>
-                <div class="project-details">
-                    <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">Java · Console · POO</span></div>
-                    <div class="detail-row"><span class="detail-key">Appris</span><span class="detail-val">Héritage · Polymorphisme · Architecture OOP</span></div>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/cogo-orlando/ArtemisIII" target="_blank" rel="noopener noreferrer" class="project-link project-link--gh" aria-label="Voir ArtemisIII sur GitHub">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                        GitHub
-                    </a>
-                    <a href="/demo/artemis" class="project-link">Captures →</a>
-                </div>
-            </article>
-
-            <!-- Portfolio -->
-            <article class="project-card project-card--featured reveal" data-filter="solo go js">
-                <div class="project-header">
-                    <div class="project-top">
-                        <span class="project-num" aria-hidden="true">06</span>
-                        <div class="project-badges">
-                            <span class="project-tag">Go</span>
-                            <span class="project-tag">JS</span>
-                            <span class="project-tag">HTML</span>
-                            <span class="project-tag">CSS</span>
-                            <span class="status-badge inprog">En cours</span>
-                        </div>
-                    </div>
-                    <div class="project-type" aria-label="Projet solo">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                        Solo
-                    </div>
-                </div>
-                <div class="featured-tag">Ce site</div>
-                <h3 class="project-name">Portfolio</h3>
-                <p class="project-desc">Développement complet de ce portfolio en Go vanilla — serveur HTTP custom, routing, middleware de maintenance, API de contact avec stockage JSON, rate limiting. Front en HTML/CSS/JS pur, sans framework.</p>
-                <div class="project-details">
-                    <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">Go · JavaScript · HTML · CSS</span></div>
-                    <div class="detail-row"><span class="detail-key">Features</span><span class="detail-val">Honeypot · Slog · Graceful shutdown · Cloudflare</span></div>
-                    <div class="detail-row"><span class="detail-key">Appris</span><span class="detail-val">Architecture web · Middleware · Docker · Cloudflare</span></div>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/cogo-orlando/portfolio" target="_blank" rel="noopener noreferrer" class="project-link project-link--gh" aria-label="Voir le portfolio sur GitHub">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                        GitHub
-                    </a>
-                </div>
-            </article>
-
-            <!-- Partage réseau + Annuaire -->
-            <article class="project-card reveal" data-filter="equipe">
-                <div class="project-header">
-                    <div class="project-top">
-                        <span class="project-num" aria-hidden="true">07</span>
-                        <div class="project-badges">
-                            <span class="project-tag">Linux</span>
-                            <span class="status-badge inprog">En cours</span>
-                        </div>
-                    </div>
-                    <div class="project-type" aria-label="Projet en équipe de 2">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-                        Équipe · 2 pers.
-                    </div>
-                </div>
-                <h3 class="project-name">Partage réseau + Annuaire</h3>
-                <p class="project-desc">Mise en place d'un espace de partage de fichiers centralisé avec authentification via annuaire — Samba, gestion des accès par équipe, traçabilité des actions et monitoring.</p>
-                <div class="project-details">
-                    <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">ArchLinux · Proxmox · VM</span></div>
-                    <div class="detail-row"><span class="detail-key">Appris</span><span class="detail-val">Server Samba · Client · SSH</span></div>
-                </div>
-                <div class="project-links">
-                    <a href="/demo/annuaire" class="project-link">Captures →</a>
-                </div>
-            </article>
-
-            <!-- Réseau Cisco -->
-            <article class="project-card reveal" data-filter="solo">
-                <div class="project-header">
-                    <div class="project-top">
-                        <span class="project-num" aria-hidden="true">08</span>
-                        <div class="project-badges">
-                            <span class="project-tag">Réseau</span>
-                            <span class="status-badge done">Terminé</span>
-                        </div>
-                    </div>
-                    <div class="project-type" aria-label="Projet solo">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                        Solo
-                    </div>
-                </div>
-                <h3 class="project-name">Réseau sur Cisco Packet Tracer</h3>
-                <p class="project-desc">Réseau réparti sur 4 sites : organisationnel, finance, production et hébergement des serveurs (DNS, Web) sur Cisco Packet Tracer.</p>
-                <div class="project-details">
-                    <div class="detail-row"><span class="detail-key">Stack</span><span class="detail-val">DHCP · DNS · Switch · Router</span></div>
-                    <div class="detail-row"><span class="detail-key">Appris</span><span class="detail-val">Switch · Router · Configurer DHCP, DNS</span></div>
-                </div>
-                <div class="project-links">
-                    <a href="/demo/cisco" class="project-link">Captures →</a>
-                </div>
-            </article>
-
-        </div>
-
-        <div id="noResults" style="display:none" class="no-results" role="status">
-            <span class="prompt" aria-hidden="true">$</span>
-            <span>Aucun projet pour ce filtre.</span>
+            </div>
         </div>
     </section>
 
@@ -399,7 +501,7 @@
         </div>
         <div class="next-grid">
             <div class="next-card reveal">
-                <span class="next-num" aria-hidden="true">09</span>
+                <span class="next-num" aria-hidden="true">10</span>
                 <div class="next-info">
                     <span class="next-name">Projet — JS 2 Forum</span>
                     <span class="next-desc">Nouveau défi JS : conception d'un projet web en équipe.</span>

@@ -26,7 +26,7 @@ var maintenancePages = map[string]bool{
 	"/tech":          false,
 	"/demo/annuaire": false, "/demo/netflix": false,
 	"/demo/zoo": false, "/demo/power4": false,
-	"/demo/groupie": false, "/demo/cisco": false, "/demo/artemis": false,
+	"/demo/groupie": false, "/demo/cisco": false, "/demo/artemis": false, "/projects/security-dashboard": false,
 }
 
 var MaintenanceMode = false
@@ -46,24 +46,25 @@ var (
 // ══════════════════════════════════════════
 
 var routes = map[string]http.HandlerFunc{
-	"/":              handler.IndexHandler,
-	"/home":          handler.HomeHandler,
-	"/about":         handler.AboutHandler,
-	"/skills":        handler.SkillsHandler,
-	"/project":       handler.ProjectHandler,
-	"/contact":       handler.ContactHandler,
-	"/cv":            handler.CvHandler,
-	"/status":        handler.StatusHandler,
-	"/faq":           handler.FaqHandler,
-	"/tech":          handler.TechHandler,
-	"/maintenance":   handler.MaintenanceHandler,
-	"/demo/zoo":      handler.DemoZooHandler,
-	"/demo/netflix":  handler.DemoNetflixHandler,
-	"/demo/groupie":  handler.DemoGroupieHandler,
-	"/demo/power4":   handler.DemoPower4Handler,
-	"/demo/cisco":    handler.DemoCiscoHandler,
-	"/demo/artemis":  handler.DemoArtemisHandler,
-	"/demo/annuaire": handler.AnnuaireHandler,
+	"/":                            handler.IndexHandler,
+	"/home":                        handler.HomeHandler,
+	"/about":                       handler.AboutHandler,
+	"/skills":                      handler.SkillsHandler,
+	"/project":                     handler.ProjectHandler,
+	"/contact":                     handler.ContactHandler,
+	"/cv":                          handler.CvHandler,
+	"/status":                      handler.StatusHandler,
+	"/faq":                         handler.FaqHandler,
+	"/tech":                        handler.TechHandler,
+	"/maintenance":                 handler.MaintenanceHandler,
+	"/demo/zoo":                    handler.DemoZooHandler,
+	"/demo/netflix":                handler.DemoNetflixHandler,
+	"/demo/groupie":                handler.DemoGroupieHandler,
+	"/demo/power4":                 handler.DemoPower4Handler,
+	"/demo/cisco":                  handler.DemoCiscoHandler,
+	"/demo/artemis":                handler.DemoArtemisHandler,
+	"/demo/annuaire":               handler.AnnuaireHandler,
+	"/projects/security-dashboard": handler.SecurityDashboardHandler,
 }
 
 // ══════════════════════════════════════════
