@@ -86,16 +86,16 @@ func LogHoneypot(ip, path, userAgent string) {
 	}
 
 	go func() {
-		conn.Exec(`
+		_, _ = conn.Exec(` 
 			INSERT INTO security_events (ip, method, path, status, user_agent, event_type)
 			VALUES ($1, 'GET', $2, 404, $3, 'honeypot')
-		`, ip, path, userAgent) //nolint:errcheck
+		`, ip, path, userAgent) // #nosec G104
 
-		conn.Exec(`
+		_, _ = conn.Exec(`
 			INSERT INTO blacklisted_ips (ip, reason, expires_at)
 			VALUES ($1, 'honeypot', $2)
 			ON CONFLICT (ip) DO UPDATE SET expires_at = $2
-		`, ip, time.Now().Add(24*time.Hour)) //nolint:errcheck
+		`, ip, time.Now().Add(24*time.Hour)) // #nosec G104
 	}()
 }
 
@@ -106,16 +106,16 @@ func LogRateLimit(ip, path string) {
 	}
 
 	go func() {
-		conn.Exec(`
+		_, _ = conn.Exec(`
 			INSERT INTO security_events (ip, method, path, status, user_agent, event_type)
 			VALUES ($1, 'GET', $2, 429, '', 'ratelimit')
-		`, ip, path) //nolint:errcheck
+		`, ip, path) // #nosec G104
 	}()
 }
 
 // Close ferme la connexion DB
 func Close() {
 	if conn != nil {
-		conn.Close()
+		_ = conn.Close() // #nosec G104
 	}
 }
