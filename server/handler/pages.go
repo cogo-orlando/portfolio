@@ -80,32 +80,33 @@ func TechHandler(w http.ResponseWriter, r *http.Request) {
 func MaintenanceHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "maintenance.html")
 }
-func DemoZooHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "demo-zoo.html")
+func ZooHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, r, "projects/zoo.html")
 }
-func DemoNetflixHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "demo-netflix.html")
+func NetflixHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, r, "projects/netflix.html")
 }
-func DemoGroupieHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "demo-groupie.html")
+func GroupieHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, r, "projects/groupie.html")
 }
-func DemoPower4Handler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "demo-power4.html")
+func Power4Handler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, r, "projects/power4.html")
 }
-func DemoCiscoHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "demo-cisco.html")
+func CiscoHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, r, "projects/cisco.html")
 }
-func DemoArtemisHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "demo-artemis.html")
+func ArtemisHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, r, "projects/artemis.html")
 }
 func AnnuaireHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "demo-annuaire.html")
-}
-func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusNotFound)
-	renderTemplate(w, r, "404.html")
+	renderTemplate(w, r, "projects/annuaire.html")
 }
 
 func SecurityDashboardHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "projects/security-dashboard.html")
+}
+
+func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotFound)
+	renderTemplate(w, r, "404.html")
 }
