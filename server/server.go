@@ -23,10 +23,10 @@ var maintenancePages = map[string]bool{
 	"/blog": false, "/about": false, "/skills": false,
 	"/contact": false, "/cv": false, "/home": false,
 	"/project": false, "/faq": false, "/status": false,
-	"/tech":          false,
-	"/demo/annuaire": false, "/demo/netflix": false,
-	"/demo/zoo": false, "/demo/power4": false,
-	"/demo/groupie": false, "/demo/cisco": false, "/demo/artemis": false, "/projects/security-dashboard": false,
+	"/tech":              false,
+	"/projects/annuaire": false, "/projects/netflix": false,
+	"/projects/zoo": false, "/projects/power4": false,
+	"/projects/groupie": false, "/projects/cisco": false, "/projects/artemis": false, "/projects/security-dashboard": false,
 }
 
 var MaintenanceMode = false
