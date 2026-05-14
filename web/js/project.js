@@ -27,24 +27,15 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 // ── Year card toggle ──
 document.querySelectorAll('.year-card-header[role="button"]').forEach(btn => {
     const content = document.getElementById(btn.getAttribute('aria-controls'));
-
-    // Init hauteur
-    content.style.maxHeight = content.scrollHeight + 'px';
+    if (!content) return;
 
     btn.addEventListener('click', () => {
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', !expanded);
-        if (expanded) {
-            content.style.maxHeight = content.scrollHeight + 'px';
-            requestAnimationFrame(() => {
-                content.style.maxHeight = '0';
-            });
-        } else {
-            content.style.maxHeight = content.scrollHeight + 'px';
-        }
+        const isCollapsed = content.classList.contains('collapsed');
+        content.classList.toggle('collapsed');
+        btn.setAttribute('aria-expanded', String(isCollapsed));
+        btn.querySelector('.year-chevron').style.transform = isCollapsed ? '' : 'rotate(-90deg)';
     });
 
-    // Keyboard support
     btn.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
@@ -54,13 +45,13 @@ document.querySelectorAll('.year-card-header[role="button"]').forEach(btn => {
 });
 
 // Reveal observer
-const revealObserver = new IntersectionObserver(entries => {
+const projectRevealObserver = new IntersectionObserver(entries => {
     entries.forEach(e => {
         if (e.isIntersecting) {
             e.target.classList.add('visible');
-            revealObserver.unobserve(e.target);
+            projectRevealObserver.unobserve(e.target);
         }
     });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+document.querySelectorAll('.reveal').forEach(el => projectRevealObserver.observe(el));
