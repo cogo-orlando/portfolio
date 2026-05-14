@@ -1,6 +1,7 @@
 package db
 
 import (
+	"context"
 	"database/sql"
 	"log/slog"
 	"os"
@@ -34,22 +35,35 @@ func Init() {
 			return
 		}
 
-		if err := c.Ping(); err != nil {
+		// Ping avec timeout pour ne pas bloquer au démarrage
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+
+		if err := c.PingContext(ctx); err != nil {
 			slog.Error("db.Ping failed", "error", err)
 			return
 		}
 
+		// Pool de connexions optimisé pour un usage asynchrone léger
 		c.SetMaxOpenConns(5)
 		c.SetMaxIdleConns(2)
 		c.SetConnMaxLifetime(5 * time.Minute)
+		c.SetConnMaxIdleTime(2 * time.Minute)
 
 		conn = c
 		slog.Info("connexion Supabase établie — logging activé")
 	})
 }
 
+// Close ferme la connexion DB proprement
+func Close() {
+	if conn != nil {
+		_ = conn.Close() // #nosec G104
+	}
+}
+
 // ══════════════════════════════════════════
-//  LOGGING ÉVÉNEMENTS
+//  TYPES
 // ══════════════════════════════════════════
 
 type EventType string
@@ -61,17 +75,31 @@ const (
 	EventError     EventType = "error"
 )
 
+// ══════════════════════════════════════════
+//  LOGGING ÉVÉNEMENTS
+// ══════════════════════════════════════════
+
 // LogEvent insère un événement en DB de manière asynchrone
 func LogEvent(ip, method, path string, status int, userAgent string, eventType EventType) {
 	if conn == nil {
 		return
 	}
 
+	// Copie des valeurs avant la goroutine pour éviter les data races
+	ip = truncate(ip, 45)
+	method = truncate(method, 10)
+	path = truncate(path, 500)
+	userAgent = truncate(userAgent, 512)
+	et := string(eventType)
+
 	go func() {
-		_, err := conn.Exec(`
+		ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+		defer cancel()
+
+		_, err := conn.ExecContext(ctx, `
 			INSERT INTO security_events (ip, method, path, status, user_agent, event_type)
 			VALUES ($1, $2, $3, $4, $5, $6)
-		`, ip, method, path, status, userAgent, string(eventType))
+		`, ip, method, path, status, userAgent, et)
 
 		if err != nil {
 			slog.Error("db.LogEvent failed", "error", err)
@@ -79,23 +107,31 @@ func LogEvent(ip, method, path string, status int, userAgent string, eventType E
 	}()
 }
 
-// LogHoneypot insère un événement honeypot + blackliste l'IP
+// LogHoneypot insère un événement honeypot + blackliste l'IP 24h
 func LogHoneypot(ip, path, userAgent string) {
 	if conn == nil {
 		return
 	}
 
+	ip = truncate(ip, 45)
+	path = truncate(path, 500)
+	userAgent = truncate(userAgent, 512)
+	expires := time.Now().Add(24 * time.Hour)
+
 	go func() {
-		_, _ = conn.Exec(` 
+		ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+		defer cancel()
+
+		_, _ = conn.ExecContext(ctx, `
 			INSERT INTO security_events (ip, method, path, status, user_agent, event_type)
 			VALUES ($1, 'GET', $2, 404, $3, 'honeypot')
 		`, ip, path, userAgent) // #nosec G104
 
-		_, _ = conn.Exec(`
+		_, _ = conn.ExecContext(ctx, `
 			INSERT INTO blacklisted_ips (ip, reason, expires_at)
 			VALUES ($1, 'honeypot', $2)
 			ON CONFLICT (ip) DO UPDATE SET expires_at = $2
-		`, ip, time.Now().Add(24*time.Hour)) // #nosec G104
+		`, ip, expires) // #nosec G104
 	}()
 }
 
@@ -105,17 +141,33 @@ func LogRateLimit(ip, path string) {
 		return
 	}
 
+	ip = truncate(ip, 45)
+	path = truncate(path, 500)
+
 	go func() {
-		_, _ = conn.Exec(`
+		ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+		defer cancel()
+
+		_, _ = conn.ExecContext(ctx, `
 			INSERT INTO security_events (ip, method, path, status, user_agent, event_type)
 			VALUES ($1, 'GET', $2, 429, '', 'ratelimit')
 		`, ip, path) // #nosec G104
 	}()
 }
 
-// Close ferme la connexion DB
-func Close() {
-	if conn != nil {
-		_ = conn.Close() // #nosec G104
+// ══════════════════════════════════════════
+//  HELPERS
+// ══════════════════════════════════════════
+
+// truncate coupe une string à la longueur max en respectant l'UTF-8
+func truncate(s string, max int) string {
+	if len(s) <= max {
+		return s
 	}
+	// Coupe proprement sur les runes pour éviter de couper au milieu d'un caractère UTF-8
+	runes := []rune(s)
+	if len(runes) <= max {
+		return s
+	}
+	return string(runes[:max])
 }
