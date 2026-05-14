@@ -47,3 +47,11 @@ jobs:
         run: |
             go install github.com/securego/gosec/v2/cmd/gosec@latest
             gosec ./...
+
+      # 7. Purge cache Cloudflare
+      - name: Purge Cloudflare Cache
+        run: |
+          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
+                     -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
+                     -H "Content-Type: application/json" \
+                     --data '{"purge_everything":true}'
