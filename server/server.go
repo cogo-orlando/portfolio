@@ -29,7 +29,7 @@ var maintenancePages = map[string]bool{
 	"/projects/groupie": false, "/projects/cisco": false, "/projects/artemis": false, "/projects/security-dashboard": false,
 }
 
-var MaintenanceMode = false
+var MaintenanceMode = true
 
 // ══════════════════════════════════════════
 //  COMPTEUR DE VISITES
