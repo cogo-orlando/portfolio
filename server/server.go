@@ -29,7 +29,7 @@ var maintenancePages = map[string]bool{
 	"/demo/groupie": false, "/demo/cisco": false, "/demo/artemis": false,
 }
 
-var MaintenanceMode = true
+var MaintenanceMode = false
 
 // ══════════════════════════════════════════
 //  COMPTEUR DE VISITES
