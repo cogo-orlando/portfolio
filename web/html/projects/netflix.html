@@ -3,62 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetflixLight — Demo</title>
+    <title>NetflixLight — Orlando Cogo</title>
+    <meta name="description" content="NetflixLight — plateforme de streaming dynamique utilisant l'API TMDB. Projet JavaScript d'Orlando Cogo.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orlandocogo.com/projects/netflix">
+    <link rel="icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/projects/demo-project.css">
 </head>
 <body>
 
-<div class="blob1"></div>
-<div class="blob2"></div>
-<div class="grid"></div>
-<div class="corner corner--tl"></div>
-<div class="corner corner--tr"></div>
-<div class="corner corner--bl"></div>
-<div class="corner corner--br"></div>
+<div class="blob1" aria-hidden="true"></div>
+<div class="blob2" aria-hidden="true"></div>
+<div class="grid" aria-hidden="true"></div>
+<div class="corner corner--tl" aria-hidden="true"></div>
+<div class="corner corner--tr" aria-hidden="true"></div>
+<div class="corner corner--bl" aria-hidden="true"></div>
+<div class="corner corner--br" aria-hidden="true"></div>
 
 <!-- NAV -->
-<nav class="nav">
-    <a href="/project" class="nav-logo"><span class="prompt">~/</span>projects</a>
+<nav class="nav" aria-label="Navigation principale">
+    <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
+        <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
+    </a>
+    <ul class="nav-links" role="list">
+        <li><a href="/about" class="nav-link">À propos</a></li>
+        <li><a href="/tech" class="nav-link">Infrastructure</a></li>
+        <li><a href="/skills" class="nav-link">Compétences</a></li>
+        <li><a href="/project" class="nav-link">Projets</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+        <li><a href="/cv" class="nav-link">CV</a></li>
+        <li class="nav-more">
+            <button class="nav-more-btn" id="navMoreBtn" aria-haspopup="true" aria-expanded="false" aria-controls="navMoreMenu" aria-label="Plus de pages">
+                Plus
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-more-menu" id="navMoreMenu" role="menu">
+                <a href="/status" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">06</span><span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
+                <a href="/faq" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">07</span><span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions / Réponses</span></span></a>
+            </div>
+        </li>
+    </ul>
+    <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
     <div class="nav-right">
-        <a href="https://github.com/cogo-orlando/NETFLIXLight" target="_blank" class="cv-btn">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-            GitHub
-        </a>
-        <div class="nav-status">
-            <span class="status-dot"></span>
-            <span>Js · Web</span>
+        <div class="nav-status" aria-label="Disponible pour travailler">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>open to work</span>
         </div>
     </div>
 </nav>
 
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>À propos</a>
+    <a href="/tech" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Infrastructure</a>
+    <a href="/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Compétences</a>
+    <a href="/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Projets</a>
+    <a href="/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>Contact</a>
+    <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>CV</a>
+    <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>Status</a>
+</div>
+
 <!-- HERO -->
-<section class="hero">
-    <div class="hero-tag">
+<section class="hero" aria-labelledby="hero-title">
+    <div class="hero-breadcrumb">
+        <a href="/project" class="breadcrumb-link">← Projets</a>
+        <span class="breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="breadcrumb-current">NetflixLight</span>
+    </div>
+
+    <div class="hero-tag" data-typed="cat netflixlight.md" aria-hidden="true">
         <span class="prompt">~/projects $</span>
         <span class="typed"></span>
         <span class="cursor"></span>
     </div>
-    <h1 class="hero-title">NetflixLight<br><span class="outline">Demo</span></h1>
+    <div class="hero-meta">
+        <span class="hero-meta-badge">JavaScript</span>
+        <span class="hero-meta-badge hero-meta-badge--status">Terminé</span>
+        <span class="hero-meta-type">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Solo · B1
+        </span>
+    </div>
+
+    <h1 class="hero-title" id="hero-title">NetflixLight<br><span class="outline">Détails</span></h1>
     <p class="hero-intro">Plateforme de streaming dynamique utilisant l'API TMDB pour la récupération de données en temps réel. Système de recherche fluide, catégories personnalisées et interface responsive.</p>
-    <div class="hero-badges">
+
+    <div class="hero-badges" aria-label="Technologies utilisées">
         <span class="badge">JavaScript</span>
         <span class="badge">API TMDB</span>
         <span class="badge">Node.js</span>
+        <span class="badge">HTML</span>
+        <span class="badge">CSS</span>
+    </div>
+
+    <div class="hero-actions">
+        <a href="https://github.com/cogo-orlando/NETFLIXLight" target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn--gh" aria-label="Voir sur GitHub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub
+        </a>
+        <a href="https://netflixlight.onrender.com" target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn--demo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Voir le site
+        </a>
     </div>
 </section>
 
-<section class="section">
+<!-- APERÇU -->
+<section class="section" aria-labelledby="apercu-title">
     <div class="section-header">
-        <span class="section-tag">// Aperçu</span>
-        <h2 class="section-title">Le projet</h2>
+        <span class="section-tag" aria-hidden="true">// Aperçu</span>
+        <h2 class="section-title" id="apercu-title">Le projet</h2>
     </div>
 
-    <a href="https://netflixlight.onrender.com" target="_blank" class="preview-link reveal">
+    <a href="https://netflixlight.onrender.com" target="_blank" rel="noopener noreferrer" class="preview-link reveal" aria-label="Ouvrir NetflixLight">
         <div class="preview-wrap">
-            <img src="/img/projects/netflix/preview.png" alt="NOM_PROJET preview" class="preview-img">
-            <div class="preview-overlay">
+            <img src="/img/projects/netflix/preview.png" alt="NetflixLight preview" class="preview-img">
+            <div class="preview-overlay" aria-hidden="true">
                 <div class="preview-btn">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     Ouvrir le site
@@ -66,24 +132,24 @@
             </div>
         </div>
         <div class="preview-caption">
-            <span class="caption-url">https://netflixlight.onrender.com</span>
-            <span class="caption-hint">Cliquer pour accéder au site →</span>
+            <span class="caption-url">netflixlight.onrender.com</span>
+            <span class="caption-hint">Cliquer pour accéder →</span>
         </div>
     </a>
 </section>
 
-<section class="section" id="gallery">
+<!-- CAPTURES -->
+<section class="section" id="gallery" aria-labelledby="gallery-title">
     <div class="section-header">
-        <span class="section-tag">// Captures</span>
-        <h2 class="section-title">Images</h2>
+        <span class="section-tag" aria-hidden="true">// Captures</span>
+        <h2 class="section-title" id="gallery-title">Images</h2>
     </div>
 
     <div class="gallery-grid">
-
         <div class="gallery-card reveal" data-index="0">
             <div class="gallery-img-wrap">
-                <img src="/img/projects/netflix/screen1.png" alt="Screenshot 1" class="gallery-img" loading="lazy">
-                <div class="gallery-overlay">
+                <img src="/img/projects/netflix/screen1.png" alt="Page d'accueil NetflixLight" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay" aria-hidden="true">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                     <span>Agrandir</span>
                 </div>
@@ -93,74 +159,71 @@
                 <span class="caption-text">Page d'accueil du site</span>
             </div>
         </div>
-
         <div class="gallery-card reveal" data-index="1">
             <div class="gallery-img-wrap">
-                <img src="/img/projects/netflix/screen2.png" alt="Screenshot 2" class="gallery-img" loading="lazy">
-                <div class="gallery-overlay">
+                <img src="/img/projects/netflix/screen2.png" alt="Favoris NetflixLight" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay" aria-hidden="true">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                     <span>Agrandir</span>
                 </div>
             </div>
             <div class="gallery-caption">
                 <span class="caption-num">02</span>
-                <span class="caption-text">Possibilité de mettre en favoris des films</span>
+                <span class="caption-text">Mettre des films en favoris</span>
             </div>
         </div>
-
         <div class="gallery-card reveal" data-index="2">
             <div class="gallery-img-wrap">
-                <img src="/img/projects/netflix/screen3.png" alt="Screenshot 3" class="gallery-img" loading="lazy">
-                <div class="gallery-overlay">
+                <img src="/img/projects/netflix/screen3.png" alt="Détails d'un film" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay" aria-hidden="true">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                     <span>Agrandir</span>
                 </div>
             </div>
             <div class="gallery-caption">
                 <span class="caption-num">03</span>
-                <span class="caption-text">Voir les details d'un film (acteurs, note, trailer, synopsie...)</span>
+                <span class="caption-text">Détails d'un film — acteurs, note, trailer</span>
             </div>
         </div>
-
         <div class="gallery-card reveal" data-index="3">
             <div class="gallery-img-wrap">
-                <img src="/img/projects/netflix/screen4.png" alt="Screenshot 3" class="gallery-img" loading="lazy">
-                <div class="gallery-overlay">
+                <img src="/img/projects/netflix/screen4.png" alt="Création de compte" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay" aria-hidden="true">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                     <span>Agrandir</span>
                 </div>
             </div>
             <div class="gallery-caption">
                 <span class="caption-num">04</span>
-                <span class="caption-text">Il est possible de créer un compte</span>
+                <span class="caption-text">Création de compte utilisateur</span>
             </div>
         </div>
-
     </div>
 </section>
 
-<!-- INFOS PROJET -->
-<section class="section">
+<!-- DÉTAILS -->
+<section class="section" aria-labelledby="details-title">
     <div class="section-header">
-        <span class="section-tag">// Détails</span>
-        <h2 class="section-title">À propos du projet</h2>
+        <span class="section-tag" aria-hidden="true">// Détails</span>
+        <h2 class="section-title" id="details-title">À propos du projet</h2>
     </div>
+
     <div class="details-grid">
         <div class="detail-card reveal">
             <span class="detail-key">Équipe</span>
-            <span class="detail-val">Seul</span>
+            <span class="detail-val">Solo</span>
         </div>
         <div class="detail-card reveal">
             <span class="detail-key">Langage</span>
-            <span class="detail-val">Js, HTML, CSS,</span>
+            <span class="detail-val">JavaScript · HTML · CSS</span>
+        </div>
+        <div class="detail-card reveal">
+            <span class="detail-key">API</span>
+            <span class="detail-val">TMDB (The Movie Database)</span>
         </div>
         <div class="detail-card reveal">
             <span class="detail-key">Appris</span>
-            <span class="detail-val">Serveur en Js</span>
-        </div>
-        <div class="detail-card reveal">
-            <span class="detail-key">Données</span>
-            <span class="detail-val">API TMDB (The Movie Database)</span>
+            <span class="detail-val">Fetch API · JSON · Node.js</span>
         </div>
         <div class="detail-card reveal">
             <span class="detail-key">Déploiement</span>
@@ -174,60 +237,91 @@
 
     <div class="project-desc reveal">
         <div class="desc-content" id="descContent">
-            <p>NetflixLight est une plateforme de streaming moderne et immersive conçue pour offrir une expérience utilisateur fluide et dynamique. Ce projet est né de la volonté de recréer une interface complexe de type "Single Page Application" (SPA) en s'appuyant sur des données réelles et massives provenant de l'industrie cinématographique.
-                L'objectif principal était de relever le défi technique de l'intégration d'API tierces tout en garantissant une performance optimale et une interface visuellement percutante, fidèle aux standards du web actuel.
-                Note : Le projet est actuellement entièrement fonctionnel et déployé, démontrant ma capacité à mener un développement de l'idéation jusqu'à la mise en production.</p>
+            <p>NetflixLight est une plateforme de streaming moderne et immersive conçue pour offrir une expérience utilisateur fluide et dynamique. Ce projet est né de la volonté de recréer une interface complexe de type "Single Page Application" (SPA) en s'appuyant sur des données réelles et massives provenant de l'industrie cinématographique. L'objectif principal était de relever le défi technique de l'intégration d'API tierces tout en garantissant une performance optimale et une interface visuellement percutante, fidèle aux standards du web actuel. Le projet est actuellement entièrement fonctionnel et déployé sur Render.</p>
         </div>
-        <button class="desc-toggle" id="descToggle">
+        <button class="desc-toggle" id="descToggle" aria-expanded="false">
             <span id="descToggleText">Lire la suite</span>
-            <svg id="descArrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <svg id="descArrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
         </button>
     </div>
 </section>
 
+<!-- CE QUE J'AI APPRIS -->
+<section class="section" aria-labelledby="learned-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">// Apprentissages</span>
+        <h2 class="section-title" id="learned-title">Ce que j'ai appris</h2>
+    </div>
+
+    <div class="learned-grid">
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">01</div>
+            <h3 class="learned-name">Intégration d'API REST</h3>
+            <p class="learned-desc">Consommer une API tierce avec fetch, gérer les réponses JSON, les erreurs et les cas limites. Comprendre la pagination et les requêtes asynchrones en JavaScript.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">02</div>
+            <h3 class="learned-name">Architecture SPA</h3>
+            <p class="learned-desc">Construire une Single Page Application sans framework — routing côté client, gestion de l'état, mise à jour dynamique du DOM sans rechargement de page.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">03</div>
+            <h3 class="learned-name">Serveur Node.js</h3>
+            <p class="learned-desc">Mettre en place un serveur JavaScript pour servir l'application et gérer les routes. Déploiement sur Render et gestion des variables d'environnement.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">04</div>
+            <h3 class="learned-name">UI/UX avancé</h3>
+            <p class="learned-desc">Recréer une interface complexe type Netflix — recherche fluide, catégories, favoris, système de compte. Attention portée à l'expérience utilisateur et aux transitions.</p>
+        </div>
+    </div>
+</section>
+
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visionneuse d'images">
     <div class="lightbox-overlay" id="lightboxOverlay"></div>
     <div class="lightbox-box">
         <div class="lightbox-header">
             <span class="lightbox-title" id="lightboxTitle"></span>
-            <button class="lightbox-close" id="lightboxClose">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                 ESC
             </button>
         </div>
         <div class="lightbox-img-wrap">
-            <button class="lightbox-nav prev" id="lightboxPrev">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Image précédente">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </button>
             <img src="" alt="" class="lightbox-img" id="lightboxImg">
-            <button class="lightbox-nav next" id="lightboxNext">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <button class="lightbox-nav next" id="lightboxNext" aria-label="Image suivante">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </button>
         </div>
-        <div class="lightbox-counter" id="lightboxCounter">1 / 3</div>
+        <div class="lightbox-counter" id="lightboxCounter">1 / 4</div>
     </div>
 </div>
 
 <!-- FOOTER -->
-<footer class="footer">
-    <span class="prompt">~/projects $</span>
-    <span>cd NetflixLight</span>
+<footer class="footer" aria-label="Pied de page">
+    <span class="prompt" aria-hidden="true">~/projects $</span>
+    <span aria-hidden="true">cd NetflixLight</span>
     <a href="/project" class="footer-back">← Retour aux projets</a>
     <span class="footer-year">© 2026</span>
 </footer>
 
 <script>
     window.projectImages = [
-        { src: '/img/projects/netflix/screen1.png', title: '01 — Pade d accueil du site' },
-        { src: '/img/projects/netflix/screen2.png', title: '02 — Possibilité de mettre en favoris des films' },
-        { src: '/img/projects/netflix/screen3.png', title: '03 — Voir les details d un film (acteurs, note, trailer, synopsie...)' },
-        { src: '/img/projects/netflix/screen4.png', title: '04 — Il est possible de créer un compte' },
+        { src: '/img/projects/netflix/screen1.png', title: '01 — Page d\'accueil du site' },
+        { src: '/img/projects/netflix/screen2.png', title: '02 — Mettre des films en favoris' },
+        { src: '/img/projects/netflix/screen3.png', title: '03 — Détails d\'un film' },
+        { src: '/img/projects/netflix/screen4.png', title: '04 — Création de compte' },
     ];
     window.typingText = 'cat netflixlight.md';
 </script>
+<script src="/js/background.js"></script>
+<script src="/js/nav.js"></script>
 <script src="/js/projects/demo-project.js"></script>
 </body>
 </html>

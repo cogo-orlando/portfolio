@@ -3,205 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Power4 — Demo</title>
+    <title>Power4 — Orlando Cogo</title>
+    <meta name="description" content="Power4 — Puissance 4 en HTML et CSS pur, sans JavaScript. Projet Go d'Orlando Cogo.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orlandocogo.com/projects/power4">
+    <link rel="icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/projects/demo-project.css">
 </head>
 <body>
 
-<div class="blob1"></div>
-<div class="blob2"></div>
-<div class="grid"></div>
-<div class="corner corner--tl"></div>
-<div class="corner corner--tr"></div>
-<div class="corner corner--bl"></div>
-<div class="corner corner--br"></div>
+<div class="blob1" aria-hidden="true"></div>
+<div class="blob2" aria-hidden="true"></div>
+<div class="grid" aria-hidden="true"></div>
+<div class="corner corner--tl" aria-hidden="true"></div>
+<div class="corner corner--tr" aria-hidden="true"></div>
+<div class="corner corner--bl" aria-hidden="true"></div>
+<div class="corner corner--br" aria-hidden="true"></div>
 
 <!-- NAV -->
-<nav class="nav">
-    <a href="/project" class="nav-logo"><span class="prompt">~/</span>projects</a>
+<nav class="nav" aria-label="Navigation principale">
+    <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
+        <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
+    </a>
+    <ul class="nav-links" role="list">
+        <li><a href="/about" class="nav-link">À propos</a></li>
+        <li><a href="/tech" class="nav-link">Infrastructure</a></li>
+        <li><a href="/skills" class="nav-link">Compétences</a></li>
+        <li><a href="/project" class="nav-link">Projets</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+        <li><a href="/cv" class="nav-link">CV</a></li>
+        <li class="nav-more">
+            <button class="nav-more-btn" id="navMoreBtn" aria-haspopup="true" aria-expanded="false" aria-controls="navMoreMenu" aria-label="Plus de pages">
+                Plus
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-more-menu" id="navMoreMenu" role="menu">
+                <a href="/status" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">06</span><span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
+                <a href="/faq" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">07</span><span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions / Réponses</span></span></a>
+            </div>
+        </li>
+    </ul>
+    <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
     <div class="nav-right">
-        <a href="https://github.com/cogo-orlando/PROJETPower4" target="_blank" class="cv-btn">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-            GitHub
-        </a>
-        <div class="nav-status">
-            <span class="status-dot"></span>
-            <span>Go · Web</span>
+        <div class="nav-status" aria-label="Disponible pour travailler">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>open to work</span>
         </div>
     </div>
 </nav>
 
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>À propos</a>
+    <a href="/tech" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Infrastructure</a>
+    <a href="/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Compétences</a>
+    <a href="/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Projets</a>
+    <a href="/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>Contact</a>
+    <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>CV</a>
+    <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>Status</a>
+</div>
+
 <!-- HERO -->
-<section class="hero">
-    <div class="hero-tag">
+<section class="hero" aria-labelledby="hero-title">
+    <div class="hero-breadcrumb">
+        <a href="/project" class="breadcrumb-link">← Projets</a>
+        <span class="breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="breadcrumb-current">Power4</span>
+    </div>
+
+    <div class="hero-tag" data-typed="cat power4.md" aria-hidden="true">
         <span class="prompt">~/projects $</span>
         <span class="typed"></span>
         <span class="cursor"></span>
     </div>
-    <h1 class="hero-title">Power4<br><span class="outline">Demo</span></h1>
+
+    <div class="hero-meta">
+        <span class="hero-meta-badge">Go</span>
+        <span class="hero-meta-badge hero-meta-badge--status">Terminé</span>
+        <span class="hero-meta-type">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            Équipe · 2 pers. · B1
+        </span>
+    </div>
+
+    <h1 class="hero-title" id="hero-title">Power4<br><span class="outline">Détails</span></h1>
     <p class="hero-intro">Puissance 4 jouable entièrement via HTML et CSS, sans JavaScript. Défi technique de repousser les limites du CSS pour simuler une logique applicative complexe — gestion des interactions et états de jeu en CSS pur.</p>
-    <div class="hero-badges">
-        <span class="badge">GO</span>
-        <span class="badge">JEU </span>
-        <span class="badge">Binome</span>
+
+    <div class="hero-badges" aria-label="Technologies utilisées">
+        <span class="badge">Go</span>
+        <span class="badge">HTML</span>
+        <span class="badge">CSS pur</span>
+        <span class="badge">Zéro JS</span>
+    </div>
+
+    <div class="hero-actions">
+        <a href="https://github.com/cogo-orlando/PROJETPower4" target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn--gh" aria-label="Voir sur GitHub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub
+        </a>
+        <a href="https://power4-slf7.onrender.com" target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn--demo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Jouer →
+        </a>
     </div>
 </section>
 
-<section class="section">
+<!-- APERÇU -->
+<section class="section" aria-labelledby="apercu-title">
     <div class="section-header">
-        <span class="section-tag">// Aperçu</span>
-        <h2 class="section-title">Le projet</h2>
+        <span class="section-tag" aria-hidden="true">// Aperçu</span>
+        <h2 class="section-title" id="apercu-title">Le projet</h2>
     </div>
-
-    <a href="https://power4-slf7.onrender.com" target="_blank" class="preview-link reveal">
+    <a href="https://power4-slf7.onrender.com" target="_blank" rel="noopener noreferrer" class="preview-link reveal" aria-label="Jouer à Power4">
         <div class="preview-wrap">
-            <img src="/img/projects/power4/preview.png" alt="NOM_PROJET preview" class="preview-img">
-            <div class="preview-overlay">
+            <img src="/img/projects/power4/preview.png" alt="Power4 preview" class="preview-img">
+            <div class="preview-overlay" aria-hidden="true">
                 <div class="preview-btn">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    Ouvrir le site
+                    Jouer maintenant
                 </div>
             </div>
         </div>
         <div class="preview-caption">
-            <span class="caption-url">https://power4-slf7.onrender.com</span>
-            <span class="caption-hint">Cliquer pour ouvrir →</span>
+            <span class="caption-url">power4-slf7.onrender.com</span>
+            <span class="caption-hint">Cliquer pour jouer →</span>
         </div>
     </a>
 </section>
 
-<section class="section" id="gallery">
+<!-- CAPTURES -->
+<section class="section" id="gallery" aria-labelledby="gallery-title">
     <div class="section-header">
-        <span class="section-tag">// Captures</span>
-        <h2 class="section-title">Images</h2>
+        <span class="section-tag" aria-hidden="true">// Captures</span>
+        <h2 class="section-title" id="gallery-title">Images</h2>
     </div>
-
     <div class="gallery-grid">
-
         <div class="gallery-card reveal" data-index="0">
             <div class="gallery-img-wrap">
-                <img src="/img/projects/power4/screen1.png" alt="Screenshot 1" class="gallery-img" loading="lazy">
-                <div class="gallery-overlay">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                    <span>Agrandir</span>
-                </div>
+                <img src="/img/projects/power4/screen1.png" alt="Règles du jeu" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>Agrandir</span></div>
             </div>
-            <div class="gallery-caption">
-                <span class="caption-num">01</span>
-                <span class="caption-text">Les règles du jeu</span>
-            </div>
+            <div class="gallery-caption"><span class="caption-num">01</span><span class="caption-text">Les règles du jeu</span></div>
         </div>
-
         <div class="gallery-card reveal" data-index="1">
             <div class="gallery-img-wrap">
-                <img src="/img/projects/power4/screen2.png" alt="Screenshot 2" class="gallery-img" loading="lazy">
-                <div class="gallery-overlay">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                    <span>Agrandir</span>
-                </div>
+                <img src="/img/projects/power4/screen2.png" alt="Choix du nom" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>Agrandir</span></div>
             </div>
-            <div class="gallery-caption">
-                <span class="caption-num">02</span>
-                <span class="caption-text">Possibilité de choisir son nom de joueur</span>
-            </div>
+            <div class="gallery-caption"><span class="caption-num">02</span><span class="caption-text">Choix du nom de joueur</span></div>
         </div>
-
         <div class="gallery-card reveal" data-index="2">
             <div class="gallery-img-wrap">
-                <img src="/img/projects/power4/screen3.png" alt="Screenshot 3" class="gallery-img" loading="lazy">
-                <div class="gallery-overlay">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                    <span>Agrandir</span>
-                </div>
+                <img src="/img/projects/power4/screen3.png" alt="Page de jeu" class="gallery-img" loading="lazy">
+                <div class="gallery-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>Agrandir</span></div>
             </div>
-            <div class="gallery-caption">
-                <span class="caption-num">03</span>
-                <span class="caption-text">Page de jeu</span>
-            </div>
+            <div class="gallery-caption"><span class="caption-num">03</span><span class="caption-text">Page de jeu — CSS pur, zéro JavaScript</span></div>
         </div>
-
     </div>
 </section>
 
-<!-- INFOS PROJET -->
-<section class="section">
+<!-- DÉTAILS -->
+<section class="section" aria-labelledby="details-title">
     <div class="section-header">
-        <span class="section-tag">// Détails</span>
-        <h2 class="section-title">À propos du projet</h2>
+        <span class="section-tag" aria-hidden="true">// Détails</span>
+        <h2 class="section-title" id="details-title">À propos du projet</h2>
     </div>
     <div class="details-grid">
-        <div class="detail-card reveal">
-            <span class="detail-key">Équipe</span>
-            <span class="detail-val">A deux</span>
-        </div>
-        <div class="detail-card reveal">
-            <span class="detail-key">LANGAGE</span>
-            <span class="detail-val">GO, HTML, CSS</span>
-        </div>
-        <div class="detail-card reveal">
-            <span class="detail-key">Appris</span>
-            <span class="detail-val">Serveur en GO</span>
-        </div>
-        <div class="detail-card reveal">
-            <span class="detail-key">Données</span>
-            <span class="detail-val">Aucune donnée</span>
-        </div>
-        <div class="detail-card reveal">
-            <span class="detail-key">Déploiement</span>
-            <span class="detail-val">Render</span>
-        </div>
-        <div class="detail-card reveal">
-            <span class="detail-key">Statut</span>
-            <span class="detail-val" style="color:var(--accent)">Terminé</span>
-        </div>
-
+        <div class="detail-card reveal"><span class="detail-key">Équipe</span><span class="detail-val">Binôme · 2 pers.</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Langage</span><span class="detail-val">Go · HTML · CSS</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Défi</span><span class="detail-val">Zéro JavaScript</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Appris</span><span class="detail-val">CSS logic · Serveur Go</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Déploiement</span><span class="detail-val">Render</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Statut</span><span class="detail-val" style="color:var(--accent)">Terminé</span></div>
     </div>
-
     <div class="project-desc reveal">
         <div class="desc-content" id="descContent">
-            <p>Le projet Power 4 est une application web interactive reproduisant le célèbre jeu du Puissance 4, entièrement développée en HTML et CSS, sans utilisation de JavaScript. L’objectif principal de ce projet était de repousser les limites du CSS en simulant une logique applicative complexe habituellement gérée par des langages de programmation dynamiques.
-                L’interface utilisateur a été conçue pour être à la fois ludique et intuitive, avec un design original et accessible directement depuis le navigateur. Le joueur peut interagir avec la grille de jeu, déposer ses pions et suivre le déroulement de la partie sans rechargement de page ni script externe. L’ensemble du système repose sur une architecture purement déclarative, ce qui met en avant une maîtrise approfondie du HTML et du CSS.
-                Enfin, Power 4 démontre qu’il est possible de créer des expériences interactives complètes en utilisant uniquement des technologies de base du web. Ce projet met en valeur la capacité à concevoir des solutions originales, optimiser l’utilisation du CSS et comprendre en profondeur le fonctionnement des interactions côté client.</p>
+            <p>Power4 est une application web interactive reproduisant le célèbre jeu du Puissance 4, entièrement développée en HTML et CSS sans utilisation de JavaScript. L'objectif principal était de repousser les limites du CSS en simulant une logique applicative complexe habituellement gérée par des langages dynamiques. Le joueur peut interagir avec la grille, déposer ses pions et suivre le déroulement de la partie sans rechargement de page ni script externe. L'ensemble repose sur une architecture purement déclarative, mettant en avant une maîtrise approfondie du CSS et de ses possibilités cachées.</p>
         </div>
-        <button class="desc-toggle" id="descToggle">
+        <button class="desc-toggle" id="descToggle" aria-expanded="false">
             <span id="descToggleText">Lire la suite</span>
-            <svg id="descArrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
+            <svg id="descArrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </button>
     </div>
 </section>
 
+<!-- CE QUE J'AI APPRIS -->
+<section class="section" aria-labelledby="learned-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">// Apprentissages</span>
+        <h2 class="section-title" id="learned-title">Ce que j'ai appris</h2>
+    </div>
+    <div class="learned-grid">
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">01</div>
+            <h3 class="learned-name">CSS sans JavaScript</h3>
+            <p class="learned-desc">Utiliser les pseudo-classes :checked, :hover et les sélecteurs CSS pour simuler de la logique applicative — états, transitions, interactions — sans une seule ligne de JS.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">02</div>
+            <h3 class="learned-name">Architecture CSS avancée</h3>
+            <p class="learned-desc">Organiser un CSS complexe pour un jeu interactif — variables, calc(), grid, flexbox. Comprendre les limites et possibilités cachées du langage.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">03</div>
+            <h3 class="learned-name">Serveur Go minimal</h3>
+            <p class="learned-desc">Mettre en place un serveur HTTP Go pour servir une application statique — routing simple, gestion des fichiers statiques, déploiement sur Render.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">04</div>
+            <h3 class="learned-name">Penser différemment</h3>
+            <p class="learned-desc">Résoudre un problème logique sans outil habituel — contrainte créative qui force à explorer des solutions non conventionnelles et à comprendre profondément le fonctionnement du navigateur.</p>
+        </div>
+    </div>
+</section>
+
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visionneuse d'images">
     <div class="lightbox-overlay" id="lightboxOverlay"></div>
     <div class="lightbox-box">
         <div class="lightbox-header">
             <span class="lightbox-title" id="lightboxTitle"></span>
-            <button class="lightbox-close" id="lightboxClose">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                 ESC
             </button>
         </div>
         <div class="lightbox-img-wrap">
-            <button class="lightbox-nav prev" id="lightboxPrev">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </button>
+            <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Image précédente"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
             <img src="" alt="" class="lightbox-img" id="lightboxImg">
-            <button class="lightbox-nav next" id="lightboxNext">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </button>
+            <button class="lightbox-nav next" id="lightboxNext" aria-label="Image suivante"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
         </div>
         <div class="lightbox-counter" id="lightboxCounter">1 / 3</div>
     </div>
 </div>
 
 <!-- FOOTER -->
-<footer class="footer">
-    <span class="prompt">~/projects $</span>
-    <span>cd power4</span>
+<footer class="footer" aria-label="Pied de page">
+    <span class="prompt" aria-hidden="true">~/projects $</span>
+    <span aria-hidden="true">cd power4</span>
     <a href="/project" class="footer-back">← Retour aux projets</a>
     <span class="footer-year">© 2026</span>
 </footer>
@@ -209,11 +254,13 @@
 <script>
     window.projectImages = [
         { src: '/img/projects/power4/screen1.png', title: '01 — Les règles du jeu' },
-        { src: '/img/projects/power4/screen2.png', title: '02 — Possibilité de choisir son nom de joueur' },
-        { src: '/img/projects/power4/screen3.png', title: '03 — Page de jeu' },
+        { src: '/img/projects/power4/screen2.png', title: '02 — Choix du nom de joueur' },
+        { src: '/img/projects/power4/screen3.png', title: '03 — Page de jeu — CSS pur, zéro JavaScript' },
     ];
     window.typingText = 'cat power4.md';
 </script>
+<script src="/js/background.js"></script>
+<script src="/js/nav.js"></script>
 <script src="/js/projects/demo-project.js"></script>
 </body>
 </html>

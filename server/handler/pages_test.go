@@ -205,13 +205,13 @@ func TestHandlers_AllReturn200(t *testing.T) {
 		{"Status", StatusHandler, "/status"},
 		{"FAQ", FaqHandler, "/faq"},
 		{"Maintenance", MaintenanceHandler, "/maintenance"},
-		{"DemoZoo", DemoZooHandler, "/demo/zoo"},
-		{"DemoNetflix", DemoNetflixHandler, "/demo/netflix"},
-		{"DemoGroupie", DemoGroupieHandler, "/demo/groupie"},
-		{"DemoPower4", DemoPower4Handler, "/demo/power4"},
-		{"DemoCisco", DemoCiscoHandler, "/demo/cisco"},
-		{"DemoArtemis", DemoArtemisHandler, "/demo/artemis"},
-		{"Annuaire", AnnuaireHandler, "/demo/annuaire"},
+		{"DemoZoo", ZooHandler, "/projects/zoo"},
+		{"DemoNetflix", NetflixHandler, "/projects/netflix"},
+		{"DemoGroupie", GroupieHandler, "/projects/groupie"},
+		{"DemoPower4", Power4Handler, "/projects/power4"},
+		{"DemoCisco", CiscoHandler, "/projects/cisco"},
+		{"DemoArtemis", ArtemisHandler, "/projects/artemis"},
+		{"Annuaire", AnnuaireHandler, "/projects/annuaire"},
 	}
 
 	for _, tt := range tests {

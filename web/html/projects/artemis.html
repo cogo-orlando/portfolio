@@ -3,75 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artemis III — Demo</title>
+    <title>Artemis III — Orlando Cogo</title>
+    <meta name="description" content="Artemis III — simulateur de lancements de fusées spatiales en Java. Projet POO d'Orlando Cogo.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orlandocogo.com/projects/artemis">
+    <link rel="icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/projects/artemis.css">
 </head>
 <body>
 
-<div class="blob1"></div>
-<div class="blob2"></div>
-<div class="grid"></div>
-<div class="corner corner--tl"></div>
-<div class="corner corner--tr"></div>
-<div class="corner corner--bl"></div>
-<div class="corner corner--br"></div>
-<canvas id="matrix" class="matrix-canvas"></canvas>
+<div class="blob1" aria-hidden="true"></div>
+<div class="blob2" aria-hidden="true"></div>
+<div class="grid" aria-hidden="true"></div>
+<div class="corner corner--tl" aria-hidden="true"></div>
+<div class="corner corner--tr" aria-hidden="true"></div>
+<div class="corner corner--bl" aria-hidden="true"></div>
+<div class="corner corner--br" aria-hidden="true"></div>
+<canvas id="matrix" class="matrix-canvas" aria-hidden="true"></canvas>
 
 <!-- NAV -->
-<nav class="nav">
-    <a href="/project" class="nav-logo"><span class="prompt">~/</span>projects</a>
+<nav class="nav" aria-label="Navigation principale">
+    <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
+        <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
+    </a>
+    <ul class="nav-links" role="list">
+        <li><a href="/about" class="nav-link">À propos</a></li>
+        <li><a href="/tech" class="nav-link">Infrastructure</a></li>
+        <li><a href="/skills" class="nav-link">Compétences</a></li>
+        <li><a href="/project" class="nav-link">Projets</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+        <li><a href="/cv" class="nav-link">CV</a></li>
+        <li class="nav-more">
+            <button class="nav-more-btn" id="navMoreBtn" aria-haspopup="true" aria-expanded="false" aria-controls="navMoreMenu" aria-label="Plus de pages">
+                Plus
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-more-menu" id="navMoreMenu" role="menu">
+                <a href="/status" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">06</span><span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
+                <a href="/faq" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">07</span><span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions / Réponses</span></span></a>
+            </div>
+        </li>
+    </ul>
+    <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
     <div class="nav-right">
-        <div class="nav-status"><span class="status-dot"></span><span>Java · Console · Solo</span></div>
+        <div class="nav-status" aria-label="Disponible pour travailler">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>open to work</span>
+        </div>
     </div>
 </nav>
 
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>À propos</a>
+    <a href="/tech" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Infrastructure</a>
+    <a href="/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Compétences</a>
+    <a href="/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Projets</a>
+    <a href="/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>Contact</a>
+    <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>CV</a>
+    <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>Status</a>
+</div>
+
 <!-- HERO -->
-<section class="hero">
-    <div class="hero-tag" data-typed="./artemis --launch">
+<section class="hero" aria-labelledby="hero-title">
+    <div class="hero-breadcrumb">
+        <a href="/project" class="breadcrumb-link">← Projets</a>
+        <span class="breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="breadcrumb-current">Artemis III</span>
+    </div>
+
+    <div class="hero-tag" data-typed="./artemis --launch" aria-hidden="true">
         <span class="prompt">~/projects/artemis $</span>
         <span class="typed"></span>
         <span class="cursor"></span>
     </div>
-    <h1 class="hero-title">Artemis III<br><span class="outline">Simulateur</span></h1>
+
+    <div class="hero-meta">
+        <span class="hero-meta-badge">Java</span>
+        <span class="hero-meta-badge hero-meta-badge--status">Terminé</span>
+        <span class="hero-meta-type">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Solo · B1
+        </span>
+    </div>
+
+    <h1 class="hero-title" id="hero-title">Artemis III<br><span class="outline">Simulateur</span></h1>
     <p class="hero-intro">Simulateur de lancements de fusées spatiales en console Java — configuration de la fusée, sélection de mission, simulation du lancement et historique des missions.</p>
-    <div class="hero-badges">
+
+    <div class="hero-badges" aria-label="Technologies utilisées">
         <span class="badge">Java</span>
         <span class="badge">Console</span>
         <span class="badge">POO</span>
         <span class="badge">Singleton</span>
-        <span class="badge">Solo</span>
+    </div>
+
+    <div class="hero-actions">
+        <a href="https://github.com/cogo-orlando/ArtemisIII" target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn--gh" aria-label="Voir sur GitHub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub
+        </a>
     </div>
 </section>
 
 <!-- TERMINAL LIVE -->
-<section class="section">
+<section class="section" aria-labelledby="terminal-title">
     <div class="section-header">
-        <span class="section-tag">01 //</span>
-        <h2 class="section-title">Simulation en direct</h2>
+        <span class="section-tag" aria-hidden="true">01 //</span>
+        <h2 class="section-title" id="terminal-title">Simulation en direct</h2>
     </div>
-    <div class="terminal-demo reveal">
-        <div class="term-bar">
+    <div class="terminal-demo reveal" aria-label="Terminal de simulation">
+        <div class="term-bar" aria-hidden="true">
             <div class="term-dot" style="background:#ff5f57"></div>
             <div class="term-dot" style="background:#febc2e"></div>
             <div class="term-dot" style="background:#28c840"></div>
             <span class="term-title">ArtemisIII — Main.java</span>
             <button class="term-replay" id="replayBtn">↺ Rejouer</button>
         </div>
-        <div class="term-body" id="termBody"></div>
+        <div class="term-body" id="termBody" aria-live="polite"></div>
     </div>
 </section>
 
 <!-- CAPTURE -->
-<section class="section">
+<section class="section" aria-labelledby="apercu-title">
     <div class="section-header">
-        <span class="section-tag">02 //</span>
-        <h2 class="section-title">Aperçu du projet</h2>
+        <span class="section-tag" aria-hidden="true">02 //</span>
+        <h2 class="section-title" id="apercu-title">Aperçu du projet</h2>
     </div>
     <div class="capture-wrap reveal">
-        <img src="#" alt="Artemis III — Structure et console" class="capture-img" id="captureImg">
+        <img src="/img/projects/artemis/screen1.png" alt="Artemis III — Structure et console" class="capture-img" id="captureImg">
         <div class="capture-caption">
             <span class="caption-num">01</span>
             <span class="caption-text">Structure du projet IntelliJ + console de lancement</span>
@@ -80,172 +145,118 @@
 </section>
 
 <!-- ARCHITECTURE -->
-<section class="section">
+<section class="section" aria-labelledby="arch-title">
     <div class="section-header">
-        <span class="section-tag">03 //</span>
-        <h2 class="section-title">Architecture du projet</h2>
+        <span class="section-tag" aria-hidden="true">03 //</span>
+        <h2 class="section-title" id="arch-title">Architecture du projet</h2>
     </div>
     <div class="arch-grid">
-
         <div class="arch-card reveal">
-            <div class="arch-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            </div>
+            <div class="arch-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
             <div class="arch-info">
                 <span class="arch-name">capsule/</span>
                 <p class="arch-desc">Classes représentant les capsules spatiales — Orion, Crew Dragon. Attributs : masse, capacité, compatibilité lanceur.</p>
                 <div class="arch-tags"><span>Orion</span><span>Crew Dragon</span></div>
             </div>
         </div>
-
         <div class="arch-card reveal">
-            <div class="arch-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            </div>
+            <div class="arch-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
             <div class="arch-info">
                 <span class="arch-name">lanceur/</span>
                 <p class="arch-desc">Les lanceurs disponibles — Saturn V, Ariane 5, Starship. Chacun avec sa poussée, son coût et ses missions compatibles.</p>
                 <div class="arch-tags"><span>Saturn V</span><span>Ariane 5</span><span>Starship</span></div>
             </div>
         </div>
-
         <div class="arch-card reveal">
-            <div class="arch-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
-            </div>
+            <div class="arch-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
             <div class="arch-info">
                 <span class="arch-name">mission/</span>
                 <p class="arch-desc">Types de missions disponibles — ISS, Orbite terrestre, Nibiru. Chaque mission définit une destination et une difficulté.</p>
                 <div class="arch-tags"><span>ISS</span><span>Orbite terrestre</span><span>Nibiru</span></div>
             </div>
         </div>
-
         <div class="arch-card reveal">
-            <div class="arch-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-            </div>
+            <div class="arch-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
             <div class="arch-info">
                 <span class="arch-name">simulateur/</span>
                 <p class="arch-desc">Le cœur du programme — pattern Singleton. Gère la boucle principale, l'interface console et l'historique des lancements.</p>
                 <div class="arch-tags"><span>Singleton</span><span>Boucle principale</span></div>
             </div>
         </div>
-
         <div class="arch-card reveal">
-            <div class="arch-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
+            <div class="arch-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
             <div class="arch-info">
                 <span class="arch-name">exception/</span>
                 <p class="arch-desc">Gestion des erreurs métier — incompatibilité lanceur/capsule, surcharge de masse, configuration invalide.</p>
                 <div class="arch-tags"><span>Exceptions custom</span></div>
             </div>
         </div>
-
         <div class="arch-card reveal">
-            <div class="arch-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            </div>
+            <div class="arch-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
             <div class="arch-info">
                 <span class="arch-name">modele/</span>
                 <p class="arch-desc">Classes modèles partagées — résultat de lancement, rapport de mission avec date, coût et statut.</p>
                 <div class="arch-tags"><span>Résultat</span><span>Rapport</span></div>
             </div>
         </div>
-
     </div>
 </section>
 
 <!-- HISTORIQUE MISSIONS -->
-<section class="section">
+<section class="section" aria-labelledby="history-title">
     <div class="section-header">
-        <span class="section-tag">04 //</span>
-        <h2 class="section-title">Exemple d'historique</h2>
+        <span class="section-tag" aria-hidden="true">04 //</span>
+        <h2 class="section-title" id="history-title">Exemple d'historique</h2>
     </div>
-    <div class="missions-table reveal">
-        <div class="missions-header">
-            <span>Date</span>
-            <span>Lanceur</span>
-            <span>Capsule</span>
-            <span>Mission</span>
-            <span>Statut</span>
-            <span>Coût</span>
+    <div class="missions-table reveal" role="table" aria-label="Historique des missions">
+        <div class="missions-header" role="row">
+            <span role="columnheader">Date</span>
+            <span role="columnheader">Lanceur</span>
+            <span role="columnheader">Capsule</span>
+            <span role="columnheader">Mission</span>
+            <span role="columnheader">Statut</span>
+            <span role="columnheader">Coût</span>
         </div>
-        <div class="missions-row">
-            <span class="m-date">05/05/2026 00:17</span>
-            <span class="m-val">Saturn V</span>
-            <span class="m-val">Crew Dragon</span>
-            <span class="m-val">Nibiru</span>
-            <span class="m-status success">Succès</span>
-            <span class="m-cost">1 650,10M€</span>
-        </div>
-        <div class="missions-row">
-            <span class="m-date">05/05/2026 00:20</span>
-            <span class="m-val">Ariane 5</span>
-            <span class="m-val">Orion</span>
-            <span class="m-val">Orbite terrestre</span>
-            <span class="m-status fail">Échec</span>
-            <span class="m-cost">510,13M€</span>
-        </div>
-        <div class="missions-row">
-            <span class="m-date">05/05/2026 15:35</span>
-            <span class="m-val">Saturn V</span>
-            <span class="m-val">Orion</span>
-            <span class="m-val">ISS</span>
-            <span class="m-status success">Succès</span>
-            <span class="m-cost">1 800,01M€</span>
-        </div>
-        <div class="missions-row">
-            <span class="m-date">05/05/2026 15:51</span>
-            <span class="m-val">Starship</span>
-            <span class="m-val">Crew Dragon</span>
-            <span class="m-val">Orbite terrestre</span>
-            <span class="m-status success">Succès</span>
-            <span class="m-cost">312,02M€</span>
-        </div>
-        <div class="missions-row">
-            <span class="m-date">06/05/2026 15:36</span>
-            <span class="m-val">Saturn V</span>
-            <span class="m-val">Crew Dragon</span>
-            <span class="m-val">ISS</span>
-            <span class="m-status success">Succès</span>
-            <span class="m-cost">1 650,01M€</span>
-        </div>
+        <div class="missions-row" role="row"><span class="m-date">05/05/2026 00:17</span><span class="m-val">Saturn V</span><span class="m-val">Crew Dragon</span><span class="m-val">Nibiru</span><span class="m-status success">Succès</span><span class="m-cost">1 650,10M€</span></div>
+        <div class="missions-row" role="row"><span class="m-date">05/05/2026 00:20</span><span class="m-val">Ariane 5</span><span class="m-val">Orion</span><span class="m-val">Orbite terrestre</span><span class="m-status fail">Échec</span><span class="m-cost">510,13M€</span></div>
+        <div class="missions-row" role="row"><span class="m-date">05/05/2026 15:35</span><span class="m-val">Saturn V</span><span class="m-val">Orion</span><span class="m-val">ISS</span><span class="m-status success">Succès</span><span class="m-cost">1 800,01M€</span></div>
+        <div class="missions-row" role="row"><span class="m-date">05/05/2026 15:51</span><span class="m-val">Starship</span><span class="m-val">Crew Dragon</span><span class="m-val">Orbite terrestre</span><span class="m-status success">Succès</span><span class="m-cost">312,02M€</span></div>
+        <div class="missions-row" role="row"><span class="m-date">06/05/2026 15:36</span><span class="m-val">Saturn V</span><span class="m-val">Crew Dragon</span><span class="m-val">ISS</span><span class="m-status success">Succès</span><span class="m-cost">1 650,01M€</span></div>
     </div>
 </section>
 
 <!-- CE QUE J'AI APPRIS -->
-<section class="section">
+<section class="section" aria-labelledby="learned-title">
     <div class="section-header">
-        <span class="section-tag">05 //</span>
-        <h2 class="section-title">Ce que j'ai appris</h2>
+        <span class="section-tag" aria-hidden="true">05 //</span>
+        <h2 class="section-title" id="learned-title">Ce que j'ai appris</h2>
     </div>
     <div class="learned-grid">
-        <div class="learned-item reveal"><span class="learned-dot"></span><span>Pattern Singleton pour le simulateur principal</span></div>
-        <div class="learned-item reveal"><span class="learned-dot"></span><span>Architecture en packages Java bien séparés</span></div>
-        <div class="learned-item reveal"><span class="learned-dot"></span><span>Gestion d'exceptions personnalisées</span></div>
-        <div class="learned-item reveal"><span class="learned-dot"></span><span>Programmation orientée objet avancée (héritage, polymorphisme)</span></div>
-        <div class="learned-item reveal"><span class="learned-dot"></span><span>Conception d'une interface console interactive</span></div>
-        <div class="learned-item reveal"><span class="learned-dot"></span><span>Modélisation d'un système complexe avec des règles métier</span></div>
+        <div class="learned-item reveal"><span class="learned-dot" aria-hidden="true"></span><span>Pattern Singleton pour le simulateur principal</span></div>
+        <div class="learned-item reveal"><span class="learned-dot" aria-hidden="true"></span><span>Architecture en packages Java bien séparés</span></div>
+        <div class="learned-item reveal"><span class="learned-dot" aria-hidden="true"></span><span>Gestion d'exceptions personnalisées</span></div>
+        <div class="learned-item reveal"><span class="learned-dot" aria-hidden="true"></span><span>Programmation orientée objet avancée — héritage, polymorphisme</span></div>
+        <div class="learned-item reveal"><span class="learned-dot" aria-hidden="true"></span><span>Conception d'une interface console interactive</span></div>
+        <div class="learned-item reveal"><span class="learned-dot" aria-hidden="true"></span><span>Modélisation d'un système complexe avec des règles métier</span></div>
     </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="footer">
-    <span class="prompt">~/projects $</span>
-    <span>cd artemis</span>
+<footer class="footer" aria-label="Pied de page">
+    <span class="prompt" aria-hidden="true">~/projects $</span>
+    <span aria-hidden="true">cd artemis</span>
     <a href="/project" class="footer-back">← Retour aux projets</a>
     <span class="footer-year">© 2026</span>
 </footer>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visionneuse d'images">
     <div class="lightbox-overlay" id="lightboxOverlay"></div>
     <div class="lightbox-box">
         <div class="lightbox-header">
             <span class="lightbox-title">Structure & Console — Artemis III</span>
-            <button class="lightbox-close" id="lightboxClose">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                 ESC
             </button>
         </div>
