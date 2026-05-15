@@ -1,11 +1,13 @@
 // ── CURRENTLY LEARNING TICKER ──
 const learningItems = [
-    'Sécurité des réseaux TCP/IP...',
-    'SQL...',
-    'Administration Linux...',
-    'Go — architecture web...',
-    'CTF challenges HackTheBox...',
+    'Administration Linux — Samba & annuaire LDAP...',
+    'Cybersécurité — CTF HackTheBox Labs...',
+    'Go — PostgreSQL & sécurité applicative...',
+    'Docker — hardening & multi-stage builds...',
+    'CI/CD — GitHub Actions & gosec...',
+    'Cloudflare — WAF & SSL configuration...',
 ];
+
 const learningEl = document.getElementById('learningText');
 let lIdx = 0, lChar = 0, lDeleting = false;
 
