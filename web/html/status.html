@@ -46,24 +46,32 @@
 
 <!-- NAV -->
 <nav class="nav" aria-label="Navigation principale">
+    <!-- LOGO -->
     <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
         <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
     </a>
-    <ul class="nav-links" role="list">
+
+    <!-- LIENS GAUCHE -->
+    <ul class="nav-left nav-links" role="list">
         <li><a href="/about" class="nav-link">À propos</a></li>
-        <li><a href="/tech" class="nav-link">Infrastructure</a></li>
-        <li><a href="/skills" class="nav-link">Compétences</a></li>
-        <li><a href="/project" class="nav-link">Projets</a></li>
         <li><a href="/contact" class="nav-link">Contact</a></li>
         <li><a href="/cv" class="nav-link">CV</a></li>
+    </ul>
+
+    <!-- HOME CENTRE -->
+    <div class="nav-center">
+        <a href="/home" class="nav-home"><span>HOME</span></a>
+    </div>
+
+    <!-- LIENS DROITE -->
+    <ul class="nav-right-links nav-links" role="list">
+        <li><a href="/skills" class="nav-link">Compétences</a></li>
+        <li><a href="/project" class="nav-link">Projets</a></li>
+        <li><a href="/tech" class="nav-link">Infrastructure</a></li>
         <li class="nav-more">
-            <button class="nav-more-btn" id="navMoreBtn"
-                    aria-haspopup="true" aria-expanded="false"
-                    aria-controls="navMoreMenu" aria-label="Plus de pages">
+            <button class="nav-more-btn" id="navMoreBtn" aria-haspopup="true" aria-expanded="false" aria-controls="navMoreMenu" aria-label="Plus de pages">
                 Plus
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                    <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="nav-more-menu" id="navMoreMenu" role="menu">
                 <a href="/status" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">06</span><span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
@@ -71,11 +79,12 @@
             </div>
         </li>
     </ul>
-    <button class="nav-burger" id="navBurger"
-            aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
-        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-    </button>
+
+    <!-- BURGER + STATUS -->
     <div class="nav-right">
+        <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+            <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+        </button>
         <div class="nav-status" aria-label="Disponible pour travailler">
             <span class="status-dot" aria-hidden="true"></span>
             <span>open to work</span>
