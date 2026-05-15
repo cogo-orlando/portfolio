@@ -44,14 +44,14 @@ document.querySelectorAll('.year-card-header[role="button"]').forEach(btn => {
     });
 });
 
-// Reveal observer
-const projectRevealObserver = new IntersectionObserver(entries => {
+// ── REVEAL OBSERVER ──
+const projectRevealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
         if (e.isIntersecting) {
             e.target.classList.add('visible');
             projectRevealObserver.unobserve(e.target);
         }
     });
-}, { threshold: 0.1 });
+}, { threshold: 0.05 }); // ← réduit à 0.05 au lieu de 0.1
 
 document.querySelectorAll('.reveal').forEach(el => projectRevealObserver.observe(el));

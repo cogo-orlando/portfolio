@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ── SEO ── -->
     <title>Orlando Cogo — Étudiant Cybersécurité & Développeur Go</title>
     <meta name="description" content="Portfolio d'Orlando Cogo, étudiant en Bachelor Informatique spécialisation Cybersécurité à Ynov Campus. Développeur Go, passionné par la sécurité des systèmes et des réseaux.">
     <meta name="author" content="Orlando Cogo">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://orlandocogo.com/home">
 
-    <!-- ── Open Graph ── -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orlandocogo.com/home">
     <meta property="og:title" content="Orlando Cogo — Étudiant Cybersécurité & Développeur Go">
@@ -19,23 +17,19 @@
     <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
     <meta property="og:locale" content="fr_FR">
 
-    <!-- ── Twitter Card ── -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Orlando Cogo — Étudiant Cybersécurité & Développeur Go">
     <meta name="twitter:description" content="Portfolio d'Orlando Cogo, étudiant en Bachelor Informatique spécialisation Cybersécurité à Ynov Campus.">
     <meta name="twitter:image" content="https://orlandocogo.com/img/og-image.png">
 
-    <!-- ── Favicon ── -->
     <link rel="icon" href="/img/favicon.ico">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <link rel="apple-touch-icon" href="/img/favicon.png">
 
-    <!-- ── Fonts ── -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
-    <!-- ── CSS ── -->
     <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/home.css">
 </head>
@@ -129,12 +123,12 @@
             Étudiant en <em>Bachelor Informatique</em> · Spécialisation <em>Cybersécurité</em>
         </p>
         <p class="hero-about">
-            Passionné par la sécurité des systèmes et des réseaux, j'explore les vulnérabilités
-            pour mieux construire des défenses robustes. Curieux, rigoureux, toujours en apprentissage.
+            Passionné par la sécurité des systèmes et des réseaux, je construis des projets réels en production — backend Go, Docker, CI/CD, monitoring temps réel. Curieux, rigoureux, toujours en apprentissage.
         </p>
         <div class="hero-badges" aria-label="Statut actuel">
             <span class="badge">Bachelor 1ère année</span>
             <span class="badge badge--open"><span class="badge-dot" aria-hidden="true"></span>Open to work</span>
+            <span class="badge">2 projets en prod</span>
         </div>
         <div class="scroll-hint" aria-hidden="true">
             <span>scroll</span>
@@ -148,43 +142,47 @@
             <span>CYBERSECURITY</span><span class="sep">·</span>
             <span>DÉVELOPPEMENT</span><span class="sep">·</span>
             <span>INFRASTRUCTURE</span><span class="sep">·</span>
-            <span>SECURITE</span><span class="sep">·</span>
+            <span>DOCKER</span><span class="sep">·</span>
             <span>OPEN TO WORK</span><span class="sep">·</span>
+            <span>CI/CD</span><span class="sep">·</span>
+            <span>GOLANG</span><span class="sep">·</span>
+            <span>POSTGRESQL</span><span class="sep">·</span>
             <span>YNOV CAMPUS</span><span class="sep">·</span>
-            <span>BACHELOR B1</span><span class="sep">·</span>
             <span>CYBERSECURITY</span><span class="sep">·</span>
             <span>DÉVELOPPEMENT</span><span class="sep">·</span>
             <span>INFRASTRUCTURE</span><span class="sep">·</span>
-            <span>SECURITE</span><span class="sep">·</span>
+            <span>DOCKER</span><span class="sep">·</span>
             <span>OPEN TO WORK</span><span class="sep">·</span>
+            <span>CI/CD</span><span class="sep">·</span>
+            <span>GOLANG</span><span class="sep">·</span>
+            <span>POSTGRESQL</span><span class="sep">·</span>
             <span>YNOV CAMPUS</span><span class="sep">·</span>
-            <span>BACHELOR B1</span><span class="sep">·</span>
         </div>
     </div>
 
-    <!-- STATS -->
-    <section class="section" aria-label="Statistiques">
+    <!-- STATS LIVE -->
+    <section class="section" aria-label="Statistiques système live">
         <div class="section-num" aria-hidden="true">01</div>
         <div class="stats-grid">
             <div class="stat-card reveal">
-                <span class="stat-val" data-target="8">0</span>
-                <span class="stat-unit">mois</span>
-                <span class="stat-label">En formation informatique</span>
+                <span class="stat-val" id="stat-tests">75</span>
+                <span class="stat-unit">tests</span>
+                <span class="stat-label">Unitaires — CI vert</span>
             </div>
             <div class="stat-card reveal">
-                <span class="stat-val" data-target="5">0</span>
-                <span class="stat-unit">+</span>
-                <span class="stat-label">Outils maîtrisés</span>
-            </div>
-            <div class="stat-card reveal">
-                <span class="stat-val" data-target="7">0</span>
+                <span class="stat-val" id="stat-projects">9</span>
                 <span class="stat-unit">+</span>
                 <span class="stat-label">Projets réalisés</span>
             </div>
             <div class="stat-card reveal">
-                <span class="stat-val" id="live-timer">0</span>
-                <span class="stat-unit">jours</span>
-                <span class="stat-label">Depuis reconversion</span>
+                <span class="stat-val" id="stat-goroutines">—</span>
+                <span class="stat-unit">go</span>
+                <span class="stat-label">Goroutines actives</span>
+            </div>
+            <div class="stat-card reveal">
+                <span class="stat-val" id="stat-uptime">—</span>
+                <span class="stat-unit"></span>
+                <span class="stat-label">Uptime serveur</span>
             </div>
         </div>
     </section>
@@ -201,74 +199,121 @@
                 <div class="whatido-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                 </div>
-                <h3 class="whatido-title">Développement</h3>
-                <p class="whatido-desc">Applications web avec Go et JavaScript. Architecture serveur, routing, templating et gestion des fichiers statiques.</p>
-                <div class="whatido-tags" aria-label="Technologies : Go, JavaScript, SQL"><span>Go</span><span>JavaScript</span><span>SQL</span></div>
+                <h3 class="whatido-title">Développement backend</h3>
+                <p class="whatido-desc">Serveurs HTTP Go from scratch, API REST, middleware chain, tests unitaires, PostgreSQL. 2 applications en production.</p>
+                <div class="whatido-tags" aria-label="Technologies"><span>Go</span><span>PostgreSQL</span><span>Docker</span><span>CI/CD</span></div>
             </article>
             <article class="whatido-card reveal">
                 <div class="whatido-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <h3 class="whatido-title">Cybersécurité</h3>
-                <p class="whatido-desc">Analyse de vulnérabilités, OSINT, CTF challenges. Apprentissage des techniques offensives et défensives.</p>
-                <div class="whatido-tags" aria-label="Domaines : OSINT, CTF, Pentest"><span>OSINT</span><span>CTF</span><span>Pentest</span></div>
+                <h3 class="whatido-title">Sécurité applicative</h3>
+                <p class="whatido-desc">bcrypt, sessions sécurisées, rate limiting, honeypot, WAF Cloudflare, RLS PostgreSQL, gosec 0 issues. Sécurité by design.</p>
+                <div class="whatido-tags" aria-label="Domaines"><span>bcrypt</span><span>WAF</span><span>gosec</span><span>RLS</span></div>
             </article>
             <article class="whatido-card reveal">
                 <div class="whatido-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
                 </div>
-                <h3 class="whatido-title">Infrastructure</h3>
-                <p class="whatido-desc">Configuration réseau Cisco, virtualisation VirtualBox, administration Linux. Bases solides en systèmes et réseaux.</p>
-                <div class="whatido-tags" aria-label="Outils : Linux, Cisco, VirtualBox"><span>Linux</span><span>Cisco</span><span>VirtualBox</span></div>
+                <h3 class="whatido-title">Infrastructure & DevOps</h3>
+                <p class="whatido-desc">Docker multi-stage, GitHub Actions CI/CD, Cloudflare, Render, Proxmox VE, Linux, Cisco Packet Tracer, réseau multi-sites.</p>
+                <div class="whatido-tags" aria-label="Outils"><span>Docker</span><span>Cloudflare</span><span>Proxmox</span><span>Cisco</span></div>
             </article>
+        </div>
+    </section>
+
+    <!-- PROJETS FLAGSHIP -->
+    <section class="section" aria-labelledby="flagship-title">
+        <div class="section-num" aria-hidden="true">03</div>
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">03 //</span>
+            <h2 class="section-title" id="flagship-title">Projets en production</h2>
+        </div>
+        <div class="flagship-grid">
+
+            <div class="flagship-card reveal">
+                <div class="flagship-header">
+                    <div class="flagship-left">
+                        <span class="flagship-num" aria-hidden="true">01</span>
+                        <span class="flagship-badge flagship-badge--live">En prod</span>
+                    </div>
+                    <div class="flagship-tags">
+                        <span>Go</span><span>Docker</span><span>Cloudflare</span><span>CI/CD</span>
+                    </div>
+                </div>
+                <h3 class="flagship-name">Portfolio — orlandocogo.com</h3>
+                <p class="flagship-desc">Serveur HTTP Go from scratch — routing, middleware chain, honeypot 15 routes, rate limiting 120 req/min, panic recovery. Docker multi-stage 60MB, Cloudflare WAF, GitHub Actions.</p>
+                <div class="flagship-metrics">
+                    <div class="fm-item"><span class="fm-val">47</span><span class="fm-label">tests</span></div>
+                    <div class="fm-item"><span class="fm-val">60MB</span><span class="fm-label">Docker</span></div>
+                    <div class="fm-item"><span class="fm-val">0</span><span class="fm-label">gosec issues</span></div>
+                    <div class="fm-item"><span class="fm-val">96+</span><span class="fm-label">Lighthouse</span></div>
+                </div>
+                <a href="/tech" class="flagship-link">Architecture →</a>
+            </div>
+
+            <div class="flagship-card flagship-card--flagship reveal">
+                <div class="flagship-header">
+                    <div class="flagship-left">
+                        <span class="flagship-num" aria-hidden="true">02</span>
+                        <span class="flagship-badge flagship-badge--flagship">Flagship</span>
+                    </div>
+                    <div class="flagship-tags">
+                        <span>Go</span><span>PostgreSQL</span><span>Supabase</span><span>Docker</span>
+                    </div>
+                </div>
+                <h3 class="flagship-name">Security Dashboard</h3>
+                <p class="flagship-desc">Plateforme de monitoring et supervision de sécurité connectée au portfolio en temps réel — 8 sections, auth bcrypt, sessions sécurisées, PostgreSQL RLS, export CSV, métriques Go live.</p>
+                <div class="flagship-metrics">
+                    <div class="fm-item"><span class="fm-val">28</span><span class="fm-label">tests</span></div>
+                    <div class="fm-item"><span class="fm-val">15MB</span><span class="fm-label">Docker</span></div>
+                    <div class="fm-item"><span class="fm-val">0</span><span class="fm-label">gosec issues</span></div>
+                    <div class="fm-item"><span class="fm-val">8</span><span class="fm-label">sections</span></div>
+                </div>
+                <a href="/projects/security-dashboard" class="flagship-link">Détails →</a>
+            </div>
+
+        </div>
+        <div class="flagship-cta reveal">
+            <a href="/project" class="infra-link">Voir tous les projets →</a>
         </div>
     </section>
 
     <!-- INFRASTRUCTURE & DÉPLOIEMENT -->
     <section class="section" aria-labelledby="infra-title">
-        <div class="section-num" aria-hidden="true">03</div>
+        <div class="section-num" aria-hidden="true">04</div>
         <div class="section-header">
-            <span class="section-tag" aria-hidden="true">03 //</span>
+            <span class="section-tag" aria-hidden="true">04 //</span>
             <h2 class="section-title" id="infra-title">Infrastructure & Déploiement</h2>
         </div>
 
         <!-- Schéma d'architecture -->
         <div class="arch-diagram reveal" aria-label="Schéma d'architecture du portfolio">
             <div class="arch-step">
-                <div class="arch-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-                </div>
+                <div class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
                 <span class="arch-label">Visiteur</span>
             </div>
             <div class="arch-arrow" aria-hidden="true">↓</div>
             <div class="arch-step arch-step--highlight">
-                <div class="arch-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                </div>
+                <div class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
                 <span class="arch-label">Cloudflare</span>
                 <span class="arch-sub">WAF · DDoS · HTTPS · CDN</span>
             </div>
             <div class="arch-arrow" aria-hidden="true">↓</div>
             <div class="arch-step">
-                <div class="arch-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-                </div>
+                <div class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
                 <span class="arch-label">Render</span>
                 <span class="arch-sub">PaaS · Auto-deploy</span>
             </div>
             <div class="arch-arrow" aria-hidden="true">↓</div>
             <div class="arch-step">
-                <div class="arch-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-                </div>
+                <div class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
                 <span class="arch-label">Docker</span>
-                <span class="arch-sub">Multi-stage · ~60MB</span>
+                <span class="arch-sub">Multi-stage · 60MB</span>
             </div>
             <div class="arch-arrow" aria-hidden="true">↓</div>
             <div class="arch-step arch-step--accent">
-                <div class="arch-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                </div>
+                <div class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
                 <span class="arch-label">Go Backend</span>
                 <span class="arch-sub">HTTP natif · Middleware · Slog</span>
             </div>
@@ -276,122 +321,82 @@
 
         <!-- Stack cards -->
         <div class="infra-grid reveal">
-
             <div class="infra-card">
                 <div class="infra-card-top">
-                    <div class="infra-icon infra-icon--go" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                    </div>
+                    <div class="infra-icon infra-icon--go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
                     <span class="infra-name">Go Backend</span>
                     <span class="infra-badge infra-badge--green">Production</span>
                 </div>
-                <p class="infra-desc">Serveur HTTP natif sans framework. Routing manuel, middleware chain, template cache, graceful shutdown.</p>
-                <div class="infra-tags"><span>Zéro dépendance</span><span>slog JSON</span><span>Tests unitaires</span></div>
+                <p class="infra-desc">Serveur HTTP natif sans framework. Routing manuel, middleware chain, template cache, graceful shutdown, tests unitaires.</p>
+                <div class="infra-tags"><span>75 tests</span><span>slog JSON</span><span>gosec 0</span></div>
             </div>
-
             <div class="infra-card">
                 <div class="infra-card-top">
-                    <div class="infra-icon infra-icon--docker" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-                    </div>
+                    <div class="infra-icon infra-icon--docker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
                     <span class="infra-name">Docker</span>
                     <span class="infra-badge infra-badge--blue">Containerisé</span>
                 </div>
-                <p class="infra-desc">Multi-stage build — image finale ~60MB depuis scratch. Binaire statique compilé, utilisateur non-root.</p>
-                <div class="infra-tags"><span>Multi-stage</span><span>Non-root</span><span>~60MB</span></div>
+                <p class="infra-desc">Multi-stage build — 60MB portfolio, 15MB dashboard. Image scratch, no-new-privileges, read_only filesystem, USER 1001.</p>
+                <div class="infra-tags"><span>Multi-stage</span><span>Non-root</span><span>Hardened</span></div>
             </div>
-
             <div class="infra-card">
                 <div class="infra-card-top">
-                    <div class="infra-icon infra-icon--cloudflare" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    </div>
+                    <div class="infra-icon infra-icon--cloudflare" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
                     <span class="infra-name">Cloudflare</span>
                     <span class="infra-badge infra-badge--orange">Sécurisé</span>
                 </div>
-                <p class="infra-desc">WAF, DDoS protection, SSL Full Strict, headers de sécurité. Score A+ sur securityheaders.com.</p>
-                <div class="infra-tags"><span>WAF</span><span>Score A</span><span>HTTPS</span></div>
+                <p class="infra-desc">WAF, DDoS protection, SSL Full Strict, Bot Fight Mode. Headers de sécurité score A.</p>
+                <div class="infra-tags"><span>WAF</span><span>Score A</span><span>SSL Strict</span></div>
             </div>
-
             <div class="infra-card">
                 <div class="infra-card-top">
-                    <div class="infra-icon infra-icon--render" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-                    </div>
+                    <div class="infra-icon infra-icon--render" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
                     <span class="infra-name">Render</span>
                     <span class="infra-badge infra-badge--purple">Déployé</span>
                 </div>
                 <p class="infra-desc">Déploiement automatique depuis GitHub. Auto-deploy sur chaque push, monitoring via UptimeRobot.</p>
-                <div class="infra-tags"><span>Auto-deploy</span><span>UptimeRobot</span><span>100% uptime</span></div>
+                <div class="infra-tags"><span>Auto-deploy</span><span>UptimeRobot</span></div>
             </div>
-
             <div class="infra-card">
                 <div class="infra-card-top">
-                    <div class="infra-icon infra-icon--ci" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-                    </div>
+                    <div class="infra-icon infra-icon--ci" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
                     <span class="infra-name">GitHub Actions</span>
                     <span class="infra-badge infra-badge--green">CI/CD</span>
                 </div>
-                <p class="infra-desc">47 tests unitaires lancés automatiquement à chaque push. Scan gosec inclus — 0 vulnérabilité détectée.</p>
-                <div class="infra-tags"><span>47 tests</span><span>gosec</span><span>Go 1.23</span></div>
+                <p class="infra-desc">75 tests unitaires lancés automatiquement à chaque push. Scan gosec — 0 vulnérabilité. Purge cache Cloudflare auto.</p>
+                <div class="infra-tags"><span>75 tests</span><span>gosec</span><span>Purge CF</span></div>
             </div>
-
             <div class="infra-card">
                 <div class="infra-card-top">
-                    <div class="infra-icon infra-icon--security" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                    </div>
+                    <div class="infra-icon infra-icon--security" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
                     <span class="infra-name">Sécurité Go</span>
                     <span class="infra-badge infra-badge--green">Hardened</span>
                 </div>
-                <p class="infra-desc">Honeypot, rate limiting, panic recovery, request ID, IP Cloudflare, sanitisation des inputs.</p>
-                <div class="infra-tags"><span>Honeypot</span><span>Rate limit</span><span>Recovery</span></div>
+                <p class="infra-desc">Honeypot 15 routes, rate limiting, bcrypt, sessions HttpOnly, RLS Supabase, panic recovery, request ID.</p>
+                <div class="infra-tags"><span>Honeypot</span><span>bcrypt</span><span>RLS</span></div>
             </div>
-
         </div>
 
         <!-- Métriques de sécurité -->
         <div class="security-checks reveal" aria-label="Vérifications de sécurité">
-            <div class="check-item">
-                <span class="check-icon" aria-hidden="true">✓</span>
-                <span>HTTPS — SSL Full Strict via Cloudflare</span>
-            </div>
-            <div class="check-item">
-                <span class="check-icon" aria-hidden="true">✓</span>
-                <span>Headers de sécurité — Score A securityheaders.com</span>
-            </div>
-            <div class="check-item">
-                <span class="check-icon" aria-hidden="true">✓</span>
-                <span>Docker — image non-root, binaire statique</span>
-            </div>
-            <div class="check-item">
-                <span class="check-icon" aria-hidden="true">✓</span>
-                <span>CI/CD — 47 tests + gosec à chaque push</span>
-            </div>
-            <div class="check-item">
-                <span class="check-icon" aria-hidden="true">✓</span>
-                <span>Honeypot — blacklist automatique des scanners</span>
-            </div>
-            <div class="check-item">
-                <span class="check-icon" aria-hidden="true">✓</span>
-                <span>Rate limiting — 120 req/min/IP + protection contact</span>
-            </div>
+            <div class="check-item"><span class="check-icon" aria-hidden="true">✓</span><span>HTTPS — SSL Full Strict via Cloudflare</span></div>
+            <div class="check-item"><span class="check-icon" aria-hidden="true">✓</span><span>Headers de sécurité — Score A securityheaders.com</span></div>
+            <div class="check-item"><span class="check-icon" aria-hidden="true">✓</span><span>Docker — image non-root, no-new-privileges, read_only</span></div>
+            <div class="check-item"><span class="check-icon" aria-hidden="true">✓</span><span>CI/CD — 75 tests + gosec 0 issues à chaque push</span></div>
+            <div class="check-item"><span class="check-icon" aria-hidden="true">✓</span><span>Honeypot — 15 routes piège, blacklist 24h automatique</span></div>
+            <div class="check-item"><span class="check-icon" aria-hidden="true">✓</span><span>Rate limiting — 120 req/min/IP + 10 tentatives login max</span></div>
         </div>
 
         <div class="infra-cta reveal">
-            <a href="/tech" class="infra-link">
-                Voir l'architecture complète →
-            </a>
+            <a href="/tech" class="infra-link">Voir l'architecture complète →</a>
         </div>
-
     </section>
 
     <!-- EXPLORER -->
     <section class="section" aria-labelledby="explorer-title">
-        <div class="section-num" aria-hidden="true">04</div>
+        <div class="section-num" aria-hidden="true">05</div>
         <div class="section-header">
-            <span class="section-tag" aria-hidden="true">04 //</span>
+            <span class="section-tag" aria-hidden="true">05 //</span>
             <h2 class="section-title" id="explorer-title">Explorer</h2>
         </div>
         <nav class="quicknav-grid" aria-label="Navigation rapide">
@@ -403,41 +408,41 @@
             <a href="/skills" class="quicknav-card reveal">
                 <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">02</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
                 <h3>Compétences</h3>
-                <p>Go, JS, SQL, VirtualBox, Linux et plus.</p>
+                <p>Go, Docker, CI/CD, PostgreSQL, Linux, Cisco.</p>
             </a>
             <a href="/project" class="quicknav-card reveal">
                 <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">03</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
                 <h3>Projets</h3>
-                <p>Mes réalisations, ce portfolio inclus.</p>
+                <p>9 projets — dont 2 en production.</p>
             </a>
             <a href="/contact" class="quicknav-card reveal">
                 <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">04</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
                 <h3>Contact</h3>
-                <p>GitHub, LinkedIn, email — retrouvez-moi.</p>
+                <p>GitHub, LinkedIn, email — disponible.</p>
             </a>
             <a href="/cv" class="quicknav-card reveal">
                 <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">05</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
                 <h3>CV</h3>
-                <p>Retrouve mon CV</p>
+                <p>Mon curriculum vitae complet.</p>
             </a>
             <a href="/status" class="quicknav-card reveal">
                 <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">06</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
                 <h3>Status</h3>
-                <p>Status en direct du site.</p>
+                <p>Status en direct du système.</p>
             </a>
             <a href="/faq" class="quicknav-card reveal">
                 <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">07</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
                 <h3>FAQ</h3>
-                <p>Questions / Réponses</p>
+                <p>Questions fréquentes sur le portfolio.</p>
             </a>
         </nav>
     </section>
 
     <!-- CERTIFICATIONS -->
     <section class="section" aria-labelledby="certif-title">
-        <div class="section-num" aria-hidden="true">05</div>
+        <div class="section-num" aria-hidden="true">06</div>
         <div class="section-header">
-            <span class="section-tag" aria-hidden="true">05 //</span>
+            <span class="section-tag" aria-hidden="true">06 //</span>
             <h2 class="section-title" id="certif-title">Certifications & Objectifs</h2>
         </div>
         <div class="certif-list">
@@ -447,9 +452,7 @@
                     <span class="certif-status status--planned">Planifié</span>
                 </div>
                 <div class="certif-bar-wrap">
-                    <div class="certif-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progression CompTIA A+">
-                        <div class="certif-fill" style="--pct:0%"></div>
-                    </div>
+                    <div class="certif-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progression CompTIA A+"><div class="certif-fill" style="--pct:0%"></div></div>
                     <span class="certif-pct" aria-hidden="true">0%</span>
                 </div>
             </div>
@@ -459,9 +462,7 @@
                     <span class="certif-status status--planned">Planifié</span>
                 </div>
                 <div class="certif-bar-wrap">
-                    <div class="certif-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progression Cisco CCNA">
-                        <div class="certif-fill" style="--pct:0%"></div>
-                    </div>
+                    <div class="certif-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progression Cisco CCNA"><div class="certif-fill" style="--pct:0%"></div></div>
                     <span class="certif-pct" aria-hidden="true">0%</span>
                 </div>
             </div>
@@ -471,9 +472,7 @@
                     <span class="certif-status status--planned">Planifié</span>
                 </div>
                 <div class="certif-bar-wrap">
-                    <div class="certif-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progression AWS">
-                        <div class="certif-fill" style="--pct:0%"></div>
-                    </div>
+                    <div class="certif-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progression AWS"><div class="certif-fill" style="--pct:0%"></div></div>
                     <span class="certif-pct" aria-hidden="true">0%</span>
                 </div>
             </div>
@@ -482,26 +481,28 @@
 
     <!-- SETUP -->
     <section class="section" aria-labelledby="setup-title">
-        <div class="section-num" aria-hidden="true">06</div>
+        <div class="section-num" aria-hidden="true">07</div>
         <div class="section-header">
-            <span class="section-tag" aria-hidden="true">06 //</span>
+            <span class="section-tag" aria-hidden="true">07 //</span>
             <h2 class="section-title" id="setup-title">Mon setup</h2>
         </div>
         <div class="setup-grid">
-            <div class="setup-card reveal"><span class="setup-key">OS</span><span class="setup-val">Windows 11 pro + Linux (VM)</span></div>
+            <div class="setup-card reveal"><span class="setup-key">OS</span><span class="setup-val">Windows 11 Pro + Linux VM</span></div>
             <div class="setup-card reveal"><span class="setup-key">IDE</span><span class="setup-val">GoLand · VS Code</span></div>
             <div class="setup-card reveal"><span class="setup-key">Terminal</span><span class="setup-val">PowerShell · Bash</span></div>
-            <div class="setup-card reveal"><span class="setup-key">VM</span><span class="setup-val">VirtualBox</span></div>
+            <div class="setup-card reveal"><span class="setup-key">Container</span><span class="setup-val">Docker Desktop</span></div>
+            <div class="setup-card reveal"><span class="setup-key">VM</span><span class="setup-val">VirtualBox · Proxmox VE</span></div>
             <div class="setup-card reveal"><span class="setup-key">Réseau</span><span class="setup-val">Cisco Packet Tracer</span></div>
-            <div class="setup-card reveal"><span class="setup-key">CTF</span><span class="setup-val">HackTheBox</span></div>
+            <div class="setup-card reveal"><span class="setup-key">DB</span><span class="setup-val">PostgreSQL · Supabase</span></div>
+            <div class="setup-card reveal"><span class="setup-key">CTF</span><span class="setup-val">HackTheBox Labs</span></div>
         </div>
     </section>
 
     <!-- CURRENTLY LEARNING -->
     <section class="section" aria-labelledby="learning-title">
-        <div class="section-num" aria-hidden="true">07</div>
+        <div class="section-num" aria-hidden="true">08</div>
         <div class="section-header">
-            <span class="section-tag" aria-hidden="true">07 //</span>
+            <span class="section-tag" aria-hidden="true">08 //</span>
             <h2 class="section-title" id="learning-title">Currently learning</h2>
         </div>
         <div class="learning-ticker reveal" aria-live="polite" aria-label="En cours d'apprentissage">

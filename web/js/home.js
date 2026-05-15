@@ -96,3 +96,19 @@ function typeLearning() {
     setTimeout(typeLearning, lDeleting ? 40 : 70);
 }
 setTimeout(typeLearning, 2500);
+
+// ── STATS LIVE depuis /health ──
+async function loadLiveStats() {
+    try {
+        const res = await fetch('/health');
+        if (!res.ok) return;
+        const data = await res.json();
+        const gorEl = document.getElementById('stat-goroutines');
+        const upEl  = document.getElementById('stat-uptime');
+        if (gorEl) gorEl.textContent = data.goroutines ?? '—';
+        if (upEl)  upEl.textContent  = data.uptime ?? '—';
+    } catch (e) {
+        console.warn('loadLiveStats:', e);
+    }
+}
+loadLiveStats();
