@@ -30,12 +30,15 @@ func setupTestTemplates(t *testing.T) func() {
 		"index.html", "home.html", "about.html", "skills.html",
 		"project.html", "contact.html", "cv.html", "status.html",
 		"faq.html", "maintenance.html", "404.html",
-		"zoo.html", "netflix.html", "groupie.html",
-		"power4.html", "cisco.html", "artemis.html",
-		"annuaire.html",
+		"projects/zoo.html", "projects/netflix.html", "projects/groupie.html",
+		"projects/power4.html", "projects/cisco.html", "projects/artemis.html",
+		"projects/annuaire.html", "projects/security-dashboard.html",
 	}
 
 	created := []string{}
+	if err := os.MkdirAll(filepath.Join("web", "html", "projects"), 0755); err != nil {
+		t.Fatalf("impossible de créer web/html/projects : %v", err)
+	}
 	for _, page := range pages {
 		path := filepath.Join(dir, page)
 		content := "<!DOCTYPE html><html><body>test:" + page + "</body></html>"
