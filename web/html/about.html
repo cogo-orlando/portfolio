@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ── SEO ── -->
+
     <title>Orlando Cogo — À propos & Parcours</title>
     <meta name="description" content="Découvrez le parcours d'Orlando Cogo — de l'industrie aéronautique Airbus à la cybersécurité. Reconversion assumée, Bachelor Informatique Ynov Campus Toulouse.">
     <meta name="author" content="Orlando Cogo">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://orlandocogo.com/about">
 
-    <!-- ── Open Graph ── -->
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orlandocogo.com/about">
     <meta property="og:title" content="Orlando Cogo — À propos & Parcours">
@@ -19,23 +19,23 @@
     <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
     <meta property="og:locale" content="fr_FR">
 
-    <!-- ── Twitter Card ── -->
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Orlando Cogo — À propos & Parcours">
     <meta name="twitter:description" content="De l'industrie aéronautique Airbus à la cybersécurité — le parcours d'Orlando Cogo.">
     <meta name="twitter:image" content="https://orlandocogo.com/img/og-image.png">
 
-    <!-- ── Favicon ── -->
+
     <link rel="icon" href="/img/favicon.ico">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <link rel="apple-touch-icon" href="/img/favicon.png">
 
-    <!-- ── Fonts ── -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
-    <!-- ── CSS ── -->
+
     <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/about.css">
 </head>
@@ -50,7 +50,6 @@
 <div class="corner corner--br" aria-hidden="true"></div>
 <canvas id="matrix" class="matrix-canvas" aria-hidden="true"></canvas>
 
-<!-- NAV -->
 <nav class="nav" aria-label="Navigation principale">
     <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
         <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
@@ -63,35 +62,18 @@
         <li><a href="/contact" class="nav-link">Contact</a></li>
         <li><a href="/cv" class="nav-link">CV</a></li>
         <li class="nav-more">
-            <button class="nav-more-btn" id="navMoreBtn"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    aria-controls="navMoreMenu"
-                    aria-label="Plus de pages">
+            <button class="nav-more-btn" id="navMoreBtn" aria-haspopup="true" aria-expanded="false" aria-controls="navMoreMenu" aria-label="Plus de pages">
                 Plus
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                    <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="nav-more-menu" id="navMoreMenu" role="menu">
-                <a href="/status" class="more-item" role="menuitem">
-                    <span class="more-num" aria-hidden="true">06</span>
-                    <span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span>
-                </a>
-                <a href="/faq" class="more-item" role="menuitem">
-                    <span class="more-num" aria-hidden="true">07</span>
-                    <span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions / Réponses</span></span>
-                </a>
+                <a href="/status" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">06</span><span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
+                <a href="/faq" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">07</span><span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions / Réponses</span></span></a>
             </div>
         </li>
     </ul>
-    <button class="nav-burger" id="navBurger"
-            aria-label="Ouvrir le menu"
-            aria-expanded="false"
-            aria-controls="mobileMenu">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+    <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
     </button>
     <div class="nav-right">
         <div class="nav-status" aria-label="Disponible pour travailler">
@@ -101,19 +83,17 @@
     </div>
 </nav>
 
-<!-- Menu mobile -->
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <a href="/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>À propos</a>
     <a href="/tech" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Infrastructure</a>
-    <a href="/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Compétences</a>
-    <a href="/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Projets</a>
-    <a href="/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Contact</a>
-    <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>CV</a>
-    <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>Status</a>
-    <a href="/faq" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>FAQ</a>
+    <a href="/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Compétences</a>
+    <a href="/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Projets</a>
+    <a href="/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>Contact</a>
+    <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>CV</a>
+    <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>Status</a>
+    <a href="/faq" class="mobile-link"><span class="mobile-num" aria-hidden="true">08</span>FAQ</a>
 </div>
 
-<!-- CONTENU PRINCIPAL -->
 <main id="main-content">
 
     <!-- HERO -->
@@ -124,7 +104,16 @@
             <span class="cursor"></span>
         </div>
         <h1 class="hero-title" id="hero-title">À propos<br><span class="outline">de moi</span></h1>
-        <p class="hero-intro">Un parcours atypique, une reconversion assumée, une passion qui guide chaque décision.</p>
+        <p class="hero-intro">Un parcours atypique, une reconversion assumée, une passion qui guide chaque décision. De l'industrie aéronautique à la cybersécurité — avec des projets en production pour le prouver.</p>
+        <div class="hero-stats reveal" aria-label="Quelques chiffres">
+            <div class="hstat"><span class="hstat-val">5</span><span class="hstat-label">ans Airbus</span></div>
+            <div class="hstat-sep" aria-hidden="true">·</div>
+            <div class="hstat"><span class="hstat-val">B1</span><span class="hstat-label">Ynov Campus</span></div>
+            <div class="hstat-sep" aria-hidden="true">·</div>
+            <div class="hstat"><span class="hstat-val">2</span><span class="hstat-label">Projets en prod</span></div>
+            <div class="hstat-sep" aria-hidden="true">·</div>
+            <div class="hstat"><span class="hstat-val">75</span><span class="hstat-label">Tests unitaires</span></div>
+        </div>
     </section>
 
     <!-- TIMELINE -->
@@ -142,8 +131,8 @@
                     <div class="timeline-content">
                         <span class="timeline-tag">Aujourd'hui</span>
                         <h3 class="timeline-title">Bachelor Informatique — Cybersécurité</h3>
-                        <p class="timeline-place">Ynov Campus · 1ère année</p>
-                        <p class="timeline-desc">Reconversion dans ce qui me passionne vraiment : l'informatique, l'infrastructure et la cybersécurité. Apprentissage des fondamentaux du développement, des réseaux et de la sécurité des systèmes.</p>
+                        <p class="timeline-place">Ynov Campus Toulouse · 1ère année</p>
+                        <p class="timeline-desc">Reconversion dans ce qui me passionne vraiment : l'informatique, l'infrastructure et la cybersécurité. En parallèle de la formation, je construis des projets réels en production — un portfolio Go déployé sur orlandocogo.com et un security dashboard de monitoring connecté en temps réel.</p>
                     </div>
                 </div>
             </div>
@@ -156,7 +145,7 @@
                         <span class="timeline-tag">BTS en alternance</span>
                         <h3 class="timeline-title">BTS CPRP — Conception des Processus de Réalisation de Produit</h3>
                         <p class="timeline-place">Lycée Jean Perrin · Marseille &nbsp;×&nbsp; Airbus Helicopters</p>
-                        <p class="timeline-desc">Deux ans en alternance chez Airbus Helicopters à Marseille. Conception et optimisation des processus industriels. BTS obtenu avec succès.</p>
+                        <p class="timeline-desc">Deux ans en alternance chez Airbus Helicopters à Marseille. Conception et optimisation des processus industriels. BTS obtenu avec succès. C'est ici que j'ai réalisé que je voulais me reconvertir vers l'informatique.</p>
                     </div>
                 </div>
             </div>
@@ -166,12 +155,49 @@
                 <div class="timeline-right">
                     <div class="timeline-dot" aria-hidden="true"></div>
                     <div class="timeline-content">
-                        <span class="timeline-tag">Bac Pro / Terminal en alternance</span>
+                        <span class="timeline-tag">Bac Pro en alternance</span>
                         <h3 class="timeline-title">Bac Pro Technicien d'Usinage — Mention</h3>
                         <p class="timeline-place">Lycée Airbus Saint-Éloi · Toulouse &nbsp;×&nbsp; Airbus (Usine Saint-Éloi)</p>
-                        <p class="timeline-desc">Formation en alternance au sein de l'usine Saint-Éloi d'Airbus à Toulouse. Maîtrise des techniques d'usinage, travail en environnement industriel exigeant. Bac Pro obtenu avec mention.</p>
+                        <p class="timeline-desc">Formation en alternance au sein de l'usine Saint-Éloi d'Airbus à Toulouse. Bac Pro obtenu avec mention. La rigueur industrielle acquise ici se retrouve aujourd'hui dans ma façon d'écrire du code — tests, CI/CD, monitoring, documentation.</p>
                     </div>
                 </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CE QUE JE CONSTRUIS -->
+    <section class="section" aria-labelledby="building-title">
+        <div class="section-header">
+            <span class="section-tag" aria-hidden="true">02 //</span>
+            <h2 class="section-title" id="building-title">Ce que je construis</h2>
+        </div>
+        <div class="building-grid">
+
+            <div class="building-card reveal">
+                <div class="building-header">
+                    <span class="building-num" aria-hidden="true">01</span>
+                    <span class="building-status building-status--live">En prod</span>
+                </div>
+                <h3 class="building-name">Portfolio — orlandocogo.com</h3>
+                <p class="building-desc">Serveur HTTP Go from scratch — routing, middleware chain, honeypot, rate limiting, panic recovery. Docker multi-stage 60MB, Cloudflare WAF, CI/CD GitHub Actions. 47 tests unitaires, gosec 0 issues, Lighthouse 96+.</p>
+                <div class="building-tags">
+                    <span>Go</span><span>Docker</span><span>Cloudflare</span><span>CI/CD</span><span>47 tests</span>
+                </div>
+                <a href="/tech" class="building-link">Architecture →</a>
+            </div>
+
+            <div class="building-card building-card--flagship reveal">
+                <div class="building-header">
+                    <span class="building-num" aria-hidden="true">02</span>
+                    <span class="building-status building-status--flagship">Flagship</span>
+                </div>
+                <h3 class="building-name">Security Dashboard</h3>
+                <p class="building-desc">Plateforme de monitoring et supervision de sécurité connectée au portfolio en temps réel — 8 sections, auth bcrypt, sessions sécurisées, PostgreSQL RLS, Docker 15MB, CI/CD vert, 28 tests unitaires, gosec 0 issues.</p>
+                <div class="building-tags">
+                    <span>Go</span><span>PostgreSQL</span><span>Supabase</span><span>Docker</span><span>28 tests</span>
+                </div>
+                <a href="/projects/security-dashboard" class="building-link">Détails →</a>
             </div>
 
         </div>
@@ -180,7 +206,7 @@
     <!-- MOTIVATION -->
     <section class="section" aria-labelledby="motivation-title">
         <div class="section-header">
-            <span class="section-tag" aria-hidden="true">02 //</span>
+            <span class="section-tag" aria-hidden="true">03 //</span>
             <h2 class="section-title" id="motivation-title">Pourquoi la cybersécurité</h2>
         </div>
         <div class="motivation-block reveal">
@@ -188,54 +214,48 @@
                 <span class="quote-mark" aria-hidden="true">"</span>
                 <p>Pour moi, la cybersécurité c'est vraiment l'avenir. Avec l'arrivée de l'intelligence artificielle et toutes les nouvelles technologies, le secteur de l'informatique change régulièrement et c'est ça qui me passionne. Je suis convaincu qu'il est devenu essentiel de comprendre ces évolutions pour bien protéger les systèmes.</p>
             </blockquote>
-            <p class="motivation-text">Après un parcours dans l'industrie aéronautique, j'ai compris que je voulais évoluer dans un domaine en perpétuel mouvement. La cybersécurité, c'est exactement ça : un secteur qui ne dort jamais, où chaque jour apporte de nouveaux défis, de nouvelles menaces à analyser et à contrer. Le fait d'avoir travaillé dans des environnements industriels très structurés comme Airbus m'a appris la rigueur et la méthode — deux qualités essentielles en sécurité informatique.</p>
+            <p class="motivation-text">Après un parcours dans l'industrie aéronautique, j'ai compris que je voulais évoluer dans un domaine en perpétuel mouvement. La cybersécurité, c'est exactement ça : un secteur qui ne dort jamais, où chaque jour apporte de nouveaux défis, de nouvelles menaces à analyser et à contrer.</p>
+            <p class="motivation-text">Le fait d'avoir travaillé dans des environnements industriels très structurés comme Airbus m'a appris la rigueur et la méthode — deux qualités essentielles en sécurité informatique. Aujourd'hui, je mets cette rigueur dans chaque projet : tests unitaires, scan de sécurité statique gosec, CI/CD automatisé, monitoring en production.</p>
         </div>
     </section>
 
     <!-- HOBBIES -->
     <section class="section" aria-labelledby="hobbies-title">
         <div class="section-header">
-            <span class="section-tag" aria-hidden="true">03 //</span>
+            <span class="section-tag" aria-hidden="true">04 //</span>
             <h2 class="section-title" id="hobbies-title">En dehors du code</h2>
         </div>
         <div class="hobbies-grid">
-
             <div class="hobby-card reveal">
                 <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M9 18V5l12-2v13M9 18c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-2c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"/></svg></div>
                 <span class="hobby-name">Musique</span>
                 <p class="hobby-desc">Toujours un casque sur les oreilles, la musique me permet de me libérer et d'être dans ma bulle.</p>
             </div>
-
             <div class="hobby-card reveal">
                 <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
                 <span class="hobby-name">Amis</span>
                 <p class="hobby-desc">Sortir, profiter, partager — le reste du temps bien entouré de mes amis.</p>
             </div>
-
             <div class="hobby-card reveal">
                 <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9zM8 22V12h8v10"/></svg></div>
                 <span class="hobby-name">Escalade</span>
                 <p class="hobby-desc">Grimper, résoudre, recommencer. Une logique pas si différente du code.</p>
             </div>
-
             <div class="hobby-card reveal">
                 <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
                 <span class="hobby-name">Voyages</span>
                 <p class="hobby-desc">Découvrir de nouveaux endroits, cultures et perspectives.</p>
             </div>
-
             <div class="hobby-card reveal">
                 <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
                 <span class="hobby-name">Jeux vidéo</span>
                 <p class="hobby-desc">Stratégie, exploration, compétition — selon l'humeur.</p>
             </div>
-
         </div>
     </section>
 
 </main>
 
-<!-- FOOTER -->
 <footer class="footer" aria-label="Pied de page">
     <span class="prompt" aria-hidden="true">~/orlando.cogo $</span>
     <span aria-hidden="true">cd ../home</span>

@@ -36,10 +36,66 @@
 .hobby-name { font-size:14px; font-weight:700; color:var(--text); }
 .hobby-desc { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted2); line-height:1.7; }
 
+/* ── HERO STATS ── */
+.hero-stats { display:flex; align-items:center; gap:1.5rem; margin-top:2rem; flex-wrap:wrap; }
+.hstat { display:flex; flex-direction:column; gap:2px; }
+.hstat-val { font-size:1.8rem; font-weight:800; color:var(--accent); line-height:1; letter-spacing:-0.03em; }
+.hstat-label { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted2); letter-spacing:0.1em; }
+.hstat-sep { font-size:1.2rem; color:var(--muted); }
+
+/* ── CE QUE JE CONSTRUIS ── */
+.building-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1rem; }
+
+.building-card {
+    background:var(--surface);
+    border:1px solid var(--border2);
+    padding:1.6rem;
+    display:flex;
+    flex-direction:column;
+    gap:0.75rem;
+    position:relative;
+    overflow:hidden;
+    transition:border-color 0.3s, transform 0.3s;
+}
+
+.building-card::after {
+    content:'';
+    position:absolute;
+    top:0; left:0; right:0;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.building-card:hover { border-color:rgba(0,245,160,0.25); transform:translateY(-3px); }
+.building-card:hover::after { transform:scaleX(1); }
+.building-card--flagship { border-color:rgba(0,200,245,0.2); }
+.building-card--flagship:hover { border-color:rgba(0,200,245,0.4); }
+
+.building-header { display:flex; align-items:center; justify-content:space-between; }
+.building-num { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted2); letter-spacing:0.1em; }
+
+.building-status { font-family:'DM Mono',monospace; font-size:9px; padding:3px 10px; letter-spacing:0.08em; }
+.building-status--live { color:var(--accent); border:1px solid rgba(0,245,160,0.3); }
+.building-status--flagship { color:#080b0f; background:var(--accent2); }
+
+.building-name { font-size:15px; font-weight:700; color:var(--text); }
+.building-desc { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted2); line-height:1.8; flex:1; }
+
+.building-tags { display:flex; flex-wrap:wrap; gap:4px; }
+.building-tags span { font-family:'DM Mono',monospace; font-size:9px; color:var(--accent2); border:1px solid rgba(0,200,245,0.2); padding:2px 6px; letter-spacing:0.04em; }
+
+.building-link { font-family:'DM Mono',monospace; font-size:11px; color:var(--accent); text-decoration:none; letter-spacing:0.06em; transition:opacity 0.2s; align-self:flex-start; margin-top:4px; }
+.building-link:hover { opacity:0.7; }
+
 /* ── RESPONSIVE ── */
 @media (max-width:700px) {
     .hero { padding:8rem 1.5rem 3rem; }
     .section { padding:2rem 1.5rem 3rem; }
     .timeline-item { grid-template-columns:1fr; }
     .timeline-left { text-align:left; }
+    .building-grid { grid-template-columns:1fr; }
+    .hero-stats { gap:1rem; }
 }
