@@ -99,3 +99,10 @@
     .building-grid { grid-template-columns:1fr; }
     .hero-stats { gap:1rem; }
 }
+
+@media (max-width:700px) {
+    .building-grid { grid-template-columns:1fr; }
+    .building-tags { gap:4px; }
+    .building-tags span { font-size:9px; padding:2px 5px; }
+    .building-card { padding:1.2rem; }
+}

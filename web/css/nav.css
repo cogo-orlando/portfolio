@@ -271,9 +271,12 @@ body::after { content:''; position:fixed; inset:0; background:repeating-linear-g
 
 /* ── RESPONSIVE ── */
 @media (max-width:900px) {
-    .nav { grid-template-columns: auto 1fr auto; }
-    .nav-left, .nav-right-links { display:none; }
+    .nav {
+        grid-template-columns: auto auto auto auto;
+        padding: 1rem 1.5rem;
+    }
+    .nav-left { display:none; }
+    .nav-right-links { display:none; }
     .nav-center { display:none; }
     .nav-burger { display:flex; }
-    .nav { padding:1rem 1.5rem; }
 }
