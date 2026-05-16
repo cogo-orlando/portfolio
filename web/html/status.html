@@ -3,33 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- ── SEO ── -->
     <title>Orlando Cogo — Status du portfolio</title>
     <meta name="description" content="État en temps réel du portfolio d'Orlando Cogo — uptime, météo Toulouse, objectifs en cours.">
     <meta name="author" content="Orlando Cogo">
     <meta name="robots" content="noindex, follow">
     <link rel="canonical" href="https://orlandocogo.com/status">
-
-    <!-- ── Open Graph ── -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orlandocogo.com/status">
     <meta property="og:title" content="Orlando Cogo — Status">
-    <meta property="og:description" content="État en temps réel du portfolio — uptime, météo Toulouse, objectifs.">
+    <meta property="og:description" content="État en temps réel du portfolio — uptime, métriques Go, météo Toulouse.">
     <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
     <meta property="og:locale" content="fr_FR">
-
-    <!-- ── Favicon ── -->
     <link rel="icon" href="/img/favicon.ico">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <link rel="apple-touch-icon" href="/img/favicon.png">
-
-    <!-- ── Fonts ── -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-
-    <!-- ── CSS ── -->
     <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/status.css">
 </head>
@@ -46,24 +36,17 @@
 
 <!-- NAV -->
 <nav class="nav" aria-label="Navigation principale">
-    <!-- LOGO -->
     <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
         <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
     </a>
-
-    <!-- LIENS GAUCHE -->
     <ul class="nav-left nav-links" role="list">
         <li><a href="/about" class="nav-link">À propos</a></li>
         <li><a href="/contact" class="nav-link">Contact</a></li>
         <li><a href="/cv" class="nav-link">CV</a></li>
     </ul>
-
-    <!-- HOME CENTRE -->
     <div class="nav-center">
         <a href="/home" class="nav-home"><span>HOME</span></a>
     </div>
-
-    <!-- LIENS DROITE -->
     <ul class="nav-right-links nav-links" role="list">
         <li><a href="/skills" class="nav-link">Compétences</a></li>
         <li><a href="/project" class="nav-link">Projets</a></li>
@@ -79,8 +62,6 @@
             </div>
         </li>
     </ul>
-
-    <!-- BURGER + STATUS -->
     <div class="nav-right">
         <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
             <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
@@ -92,7 +73,6 @@
     </div>
 </nav>
 
-<!-- Menu mobile -->
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <a href="/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>À propos</a>
     <a href="/tech" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Infrastructure</a>
@@ -108,13 +88,13 @@
 
     <!-- HERO -->
     <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-tag" data-typed="cat status.md" aria-hidden="true">
+        <div class="hero-tag" aria-hidden="true">
             <span class="prompt">~/status $</span>
             <span class="typed"></span>
             <span class="cursor"></span>
         </div>
         <h1 class="hero-title" id="hero-title">Site<br><span class="outline">Status</span></h1>
-        <p class="hero-intro">Dernière mise à jour · <time id="lastUpdate" aria-live="polite"></time></p>
+        <p class="hero-intro">Mise à jour · <time id="lastUpdate" aria-live="polite"></time> · Données live</p>
     </section>
 
     <!-- GRID PRINCIPALE -->
@@ -134,7 +114,7 @@
                     <span class="sys-label">Tous les systèmes opérationnels</span>
                 </div>
                 <div class="sys-rows">
-                    <div class="sys-row"><span class="sys-key">Uptime</span><span class="sys-val" id="uptime" aria-live="polite">calcul...</span></div>
+                    <div class="sys-row"><span class="sys-key">Uptime session</span><span class="sys-val" id="uptime" aria-live="polite">calcul...</span></div>
                     <div class="sys-row"><span class="sys-key">Localisation</span><span class="sys-val">Toulouse, France</span></div>
                     <div class="sys-row"><span class="sys-key">Timezone</span><span class="sys-val">Europe/Paris (UTC+2)</span></div>
                     <div class="sys-row"><span class="sys-key">Heure locale</span><span class="sys-val" id="localTime" aria-live="polite">--:--:--</span></div>
@@ -142,20 +122,53 @@
                 </div>
             </div>
 
+            <!-- Métriques Go live -->
+            <div class="status-card reveal" aria-labelledby="go-title">
+                <div class="card-header">
+                    <span class="card-tag" aria-hidden="true">02 //</span>
+                    <h2 class="card-title" id="go-title">Métriques Go <span class="live-badge" aria-label="Données en direct">LIVE</span></h2>
+                </div>
+                <div class="metrics-grid" aria-label="Métriques serveur Go">
+                    <div class="metric-box">
+                        <span class="metric-val" id="m-goroutines">—</span>
+                        <span class="metric-label">Goroutines</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-val" id="m-uptime">—</span>
+                        <span class="metric-label">Uptime serveur</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-val" id="m-alloc">—</span>
+                        <span class="metric-label">Mémoire</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-val" id="m-gc">—</span>
+                        <span class="metric-label">Cycles GC</span>
+                    </div>
+                </div>
+                <div class="sys-rows" style="margin-top:1rem">
+                    <div class="sys-row"><span class="sys-key">Runtime</span><span class="sys-val" id="m-runtime">—</span></div>
+                    <div class="sys-row"><span class="sys-key">Déploiement</span><span class="sys-val">Render · Docker 60MB</span></div>
+                    <div class="sys-row"><span class="sys-key">CI/CD</span><span class="sys-val">GitHub Actions · 47 tests · gosec 0</span></div>
+                </div>
+            </div>
+
             <!-- Pages du site -->
             <div class="status-card reveal" aria-labelledby="pages-title">
                 <div class="card-header">
-                    <span class="card-tag" aria-hidden="true">02 //</span>
+                    <span class="card-tag" aria-hidden="true">03 //</span>
                     <h2 class="card-title" id="pages-title">Pages</h2>
                 </div>
                 <div class="pages-list" role="list">
-                    <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/welcome</span><span class="page-status ok">online</span></div>
+                    <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/</span><span class="page-status ok">online</span></div>
                     <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/home</span><span class="page-status ok">online</span></div>
                     <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/about</span><span class="page-status ok">online</span></div>
                     <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/skills</span><span class="page-status ok">online</span></div>
                     <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/project</span><span class="page-status ok">online</span></div>
+                    <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/projects/security-dashboard</span><span class="page-status ok">online</span></div>
                     <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/contact</span><span class="page-status ok">online</span></div>
                     <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/cv</span><span class="page-status ok">online</span></div>
+                    <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/tech</span><span class="page-status ok">online</span></div>
                     <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/status</span><span class="page-status ok">online</span></div>
                     <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/faq</span><span class="page-status ok">online</span></div>
                 </div>
@@ -164,10 +177,10 @@
             <!-- Météo Toulouse -->
             <div class="status-card reveal" aria-labelledby="weather-title">
                 <div class="card-header">
-                    <span class="card-tag" aria-hidden="true">03 //</span>
+                    <span class="card-tag" aria-hidden="true">04 //</span>
                     <h2 class="card-title" id="weather-title">Météo — Toulouse</h2>
                 </div>
-                <div class="weather-block" id="weatherBlock" aria-live="polite">
+                <div id="weatherBlock" aria-live="polite">
                     <div class="weather-main">
                         <span class="weather-temp" id="weatherTemp">--°C</span>
                         <span class="weather-desc" id="weatherDesc">Chargement...</span>
@@ -188,7 +201,7 @@
             <!-- Statut personnel -->
             <div class="status-card reveal" aria-labelledby="current-title">
                 <div class="card-header">
-                    <span class="card-tag" aria-hidden="true">04 //</span>
+                    <span class="card-tag" aria-hidden="true">05 //</span>
                     <h2 class="card-title" id="current-title">Statut actuel</h2>
                 </div>
                 <div class="current-status">
@@ -198,7 +211,7 @@
                         </span>
                         <div>
                             <span class="current-label">Formation</span>
-                            <span class="current-val">Bachelor Informatique B1 — Ynov Campus</span>
+                            <span class="current-val">Bachelor Informatique B1 — Ynov Campus Toulouse</span>
                         </div>
                     </div>
                     <div class="current-row">
@@ -207,7 +220,7 @@
                         </span>
                         <div>
                             <span class="current-label">Recherche</span>
-                            <span class="current-val">Stage IT — Réseaux, Systèmes & Cybersécurité</span>
+                            <span class="current-val">Stage · IT - Réseaux, Systèmes & Cybersécurité</span>
                         </div>
                     </div>
                     <div class="current-row">
@@ -216,7 +229,16 @@
                         </span>
                         <div>
                             <span class="current-label">Localisation</span>
-                            <span class="current-val">Toulouse, Occitanie, France</span>
+                            <span class="current-val">Toulouse</span>
+                        </div>
+                    </div>
+                    <div class="current-row">
+                        <span class="current-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        </span>
+                        <div>
+                            <span class="current-label">En cours</span>
+                            <span class="current-val">Projet Samba · HackTheBox Labs · CI/CD</span>
                         </div>
                     </div>
                     <div class="current-row">
@@ -231,31 +253,31 @@
                 </div>
             </div>
 
-            <!-- Disponibilité stage -->
+            <!-- Disponibilité -->
             <div class="status-card reveal" aria-labelledby="dispo-title">
                 <div class="card-header">
-                    <span class="card-tag" aria-hidden="true">05 //</span>
+                    <span class="card-tag" aria-hidden="true">06 //</span>
                     <h2 class="card-title" id="dispo-title">Disponibilité</h2>
                 </div>
                 <div class="dispo-block">
                     <div class="dispo-main">
                         <span class="dispo-dot" aria-hidden="true"></span>
-                        <span class="dispo-text">Disponible pour un stage</span>
+                        <span class="dispo-text">Disponible dès maintenant</span>
                     </div>
                     <div class="sys-rows">
-                        <div class="sys-row"><span class="sys-key">Type</span><span class="sys-val">Stage IT</span></div>
-                        <div class="sys-row"><span class="sys-key">Domaine</span><span class="sys-val">Réseaux · Systèmes · Cybersécurité</span></div>
-                        <div class="sys-row"><span class="sys-key">Durée</span><span class="sys-val">Minimum 1 semaine - Maximum 1 mois</span></div>
-                        <div class="sys-row"><span class="sys-key">Localisation</span><span class="sys-val">Toulouse + les alentours</span></div>
-                        <div class="sys-row"><span class="sys-key">Contact</span><span class="sys-val"><a href="mailto:Orlando.cogo.pro@gmail.com" style="color:var(--accent)">Orlando.cogo.pro@gmail.com</a></span></div>
+                        <div class="sys-row"><span class="sys-key">Type</span><span class="sys-val">Stage · Alternance</span></div>
+                        <div class="sys-row"><span class="sys-key">Domaine</span><span class="sys-val">IT - Réseaux, Systèmes & Cybersécurité</span></div>
+                        <div class="sys-row"><span class="sys-key">Localisation</span><span class="sys-val">Toulouse</span></div>
+                        <div class="sys-row"><span class="sys-key">Niveau</span><span class="sys-val">Bachelor 1 — Ynov Campus</span></div>
+                        <div class="sys-row"><span class="sys-key">Contact</span><span class="sys-val"><a href="mailto:Orlando.cogo.pro@gmail.com" class="dispo-link">Orlando.cogo.pro@gmail.com</a></span></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Prochain objectif -->
+            <!-- Objectif -->
             <div class="status-card reveal" aria-labelledby="goal-title">
                 <div class="card-header">
-                    <span class="card-tag" aria-hidden="true">06 //</span>
+                    <span class="card-tag" aria-hidden="true">07 //</span>
                     <h2 class="card-title" id="goal-title">Prochain objectif</h2>
                 </div>
                 <div class="goal-block">
@@ -264,53 +286,67 @@
                         <span class="goal-deadline">Deadline : Juillet 2026</span>
                     </div>
                     <div class="goal-bar-wrap">
-                        <div class="goal-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" aria-label="Progression vers le stage">
+                        <div class="goal-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" aria-label="Progression vers le stage">
                             <div class="goal-fill" id="goalFill"></div>
                         </div>
                         <span class="goal-pct" id="goalPct" aria-live="polite">0%</span>
                     </div>
                     <div class="sys-rows" style="margin-top:1rem">
-                        <div class="sys-row"><span class="sys-val done">Étape 1</span><span class="sys-val done">Portfolio terminé</span></div>
-                        <div class="sys-row"><span class="sys-val done">Étape 2</span><span class="sys-val done">CV à jour</span></div>
-                        <div class="sys-row"><span class="sys-val inprog">Étape 3</span><span class="sys-val inprog">Candidatures en cours</span></div>
-                        <div class="sys-row"><span class="sys-key">Étape 4</span><span class="sys-val pending">Entretiens</span></div>
+                        <div class="sys-row"><span class="sys-val done">✓ Étape 1</span><span class="sys-val done">Portfolio en production</span></div>
+                        <div class="sys-row"><span class="sys-val done">✓ Étape 2</span><span class="sys-val done">CV à jour</span></div>
+                        <div class="sys-row"><span class="sys-val inprog">→ Étape 3</span><span class="sys-val inprog">Candidatures en cours</span></div>
+                        <div class="sys-row"><span class="sys-key">· Étape 4</span><span class="sys-val pending">Entretiens</span></div>
                     </div>
                 </div>
             </div>
 
-        </div>
+            <!-- Sécurité live -->
+            <div class="status-card reveal" aria-labelledby="sec-title">
+                <div class="card-header">
+                    <span class="card-tag" aria-hidden="true">08 //</span>
+                    <h2 class="card-title" id="sec-title">Sécurité <span class="live-badge">LIVE</span></h2>
+                </div>
+                <div class="sys-rows">
+                    <div class="sys-row"><span class="sys-key">Honeypot routes</span><span class="sys-val">15 routes actives</span></div>
+                    <div class="sys-row"><span class="sys-key">Rate limiting</span><span class="sys-val">120 req/min/IP</span></div>
+                    <div class="sys-row"><span class="sys-key">WAF</span><span class="sys-val">Cloudflare — actif</span></div>
+                    <div class="sys-row"><span class="sys-key">SSL</span><span class="sys-val">Full Strict · HTTPS only</span></div>
+                    <div class="sys-row"><span class="sys-key">gosec</span><span class="sys-val">0 issues</span></div>
+                    <div class="sys-row"><span class="sys-key">Docker</span><span class="sys-val">non-root · read_only · 60MB</span></div>
+                </div>
+                <a href="/projects/security-dashboard" class="sec-link">Voir le Security Dashboard →</a>
+            </div>
 
+        </div>
     </div>
 
     <!-- CURRENTLY LEARNING -->
-    <div class="status-page" style="margin-top:0">
-        <div style="grid-column:1/-1;width:100%">
-            <div class="status-card reveal" aria-labelledby="learning-title">
-                <div class="card-header">
-                    <span class="card-tag" aria-hidden="true">07 //</span>
-                    <h2 class="card-title" id="learning-title">Currently learning</h2>
-                </div>
-                <div class="learning-ticker" aria-live="polite" aria-label="En cours d'apprentissage">
-                    <span class="learning-label" aria-hidden="true">~/learning $</span>
-                    <span class="learning-text" id="learningText"></span>
-                    <span class="cursor" aria-hidden="true"></span>
-                </div>
-                <div class="learning-tags" aria-label="Sujets en cours d'apprentissage">
-                    <span class="ltag">Sécurité des réseaux TCP/IP</span>
-                    <span class="ltag">Cryptographie appliquée</span>
-                    <span class="ltag">SQL injection & prévention</span>
-                    <span class="ltag">Administration Linux avancée</span>
-                    <span class="ltag">Go — architecture web</span>
-                    <span class="ltag">OWASP Top 10</span>
-                    <span class="ltag">CTF challenges</span>
-                </div>
+    <div class="status-full">
+        <div class="status-card reveal" aria-labelledby="learning-title">
+            <div class="card-header">
+                <span class="card-tag" aria-hidden="true">09 //</span>
+                <h2 class="card-title" id="learning-title">Currently learning</h2>
+            </div>
+            <div class="learning-ticker" aria-live="polite" aria-label="En cours d'apprentissage">
+                <span class="learning-label" aria-hidden="true">~/learning $</span>
+                <span class="learning-text" id="learningText"></span>
+                <span class="cursor" aria-hidden="true"></span>
+            </div>
+            <div class="learning-tags" aria-label="Sujets en cours d'apprentissage">
+                <span class="ltag">Administration Linux — Samba & LDAP</span>
+                <span class="ltag">CTF HackTheBox Labs</span>
+                <span class="ltag">Go — PostgreSQL & sécurité applicative</span>
+                <span class="ltag">Docker hardening & multi-stage</span>
+                <span class="ltag">CI/CD GitHub Actions</span>
+                <span class="ltag">Cloudflare WAF & SSL</span>
+                <span class="ltag">OWASP Top 10</span>
+                <span class="ltag">Cisco CCNA</span>
             </div>
         </div>
     </div>
 
 </main>
 
-<!-- FOOTER -->
 <footer class="footer" aria-label="Pied de page">
     <span class="prompt" aria-hidden="true">~/orlando.cogo $</span>
     <span aria-hidden="true">systemctl status portfolio</span>

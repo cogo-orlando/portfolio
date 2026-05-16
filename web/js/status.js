@@ -5,39 +5,58 @@ function updateClock() {
     const m = String(now.getMinutes()).padStart(2,'0');
     const s = String(now.getSeconds()).padStart(2,'0');
     const timeStr = `${h}:${m}:${s}`;
-    const navClock  = document.getElementById('navClock');
     const localTime = document.getElementById('localTime');
-    if (navClock)  navClock.textContent  = timeStr;
     if (localTime) localTime.textContent = timeStr;
 }
 updateClock();
 setInterval(updateClock, 1000);
 
-// ── UPTIME (depuis le chargement de la page) ──
+// ── UPTIME SESSION ──
 const pageStart = Date.now();
 function updateUptime() {
-    const el   = document.getElementById('uptime');
+    const el = document.getElementById('uptime');
     if (!el) return;
     const diff = Math.floor((Date.now() - pageStart) / 1000);
-    const h    = Math.floor(diff / 3600);
-    const m    = Math.floor((diff % 3600) / 60);
-    const s    = diff % 60;
+    const h = Math.floor(diff / 3600);
+    const m = Math.floor((diff % 3600) / 60);
+    const s = diff % 60;
     el.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 }
 updateUptime();
 setInterval(updateUptime, 1000);
 
-// ── COMPTEUR RECONVERSION ──
-const reconvEl = document.getElementById('reconvDays');
-if (reconvEl) {
-    reconvEl.textContent = Math.floor((new Date() - new Date('2025-09-01')) / (1000*60*60*24));
-}
-
 // ── DERNIÈRE MISE À JOUR ──
 const lastUpdateEl = document.getElementById('lastUpdate');
 if (lastUpdateEl) {
-    lastUpdateEl.textContent = new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
+    lastUpdateEl.textContent = new Date().toLocaleDateString('fr-FR', {
+        day: '2-digit', month: 'long', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+    });
 }
+
+// ── MÉTRIQUES GO LIVE depuis /health ──
+async function loadGoMetrics() {
+    try {
+        const res = await fetch('/health');
+        if (!res.ok) return;
+        const data = await res.json();
+
+        const set = (id, val) => {
+            const el = document.getElementById(id);
+            if (el && val !== undefined) el.textContent = val;
+        };
+
+        set('m-goroutines', data.goroutines ?? '—');
+        set('m-uptime',     data.uptime     ?? '—');
+        set('m-alloc',      data.alloc      ?? '—');
+        set('m-gc',         data.gc         ?? '—');
+        set('m-runtime',    data.go_version  ?? data.runtime ?? '—');
+    } catch (e) {
+        console.warn('loadGoMetrics:', e);
+    }
+}
+loadGoMetrics();
+setInterval(loadGoMetrics, 30000); // refresh toutes les 30s
 
 // ── MÉTÉO TOULOUSE via Open-Meteo ──
 async function fetchWeather() {
@@ -66,8 +85,8 @@ async function fetchWeather() {
 fetchWeather();
 
 // ── OBJECTIF PROGRESSION ──
-const steps     = ['done', 'done', 'inprog', 'pending'];
-const pct       = Math.round(steps.filter(s => s === 'done').length / steps.length * 100);
+const steps = ['done', 'done', 'inprog', 'pending'];
+const pct   = Math.round(steps.filter(s => s === 'done').length / steps.length * 100);
 setTimeout(() => {
     const goalFill = document.getElementById('goalFill');
     const goalPct  = document.getElementById('goalPct');
@@ -77,12 +96,13 @@ setTimeout(() => {
 
 // ── CURRENTLY LEARNING TICKER ──
 const learningItems = [
-    'Sécurité des réseaux TCP/IP...',
-    'Cryptographie appliquée...',
-    'SQL...',
-    'Administration Linux...',
-    'Go — architecture web...',
-    'CTF challenges HackTheBox...',
+    'Administration Linux — Samba & annuaire LDAP...',
+    'CTF HackTheBox Labs...',
+    'Go — PostgreSQL & sécurité applicative...',
+    'Docker hardening & multi-stage builds...',
+    'CI/CD GitHub Actions & gosec...',
+    'Cloudflare WAF & SSL configuration...',
+    'OWASP Top 10...',
 ];
 const learningEl = document.getElementById('learningText');
 let lIdx = 0, lChar = 0, lDeleting = false;
@@ -99,14 +119,14 @@ function typeLearning() {
     }
     setTimeout(typeLearning, lDeleting ? 40 : 70);
 }
-setTimeout(typeLearning, 1500);
+setTimeout(typeLearning, 1000);
 
 // ── COMPTEUR DE VISITES ──
 fetch('/api/visits')
     .then(r => r.json())
     .then(data => {
         const el = document.getElementById('visitCount');
-        if (el) el.textContent = data.visits;
+        if (el) el.textContent = data.visits ?? '--';
     })
     .catch(() => {
         const el = document.getElementById('visitCount');

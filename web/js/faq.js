@@ -35,8 +35,14 @@ items.forEach((item, idx) => {
     item.id  = id;
     item.querySelector('.faq-q').addEventListener('click', () => {
         const isOpen = item.classList.contains('open');
-        if (isOpen) { item.classList.remove('open'); openedIds.delete(id); }
-        else        { item.classList.add('open'); item.classList.remove('pulse'); openedIds.add(id); }
+        if (isOpen) {
+            item.classList.remove('open');
+            openedIds.delete(id);
+        } else {
+            item.classList.add('open');
+            item.classList.remove('pulse');
+            openedIds.add(id);
+        }
         updateProgress();
     });
 });

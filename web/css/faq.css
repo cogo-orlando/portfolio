@@ -55,8 +55,8 @@
 .faq-secret-tag { font-family:'DM Mono',monospace; font-size:9px; color:#f5a000; border:1px solid rgba(245,160,0,0.4); padding:2px 8px; letter-spacing:0.08em; flex-shrink:0; }
 .faq-arrow { color:var(--muted2); flex-shrink:0; transition:transform 0.3s ease; }
 .faq-item.open .faq-arrow { transform:rotate(180deg); }
-.faq-a { max-height:0; overflow:hidden; transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
-.faq-item.open .faq-a { max-height:400px; }
+.faq-a { max-height:0; overflow:hidden; transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1); display: block; }
+.faq-item.open .faq-a { max-height:600px; }
 .faq-a-inner { padding:1rem 1.4rem 1.4rem; display:flex; flex-direction:column; gap:8px; border-top:1px solid var(--border2); }
 .faq-prompt { font-family:'DM Mono',monospace; font-size:11px; color:var(--accent); }
 .faq-a-inner p { font-size:14px; color:var(--muted2); line-height:1.8; }
@@ -100,6 +100,10 @@
 .iv-btn:hover { border-color:var(--accent); color:var(--accent); }
 .iv-exit { margin-left:auto; }
 .iv-exit:hover { border-color:#f54040; color:#f54040; }
+
+.not-item--yes { border-color: rgba(0,245,160,0.1); }
+.not-item--yes:hover { border-color: rgba(0,245,160,0.25); color: var(--text); }
+.not-check { color: var(--accent); font-family:'DM Mono',monospace; font-size:14px; flex-shrink:0; }
 
 /* ── ANIMATIONS SPÉCIFIQUES ── */
 @keyframes pulse { 0%,100% { box-shadow:0 0 0 0 rgba(0,245,160,0.2); } 50% { box-shadow:0 0 0 4px rgba(0,245,160,0); } }
