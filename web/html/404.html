@@ -3,24 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- ── SEO ── -->
     <title>404 — Page introuvable · Orlando Cogo</title>
     <meta name="description" content="Page introuvable sur le portfolio d'Orlando Cogo.">
     <meta name="robots" content="noindex, nofollow">
-
-    <!-- ── Favicon ── -->
     <link rel="icon" href="/img/favicon.ico">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <link rel="apple-touch-icon" href="/img/favicon.png">
-
-    <!-- ── Fonts ── -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-
-    <!-- ── CSS ── -->
-    <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/404.css">
 </head>
 <body>
@@ -43,10 +34,12 @@
 
 <main id="main-content" class="wrapper">
 
+    <!-- GLITCH 404 -->
     <div class="glitch-wrap">
         <h1 class="glitch" data-text="404" aria-label="Erreur 404">404</h1>
     </div>
 
+    <!-- TERMINAL -->
     <div class="terminal-block" aria-hidden="true">
         <div class="terminal-line">
             <span class="prompt">~/portfolio $</span>
@@ -56,27 +49,44 @@
         <div class="terminal-output" id="term-output"></div>
     </div>
 
-    <p class="subtitle">Cette page n'existe pas ou a été déplacée.</p>
+    <!-- SUBTITLE -->
+    <p class="subtitle">Cette page n'existe pas ou a été déplacée.<br>
+        <span class="subtitle-redirect">Redirection automatique dans <span id="countdown">10</span>s...</span></p>
 
+    <!-- ACTIONS -->
     <div class="actions">
         <a href="/home" class="btn-primary" aria-label="Retour à l'accueil du portfolio">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M12 7H2M2 7L6 3M2 7L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M12 7H2M2 7L6 3M2 7L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span>Retour à l'accueil</span>
         </a>
         <a href="/contact" class="btn-secondary">Me contacter</a>
     </div>
 
+    <!-- LIENS RAPIDES -->
+    <div class="quicklinks" aria-label="Pages disponibles">
+        <span class="quicklinks-label">Pages disponibles —</span>
+        <a href="/about" class="qlink">À propos</a>
+        <span class="qsep" aria-hidden="true">·</span>
+        <a href="/skills" class="qlink">Compétences</a>
+        <span class="qsep" aria-hidden="true">·</span>
+        <a href="/project" class="qlink">Projets</a>
+        <span class="qsep" aria-hidden="true">·</span>
+        <a href="/contact" class="qlink">Contact</a>
+        <span class="qsep" aria-hidden="true">·</span>
+        <a href="/cv" class="qlink">CV</a>
+        <span class="qsep" aria-hidden="true">·</span>
+        <a href="/faq" class="qlink">FAQ</a>
+    </div>
+
+    <!-- STATUS -->
     <div class="status-row" aria-label="Statut erreur">
         <span class="status-dot" aria-hidden="true"></span>
-        <span class="status-text">Erreur 404 · Page introuvable</span>
+        <span>Erreur 404 · Page introuvable · orlandocogo.com</span>
     </div>
 
 </main>
 
 <script src="/js/background.js"></script>
-<script src="/js/nav.js"></script>
 <script src="/js/404.js"></script>
 </body>
 </html>

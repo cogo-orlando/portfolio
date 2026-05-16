@@ -12,9 +12,9 @@ if (typingEl) {
 }
 
 // ── COUNTDOWN ──
-// Modifie cette date pour définir la fin de la maintenance
+// Modifie endTime pour définir la fin de la maintenance
 const endTime = new Date();
-endTime.setHours(endTime.getHours() + 0); // 2h à partir de maintenant
+endTime.setHours(endTime.getHours() + 2); // 2h à partir de maintenant
 
 function updateCountdown() {
     const now  = new Date();
@@ -32,29 +32,18 @@ function updateCountdown() {
 
     const returnEl = document.getElementById('returnTime');
     if (returnEl) {
-        returnEl.textContent = endTime.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+        returnEl.textContent = endTime.toLocaleTimeString('fr-FR', {
+            hour: '2-digit', minute: '2-digit'
+        });
     }
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ── DURÉE ──
-const durationEl = document.getElementById('duration');
-if (durationEl) durationEl.textContent = '~ pas de temps définie';
-
-// ── PROGRESS BAR ANIMÉE ──
-// Simule une progression réaliste
-const steps = [
-    { pct: 35, step: 'step1', label: 'step2' },
-    { pct: 65, step: 'step2', label: 'step3' },
-    { pct: 88, step: 'step3', label: 'step4' },
-];
-
-let currentStep = 0;
+// ── PROGRESS BAR ──
 const fillEl = document.getElementById('progressFill');
 const pctEl  = document.getElementById('progressPct');
 
-// Démarre à 20%
 setTimeout(() => {
     if (fillEl) fillEl.style.width = '40%';
     if (pctEl)  pctEl.textContent  = '40%';
@@ -62,12 +51,3 @@ setTimeout(() => {
     document.getElementById('step1')?.classList.add('done');
     document.getElementById('step2')?.classList.add('active');
 }, 800);
-
-// ── SCROLL REVEAL ──
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach((el, i) => {
-    el.style.transitionDelay = (i * 0.1) + 's';
-    observer.observe(el);
-});
