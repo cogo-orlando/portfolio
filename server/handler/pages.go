@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"crypto/md5"
+	"crypto/sha256"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -95,10 +95,10 @@ func generateETag(file string) string {
 	info, err := os.Stat("web/html/" + file)
 	if err != nil {
 		// Fallback sur le nom seul
-		return fmt.Sprintf(`"%x"`, md5.Sum([]byte(file)))
+		return fmt.Sprintf(`"%x"`, sha256.Sum256([]byte(file)))
 	}
 	raw := fmt.Sprintf("%s:%d", file, info.ModTime().UnixNano())
-	return fmt.Sprintf(`"%x"`, md5.Sum([]byte(raw)))
+	return fmt.Sprintf(`"%x"`, sha256.Sum256([]byte(raw)))
 }
 
 // ══════════════════════════════════════════
