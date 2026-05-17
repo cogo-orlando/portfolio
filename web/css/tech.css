@@ -627,3 +627,14 @@
     line-height:1.8;
     flex:1;
 }
+
+/* ── HERO STATS ── */
+.hero-stats { display:flex; align-items:center; gap:1.5rem; margin-top:2rem; flex-wrap:wrap; }
+.hstat { display:flex; flex-direction:column; gap:2px; }
+.hstat-val { font-size:1.8rem; font-weight:800; color:var(--accent); line-height:1; letter-spacing:-0.03em; }
+.hstat-label { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted2); letter-spacing:0.1em; }
+.hstat-sep { font-size:1.2rem; color:var(--muted); }
+
+/* ── ARCH NODE DB ── */
+.arch-node--db { border-left:2px solid rgba(0,245,160,0.2); }
+.arch-node--db .arch-node-icon { color:var(--accent2); }
