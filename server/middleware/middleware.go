@@ -14,6 +14,7 @@ import (
 	"runtime/debug"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -38,7 +39,7 @@ const RequestIDKey contextKey = "request_id"
 
 func generateRequestID() string {
 	b := make([]byte, 8)
-	rand.Read(b)
+	rand.Read(b) //nolint:errcheck
 	return hex.EncodeToString(b)
 }
 
@@ -79,6 +80,72 @@ func RecoveryMiddleware(next http.Handler) http.Handler {
 		}()
 		next.ServeHTTP(w, r)
 	})
+}
+
+// ══════════════════════════════════════════
+//  CIRCUIT BREAKER — DB
+//  Si la DB échoue 5 fois → ouvre le circuit
+//  pendant 30 secondes avant de réessayer
+// ══════════════════════════════════════════
+
+type circuitState int32
+
+const (
+	circuitClosed   circuitState = 0
+	circuitOpen     circuitState = 1
+	circuitHalfOpen circuitState = 2
+)
+
+type dbCircuitBreaker struct {
+	state        atomic.Int32
+	failures     atomic.Int32
+	lastFailure  atomic.Int64
+	maxFailures  int32
+	resetTimeout time.Duration
+}
+
+var DBCircuit = &dbCircuitBreaker{
+	maxFailures:  5,
+	resetTimeout: 30 * time.Second,
+}
+
+func (cb *dbCircuitBreaker) Allow() bool {
+	state := circuitState(cb.state.Load())
+	switch state {
+	case circuitClosed:
+		return true
+	case circuitOpen:
+		last := time.Unix(0, cb.lastFailure.Load())
+		if time.Since(last) >= cb.resetTimeout {
+			cb.state.Store(int32(circuitHalfOpen))
+			return true
+		}
+		return false
+	default:
+		return true
+	}
+}
+
+func (cb *dbCircuitBreaker) RecordSuccess() {
+	cb.failures.Store(0)
+	cb.state.Store(int32(circuitClosed))
+}
+
+func (cb *dbCircuitBreaker) RecordFailure() {
+	failures := cb.failures.Add(1)
+	cb.lastFailure.Store(time.Now().UnixNano())
+	if failures >= cb.maxFailures {
+		if cb.state.Load() != int32(circuitOpen) {
+			slog.Warn("circuit breaker DB ouvert — logs DB suspendus 30s",
+				"failures", failures,
+			)
+		}
+		cb.state.Store(int32(circuitOpen))
+	}
+}
+
+func (cb *dbCircuitBreaker) IsOpen() bool {
+	return circuitState(cb.state.Load()) == circuitOpen
 }
 
 // ══════════════════════════════════════════
@@ -141,7 +208,6 @@ func init() { //nolint:gochecknoinits
 func HoneypotMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ip := GetIP(r)
-
 		if ipBlacklist.has(ip) {
 			slog.Warn("ip blacklistée bloquée",
 				"ip", ip,
@@ -151,7 +217,6 @@ func HoneypotMiddleware(next http.Handler) http.Handler {
 			http.Error(w, "Forbidden", http.StatusForbidden)
 			return
 		}
-
 		if honeypotRoutes[r.URL.Path] {
 			ipBlacklist.add(ip)
 			slog.Warn("honeypot déclenché — IP blacklistée 24h",
@@ -161,13 +226,12 @@ func HoneypotMiddleware(next http.Handler) http.Handler {
 				"user_agent", r.UserAgent(),
 				"request_id", GetRequestID(r.Context()),
 			)
-			// Log en DB
-			db.LogHoneypot(ip, r.URL.Path, r.UserAgent())
-
+			if DBCircuit.Allow() {
+				db.LogHoneypot(ip, r.URL.Path, r.UserAgent())
+			}
 			http.NotFound(w, r)
 			return
 		}
-
 		next.ServeHTTP(w, r)
 	})
 }
@@ -205,41 +269,28 @@ func LoggerMiddleware(next http.Handler) http.Handler {
 		switch {
 		case rw.status >= 500:
 			slog.Error("request",
-				"request_id", id,
-				"method", r.Method,
-				"path", r.URL.Path,
-				"status", rw.status,
-				"duration_ms", ms,
-				"ip", ip,
+				"request_id", id, "method", r.Method, "path", r.URL.Path,
+				"status", rw.status, "duration_ms", ms, "ip", ip,
 			)
 		case rw.status >= 400:
 			slog.Warn("request",
-				"request_id", id,
-				"method", r.Method,
-				"path", r.URL.Path,
-				"status", rw.status,
-				"duration_ms", ms,
-				"ip", ip,
+				"request_id", id, "method", r.Method, "path", r.URL.Path,
+				"status", rw.status, "duration_ms", ms, "ip", ip,
 			)
 		default:
 			slog.Info("request",
-				"request_id", id,
-				"method", r.Method,
-				"path", r.URL.Path,
-				"status", rw.status,
-				"duration_ms", ms,
-				"ip", ip,
+				"request_id", id, "method", r.Method, "path", r.URL.Path,
+				"status", rw.status, "duration_ms", ms, "ip", ip,
 			)
 		}
 
-		// Log en DB — détermine le type d'événement
-		eventType := db.EventRequest
-		if rw.status >= 500 {
-			eventType = db.EventError
-		} else if rw.status >= 400 {
-			eventType = db.EventError
+		if DBCircuit.Allow() {
+			eventType := db.EventRequest
+			if rw.status >= 400 {
+				eventType = db.EventError
+			}
+			db.LogEvent(ip, r.Method, r.URL.Path, rw.status, r.UserAgent(), eventType)
 		}
-		db.LogEvent(ip, r.Method, r.URL.Path, rw.status, r.UserAgent(), eventType)
 	})
 }
 
@@ -271,8 +322,21 @@ func SecurityMiddleware(next http.Handler) http.Handler {
 }
 
 // ══════════════════════════════════════════
-//  GZIP
+//  GZIP (Brotli nécessite lib externe)
 // ══════════════════════════════════════════
+
+var skipCompressExts = []string{
+	".png", ".jpg", ".jpeg", ".gif", ".ico", ".webp", ".woff", ".woff2",
+}
+
+func shouldSkipCompression(path string) bool {
+	for _, ext := range skipCompressExts {
+		if strings.HasSuffix(path, ext) {
+			return true
+		}
+	}
+	return false
+}
 
 type gzipWriter struct {
 	http.ResponseWriter
@@ -287,15 +351,13 @@ func (gw *gzipWriter) WriteHeader(status int) {
 
 func GzipMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
+		if shouldSkipCompression(r.URL.Path) {
 			next.ServeHTTP(w, r)
 			return
 		}
-		for _, ext := range []string{".png", ".jpg", ".jpeg", ".gif", ".ico", ".webp"} {
-			if strings.HasSuffix(r.URL.Path, ext) {
-				next.ServeHTTP(w, r)
-				return
-			}
+		if !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
+			next.ServeHTTP(w, r)
+			return
 		}
 		gz, err := gzip.NewWriterLevel(w, gzip.BestSpeed)
 		if err != nil {
@@ -385,18 +447,44 @@ func RateLimitMiddleware(next http.Handler) http.Handler {
 		ip := GetIP(r)
 		if !globalRateLimiter.allow(ip) {
 			slog.Warn("rate limit global dépassé",
-				"ip", ip,
-				"path", r.URL.Path,
+				"ip", ip, "path", r.URL.Path,
 				"request_id", GetRequestID(r.Context()),
 			)
-			// Log en DB
-			db.LogRateLimit(ip, r.URL.Path)
-
+			if DBCircuit.Allow() {
+				db.LogRateLimit(ip, r.URL.Path)
+			}
 			w.Header().Set("Retry-After", "60")
 			http.Error(w, "Too Many Requests", http.StatusTooManyRequests)
 			return
 		}
 		next.ServeHTTP(w, r)
+	})
+}
+
+// ══════════════════════════════════════════
+//  TIMEOUT PAR ROUTE
+//  API/health  : 3s
+//  /projects/  : 8s
+//  autres      : 5s
+// ══════════════════════════════════════════
+
+func timeoutForPath(path string) time.Duration {
+	switch {
+	case strings.HasPrefix(path, "/api/") || path == "/health":
+		return 3 * time.Second
+	case strings.HasPrefix(path, "/projects/"):
+		return 8 * time.Second
+	default:
+		return 5 * time.Second
+	}
+}
+
+func TimeoutMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		timeout := timeoutForPath(r.URL.Path)
+		ctx, cancel := context.WithTimeout(r.Context(), timeout)
+		defer cancel()
+		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }
 
@@ -410,6 +498,7 @@ func Chain(h http.Handler) http.Handler {
 	h = SecurityMiddleware(h)
 	h = HoneypotMiddleware(h)
 	h = RateLimitMiddleware(h)
+	h = TimeoutMiddleware(h)
 	h = RecoveryMiddleware(h)
 	h = RequestIDMiddleware(h)
 	h = LoggerMiddleware(h)

@@ -1,13 +1,28 @@
 package handler
 
 import (
+	"crypto/md5"
+	"fmt"
 	"html/template"
 	"net/http"
+	"os"
 	"sync"
 )
 
 // ══════════════════════════════════════════
-//  TEMPLATE CACHE — compile une seule fois
+//  ENVIRONNEMENT
+// ══════════════════════════════════════════
+
+// isDev retourne true si on est en développement
+// En prod (Render) la variable GO_ENV n'est pas définie → prod
+func isDev() bool {
+	return os.Getenv("GO_ENV") == "development"
+}
+
+// ══════════════════════════════════════════
+//  TEMPLATE CACHE
+//  - Dev  : recharge à chaque requête (pas de cache)
+//  - Prod : compile une seule fois et met en cache
 // ══════════════════════════════════════════
 
 var (
@@ -15,32 +30,75 @@ var (
 	templateMu    sync.RWMutex
 )
 
+func getTemplate(file string) (*template.Template, error) {
+	// Dev — toujours recharger depuis le disque
+	if isDev() {
+		return template.ParseFiles("web/html/" + file)
+	}
+
+	// Prod — utiliser le cache
+	templateMu.RLock()
+	tmpl, cached := templateCache[file]
+	templateMu.RUnlock()
+
+	if cached {
+		return tmpl, nil
+	}
+
+	var err error
+	tmpl, err = template.ParseFiles("web/html/" + file)
+	if err != nil {
+		return nil, err
+	}
+
+	templateMu.Lock()
+	templateCache[file] = tmpl
+	templateMu.Unlock()
+
+	return tmpl, nil
+}
+
+// ══════════════════════════════════════════
+//  RENDER TEMPLATE + ETAG
+// ══════════════════════════════════════════
+
 func renderTemplate(w http.ResponseWriter, r *http.Request, file string) {
 	if r.Method != http.MethodGet && r.Method != http.MethodHead {
 		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	templateMu.RLock()
-	tmpl, cached := templateCache[file]
-	templateMu.RUnlock()
+	tmpl, err := getTemplate(file)
+	if err != nil {
+		http.Error(w, "Page introuvable", http.StatusInternalServerError)
+		return
+	}
 
-	if !cached {
-		var err error
-		tmpl, err = template.ParseFiles("web/html/" + file)
-		if err != nil {
-			http.Error(w, "Page introuvable", http.StatusInternalServerError)
-			return
-		}
-		templateMu.Lock()
-		templateCache[file] = tmpl
-		templateMu.Unlock()
+	// ── ETag — hash du nom de fichier + date de modif ──
+	etag := generateETag(file)
+	w.Header().Set("ETag", etag)
+
+	// Si le client a déjà cette version → 304 Not Modified
+	if r.Header.Get("If-None-Match") == etag {
+		w.WriteHeader(http.StatusNotModified)
+		return
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	if err := tmpl.Execute(w, nil); err != nil {
 		http.Error(w, "Erreur de rendu", http.StatusInternalServerError)
 	}
+}
+
+// generateETag génère un ETag stable basé sur le fichier et sa date de modification
+func generateETag(file string) string {
+	info, err := os.Stat("web/html/" + file)
+	if err != nil {
+		// Fallback sur le nom seul
+		return fmt.Sprintf(`"%x"`, md5.Sum([]byte(file)))
+	}
+	raw := fmt.Sprintf("%s:%d", file, info.ModTime().UnixNano())
+	return fmt.Sprintf(`"%x"`, md5.Sum([]byte(raw)))
 }
 
 // ══════════════════════════════════════════
@@ -101,7 +159,6 @@ func ArtemisHandler(w http.ResponseWriter, r *http.Request) {
 func AnnuaireHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "projects/annuaire.html")
 }
-
 func SecurityDashboardHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "projects/security-dashboard.html")
 }

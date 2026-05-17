@@ -20,7 +20,6 @@ var (
 	once sync.Once
 )
 
-// Init ouvre la connexion à Supabase (appelé une seule fois au démarrage)
 func Init() {
 	once.Do(func() {
 		dsn := os.Getenv("DATABASE_URL")
@@ -35,7 +34,6 @@ func Init() {
 			return
 		}
 
-		// Ping avec timeout pour ne pas bloquer au démarrage
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 
@@ -44,7 +42,6 @@ func Init() {
 			return
 		}
 
-		// Pool de connexions optimisé pour un usage asynchrone léger
 		c.SetMaxOpenConns(5)
 		c.SetMaxIdleConns(2)
 		c.SetConnMaxLifetime(5 * time.Minute)
@@ -55,7 +52,6 @@ func Init() {
 	})
 }
 
-// Close ferme la connexion DB proprement
 func Close() {
 	if conn != nil {
 		_ = conn.Close() // #nosec G104
@@ -76,16 +72,55 @@ const (
 )
 
 // ══════════════════════════════════════════
+//  RETRY AVEC BACKOFF EXPONENTIEL
+//  Tente maxRetries fois avec délai croissant
+//  1ère retry : 100ms · 2ème : 200ms · 3ème : 400ms
+// ══════════════════════════════════════════
+
+const maxRetries = 3
+
+func execWithRetry(query string, args ...interface{}) error {
+	var lastErr error
+	delay := 100 * time.Millisecond
+
+	for attempt := 0; attempt < maxRetries; attempt++ {
+		if attempt > 0 {
+			time.Sleep(delay)
+			delay *= 2
+		}
+
+		ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+		_, err := conn.ExecContext(ctx, query, args...)
+		cancel()
+
+		if err == nil {
+			return nil
+		}
+
+		lastErr = err
+		slog.Warn("db.exec retry",
+			"attempt", attempt+1,
+			"max", maxRetries,
+			"error", err,
+		)
+	}
+
+	slog.Error("db.exec échec après retries",
+		"attempts", maxRetries,
+		"error", lastErr,
+	)
+	return lastErr
+}
+
+// ══════════════════════════════════════════
 //  LOGGING ÉVÉNEMENTS
 // ══════════════════════════════════════════
 
-// LogEvent insère un événement en DB de manière asynchrone
 func LogEvent(ip, method, path string, status int, userAgent string, eventType EventType) {
 	if conn == nil {
 		return
 	}
 
-	// Copie des valeurs avant la goroutine pour éviter les data races
 	ip = truncate(ip, 45)
 	method = truncate(method, 10)
 	path = truncate(path, 500)
@@ -93,21 +128,13 @@ func LogEvent(ip, method, path string, status int, userAgent string, eventType E
 	et := string(eventType)
 
 	go func() {
-		ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
-		defer cancel()
-
-		_, err := conn.ExecContext(ctx, `
+		_ = execWithRetry(`
 			INSERT INTO security_events (ip, method, path, status, user_agent, event_type)
 			VALUES ($1, $2, $3, $4, $5, $6)
 		`, ip, method, path, status, userAgent, et)
-
-		if err != nil {
-			slog.Error("db.LogEvent failed", "error", err)
-		}
 	}()
 }
 
-// LogHoneypot insère un événement honeypot + blackliste l'IP 24h
 func LogHoneypot(ip, path, userAgent string) {
 	if conn == nil {
 		return
@@ -119,23 +146,19 @@ func LogHoneypot(ip, path, userAgent string) {
 	expires := time.Now().Add(24 * time.Hour)
 
 	go func() {
-		ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
-		defer cancel()
-
-		_, _ = conn.ExecContext(ctx, `
+		_ = execWithRetry(`
 			INSERT INTO security_events (ip, method, path, status, user_agent, event_type)
 			VALUES ($1, 'GET', $2, 404, $3, 'honeypot')
-		`, ip, path, userAgent) // #nosec G104
+		`, ip, path, userAgent)
 
-		_, _ = conn.ExecContext(ctx, `
+		_ = execWithRetry(`
 			INSERT INTO blacklisted_ips (ip, reason, expires_at)
 			VALUES ($1, 'honeypot', $2)
 			ON CONFLICT (ip) DO UPDATE SET expires_at = $2
-		`, ip, expires) // #nosec G104
+		`, ip, expires)
 	}()
 }
 
-// LogRateLimit insère un événement rate limit
 func LogRateLimit(ip, path string) {
 	if conn == nil {
 		return
@@ -145,13 +168,10 @@ func LogRateLimit(ip, path string) {
 	path = truncate(path, 500)
 
 	go func() {
-		ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
-		defer cancel()
-
-		_, _ = conn.ExecContext(ctx, `
+		_ = execWithRetry(`
 			INSERT INTO security_events (ip, method, path, status, user_agent, event_type)
 			VALUES ($1, 'GET', $2, 429, '', 'ratelimit')
-		`, ip, path) // #nosec G104
+		`, ip, path)
 	}()
 }
 
@@ -159,12 +179,10 @@ func LogRateLimit(ip, path string) {
 //  HELPERS
 // ══════════════════════════════════════════
 
-// truncate coupe une string à la longueur max en respectant l'UTF-8
 func truncate(s string, max int) string {
 	if len(s) <= max {
 		return s
 	}
-	// Coupe proprement sur les runes pour éviter de couper au milieu d'un caractère UTF-8
 	runes := []rune(s)
 	if len(runes) <= max {
 		return s
