@@ -14,3 +14,15 @@ if (typingEl) {
         }, 80);
     }, 600);
 }
+
+// ── UPTIME LIVE ──
+async function loadUptime() {
+    try {
+        const res = await fetch('/health');
+        if (!res.ok) return;
+        const data = await res.json();
+        const el = document.getElementById('idx-uptime');
+        if (el && data.uptime) el.textContent = 'uptime ' + data.uptime;
+    } catch {}
+}
+loadUptime();
