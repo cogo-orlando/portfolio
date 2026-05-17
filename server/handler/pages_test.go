@@ -60,7 +60,7 @@ func setupTestTemplates(t *testing.T) func() {
 }
 
 // ══════════════════════════════════════════
-//  HELPER
+//  HELPERS
 // ══════════════════════════════════════════
 
 func testHandler(t *testing.T, handler http.HandlerFunc, path string) {
@@ -180,6 +180,9 @@ func TestRenderTemplate_UsesCache(t *testing.T) {
 	cleanup := setupTestTemplates(t)
 	defer cleanup()
 
+	// Force prod mode pour tester le cache
+	os.Unsetenv("GO_ENV")
+
 	w1 := httptest.NewRecorder()
 	r1 := httptest.NewRequest(http.MethodGet, "/home", nil)
 	renderTemplate(w1, r1, "home.html")
@@ -211,12 +214,227 @@ func TestRenderTemplate_BodyContainsContent(t *testing.T) {
 }
 
 // ══════════════════════════════════════════
+//  TESTS — isDev / template cache par env
+// ══════════════════════════════════════════
+
+func TestIsDev_FalseByDefault(t *testing.T) {
+	os.Unsetenv("GO_ENV")
+	if isDev() {
+		t.Error("isDev() devrait être false sans GO_ENV")
+	}
+}
+
+func TestIsDev_TrueWhenDevelopment(t *testing.T) {
+	os.Setenv("GO_ENV", "development")
+	defer os.Unsetenv("GO_ENV")
+	if !isDev() {
+		t.Error("isDev() devrait être true avec GO_ENV=development")
+	}
+}
+
+func TestIsDev_FalseForProduction(t *testing.T) {
+	os.Setenv("GO_ENV", "production")
+	defer os.Unsetenv("GO_ENV")
+	if isDev() {
+		t.Error("isDev() devrait être false avec GO_ENV=production")
+	}
+}
+
+func TestGetTemplate_ProdUsesCache(t *testing.T) {
+	cleanup := setupTestTemplates(t)
+	defer cleanup()
+	os.Unsetenv("GO_ENV")
+
+	// Premier appel — pas en cache
+	_, err := getTemplate("home.html")
+	if err != nil {
+		t.Fatalf("getTemplate devrait réussir : %v", err)
+	}
+
+	templateMu.RLock()
+	_, cached := templateCache["home.html"]
+	templateMu.RUnlock()
+
+	if !cached {
+		t.Error("en prod, getTemplate devrait mettre en cache")
+	}
+}
+
+func TestGetTemplate_DevNoCache(t *testing.T) {
+	cleanup := setupTestTemplates(t)
+	defer cleanup()
+	os.Setenv("GO_ENV", "development")
+	defer os.Unsetenv("GO_ENV")
+
+	templateMu.Lock()
+	templateCache = make(map[string]*template.Template)
+	templateMu.Unlock()
+
+	_, err := getTemplate("home.html")
+	if err != nil {
+		t.Fatalf("getTemplate devrait réussir en dev : %v", err)
+	}
+
+	templateMu.RLock()
+	_, cached := templateCache["home.html"]
+	templateMu.RUnlock()
+
+	if cached {
+		t.Error("en dev, getTemplate ne devrait PAS mettre en cache")
+	}
+}
+
+func TestGetTemplate_MissingFile(t *testing.T) {
+	cleanup := setupTestTemplates(t)
+	defer cleanup()
+	os.Unsetenv("GO_ENV")
+
+	_, err := getTemplate("inexistant.html")
+	if err == nil {
+		t.Error("getTemplate devrait retourner une erreur pour un fichier inexistant")
+	}
+}
+
+// ══════════════════════════════════════════
+//  TESTS — ETag
+// ══════════════════════════════════════════
+
+func TestETag_PresentInResponse(t *testing.T) {
+	cleanup := setupTestTemplates(t)
+	defer cleanup()
+	os.Unsetenv("GO_ENV")
+
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest(http.MethodGet, "/home", nil)
+	renderTemplate(w, r, "home.html")
+
+	etag := w.Header().Get("ETag")
+	if etag == "" {
+		t.Error("ETag devrait être présent dans la réponse")
+	}
+}
+
+func TestETag_HasQuotes(t *testing.T) {
+	cleanup := setupTestTemplates(t)
+	defer cleanup()
+	os.Unsetenv("GO_ENV")
+
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest(http.MethodGet, "/home", nil)
+	renderTemplate(w, r, "home.html")
+
+	etag := w.Header().Get("ETag")
+	if !strings.HasPrefix(etag, `"`) || !strings.HasSuffix(etag, `"`) {
+		t.Errorf("ETag devrait être entre guillemets, obtenu : %s", etag)
+	}
+}
+
+func TestETag_Returns304WhenMatch(t *testing.T) {
+	cleanup := setupTestTemplates(t)
+	defer cleanup()
+	os.Unsetenv("GO_ENV")
+
+	// 1. Premier appel — obtenir l'ETag
+	w1 := httptest.NewRecorder()
+	r1 := httptest.NewRequest(http.MethodGet, "/home", nil)
+	renderTemplate(w1, r1, "home.html")
+	etag := w1.Header().Get("ETag")
+
+	if etag == "" {
+		t.Fatal("ETag devrait être présent")
+	}
+
+	// 2. Deuxième appel avec If-None-Match → doit retourner 304
+	w2 := httptest.NewRecorder()
+	r2 := httptest.NewRequest(http.MethodGet, "/home", nil)
+	r2.Header.Set("If-None-Match", etag)
+	renderTemplate(w2, r2, "home.html")
+
+	if w2.Code != http.StatusNotModified {
+		t.Errorf("If-None-Match avec ETag valide devrait retourner 304, obtenu %d", w2.Code)
+	}
+}
+
+func TestETag_Returns200WhenNoMatch(t *testing.T) {
+	cleanup := setupTestTemplates(t)
+	defer cleanup()
+	os.Unsetenv("GO_ENV")
+
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest(http.MethodGet, "/home", nil)
+	r.Header.Set("If-None-Match", `"etag-invalide-xyz"`)
+	renderTemplate(w, r, "home.html")
+
+	if w.Code != http.StatusOK {
+		t.Errorf("If-None-Match invalide devrait retourner 200, obtenu %d", w.Code)
+	}
+}
+
+func TestETag_StableForSameFile(t *testing.T) {
+	cleanup := setupTestTemplates(t)
+	defer cleanup()
+	os.Unsetenv("GO_ENV")
+
+	etag1 := generateETag("home.html")
+	etag2 := generateETag("home.html")
+
+	if etag1 != etag2 {
+		t.Errorf("ETag devrait être stable pour le même fichier : %s != %s", etag1, etag2)
+	}
+}
+
+func TestETag_DifferentForDifferentFiles(t *testing.T) {
+	cleanup := setupTestTemplates(t)
+	defer cleanup()
+	os.Unsetenv("GO_ENV")
+
+	etag1 := generateETag("home.html")
+	etag2 := generateETag("about.html")
+
+	if etag1 == etag2 {
+		t.Error("ETag devrait être différent pour des fichiers différents")
+	}
+}
+
+func TestETag_FallbackWhenFileMissing(t *testing.T) {
+	// Fichier inexistant — fallback sur hash du nom
+	etag := generateETag("fichier-inexistant.html")
+	if etag == "" {
+		t.Error("generateETag devrait retourner un ETag même pour un fichier inexistant")
+	}
+	if !strings.HasPrefix(etag, `"`) {
+		t.Error("ETag fallback devrait aussi être entre guillemets")
+	}
+}
+
+func TestETag_304BodyEmpty(t *testing.T) {
+	cleanup := setupTestTemplates(t)
+	defer cleanup()
+	os.Unsetenv("GO_ENV")
+
+	w1 := httptest.NewRecorder()
+	r1 := httptest.NewRequest(http.MethodGet, "/home", nil)
+	renderTemplate(w1, r1, "home.html")
+	etag := w1.Header().Get("ETag")
+
+	w2 := httptest.NewRecorder()
+	r2 := httptest.NewRequest(http.MethodGet, "/home", nil)
+	r2.Header.Set("If-None-Match", etag)
+	renderTemplate(w2, r2, "home.html")
+
+	if w2.Body.Len() != 0 {
+		t.Error("réponse 304 devrait avoir un body vide")
+	}
+}
+
+// ══════════════════════════════════════════
 //  TESTS — tous les handlers GET 200
 // ══════════════════════════════════════════
 
 func TestHandlers_AllReturn200(t *testing.T) {
 	cleanup := setupTestTemplates(t)
 	defer cleanup()
+	os.Unsetenv("GO_ENV")
 
 	tests := []struct {
 		name    string
@@ -258,6 +476,7 @@ func TestHandlers_AllReturn200(t *testing.T) {
 func TestHandlers_HeadReturn200(t *testing.T) {
 	cleanup := setupTestTemplates(t)
 	defer cleanup()
+	os.Unsetenv("GO_ENV")
 
 	tests := []struct {
 		name    string
@@ -360,6 +579,7 @@ func TestNotFoundHandler_PostReturns405(t *testing.T) {
 func TestProjectHandlers_ContentType(t *testing.T) {
 	cleanup := setupTestTemplates(t)
 	defer cleanup()
+	os.Unsetenv("GO_ENV")
 
 	tests := []struct {
 		name    string

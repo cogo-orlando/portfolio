@@ -95,12 +95,10 @@ func TestRateLimit_BlocksAfterLimit(t *testing.T) {
 		times[i] = now
 	}
 	globalRateLimiter.records[ip] = times
-
 	handler := RateLimitMiddleware(okHandler())
 	w := httptest.NewRecorder()
 	r := newRequest("GET", "/", ip)
 	handler.ServeHTTP(w, r)
-
 	if w.Code != http.StatusTooManyRequests {
 		t.Errorf("attendu 429, obtenu %d", w.Code)
 	}
@@ -115,12 +113,10 @@ func TestRateLimit_RetryAfterHeader(t *testing.T) {
 		times[i] = now
 	}
 	globalRateLimiter.records[ip] = times
-
 	handler := RateLimitMiddleware(okHandler())
 	w := httptest.NewRecorder()
 	r := newRequest("GET", "/", ip)
 	handler.ServeHTTP(w, r)
-
 	if w.Header().Get("Retry-After") == "" {
 		t.Error("Retry-After header devrait être présent sur 429")
 	}
@@ -129,7 +125,6 @@ func TestRateLimit_RetryAfterHeader(t *testing.T) {
 func TestRateLimit_DifferentIPsIndependent(t *testing.T) {
 	globalRateLimiter = &globalLimiter{records: make(map[string][]time.Time)}
 	handler := RateLimitMiddleware(okHandler())
-
 	ipA := "10.0.1.1"
 	now := time.Now()
 	times := make([]time.Time, 120)
@@ -137,7 +132,6 @@ func TestRateLimit_DifferentIPsIndependent(t *testing.T) {
 		times[i] = now
 	}
 	globalRateLimiter.records[ipA] = times
-
 	ipB := "10.0.1.2"
 	w := httptest.NewRecorder()
 	r := newRequest("GET", "/", ipB)
@@ -150,20 +144,16 @@ func TestRateLimit_DifferentIPsIndependent(t *testing.T) {
 func TestRateLimit_ExpiredRequestsNotCounted(t *testing.T) {
 	globalRateLimiter = &globalLimiter{records: make(map[string][]time.Time)}
 	ip := "10.0.0.7"
-
-	// 120 requêtes expirées (il y a 2 minutes)
 	old := time.Now().Add(-2 * time.Minute)
 	times := make([]time.Time, 120)
 	for i := range times {
 		times[i] = old
 	}
 	globalRateLimiter.records[ip] = times
-
 	handler := RateLimitMiddleware(okHandler())
 	w := httptest.NewRecorder()
 	r := newRequest("GET", "/", ip)
 	handler.ServeHTTP(w, r)
-
 	if w.Code != http.StatusOK {
 		t.Errorf("requêtes expirées ne devraient pas compter, obtenu %d", w.Code)
 	}
@@ -172,15 +162,12 @@ func TestRateLimit_ExpiredRequestsNotCounted(t *testing.T) {
 func TestRateLimit_AllowMethod(t *testing.T) {
 	globalRateLimiter = &globalLimiter{records: make(map[string][]time.Time)}
 	ip := "10.0.0.8"
-
-	// 119 requêtes — une de moins que la limite
 	now := time.Now()
 	times := make([]time.Time, 119)
 	for i := range times {
 		times[i] = now
 	}
 	globalRateLimiter.records[ip] = times
-
 	if !globalRateLimiter.allow(ip) {
 		t.Error("119 requêtes devrait encore être autorisé")
 	}
@@ -205,11 +192,9 @@ func TestHoneypot_BlacklistsOnTrap(t *testing.T) {
 	ipBlacklist = &blacklist{records: make(map[string]time.Time)}
 	handler := HoneypotMiddleware(okHandler())
 	ip := "20.0.0.2"
-
 	w := httptest.NewRecorder()
 	r := newRequest("GET", "/wp-admin", ip)
 	handler.ServeHTTP(w, r)
-
 	if w.Code != http.StatusNotFound {
 		t.Errorf("honeypot devrait retourner 404, obtenu %d", w.Code)
 	}
@@ -222,12 +207,10 @@ func TestHoneypot_BlocksBlacklistedIP(t *testing.T) {
 	ipBlacklist = &blacklist{records: make(map[string]time.Time)}
 	ip := "20.0.0.3"
 	ipBlacklist.add(ip)
-
 	handler := HoneypotMiddleware(okHandler())
 	w := httptest.NewRecorder()
 	r := newRequest("GET", "/home", ip)
 	handler.ServeHTTP(w, r)
-
 	if w.Code != http.StatusForbidden {
 		t.Errorf("IP blacklistée devrait obtenir 403, obtenu %d", w.Code)
 	}
@@ -255,12 +238,9 @@ func TestHoneypot_AllTraps(t *testing.T) {
 func TestHoneypot_BlacklistExpiry(t *testing.T) {
 	ipBlacklist = &blacklist{records: make(map[string]time.Time)}
 	ip := "20.0.0.9"
-
-	// Ajoute une entrée déjà expirée
 	ipBlacklist.mu.Lock()
 	ipBlacklist.records[ip] = time.Now().Add(-1 * time.Hour)
 	ipBlacklist.mu.Unlock()
-
 	if ipBlacklist.has(ip) {
 		t.Error("IP avec expiration passée ne devrait pas être blacklistée")
 	}
@@ -269,9 +249,7 @@ func TestHoneypot_BlacklistExpiry(t *testing.T) {
 func TestHoneypot_BlacklistAdd(t *testing.T) {
 	ipBlacklist = &blacklist{records: make(map[string]time.Time)}
 	ip := "20.0.0.10"
-
 	ipBlacklist.add(ip)
-
 	if !ipBlacklist.has(ip) {
 		t.Error("IP ajoutée devrait être dans la blacklist")
 	}
@@ -280,8 +258,6 @@ func TestHoneypot_BlacklistAdd(t *testing.T) {
 func TestHoneypot_BlacklistFresh(t *testing.T) {
 	ipBlacklist = &blacklist{records: make(map[string]time.Time)}
 	ip := "20.0.0.11"
-
-	// IP non blacklistée
 	if ipBlacklist.has(ip) {
 		t.Error("IP non ajoutée ne devrait pas être dans la blacklist")
 	}
@@ -291,17 +267,12 @@ func TestHoneypot_TrapThenBlocked(t *testing.T) {
 	ipBlacklist = &blacklist{records: make(map[string]time.Time)}
 	handler := HoneypotMiddleware(okHandler())
 	ip := "20.0.0.12"
-
-	// 1. Déclenche le honeypot
 	w1 := httptest.NewRecorder()
 	r1 := newRequest("GET", "/wp-admin", ip)
 	handler.ServeHTTP(w1, r1)
-
-	// 2. Tente une route normale — doit être bloqué
 	w2 := httptest.NewRecorder()
 	r2 := newRequest("GET", "/home", ip)
 	handler.ServeHTTP(w2, r2)
-
 	if w2.Code != http.StatusForbidden {
 		t.Errorf("après honeypot, /home devrait être 403, obtenu %d", w2.Code)
 	}
@@ -381,7 +352,7 @@ func TestSecurity_ServerHeaderEmpty(t *testing.T) {
 func TestSecurity_XPoweredByRemoved(t *testing.T) {
 	handler := SecurityMiddleware(okHandler())
 	w := httptest.NewRecorder()
-	w.Header().Set("X-Powered-By", "Go") // positionné avant
+	w.Header().Set("X-Powered-By", "Go")
 	r := httptest.NewRequest("GET", "/", nil)
 	handler.ServeHTTP(w, r)
 	if w.Header().Get("X-Powered-By") != "" {
@@ -432,7 +403,6 @@ func TestRequestID_AvailableInContext(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	handler.ServeHTTP(w, r)
-
 	if capturedID == "" || capturedID == "-" {
 		t.Error("RequestID devrait être accessible depuis le context")
 	}
@@ -555,5 +525,148 @@ func TestGzip_VaryHeader(t *testing.T) {
 	handler.ServeHTTP(w, r)
 	if w.Header().Get("Vary") != "Accept-Encoding" {
 		t.Error("Vary: Accept-Encoding devrait être présent avec gzip")
+	}
+}
+
+// ══════════════════════════════════════════
+//  TESTS — Circuit Breaker DB
+// ══════════════════════════════════════════
+
+func TestCircuitBreaker_InitiallyClosed(t *testing.T) {
+	cb := &dbCircuitBreaker{maxFailures: 5, resetTimeout: 30 * time.Second}
+	if !cb.Allow() {
+		t.Error("circuit breaker devrait être fermé (Allow=true) au démarrage")
+	}
+}
+
+func TestCircuitBreaker_OpensAfterMaxFailures(t *testing.T) {
+	cb := &dbCircuitBreaker{maxFailures: 3, resetTimeout: 30 * time.Second}
+	cb.RecordFailure()
+	cb.RecordFailure()
+	cb.RecordFailure()
+	if !cb.IsOpen() {
+		t.Error("circuit devrait être ouvert après 3 échecs")
+	}
+}
+
+func TestCircuitBreaker_BlocksWhenOpen(t *testing.T) {
+	cb := &dbCircuitBreaker{maxFailures: 3, resetTimeout: 30 * time.Second}
+	cb.RecordFailure()
+	cb.RecordFailure()
+	cb.RecordFailure()
+	if cb.Allow() {
+		t.Error("circuit ouvert devrait bloquer les appels (Allow=false)")
+	}
+}
+
+func TestCircuitBreaker_ClosesOnSuccess(t *testing.T) {
+	cb := &dbCircuitBreaker{maxFailures: 3, resetTimeout: 30 * time.Second}
+	cb.RecordFailure()
+	cb.RecordFailure()
+	cb.RecordFailure()
+	cb.RecordSuccess()
+	if cb.IsOpen() {
+		t.Error("circuit devrait être fermé après un succès")
+	}
+}
+
+func TestCircuitBreaker_AllowsAfterTimeout(t *testing.T) {
+	cb := &dbCircuitBreaker{maxFailures: 3, resetTimeout: 50 * time.Millisecond}
+	cb.RecordFailure()
+	cb.RecordFailure()
+	cb.RecordFailure()
+
+	// Attend que le timeout expire
+	time.Sleep(60 * time.Millisecond)
+
+	if !cb.Allow() {
+		t.Error("circuit devrait permettre un appel test après le timeout")
+	}
+}
+
+func TestCircuitBreaker_NotOpenBeforeMaxFailures(t *testing.T) {
+	cb := &dbCircuitBreaker{maxFailures: 5, resetTimeout: 30 * time.Second}
+	cb.RecordFailure()
+	cb.RecordFailure()
+	if cb.IsOpen() {
+		t.Error("circuit ne devrait pas être ouvert avec seulement 2 échecs sur 5")
+	}
+}
+
+func TestCircuitBreaker_SuccessResetsFailures(t *testing.T) {
+	cb := &dbCircuitBreaker{maxFailures: 5, resetTimeout: 30 * time.Second}
+	cb.RecordFailure()
+	cb.RecordFailure()
+	cb.RecordSuccess()
+	// Après succès, les failures sont reset
+	// Il faut de nouveau 5 échecs pour ouvrir
+	cb.RecordFailure()
+	cb.RecordFailure()
+	if cb.IsOpen() {
+		t.Error("après RecordSuccess, le circuit ne devrait pas s'ouvrir avec 2 nouveaux échecs")
+	}
+}
+
+// ══════════════════════════════════════════
+//  TESTS — TimeoutMiddleware
+// ══════════════════════════════════════════
+
+func TestTimeout_APIPath(t *testing.T) {
+	d := timeoutForPath("/api/visits")
+	if d != 3*time.Second {
+		t.Errorf("/api/ devrait avoir timeout 3s, obtenu %v", d)
+	}
+}
+
+func TestTimeout_HealthPath(t *testing.T) {
+	d := timeoutForPath("/health")
+	if d != 3*time.Second {
+		t.Errorf("/health devrait avoir timeout 3s, obtenu %v", d)
+	}
+}
+
+func TestTimeout_ProjectsPath(t *testing.T) {
+	d := timeoutForPath("/projects/security-dashboard")
+	if d != 8*time.Second {
+		t.Errorf("/projects/ devrait avoir timeout 8s, obtenu %v", d)
+	}
+}
+
+func TestTimeout_DefaultPath(t *testing.T) {
+	d := timeoutForPath("/home")
+	if d != 5*time.Second {
+		t.Errorf("/home devrait avoir timeout 5s, obtenu %v", d)
+	}
+}
+
+func TestTimeout_AboutPath(t *testing.T) {
+	d := timeoutForPath("/about")
+	if d != 5*time.Second {
+		t.Errorf("/about devrait avoir timeout 5s, obtenu %v", d)
+	}
+}
+
+func TestTimeoutMiddleware_PassesNormalRequest(t *testing.T) {
+	handler := TimeoutMiddleware(okHandler())
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("GET", "/home", nil)
+	handler.ServeHTTP(w, r)
+	if w.Code != http.StatusOK {
+		t.Errorf("requête normale devrait passer, obtenu %d", w.Code)
+	}
+}
+
+func TestTimeoutMiddleware_ContextHasDeadline(t *testing.T) {
+	var hasDeadline bool
+	inner := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_, hasDeadline = r.Context().Deadline()
+		w.WriteHeader(http.StatusOK)
+	})
+	handler := TimeoutMiddleware(inner)
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("GET", "/home", nil)
+	handler.ServeHTTP(w, r)
+	if !hasDeadline {
+		t.Error("le context devrait avoir une deadline après TimeoutMiddleware")
 	}
 }

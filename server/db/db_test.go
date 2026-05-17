@@ -45,7 +45,6 @@ func TestTruncate_ZeroMax(t *testing.T) {
 }
 
 func TestTruncate_UTF8(t *testing.T) {
-	// "héllo" = 5 runes mais 6 bytes — ne doit pas couper au milieu d'un caractère
 	result := truncate("héllo", 3)
 	if len([]rune(result)) != 3 {
 		t.Errorf("attendu 3 runes, obtenu %d", len([]rune(result)))
@@ -116,14 +115,27 @@ func TestEventType_Distinct(t *testing.T) {
 }
 
 // ══════════════════════════════════════════
+//  TESTS — maxRetries constante
+// ══════════════════════════════════════════
+
+func TestMaxRetries_Value(t *testing.T) {
+	if maxRetries != 3 {
+		t.Errorf("maxRetries devrait être 3, obtenu %d", maxRetries)
+	}
+}
+
+func TestMaxRetries_Positive(t *testing.T) {
+	if maxRetries <= 0 {
+		t.Errorf("maxRetries devrait être positif, obtenu %d", maxRetries)
+	}
+}
+
+// ══════════════════════════════════════════
 //  TESTS — fonctions sans connexion DB
-//  conn == nil → les fonctions doivent
-//  retourner silencieusement sans paniquer
 // ══════════════════════════════════════════
 
 func TestLogEvent_NilConn(t *testing.T) {
 	conn = nil
-	// Ne doit pas paniquer
 	LogEvent("1.2.3.4", "GET", "/home", 200, "Mozilla/5.0", EventRequest)
 }
 
@@ -137,26 +149,22 @@ func TestLogEvent_AllEventTypes(t *testing.T) {
 
 func TestLogHoneypot_NilConn(t *testing.T) {
 	conn = nil
-	// Ne doit pas paniquer
 	LogHoneypot("1.2.3.4", "/wp-admin", "scanner/1.0")
 }
 
 func TestLogRateLimit_NilConn(t *testing.T) {
 	conn = nil
-	// Ne doit pas paniquer
 	LogRateLimit("1.2.3.4", "/home")
 }
 
 func TestClose_NilConn(t *testing.T) {
 	conn = nil
-	// Ne doit pas paniquer
 	Close()
 }
 
 func TestLogEvent_LongValues(t *testing.T) {
 	conn = nil
 	longStr := string(make([]byte, 1000))
-	// Ne doit pas paniquer même avec des strings très longues
 	LogEvent(longStr, longStr, longStr, 200, longStr, EventRequest)
 }
 
@@ -173,11 +181,38 @@ func TestLogRateLimit_LongValues(t *testing.T) {
 }
 
 // ══════════════════════════════════════════
+//  TESTS — execWithRetry sans connexion
+// ══════════════════════════════════════════
+
+func TestExecWithRetry_NilConn(t *testing.T) {
+	conn = nil
+	// Ne doit pas paniquer — conn == nil → panic dans ExecContext
+	// On vérifie que LogEvent (qui appelle execWithRetry) ne panique pas
+	// LogEvent vérifie conn == nil avant d'appeler execWithRetry
+	LogEvent("1.2.3.4", "GET", "/", 200, "", EventRequest)
+}
+
+func TestLogEvent_StatusCodes(t *testing.T) {
+	conn = nil
+	codes := []int{200, 201, 400, 401, 403, 404, 429, 500, 503}
+	for _, code := range codes {
+		LogEvent("1.2.3.4", "GET", "/test", code, "agent", EventRequest)
+	}
+}
+
+func TestLogEvent_Methods(t *testing.T) {
+	conn = nil
+	methods := []string{"GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"}
+	for _, method := range methods {
+		LogEvent("1.2.3.4", method, "/test", 200, "agent", EventRequest)
+	}
+}
+
+// ══════════════════════════════════════════
 //  TESTS — Init sans DATABASE_URL
 // ══════════════════════════════════════════
 
 func TestInit_NoDatabaseURL(t *testing.T) {
-	// Sauvegarde et supprime la variable
 	original := os.Getenv("DATABASE_URL")
 	os.Unsetenv("DATABASE_URL")
 	defer func() {
@@ -186,12 +221,9 @@ func TestInit_NoDatabaseURL(t *testing.T) {
 		}
 	}()
 
-	// On teste juste que sans DATABASE_URL, conn reste nil
-	// Init() utilise sync.Once donc on teste l'état de conn directement
 	savedConn := conn
 	conn = nil
 
-	// Vérifie que les fonctions log ne paniquent pas sans conn
 	LogEvent("1.2.3.4", "GET", "/", 200, "", EventRequest)
 	LogHoneypot("1.2.3.4", "/wp-admin", "")
 	LogRateLimit("1.2.3.4", "/")
