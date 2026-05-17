@@ -211,6 +211,14 @@ var sitemapURLs = []struct {
 	{"/cv", "0.8", "monthly"},
 	{"/faq", "0.7", "monthly"},
 	{"/tech", "0.8", "monthly"},
+	{"/projects/security-dashboard", "0.8", "weekly"},
+	{"/projects/netflix", "0.6", "monthly"},
+	{"/projects/groupie", "0.6", "monthly"},
+	{"/projects/power4", "0.6", "monthly"},
+	{"/projects/zoo", "0.6", "monthly"},
+	{"/projects/cisco", "0.6", "monthly"},
+	{"/projects/artemis", "0.6", "monthly"},
+	{"/projects/annuaire", "0.6", "monthly"},
 }
 
 func sitemapHandler(w http.ResponseWriter, r *http.Request) {
