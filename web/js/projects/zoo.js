@@ -5,11 +5,11 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ── LIGHTBOX ──
-const images = [
-    { src: '/img/zoo/zoo1.png', title: '01 — Menu principal' },
-    { src: '/img/zoo/zoo2.png', title: '02 — Tableau de bord' },
-    { src: '/img/zoo/zoo3.png', title: '03 — Menu zoo' },
-    { src: '/img/zoo/zoo4.png', title: '04 — Registre des animaux' },
+const images = window.projectImages || [
+    { src: '/img/projects/zoo/zoo1.png', title: '01 — Menu principal — ASCII art & navigation' },
+    { src: '/img/projects/zoo/zoo2.png', title: '02 — Menu zoo — Jouer, infos, carte' },
+    { src: '/img/projects/zoo/zoo3.png', title: '03 — Tableau de bord — Argent & animaux' },
+    { src: '/img/projects/zoo/zoo4.png', title: '04 — Registre des animaux — âge & sexe' },
 ];
 
 const lightbox      = document.getElementById('lightbox');

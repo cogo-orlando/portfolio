@@ -95,7 +95,7 @@
         <h1 class="hero-title" id="hero-title">Architecture<br><span class="outline">& Infrastructure</span></h1>
         <p class="hero-intro">Ce portfolio n'est pas qu'un site vitrine — c'est un projet backend complet avec sécurité, tests, CI/CD et déploiement containerisé. Deux applications en production.</p>
         <div class="hero-stats reveal">
-            <div class="hstat"><span class="hstat-val">55</span><span class="hstat-label">Tests unitaires</span></div>
+            <div class="hstat"><span class="hstat-val">129</span><span class="hstat-label">Tests unitaires</span></div>
             <div class="hstat-sep" aria-hidden="true">·</div>
             <div class="hstat"><span class="hstat-val">2</span><span class="hstat-label">Apps en prod</span></div>
             <div class="hstat-sep" aria-hidden="true">·</div>
@@ -195,8 +195,8 @@
             <div class="pipeline-arrow" aria-hidden="true">→</div>
             <div class="pipeline-step pipeline-step--accent">
                 <div class="pipeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
-                <span class="pipeline-label">55 tests</span>
-                <span class="pipeline-sub">handler + middleware + server</span>
+                <span class="pipeline-label">129 tests</span>
+                <span class="pipeline-sub">4 packages · handler · middleware · server · db</span>
             </div>
             <div class="pipeline-arrow" aria-hidden="true">→</div>
             <div class="pipeline-step pipeline-step--security">
@@ -218,7 +218,7 @@
             </div>
         </div>
         <div class="ci-stats reveal">
-            <div class="ci-stat"><span class="ci-val">55</span><span class="ci-label">Tests unitaires</span></div>
+            <div class="ci-stat"><span class="ci-val">129</span><span class="ci-label">Tests unitaires</span></div>
             <div class="ci-stat"><span class="ci-val">0</span><span class="ci-label">Vulnérabilités gosec</span></div>
             <div class="ci-stat"><span class="ci-val">~2m</span><span class="ci-label">Durée pipeline</span></div>
             <div class="ci-stat"><span class="ci-val">Go 1.23</span><span class="ci-label">Version cible</span></div>
@@ -311,7 +311,7 @@
             <div class="stack-row"><span class="stack-layer">Container</span><span class="stack-tech">Docker</span><span class="stack-detail">Multi-stage · scratch · ~60MB · USER 1001 · no-new-privileges</span></div>
             <div class="stack-row"><span class="stack-layer">Déploiement</span><span class="stack-tech">Render</span><span class="stack-detail">PaaS · auto-deploy GitHub · free tier</span></div>
             <div class="stack-row"><span class="stack-layer">CDN / Sécurité</span><span class="stack-tech">Cloudflare</span><span class="stack-detail">WAF · DDoS · SSL Full Strict · headers · score A</span></div>
-            <div class="stack-row"><span class="stack-layer">CI/CD</span><span class="stack-tech">GitHub Actions</span><span class="stack-detail">build · 55 tests · gosec · purge CF · auto-deploy</span></div>
+            <div class="stack-row"><span class="stack-layer">CI/CD</span><span class="stack-tech">GitHub Actions</span><span class="stack-detail">build · 129 tests · gosec · purge CF · auto-deploy</span></div>
             <div class="stack-row"><span class="stack-layer">Base de données</span><span class="stack-tech">PostgreSQL · Supabase</span><span class="stack-detail">RLS · sslmode=require · utilisateurs dédiés · JWT désactivé</span></div>
             <div class="stack-row"><span class="stack-layer">Formulaire</span><span class="stack-tech">Formspree</span><span class="stack-detail">Email sécurisé · honeypot anti-bot</span></div>
             <div class="stack-row"><span class="stack-layer">Monitoring</span><span class="stack-tech">UptimeRobot</span><span class="stack-detail">Ping 5min · alerte email · 100% uptime</span></div>
@@ -340,10 +340,10 @@
 │   ├── server_test.go             <span class="code-comment"># 19 tests : health · sitemap · visits · maintenance</span>
 │   ├── handler/
 │   │   ├── pages.go               <span class="code-comment"># 20 handlers HTML + template cache sync.RWMutex</span>
-│   │   └── pages_test.go          <span class="code-comment"># 36 tests : GET · HEAD · POST 405 · Content-Type · cache</span>
+│   │   └── pages_test.go          <span class="code-comment"># 55 tests : GET · HEAD · POST 405 · Content-Type · cache</span>
 │   └── middleware/
 │       ├── middleware.go          <span class="code-comment"># Logger · RequestID · Recovery · RateLimit · Honeypot · Gzip · Cache</span>
-│       └── middleware_test.go     <span class="code-comment"># 21 tests middleware</span>
+│       └── middleware_test.go     <span class="code-comment"># 53 tests middleware</span>
 ├── web/
 │   ├── html/                      <span class="code-comment"># 12 pages + 7 pages projets</span>
 │   │   └── projects/              <span class="code-comment"># zoo · netflix · groupie · power4 · cisco · artemis · annuaire · security-dashboard</span>
@@ -352,7 +352,7 @@
 │   └── img/                       <span class="code-comment"># Favicon · og-image · cv · screenshots</span>
 ├── .github/
 │   └── workflows/
-│       └── ci.yml                 <span class="code-comment"># GitHub Actions : build · 55 tests · gosec · purge Cloudflare</span>
+│       └── ci.yml                 <span class="code-comment"># GitHub Actions : build · 129 tests · gosec · purge Cloudflare</span>
 ├── Dockerfile                     <span class="code-comment"># Multi-stage : builder golang:1.23-alpine → scratch</span>
 ├── docker-compose.yml             <span class="code-comment"># Production : healthcheck · logs rotation · 256MB limit</span>
 └── go.mod                         <span class="code-comment"># Module portfo · Go 1.23 · lib/pq uniquement</span></code></pre>
@@ -411,7 +411,7 @@
             <div class="learned-card reveal">
                 <div class="learned-num" aria-hidden="true">05</div>
                 <h3 class="learned-name">CI/CD & tests automatiques</h3>
-                <p class="learned-desc">Écrire 55 tests unitaires et les faire tourner automatiquement à chaque push avec GitHub Actions m'a convaincu que les tests ne sont pas une contrainte — c'est ce qui te permet de modifier du code sans avoir peur de tout casser.</p>
+                <p class="learned-desc">Écrire 129 tests unitaires et les faire tourner automatiquement à chaque push avec GitHub Actions m'a convaincu que les tests ne sont pas une contrainte — c'est ce qui te permet de modifier du code sans avoir peur de tout casser.</p>
             </div>
             <div class="learned-card reveal">
                 <div class="learned-num" aria-hidden="true">06</div>
