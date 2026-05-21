@@ -28,7 +28,7 @@ func setupTestTemplates(t *testing.T) func() {
 		"faq.html", "tech.html", "maintenance.html", "404.html",
 		"projects/zoo.html", "projects/netflix.html", "projects/groupie.html",
 		"projects/power4.html", "projects/cisco.html", "projects/artemis.html",
-		"projects/annuaire.html", "projects/security-dashboard.html",
+		"projects/annuaire.html", "projects/security-dashboard.html", "projects/forum.html",
 	}
 
 	created := []string{}
