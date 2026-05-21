@@ -65,6 +65,7 @@ var routes = map[string]http.HandlerFunc{
 	"/projects/artemis":            handler.ArtemisHandler,
 	"/projects/annuaire":           handler.AnnuaireHandler,
 	"/projects/security-dashboard": handler.SecurityDashboardHandler,
+	"/projects/forum":              handler.ForumHandler,
 }
 
 // ══════════════════════════════════════════

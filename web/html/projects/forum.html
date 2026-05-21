@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Web — Orlando Cogo</title>
+    <meta name="description" content="Forum web complet en Go — authentification bcrypt, SQLite, posts, commentaires, likes/dislikes, Docker, modération, OAuth. Projet B1 Ynov Campus, équipe de 4.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orlandocogo.com/projects/forum">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orlandocogo.com/projects/forum">
+    <meta property="og:title" content="Forum Web — Orlando Cogo">
+    <meta property="og:description" content="Forum web complet en Go — authentification bcrypt, SQLite, Docker, modération, OAuth.">
+    <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/projects/zoo.css">
+    <link rel="stylesheet" href="/css/projects/forum.css">
+</head>
+<body>
+
+<div class="blob1" aria-hidden="true"></div>
+<div class="blob2" aria-hidden="true"></div>
+<div class="grid" aria-hidden="true"></div>
+<div class="corner corner--tl" aria-hidden="true"></div>
+<div class="corner corner--tr" aria-hidden="true"></div>
+<div class="corner corner--bl" aria-hidden="true"></div>
+<div class="corner corner--br" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav class="nav" aria-label="Navigation principale">
+    <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
+        <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
+    </a>
+    <ul class="nav-left nav-links" role="list">
+        <li><a href="/about" class="nav-link">À propos</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+        <li><a href="/cv" class="nav-link">CV</a></li>
+    </ul>
+    <div class="nav-center">
+        <a href="/home" class="nav-home"><span>HOME</span></a>
+    </div>
+    <ul class="nav-right-links nav-links" role="list">
+        <li><a href="/skills" class="nav-link">Compétences</a></li>
+        <li><a href="/project" class="nav-link">Projets</a></li>
+        <li><a href="/tech" class="nav-link">Infrastructure</a></li>
+        <li class="nav-more">
+            <button class="nav-more-btn" id="navMoreBtn" aria-haspopup="true" aria-expanded="false" aria-controls="navMoreMenu" aria-label="Plus de pages">
+                Plus
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-more-menu" id="navMoreMenu" role="menu">
+                <a href="/status" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">06</span><span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
+                <a href="/faq" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">07</span><span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions / Réponses</span></span></a>
+            </div>
+        </li>
+    </ul>
+    <div class="nav-right">
+        <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+            <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+        </button>
+        <div class="nav-status" aria-label="Disponible pour travailler">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>open to work</span>
+        </div>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>À propos</a>
+    <a href="/tech" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Infrastructure</a>
+    <a href="/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Compétences</a>
+    <a href="/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Projets</a>
+    <a href="/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>Contact</a>
+    <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>CV</a>
+    <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>Status</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-title">
+    <div class="hero-breadcrumb">
+        <a href="/project" class="breadcrumb-link">← Projets</a>
+        <span class="breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="breadcrumb-current">Forum Web</span>
+    </div>
+
+    <div class="hero-tag" data-typed="go run main.go" data-typing-delay="600" aria-hidden="true">
+        <span class="prompt">~/projects/forum $</span>
+        <span class="typed"></span>
+        <span class="cursor"></span>
+    </div>
+
+    <div class="hero-meta">
+        <span class="hero-meta-badge">Go</span>
+        <span class="hero-meta-badge">SQLite</span>
+        <span class="hero-meta-badge">Docker</span>
+        <span class="hero-meta-badge hero-meta-badge--status" style="background:rgba(254,188,46,0.1);color:#febc2e;border-color:rgba(254,188,46,0.3)">En cours</span>
+        <span class="hero-meta-type">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            Équipe · 4 pers. · B1
+        </span>
+    </div>
+
+    <h1 class="hero-title" id="hero-title">Forum<br><span class="outline">Web</span></h1>
+    <p class="hero-intro">Forum web complet en Go from scratch — authentification sécurisée, posts avec catégories et images, commentaires, système de likes/dislikes, modération 4 niveaux, OAuth, SQLite, Docker. Projet d'équipe B1 Ynov Campus.</p>
+
+    <div class="hero-badges" aria-label="Technologies utilisées">
+        <span class="badge">Go</span>
+        <span class="badge">SQLite</span>
+        <span class="badge">Docker</span>
+        <span class="badge">bcrypt</span>
+        <span class="badge">UUID</span>
+        <span class="badge">Sessions</span>
+        <span class="badge">OAuth</span>
+        <span class="badge">HTML/CSS</span>
+    </div>
+
+    <div class="hero-actions">
+        <a href="https://github.com/enzoandria1-oss/Forum-JS" target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn--gh" aria-label="Voir sur GitHub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub
+        </a>
+    </div>
+</section>
+
+<!-- AVANCEMENT -->
+<section class="section" aria-labelledby="progress-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">01 //</span>
+        <h2 class="section-title" id="progress-title">Avancement</h2>
+    </div>
+    <div class="forum-pipeline reveal">
+        <div class="fp-item fp-item--done">
+            <span class="fp-icon fp-icon--done">✓</span>
+            <div class="fp-info">
+                <span class="fp-name">Initialisation du projet</span>
+                <span class="fp-desc">Repo GitHub · Structure Go · go.mod · Docker de base</span>
+            </div>
+            <span class="fp-badge fp-badge--done">Fait</span>
+        </div>
+        <div class="fp-item fp-item--inprog">
+            <span class="fp-icon fp-icon--inprog">→</span>
+            <div class="fp-info">
+                <span class="fp-name">Authentification</span>
+                <span class="fp-desc">Inscription · Connexion · bcrypt · Sessions · Cookies</span>
+            </div>
+            <span class="fp-badge fp-badge--inprog">En cours</span>
+        </div>
+        <div class="fp-item fp-item--inprog">
+            <span class="fp-icon fp-icon--inprog">→</span>
+            <div class="fp-info">
+                <span class="fp-name">Base de données SQLite</span>
+                <span class="fp-desc">Schéma · Migrations · Requêtes · lib/sqlite3</span>
+            </div>
+            <span class="fp-badge fp-badge--inprog">En cours</span>
+        </div>
+        <div class="fp-item fp-item--todo">
+            <span class="fp-icon fp-icon--todo">·</span>
+            <div class="fp-info">
+                <span class="fp-name">Posts & Commentaires</span>
+                <span class="fp-desc">Création · Catégories · Images · Modification · Suppression</span>
+            </div>
+            <span class="fp-badge fp-badge--todo">À faire</span>
+        </div>
+        <div class="fp-item fp-item--todo">
+            <span class="fp-icon fp-icon--todo">·</span>
+            <div class="fp-info">
+                <span class="fp-name">Likes / Dislikes & Filtrage</span>
+                <span class="fp-desc">Réactions · Compteurs · Filtres par catégorie · Posts likés</span>
+            </div>
+            <span class="fp-badge fp-badge--todo">À faire</span>
+        </div>
+        <div class="fp-item fp-item--todo">
+            <span class="fp-icon fp-icon--todo">·</span>
+            <div class="fp-info">
+                <span class="fp-name">Système de modération</span>
+                <span class="fp-desc">4 rôles · Signalement · Suppression · Admin panel</span>
+            </div>
+            <span class="fp-badge fp-badge--todo">À faire</span>
+        </div>
+        <div class="fp-item fp-item--todo">
+            <span class="fp-icon fp-icon--todo">·</span>
+            <div class="fp-info">
+                <span class="fp-name">Bonus — OAuth, HTTPS, Notifications</span>
+                <span class="fp-desc">Google & GitHub OAuth · Rate limiting · Notifications · Page d'activité</span>
+            </div>
+            <span class="fp-badge fp-badge--todo">Bonus</span>
+        </div>
+    </div>
+</section>
+
+<!-- CAPTURES D'ÉCRAN -->
+<section class="section" aria-labelledby="gallery-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">02 //</span>
+        <h2 class="section-title" id="gallery-title">Aperçu du forum</h2>
+    </div>
+    <div class="gallery-placeholder reveal">
+        <div class="gallery-ph-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><circle cx="8" cy="6" r="1"/><circle cx="12" cy="6" r="1"/></svg>
+            <span class="gallery-ph-label">Page d'accueil</span>
+            <span class="gallery-ph-sub">À venir</span>
+        </div>
+        <div class="gallery-ph-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span class="gallery-ph-label">Inscription / Connexion</span>
+            <span class="gallery-ph-sub">À venir</span>
+        </div>
+        <div class="gallery-ph-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            <span class="gallery-ph-label">Posts & Commentaires</span>
+            <span class="gallery-ph-sub">À venir</span>
+        </div>
+        <div class="gallery-ph-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span class="gallery-ph-label">Panel modération</span>
+            <span class="gallery-ph-sub">À venir</span>
+        </div>
+    </div>
+    <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted2);margin-top:1rem;text-align:center;">Captures à venir</p>
+</section>
+
+<!-- ARCHITECTURE DB -->
+<section class="section" aria-labelledby="db-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">03 //</span>
+        <h2 class="section-title" id="db-title">Schéma base de données</h2>
+    </div>
+    <div class="db-schema reveal">
+        <div class="db-tables">
+            <div class="db-table">
+                <div class="db-table-name">users</div>
+                <div class="db-field"><span class="db-field-key">PK</span> id<span class="db-field-type">UUID</span></div>
+                <div class="db-field"><span></span> email<span class="db-field-type">TEXT UNIQUE</span></div>
+                <div class="db-field"><span></span> username<span class="db-field-type">TEXT</span></div>
+                <div class="db-field"><span></span> password<span class="db-field-type">TEXT (bcrypt)</span></div>
+                <div class="db-field"><span></span> role<span class="db-field-type">TEXT</span></div>
+                <div class="db-field"><span></span> created_at<span class="db-field-type">DATETIME</span></div>
+                <div class="db-field"><span></span> oauth_provider<span class="db-field-type">TEXT</span></div>
+            </div>
+            <div class="db-table">
+                <div class="db-table-name">sessions</div>
+                <div class="db-field"><span class="db-field-key">PK</span> id<span class="db-field-type">UUID</span></div>
+                <div class="db-field"><span class="db-field-key">FK</span> user_id<span class="db-field-type">UUID</span></div>
+                <div class="db-field"><span></span> token<span class="db-field-type">TEXT</span></div>
+                <div class="db-field"><span></span> expires_at<span class="db-field-type">DATETIME</span></div>
+            </div>
+            <div class="db-table">
+                <div class="db-table-name">posts</div>
+                <div class="db-field"><span class="db-field-key">PK</span> id<span class="db-field-type">UUID</span></div>
+                <div class="db-field"><span class="db-field-key">FK</span> user_id<span class="db-field-type">UUID</span></div>
+                <div class="db-field"><span></span> title<span class="db-field-type">TEXT</span></div>
+                <div class="db-field"><span></span> content<span class="db-field-type">TEXT</span></div>
+                <div class="db-field"><span></span> image_path<span class="db-field-type">TEXT</span></div>
+                <div class="db-field"><span></span> created_at<span class="db-field-type">DATETIME</span></div>
+            </div>
+            <div class="db-table">
+                <div class="db-table-name">comments</div>
+                <div class="db-field"><span class="db-field-key">PK</span> id<span class="db-field-type">UUID</span></div>
+                <div class="db-field"><span class="db-field-key">FK</span> post_id<span class="db-field-type">UUID</span></div>
+                <div class="db-field"><span class="db-field-key">FK</span> user_id<span class="db-field-type">UUID</span></div>
+                <div class="db-field"><span></span> content<span class="db-field-type">TEXT</span></div>
+                <div class="db-field"><span></span> created_at<span class="db-field-type">DATETIME</span></div>
+            </div>
+            <div class="db-table">
+                <div class="db-table-name">categories</div>
+                <div class="db-field"><span class="db-field-key">PK</span> id<span class="db-field-type">UUID</span></div>
+                <div class="db-field"><span></span> name<span class="db-field-type">TEXT</span></div>
+            </div>
+            <div class="db-table">
+                <div class="db-table-name">likes</div>
+                <div class="db-field"><span class="db-field-key">FK</span> user_id<span class="db-field-type">UUID</span></div>
+                <div class="db-field"><span class="db-field-key">FK</span> post_id<span class="db-field-type">UUID</span></div>
+                <div class="db-field"><span class="db-field-key">FK</span> comment_id<span class="db-field-type">UUID</span></div>
+                <div class="db-field"><span></span> value<span class="db-field-type">INT (+1/-1)</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RÔLES UTILISATEURS -->
+<section class="section" aria-labelledby="roles-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">04 //</span>
+        <h2 class="section-title" id="roles-title">Système de rôles</h2>
+    </div>
+    <div class="roles-grid reveal">
+        <div class="role-card role-card--guest">
+            <div class="role-name">Visiteur <span class="role-badge role-badge--guest">GUEST</span></div>
+            <div class="role-perms">
+                <span class="role-perm">Lire les posts</span>
+                <span class="role-perm">Voir les commentaires</span>
+                <span class="role-perm">Voir les likes/dislikes</span>
+                <span class="role-perm role-perm--no">Poster / Commenter</span>
+                <span class="role-perm role-perm--no">Liker / Disliker</span>
+            </div>
+        </div>
+        <div class="role-card role-card--user">
+            <div class="role-name">Utilisateur <span class="role-badge role-badge--user">USER</span></div>
+            <div class="role-perms">
+                <span class="role-perm">Créer des posts</span>
+                <span class="role-perm">Commenter</span>
+                <span class="role-perm">Liker / Disliker</span>
+                <span class="role-perm">Modifier ses contenus</span>
+                <span class="role-perm">Signaler un post</span>
+            </div>
+        </div>
+        <div class="role-card role-card--mod">
+            <div class="role-name">Modérateur <span class="role-badge role-badge--mod">MOD</span></div>
+            <div class="role-perms">
+                <span class="role-perm">Supprimer des posts</span>
+                <span class="role-perm">Gérer les commentaires</span>
+                <span class="role-perm">Signaler contenu inapproprié</span>
+                <span class="role-perm">Promu par un Admin</span>
+                <span class="role-perm role-perm--no">Gérer les utilisateurs</span>
+            </div>
+        </div>
+        <div class="role-card role-card--admin">
+            <div class="role-name">Administrateur <span class="role-badge role-badge--admin">ADMIN</span></div>
+            <div class="role-perms">
+                <span class="role-perm">Accès total à la plateforme</span>
+                <span class="role-perm">Promouvoir des modérateurs</span>
+                <span class="role-perm">Gérer tous les contenus</span>
+                <span class="role-perm">Gérer les catégories</span>
+                <span class="role-perm">Recevoir les signalements</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FONCTIONNALITÉS OBLIGATOIRES -->
+<section class="section" aria-labelledby="features-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">05 //</span>
+        <h2 class="section-title" id="features-title">Fonctionnalités</h2>
+    </div>
+    <div class="learned-grid">
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">01</div>
+            <h3 class="learned-name">Authentification sécurisée</h3>
+            <p class="learned-desc">Inscription avec email unique, mot de passe haché bcrypt. Sessions via cookies sécurisés avec expiration. Un seul session actif par utilisateur. Déconnexion propre avec suppression du cookie.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">02</div>
+            <h3 class="learned-name">Posts avec catégories & images</h3>
+            <p class="learned-desc">Création de posts avec une ou plusieurs catégories — fonctionne comme des sous-forums thématiques. Upload d'images JPEG/PNG/GIF jusqu'à 20Mo. Modification et suppression de ses propres posts.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">03</div>
+            <h3 class="learned-name">Commentaires</h3>
+            <p class="learned-desc">Les utilisateurs connectés peuvent commenter n'importe quel post. Modification et suppression de ses propres commentaires. Les visiteurs peuvent lire les commentaires sans se connecter.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">04</div>
+            <h3 class="learned-name">Likes & Dislikes</h3>
+            <p class="learned-desc">Système de réactions +1/-1 sur posts et commentaires. Compteurs visibles par tous les visiteurs. Réservé aux utilisateurs connectés. Un seul vote par utilisateur par contenu — changeable.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">05</div>
+            <h3 class="learned-name">Filtrage des posts</h3>
+            <p class="learned-desc">Filtrer par catégories (tous les utilisateurs), par posts créés par l'utilisateur connecté, ou par posts likés par l'utilisateur connecté. Navigation fluide entre les vues.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">06</div>
+            <h3 class="learned-name">Docker & Gestion d'erreurs</h3>
+            <p class="learned-desc">Application entièrement containerisée — lancement complet via Docker sans installation. Pages d'erreur personnalisées 404/500. Gestion complète des erreurs techniques sans crash.</p>
+        </div>
+    </div>
+</section>
+
+<!-- BONUS -->
+<section class="section" aria-labelledby="bonus-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">06 //</span>
+        <h2 class="section-title" id="bonus-title">Bonus visés</h2>
+    </div>
+    <div class="bonus-grid">
+        <div class="bonus-card reveal">
+            <div class="bonus-header">
+                <span class="bonus-num">B1</span>
+                <span class="bonus-name">OAuth — Google & GitHub</span>
+                <span class="bonus-status">Planifié</span>
+            </div>
+            <p class="bonus-desc">Connexion via compte Google ou GitHub en plus de l'inscription classique. Implémentation du flux OAuth 2.0, gestion des tokens, liaison avec le compte local.</p>
+            <div class="bonus-tags">
+                <span class="bonus-tag">OAuth 2.0</span>
+                <span class="bonus-tag">Google API</span>
+                <span class="bonus-tag">GitHub API</span>
+                <span class="bonus-tag">Cookies sécurisés</span>
+            </div>
+        </div>
+        <div class="bonus-card reveal">
+            <div class="bonus-header">
+                <span class="bonus-num">B2</span>
+                <span class="bonus-name">Upload d'images avancé</span>
+                <span class="bonus-status">Planifié</span>
+            </div>
+            <p class="bonus-desc">Joindre une image à un post — JPEG, PNG, GIF. Taille max 20Mo avec message d'erreur clair. Gestion des erreurs fichier : mauvais format, fichier corrompu, dépassement de taille.</p>
+            <div class="bonus-tags">
+                <span class="bonus-tag">Multipart form</span>
+                <span class="bonus-tag">MIME detection</span>
+                <span class="bonus-tag">20MB limit</span>
+            </div>
+        </div>
+        <div class="bonus-card reveal">
+            <div class="bonus-header">
+                <span class="bonus-num">B3</span>
+                <span class="bonus-name">Système de modération</span>
+                <span class="bonus-status">Planifié</span>
+            </div>
+            <p class="bonus-desc">4 niveaux de rôles — Guest, User, Moderator, Admin. Les modérateurs peuvent supprimer et signaler les contenus inappropriés. L'admin gère les promotions et reçoit les signalements.</p>
+            <div class="bonus-tags">
+                <span class="bonus-tag">RBAC</span>
+                <span class="bonus-tag">Middleware auth</span>
+                <span class="bonus-tag">Admin panel</span>
+            </div>
+        </div>
+        <div class="bonus-card reveal">
+            <div class="bonus-header">
+                <span class="bonus-num">B4</span>
+                <span class="bonus-name">HTTPS + Rate Limiting</span>
+                <span class="bonus-status">Planifié</span>
+            </div>
+            <p class="bonus-desc">Certificat SSL auto-signé ou CA. Rate limiting par IP pour protéger contre le brute force et le spam. Chiffrement de la base de données SQLite avec mot de passe dédié.</p>
+            <div class="bonus-tags">
+                <span class="bonus-tag">TLS/SSL</span>
+                <span class="bonus-tag">Rate limiting</span>
+                <span class="bonus-tag">SQLite encrypt</span>
+            </div>
+        </div>
+        <div class="bonus-card reveal">
+            <div class="bonus-header">
+                <span class="bonus-num">B5</span>
+                <span class="bonus-name">Notifications & Activité</span>
+                <span class="bonus-status">Planifié</span>
+            </div>
+            <p class="bonus-desc">Notifier un utilisateur quand son post reçoit un like, dislike ou commentaire. Page d'activité personnelle — posts créés, posts likés, commentaires laissés avec contexte.</p>
+            <div class="bonus-tags">
+                <span class="bonus-tag">Notifications</span>
+                <span class="bonus-tag">Page activité</span>
+                <span class="bonus-tag">Historique</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DÉTAILS TECHNIQUES -->
+<section class="section" aria-labelledby="details-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">07 //</span>
+        <h2 class="section-title" id="details-title">Stack & contraintes</h2>
+    </div>
+    <div class="details-grid">
+        <div class="detail-card reveal"><span class="detail-key">Langage</span><span class="detail-val">Go — zéro framework backend</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Base de données</span><span class="detail-val">SQLite · lib/sqlite3</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Sécurité</span><span class="detail-val">bcrypt · UUID · Sessions HttpOnly</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Frontend</span><span class="detail-val">HTML/CSS vanilla — zéro framework</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Container</span><span class="detail-val">Docker — lancement autonome complet</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Équipe</span><span class="detail-val">4 personnes · B1 Ynov Campus</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Statut</span><span class="detail-val" style="color:#febc2e">En cours</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Images upload</span><span class="detail-val">JPEG · PNG · GIF · max 20MB</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Libs autorisées</span><span class="detail-val">sqlite3 · bcrypt · UUID uniquement</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Erreurs HTTP</span><span class="detail-val">404 · 500 · toutes gérées</span></div>
+    </div>
+</section>
+
+<!-- CE QUE J'APPRENDS -->
+<section class="section" aria-labelledby="learned-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">08 //</span>
+        <h2 class="section-title" id="learned-title">Ce que j'apprends</h2>
+    </div>
+    <div class="learned-grid">
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">01</div>
+            <h3 class="learned-name">Go — serveur web complet</h3>
+            <p class="learned-desc">Templates HTML côté serveur, gestion des fichiers uploadés, routing manuel, middleware d'authentification, sessions et cookies sécurisés — tout from scratch sans framework.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">02</div>
+            <h3 class="learned-name">SQL & conception BDD</h3>
+            <p class="learned-desc">Concevoir un schéma relationnel complet avant de coder — diagramme entité-relation, normalisation, clés étrangères, jointures, requêtes optimisées avec SQLite.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">03</div>
+            <h3 class="learned-name">Sécurité applicative réelle</h3>
+            <p class="learned-desc">bcrypt pour les mots de passe, sessions avec expiration, cookies HttpOnly et Secure, protection des routes par rôle, rate limiting, HTTPS — sécurité by design dès le départ.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">04</div>
+            <h3 class="learned-name">OAuth 2.0</h3>
+            <p class="learned-desc">Implémenter le flux OAuth 2.0 avec Google et GitHub — authorization code flow, gestion des tokens, liaison avec les comptes locaux, sécurisation des callbacks.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">05</div>
+            <h3 class="learned-name">Architecture en équipe</h3>
+            <p class="learned-desc">Organiser un projet Go à 4 — branches Git par feature, pull requests, répartition des responsabilités, gestion des conflits de merge, revue de code, conventions partagées.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">06</div>
+            <h3 class="learned-name">Contrôle d'accès par rôle (RBAC)</h3>
+            <p class="learned-desc">Implémenter un système de rôles hiérarchiques — Guest, User, Moderator, Admin — avec middleware d'autorisation, protection des routes et vérification des permissions à chaque action.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" aria-label="Pied de page">
+    <span class="prompt" aria-hidden="true">~/projects $</span>
+    <span aria-hidden="true">cd forum</span>
+    <a href="/project" class="footer-back">← Retour aux projets</a>
+    <span class="footer-year">© 2026</span>
+</footer>
+
+<script src="/js/background.js"></script>
+<script src="/js/nav.js"></script>
+</body>
+</html>

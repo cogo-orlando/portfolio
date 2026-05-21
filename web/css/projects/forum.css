@@ -1,0 +1,248 @@
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.role-card {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    padding: 1.2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+}
+.role-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+}
+.role-card--guest::before   { background: var(--muted2); }
+.role-card--user::before    { background: var(--accent2); }
+.role-card--mod::before     { background: #febc2e; }
+.role-card--admin::before   { background: var(--accent); }
+.role-card:hover { border-color: rgba(0,245,160,0.2); }
+.role-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.role-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    padding: 2px 6px;
+    letter-spacing: 0.08em;
+}
+.role-badge--guest { color: var(--muted2); border: 1px solid var(--border2); }
+.role-badge--user  { color: var(--accent2); border: 1px solid rgba(0,200,245,0.3); }
+.role-badge--mod   { color: #febc2e; border: 1px solid rgba(254,188,46,0.3); }
+.role-badge--admin { color: var(--accent); border: 1px solid rgba(0,245,160,0.3); }
+.role-perms {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.role-perm {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted2);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.role-perm::before { content: '✓'; color: var(--accent); font-weight: 700; }
+.role-perm--no::before { content: '✗'; color: #ff5f57; }
+
+/* DB Schema */
+.db-schema {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--border2);
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+.db-tables {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+.db-table {
+    min-width: 160px;
+}
+.db-table-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 6px 10px;
+    background: rgba(0,245,160,0.05);
+    border: 1px solid rgba(0,245,160,0.2);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+.db-field {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted2);
+    padding: 3px 10px;
+    border-left: 1px solid var(--border2);
+    border-right: 1px solid var(--border2);
+    border-bottom: 1px solid var(--border2);
+    display: flex;
+    gap: 8px;
+}
+.db-field-key { color: var(--accent2); flex-shrink: 0; }
+.db-field-type { color: var(--muted); font-size: 9px; margin-left: auto; }
+
+/* Bonus cards */
+.bonus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+.bonus-card {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+.bonus-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+.bonus-card:hover { border-color: rgba(0,245,160,0.25); }
+.bonus-card:hover::after { transform: scaleX(1); }
+.bonus-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.bonus-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+}
+.bonus-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+}
+.bonus-status {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: #febc2e;
+    border: 1px solid rgba(254,188,46,0.3);
+    padding: 2px 6px;
+    margin-left: auto;
+    letter-spacing: 0.06em;
+}
+.bonus-desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted2);
+    line-height: 1.7;
+}
+.bonus-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+}
+.bonus-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--muted2);
+    border: 1px solid var(--border2);
+    padding: 2px 6px;
+    letter-spacing: 0.04em;
+}
+
+/* Gallery placeholder */
+.gallery-placeholder {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+}
+.gallery-ph-card {
+    background: var(--surface);
+    border: 1px dashed var(--border2);
+    aspect-ratio: 16/9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--muted);
+    transition: border-color 0.3s;
+}
+.gallery-ph-card:hover { border-color: rgba(0,245,160,0.2); }
+.gallery-ph-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted2);
+    letter-spacing: 0.08em;
+}
+.gallery-ph-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+}
+
+/* Pipeline forum */
+.forum-pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.fp-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-left: 2px solid var(--border2);
+    padding: 0.8rem 1rem;
+    transition: border-color 0.2s;
+}
+.fp-item--done { border-left-color: var(--accent); }
+.fp-item--inprog { border-left-color: #febc2e; }
+.fp-item--todo { border-left-color: var(--border2); opacity: 0.6; }
+.fp-item:hover { border-color: rgba(0,245,160,0.2); }
+.fp-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    min-width: 20px;
+    text-align: center;
+}
+.fp-icon--done { color: var(--accent); }
+.fp-icon--inprog { color: #febc2e; }
+.fp-icon--todo { color: var(--muted); }
+.fp-info { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.fp-name { font-size: 13px; font-weight: 700; color: var(--text); }
+.fp-desc { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted2); }
+.fp-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    padding: 2px 8px;
+    letter-spacing: 0.06em;
+}
+.fp-badge--done   { color: var(--accent); border: 1px solid rgba(0,245,160,0.3); }
+.fp-badge--inprog { color: #febc2e; border: 1px solid rgba(254,188,46,0.3); }
+.fp-badge--todo   { color: var(--muted); border: 1px solid var(--border2); }

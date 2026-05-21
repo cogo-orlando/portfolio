@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NetflixLight — Orlando Cogo</title>
-    <meta name="description" content="NetflixLight — plateforme de streaming dynamique utilisant l'API TMDB. Projet JavaScript d'Orlando Cogo.">
+    <meta name="description" content="NetflixLight — plateforme de streaming dynamique JavaScript/Node.js/Express. API TMDB, authentification, favoris, bande-annonce. Projet B1 Orlando Cogo.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://orlandocogo.com/projects/netflix">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orlandocogo.com/projects/netflix">
+    <meta property="og:title" content="NetflixLight — Orlando Cogo">
+    <meta property="og:description" content="Plateforme de streaming JavaScript/Node.js — API TMDB, authentification, favoris, bande-annonce.">
+    <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
+    <meta property="og:locale" content="fr_FR">
     <link rel="icon" href="/img/favicon.ico">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,24 +33,17 @@
 
 <!-- NAV -->
 <nav class="nav" aria-label="Navigation principale">
-    <!-- LOGO -->
     <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
         <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
     </a>
-
-    <!-- LIENS GAUCHE -->
     <ul class="nav-left nav-links" role="list">
         <li><a href="/about" class="nav-link">À propos</a></li>
         <li><a href="/contact" class="nav-link">Contact</a></li>
         <li><a href="/cv" class="nav-link">CV</a></li>
     </ul>
-
-    <!-- HOME CENTRE -->
     <div class="nav-center">
         <a href="/home" class="nav-home"><span>HOME</span></a>
     </div>
-
-    <!-- LIENS DROITE -->
     <ul class="nav-right-links nav-links" role="list">
         <li><a href="/skills" class="nav-link">Compétences</a></li>
         <li><a href="/project" class="nav-link">Projets</a></li>
@@ -60,8 +59,6 @@
             </div>
         </li>
     </ul>
-
-    <!-- BURGER + STATUS -->
     <div class="nav-right">
         <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
             <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
@@ -90,7 +87,6 @@
         <span class="breadcrumb-sep" aria-hidden="true">/</span>
         <span class="breadcrumb-current">NetflixLight</span>
     </div>
-
     <div class="hero-tag" data-typed="cat netflixlight.md" aria-hidden="true">
         <span class="prompt">~/projects $</span>
         <span class="typed"></span>
@@ -98,24 +94,25 @@
     </div>
     <div class="hero-meta">
         <span class="hero-meta-badge">JavaScript</span>
+        <span class="hero-meta-badge">Node.js</span>
+        <span class="hero-meta-badge">Express</span>
         <span class="hero-meta-badge hero-meta-badge--status">Terminé</span>
         <span class="hero-meta-type">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             Solo · B1
         </span>
     </div>
-
-    <h1 class="hero-title" id="hero-title">NetflixLight<br><span class="outline">Détails</span></h1>
-    <p class="hero-intro">Plateforme de streaming dynamique utilisant l'API TMDB pour la récupération de données en temps réel. Système de recherche fluide, catégories personnalisées et interface responsive.</p>
-
+    <h1 class="hero-title" id="hero-title">NetflixLight<br><span class="outline">Streaming</span></h1>
+    <p class="hero-intro">Plateforme de streaming dynamique construite en JavaScript/Node.js/Express. API TMDB pour le catalogue complet, authentification avec sessions, gestion des favoris, lecteur de bandes annonces personnalisé. Déployé sur Render.</p>
     <div class="hero-badges" aria-label="Technologies utilisées">
         <span class="badge">JavaScript</span>
-        <span class="badge">API TMDB</span>
         <span class="badge">Node.js</span>
-        <span class="badge">HTML</span>
-        <span class="badge">CSS</span>
+        <span class="badge">Express.js</span>
+        <span class="badge">API TMDB</span>
+        <span class="badge">HTML5</span>
+        <span class="badge">CSS3</span>
+        <span class="badge">JSON Storage</span>
     </div>
-
     <div class="hero-actions">
         <a href="https://github.com/cogo-orlando/NETFLIXLight" target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn--gh" aria-label="Voir sur GitHub">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
@@ -131,10 +128,9 @@
 <!-- APERÇU -->
 <section class="section" aria-labelledby="apercu-title">
     <div class="section-header">
-        <span class="section-tag" aria-hidden="true">// Aperçu</span>
+        <span class="section-tag" aria-hidden="true">01 //</span>
         <h2 class="section-title" id="apercu-title">Le projet</h2>
     </div>
-
     <a href="https://netflixlight.onrender.com" target="_blank" rel="noopener noreferrer" class="preview-link reveal" aria-label="Ouvrir NetflixLight">
         <div class="preview-wrap">
             <img src="/img/projects/netflix/preview.png" alt="NetflixLight preview" class="preview-img">
@@ -155,62 +151,206 @@
 <!-- CAPTURES -->
 <section class="section" id="gallery" aria-labelledby="gallery-title">
     <div class="section-header">
-        <span class="section-tag" aria-hidden="true">// Captures</span>
-        <h2 class="section-title" id="gallery-title">Images</h2>
+        <span class="section-tag" aria-hidden="true">02 //</span>
+        <h2 class="section-title" id="gallery-title">Captures d'écran</h2>
     </div>
-
     <div class="gallery-grid">
         <div class="gallery-card reveal" data-index="0">
             <div class="gallery-img-wrap">
                 <img src="/img/projects/netflix/screen1.png" alt="Page d'accueil NetflixLight" class="gallery-img" loading="lazy">
-                <div class="gallery-overlay" aria-hidden="true">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                    <span>Agrandir</span>
-                </div>
+                <div class="gallery-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>Agrandir</span></div>
             </div>
-            <div class="gallery-caption">
-                <span class="caption-num">01</span>
-                <span class="caption-text">Page d'accueil du site</span>
-            </div>
+            <div class="gallery-caption"><span class="caption-num">01</span><span class="caption-text">Page d'accueil — films tendances, populaires, mieux notés</span></div>
         </div>
         <div class="gallery-card reveal" data-index="1">
             <div class="gallery-img-wrap">
                 <img src="/img/projects/netflix/screen2.png" alt="Favoris NetflixLight" class="gallery-img" loading="lazy">
-                <div class="gallery-overlay" aria-hidden="true">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                    <span>Agrandir</span>
-                </div>
+                <div class="gallery-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>Agrandir</span></div>
             </div>
-            <div class="gallery-caption">
-                <span class="caption-num">02</span>
-                <span class="caption-text">Mettre des films en favoris</span>
-            </div>
+            <div class="gallery-caption"><span class="caption-num">02</span><span class="caption-text">Page favoris — ajout/suppression, recherche dans les favoris</span></div>
         </div>
         <div class="gallery-card reveal" data-index="2">
             <div class="gallery-img-wrap">
                 <img src="/img/projects/netflix/screen3.png" alt="Détails d'un film" class="gallery-img" loading="lazy">
-                <div class="gallery-overlay" aria-hidden="true">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                    <span>Agrandir</span>
-                </div>
+                <div class="gallery-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>Agrandir</span></div>
             </div>
-            <div class="gallery-caption">
-                <span class="caption-num">03</span>
-                <span class="caption-text">Détails d'un film — acteurs, note, trailer</span>
-            </div>
+            <div class="gallery-caption"><span class="caption-num">03</span><span class="caption-text">Détail film — synopsis, acteurs, note, bande-annonce</span></div>
         </div>
         <div class="gallery-card reveal" data-index="3">
             <div class="gallery-img-wrap">
                 <img src="/img/projects/netflix/screen4.png" alt="Création de compte" class="gallery-img" loading="lazy">
-                <div class="gallery-overlay" aria-hidden="true">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                    <span>Agrandir</span>
-                </div>
+                <div class="gallery-overlay" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>Agrandir</span></div>
             </div>
-            <div class="gallery-caption">
-                <span class="caption-num">04</span>
-                <span class="caption-text">Création de compte utilisateur</span>
-            </div>
+            <div class="gallery-caption"><span class="caption-num">04</span><span class="caption-text">Authentification — inscription, connexion, session sécurisée</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- FONCTIONNALITÉS -->
+<section class="section" aria-labelledby="features-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">03 //</span>
+        <h2 class="section-title" id="features-title">Fonctionnalités</h2>
+    </div>
+    <div class="learned-grid">
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">01</div>
+            <h3 class="learned-name">Catalogue TMDB complet</h3>
+            <p class="learned-desc">Tendances du moment, films populaires, mieux notés, par genre. Film aléatoire en hero à chaque visite. Données réelles en temps réel depuis l'API TMDB — millions de films disponibles.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">02</div>
+            <h3 class="learned-name">Authentification & Sessions</h3>
+            <p class="learned-desc">Inscription email/pseudo/mot de passe, connexion, déconnexion. Sessions gérées côté serveur Express avec middleware de protection des routes. Persistance dans users.json.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">03</div>
+            <h3 class="learned-name">Détail film complet</h3>
+            <p class="learned-desc">Synopsis, casting complet avec photos, note TMDB, genres, durée, date de sortie. Films similaires recommandés. Interface immersive avec fond dynamique basé sur le poster du film.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">04</div>
+            <h3 class="learned-name">Recherche fluide</h3>
+            <p class="learned-desc">Barre de recherche sur la page films et dans les favoris. Résultats dynamiques via l'API TMDB sans rechargement de page. Routing côté client géré manuellement via l'API History.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">05</div>
+            <h3 class="learned-name">Système de favoris</h3>
+            <p class="learned-desc">Ajout et suppression de films depuis n'importe quelle page. Stockage par utilisateur dans favorites.json côté serveur. Synchronisé en temps réel avec le compte connecté.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">06</div>
+            <h3 class="learned-name">Lecteur bande-annonce</h3>
+            <p class="learned-desc">Player vidéo custom construit sur l'élément HTML5 natif — contrôles natifs désactivés, remplacés par une interface JavaScript : barre de progression, play/pause, volume, timer, plein écran.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="section" aria-labelledby="arch-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">04 //</span>
+        <h2 class="section-title" id="arch-title">Architecture du projet</h2>
+    </div>
+    <div class="arch-tree reveal">
+        <pre><span class="tree-dir">netflixlight/</span>
+│
+├── <span class="tree-dir">server/</span>                        <span class="tree-comment"># Backend Node.js / Express</span>
+│   ├── <span class="tree-dir">logic/</span>                     <span class="tree-comment"># Logique métier découplée des routes</span>
+│   │   ├── <span class="tree-file">authentification.js</span>    <span class="tree-comment"># Inscription, connexion, gestion des users</span>
+│   │   ├── <span class="tree-file">favorites.js</span>           <span class="tree-comment"># Lecture/écriture des favoris</span>
+│   │   └── <span class="tree-file">movies.js</span>              <span class="tree-comment"># Appels vers l'API TMDB</span>
+│   │
+│   ├── <span class="tree-dir">routes/</span>                    <span class="tree-comment"># Définition des routes Express</span>
+│   │   ├── <span class="tree-file">authentification.js</span>    <span class="tree-comment"># POST /api/auth/*</span>
+│   │   ├── <span class="tree-file">favorites.js</span>           <span class="tree-comment"># GET / POST / DELETE /api/favorites</span>
+│   │   └── <span class="tree-file">movies.js</span>              <span class="tree-comment"># GET /api/movies/*</span>
+│   │
+│   ├── <span class="tree-dir">security/</span>
+│   │   └── <span class="tree-file">security.js</span>            <span class="tree-comment"># Middleware de vérification de session</span>
+│   │
+│   ├── <span class="tree-dir">services/</span>
+│   │   └── <span class="tree-file">storage.js</span>             <span class="tree-comment"># Utilitaire lecture/écriture fichiers JSON</span>
+│   │
+│   ├── <span class="tree-dir">stockage/</span>                  <span class="tree-comment"># Persistance des données</span>
+│   │   ├── <span class="tree-file">favorites.json</span>         <span class="tree-comment"># Favoris par utilisateur</span>
+│   │   ├── <span class="tree-file">tmdb.js</span>                <span class="tree-comment"># Cache / configuration TMDB</span>
+│   │   └── <span class="tree-file">users.json</span>             <span class="tree-comment"># Utilisateurs enregistrés</span>
+│   │
+│   └── <span class="tree-file">server.js</span>                  <span class="tree-comment"># Point d'entrée Express</span>
+│
+└── <span class="tree-dir">web/</span>                           <span class="tree-comment"># Frontend</span>
+    ├── <span class="tree-dir">css/</span>                       <span class="tree-comment"># Feuilles de style</span>
+    ├── <span class="tree-dir">js/</span>                        <span class="tree-comment"># Scripts JavaScript</span>
+    ├── <span class="tree-dir">image/</span>                     <span class="tree-comment"># Images statiques</span>
+    ├── <span class="tree-file">home.html</span>                  <span class="tree-comment"># Page d'accueil</span>
+    ├── <span class="tree-file">details.html</span>               <span class="tree-comment"># Page détail film</span>
+    ├── <span class="tree-file">favorites.html</span>             <span class="tree-comment"># Page favoris</span>
+    └── <span class="tree-file">error.html</span>                 <span class="tree-comment"># Page d'erreur 404</span></pre>
+    </div>
+</section>
+
+<!-- API BACKEND -->
+<section class="section" aria-labelledby="api-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">05 //</span>
+        <h2 class="section-title" id="api-title">Documentation API backend</h2>
+    </div>
+    <div class="reveal" style="background:var(--surface);border:1px solid var(--border2);padding:1.5rem;overflow-x:auto;">
+
+        <div class="api-section">
+            <div class="api-section-title">Authentification — /api/auth</div>
+            <table class="api-table">
+                <thead><tr><th>Méthode</th><th>Route</th><th>Corps</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr><td><span class="api-method api-method--post">POST</span></td><td class="api-route">/api/auth/register</td><td>{ email, pseudo, password }</td><td>Inscription d'un nouvel utilisateur</td></tr>
+                <tr><td><span class="api-method api-method--post">POST</span></td><td class="api-route">/api/auth/login</td><td>{ email, password }</td><td>Connexion, création de session</td></tr>
+                <tr><td><span class="api-method api-method--post">POST</span></td><td class="api-route">/api/auth/logout</td><td>—</td><td>Déconnexion, destruction de session</td></tr>
+                <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/api/auth/me</td><td>—</td><td>Retourne l'utilisateur connecté (session requise)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="api-section">
+            <div class="api-section-title">Films — /api/movies</div>
+            <table class="api-table">
+                <thead><tr><th>Méthode</th><th>Route</th><th>Paramètres</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/api/movies/trending</td><td>—</td><td>Contenus tendances du moment</td></tr>
+                <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/api/movies/popular</td><td>—</td><td>Films populaires</td></tr>
+                <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/api/movies/top-rated</td><td>—</td><td>Films les mieux notés</td></tr>
+                <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/api/movies/genre/:id</td><td>id : identifiant TMDB du genre</td><td>Films par genre</td></tr>
+                <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/api/movies/:id</td><td>id : identifiant TMDB</td><td>Détail complet d'un film</td></tr>
+                <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/api/movies/search</td><td>?q=terme</td><td>Recherche dans le catalogue TMDB</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="api-section">
+            <div class="api-section-title">Favoris — /api/favorites</div>
+            <table class="api-table">
+                <thead><tr><th>Méthode</th><th>Route</th><th>Corps</th><th>Description</th></tr></thead>
+                <tbody>
+                <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/api/favorites</td><td>—</td><td>Récupère les favoris de l'utilisateur connecté</td></tr>
+                <tr><td><span class="api-method api-method--post">POST</span></td><td class="api-route">/api/favorites</td><td>{ tmdbId, type, title, poster }</td><td>Ajoute un contenu aux favoris</td></tr>
+                <tr><td><span class="api-method api-method--delete">DELETE</span></td><td class="api-route">/api/favorites/:tmdbId</td><td>—</td><td>Supprime un contenu des favoris</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+
+<!-- CHOIX TECHNIQUES -->
+<section class="section" aria-labelledby="choices-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">06 //</span>
+        <h2 class="section-title" id="choices-title">Choix techniques</h2>
+    </div>
+    <div class="choices-grid">
+        <div class="choice-card reveal">
+            <div class="choice-name">Routing client manuel <span class="choice-tag">History API</span></div>
+            <p class="choice-desc">Le routing côté client est géré manuellement via l'API History du navigateur — sans React, Vue ou autre framework. Navigation SPA complète sans rechargement de page.</p>
+        </div>
+        <div class="choice-card reveal">
+            <div class="choice-name">Architecture découplée <span class="choice-tag">logic/routes/security</span></div>
+            <p class="choice-desc">La logique métier (logic/) est séparée des routes Express (routes/) et du middleware d'authentification (security/). Chaque couche a une responsabilité unique et claire.</p>
+        </div>
+        <div class="choice-card reveal">
+            <div class="choice-name">Stockage JSON <span class="choice-tag">Sans base de données</span></div>
+            <p class="choice-desc">Les données utilisateurs et favoris sont stockées dans des fichiers JSON lus et écrits via un service dédié (services/storage.js). Choix délibéré pour simplifier le setup sans BDD.</p>
+        </div>
+        <div class="choice-card reveal">
+            <div class="choice-name">Proxy TMDB côté serveur <span class="choice-tag">Clé API sécurisée</span></div>
+            <p class="choice-desc">La clé API TMDB est conservée dans .env côté serveur et jamais exposée au navigateur. Le frontend communique exclusivement avec l'API Express, qui joue le rôle de proxy vers TMDB.</p>
+        </div>
+        <div class="choice-card reveal">
+            <div class="choice-name">Player vidéo custom <span class="choice-tag">HTML5 natif</span></div>
+            <p class="choice-desc">Le lecteur de bandes-annonces est construit sur l'élément video HTML5 — contrôles natifs désactivés, interface entièrement personnalisée en JavaScript : progression, volume, timer, plein écran.</p>
+        </div>
+        <div class="choice-card reveal">
+            <div class="choice-name">Déploiement Render <span class="choice-tag">Live</span></div>
+            <p class="choice-desc">Application déployée sur Render avec variables d'environnement sécurisées. Accessible à netflixlight.onrender.com — premier projet JavaScript solo déployé en production.</p>
         </div>
     </div>
 </section>
@@ -218,77 +358,49 @@
 <!-- DÉTAILS -->
 <section class="section" aria-labelledby="details-title">
     <div class="section-header">
-        <span class="section-tag" aria-hidden="true">// Détails</span>
-        <h2 class="section-title" id="details-title">À propos du projet</h2>
+        <span class="section-tag" aria-hidden="true">07 //</span>
+        <h2 class="section-title" id="details-title">Détails du projet</h2>
     </div>
-
     <div class="details-grid">
-        <div class="detail-card reveal">
-            <span class="detail-key">Équipe</span>
-            <span class="detail-val">Solo</span>
-        </div>
-        <div class="detail-card reveal">
-            <span class="detail-key">Langage</span>
-            <span class="detail-val">JavaScript · HTML · CSS</span>
-        </div>
-        <div class="detail-card reveal">
-            <span class="detail-key">API</span>
-            <span class="detail-val">TMDB (The Movie Database)</span>
-        </div>
-        <div class="detail-card reveal">
-            <span class="detail-key">Appris</span>
-            <span class="detail-val">Fetch API · JSON · Node.js</span>
-        </div>
-        <div class="detail-card reveal">
-            <span class="detail-key">Déploiement</span>
-            <span class="detail-val">Render</span>
-        </div>
-        <div class="detail-card reveal">
-            <span class="detail-key">Statut</span>
-            <span class="detail-val" style="color:var(--accent)">Terminé</span>
-        </div>
-    </div>
-
-    <div class="project-desc reveal">
-        <div class="desc-content" id="descContent">
-            <p>NetflixLight est une plateforme de streaming moderne et immersive conçue pour offrir une expérience utilisateur fluide et dynamique. Ce projet est né de la volonté de recréer une interface complexe de type "Single Page Application" (SPA) en s'appuyant sur des données réelles et massives provenant de l'industrie cinématographique. L'objectif principal était de relever le défi technique de l'intégration d'API tierces tout en garantissant une performance optimale et une interface visuellement percutante, fidèle aux standards du web actuel. Le projet est actuellement entièrement fonctionnel et déployé sur Render.</p>
-        </div>
-        <button class="desc-toggle" id="descToggle" aria-expanded="false">
-            <span id="descToggleText">Lire la suite</span>
-            <svg id="descArrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-        </button>
+        <div class="detail-card reveal"><span class="detail-key">Équipe</span><span class="detail-val">Solo</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Frontend</span><span class="detail-val">JavaScript · HTML5 · CSS3</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Backend</span><span class="detail-val">Node.js · Express.js</span></div>
+        <div class="detail-card reveal"><span class="detail-key">API externe</span><span class="detail-val">TMDB (The Movie Database)</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Stockage</span><span class="detail-val">JSON files (users · favorites)</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Déploiement</span><span class="detail-val">Render — live</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Commits</span><span class="detail-val">58 commits</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Licence</span><span class="detail-val">GPL-3.0</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Statut</span><span class="detail-val" style="color:var(--accent)">Terminé · En prod</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Langages</span><span class="detail-val">JS 43% · CSS 43% · HTML 13%</span></div>
     </div>
 </section>
 
 <!-- CE QUE J'AI APPRIS -->
 <section class="section" aria-labelledby="learned-title">
     <div class="section-header">
-        <span class="section-tag" aria-hidden="true">// Apprentissages</span>
+        <span class="section-tag" aria-hidden="true">08 //</span>
         <h2 class="section-title" id="learned-title">Ce que j'ai appris</h2>
     </div>
-
     <div class="learned-grid">
         <div class="learned-card reveal">
             <div class="learned-num" aria-hidden="true">01</div>
-            <h3 class="learned-name">Intégration d'API REST</h3>
-            <p class="learned-desc">Consommer une API tierce avec fetch, gérer les réponses JSON, les erreurs et les cas limites. Comprendre la pagination et les requêtes asynchrones en JavaScript.</p>
+            <h3 class="learned-name">Intégration d'API REST tierce</h3>
+            <p class="learned-desc">Consommer l'API TMDB depuis un proxy Express — fetch, gestion des réponses JSON, pagination, gestion des erreurs réseau et des cas limites. Clé API sécurisée côté serveur uniquement.</p>
         </div>
         <div class="learned-card reveal">
             <div class="learned-num" aria-hidden="true">02</div>
-            <h3 class="learned-name">Architecture SPA</h3>
-            <p class="learned-desc">Construire une Single Page Application sans framework — routing côté client, gestion de l'état, mise à jour dynamique du DOM sans rechargement de page.</p>
+            <h3 class="learned-name">Architecture SPA sans framework</h3>
+            <p class="learned-desc">Construire une Single Page Application complète en JavaScript vanilla — routing avec History API, gestion de l'état global, mise à jour dynamique du DOM sans rechargement de page.</p>
         </div>
         <div class="learned-card reveal">
             <div class="learned-num" aria-hidden="true">03</div>
-            <h3 class="learned-name">Serveur Node.js</h3>
-            <p class="learned-desc">Mettre en place un serveur JavaScript pour servir l'application et gérer les routes. Déploiement sur Render et gestion des variables d'environnement.</p>
+            <h3 class="learned-name">Backend Express.js structuré</h3>
+            <p class="learned-desc">Organiser un backend Node.js en couches séparées — routes, logique métier, middleware, services. Authentification par sessions, protection des routes, proxy vers API externe.</p>
         </div>
         <div class="learned-card reveal">
             <div class="learned-num" aria-hidden="true">04</div>
-            <h3 class="learned-name">UI/UX avancé</h3>
-            <p class="learned-desc">Recréer une interface complexe type Netflix — recherche fluide, catégories, favoris, système de compte. Attention portée à l'expérience utilisateur et aux transitions.</p>
+            <h3 class="learned-name">Player vidéo custom HTML5</h3>
+            <p class="learned-desc">Construire un lecteur vidéo complet from scratch — désactiver les contrôles natifs, implémenter la progression, play/pause, volume, timer et plein écran en JavaScript pur.</p>
         </div>
     </div>
 </section>
@@ -305,13 +417,9 @@
             </button>
         </div>
         <div class="lightbox-img-wrap">
-            <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Image précédente">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </button>
+            <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Image précédente"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
             <img src="" alt="" class="lightbox-img" id="lightboxImg">
-            <button class="lightbox-nav next" id="lightboxNext" aria-label="Image suivante">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </button>
+            <button class="lightbox-nav next" id="lightboxNext" aria-label="Image suivante"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
         </div>
         <div class="lightbox-counter" id="lightboxCounter">1 / 4</div>
     </div>
@@ -327,10 +435,10 @@
 
 <script>
     window.projectImages = [
-        { src: '/img/projects/netflix/screen1.png', title: '01 — Page d\'accueil du site' },
-        { src: '/img/projects/netflix/screen2.png', title: '02 — Mettre des films en favoris' },
-        { src: '/img/projects/netflix/screen3.png', title: '03 — Détails d\'un film' },
-        { src: '/img/projects/netflix/screen4.png', title: '04 — Création de compte' },
+        { src: '/img/projects/netflix/screen1.png', title: '01 — Page d\'accueil — films tendances, populaires, mieux notés' },
+        { src: '/img/projects/netflix/screen2.png', title: '02 — Page favoris — ajout/suppression, recherche' },
+        { src: '/img/projects/netflix/screen3.png', title: '03 — Détail film — synopsis, acteurs, bande-annonce' },
+        { src: '/img/projects/netflix/screen4.png', title: '04 — Authentification — inscription et connexion' },
     ];
     window.typingText = 'cat netflixlight.md';
 </script>

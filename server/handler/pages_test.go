@@ -460,6 +460,7 @@ func TestHandlers_AllReturn200(t *testing.T) {
 		{"Artemis", ArtemisHandler, "/projects/artemis"},
 		{"Annuaire", AnnuaireHandler, "/projects/annuaire"},
 		{"SecurityDashboard", SecurityDashboardHandler, "/projects/security-dashboard"},
+		{"Forum", ForumHandler, "/projects/forum"},
 	}
 
 	for _, tt := range tests {
