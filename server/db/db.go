@@ -151,11 +151,13 @@ func LogHoneypot(ip, path, userAgent string) {
 			VALUES ($1, 'GET', $2, 404, $3, 'honeypot')
 		`, ip, path, userAgent)
 
-		_ = execWithRetry(`
+		if err := execWithRetry(`
 			INSERT INTO blacklisted_ips (ip, reason, expires_at)
 			VALUES ($1, 'honeypot', $2)
 			ON CONFLICT (ip) DO UPDATE SET expires_at = $2
-		`, ip, expires)
+		`, ip, expires); err != nil {
+			slog.Error("erreur insert blacklist", "error", err, "ip", ip)
+		}
 	}()
 }
 
