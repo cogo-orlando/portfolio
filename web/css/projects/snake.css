@@ -1,0 +1,121 @@
+/* ── SNAKE PROJECT — STYLES SPÉCIFIQUES ── */
+
+/* ── ARCH TREE ── */
+.arch-tree {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--border2);
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+.arch-tree pre {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted2);
+    line-height: 1.8;
+    margin: 0;
+    white-space: pre;
+}
+.tree-dir { color: var(--accent2); }
+.tree-comment { color: var(--muted); font-style: italic; }
+
+/* ── STRUCT CARDS ── */
+.struct-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+}
+.struct-card {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    overflow: hidden;
+    transition: border-color 0.3s;
+}
+.struct-card:hover { border-color: rgba(0,245,160,0.2); }
+.struct-header {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 8px 12px;
+    background: rgba(0,245,160,0.05);
+    border-bottom: 1px solid rgba(0,245,160,0.15);
+    text-transform: uppercase;
+}
+.struct-field {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted2);
+    padding: 5px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    display: flex;
+    gap: 8px;
+}
+.struct-field:last-child { border-bottom: none; }
+.struct-field-type { color: var(--accent2); flex-shrink: 0; }
+.struct-field-comment { color: var(--muted); font-size: 10px; margin-left: auto; font-style: italic; }
+
+/* ── CONTROLS ── */
+.controls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+}
+.control-card {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s;
+}
+.control-card:hover { border-color: rgba(0,245,160,0.2); }
+.control-key {
+    font-family: 'DM Mono', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    border: 1px solid rgba(0,245,160,0.3);
+    padding: 8px 14px;
+    min-width: 44px;
+    text-align: center;
+}
+.control-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* ── TERMINAL PREVIEW ── */
+.term-preview {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border2);
+    overflow: hidden;
+}
+.term-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.7rem 1rem;
+    background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid var(--border2);
+}
+.term-dot { width: 10px; height: 10px; border-radius: 50%; }
+.term-title { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted2); margin-left: 6px; }
+.term-body {
+    padding: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--accent);
+    white-space: pre;
+    overflow-x: auto;
+}
+.term-snake { color: var(--accent); }
+.term-food { color: var(--warn); }
+.term-wall { color: var(--muted2); }
+.term-text { color: var(--muted2); }

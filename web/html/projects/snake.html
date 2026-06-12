@@ -1,10 +1,290 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake — Orlando Cogo</title>
+    <meta name="description" content="Snake — jeu Snake jouable en terminal, codé en C. Architecture multi-fichiers, struct pointers, CMake. Projet B1 Ynov Campus, équipe de 2.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orlandocogo.com/projects/snake">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orlandocogo.com/projects/snake">
+    <meta property="og:title" content="Snake — Orlando Cogo">
+    <meta property="og:description" content="Jeu Snake en C jouable en terminal — architecture multi-fichiers, CMake.">
+    <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/projects/zoo.css">
+    <link rel="stylesheet" href="/css/projects/snake.css">
 </head>
 <body>
-$END$
+
+<div class="blob1" aria-hidden="true"></div>
+<div class="blob2" aria-hidden="true"></div>
+<div class="grid" aria-hidden="true"></div>
+<div class="corner corner--tl" aria-hidden="true"></div>
+<div class="corner corner--tr" aria-hidden="true"></div>
+<div class="corner corner--bl" aria-hidden="true"></div>
+<div class="corner corner--br" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav class="nav" aria-label="Navigation principale">
+    <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
+        <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
+    </a>
+    <ul class="nav-left nav-links" role="list">
+        <li><a href="/about" class="nav-link">À propos</a></li>
+        <li><a href="/contact" class="nav-link">Contact</a></li>
+        <li><a href="/cv" class="nav-link">CV</a></li>
+    </ul>
+    <div class="nav-center">
+        <a href="/home" class="nav-home"><span>HOME</span></a>
+    </div>
+    <ul class="nav-right-links nav-links" role="list">
+        <li><a href="/skills" class="nav-link">Compétences</a></li>
+        <li><a href="/project" class="nav-link">Projets</a></li>
+        <li><a href="/tech" class="nav-link">Infrastructure</a></li>
+        <li class="nav-more">
+            <button class="nav-more-btn" id="navMoreBtn" aria-haspopup="true" aria-expanded="false" aria-controls="navMoreMenu" aria-label="Plus de pages">
+                Plus
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-more-menu" id="navMoreMenu" role="menu">
+                <a href="/status" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">06</span><span class="more-info"><span class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
+                <a href="/faq" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">07</span><span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions / Réponses</span></span></a>
+            </div>
+        </li>
+    </ul>
+    <div class="nav-right">
+        <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+            <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+        </button>
+        <div class="nav-status" aria-label="Disponible pour travailler">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>open to work</span>
+        </div>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>À propos</a>
+    <a href="/tech" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Infrastructure</a>
+    <a href="/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Compétences</a>
+    <a href="/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Projets</a>
+    <a href="/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>Contact</a>
+    <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>CV</a>
+    <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>Status</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-title">
+    <div class="hero-breadcrumb">
+        <a href="/project" class="breadcrumb-link">← Projets</a>
+        <span class="breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="breadcrumb-current">Snake</span>
+    </div>
+
+    <div class="hero-tag" data-typed="./snake" data-typing-delay="600" aria-hidden="true">
+        <span class="prompt">~/projects/snake $</span>
+        <span class="typed"></span>
+        <span class="cursor"></span>
+    </div>
+
+    <div class="hero-meta">
+        <span class="hero-meta-badge">C</span>
+        <span class="hero-meta-badge">CMake</span>
+        <span class="hero-meta-badge hero-meta-badge--status">Terminé</span>
+        <span class="hero-meta-type">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            Équipe · 2 pers. · B1
+        </span>
+    </div>
+
+    <h1 class="hero-title" id="hero-title">Snake<br><span class="outline">Terminal</span></h1>
+    <p class="hero-intro">Le jeu Snake classique, codé entièrement en C et jouable directement dans le terminal. Architecture multi-fichiers propre — affichage, logique de jeu, gestion des entrées et menu séparés. Build avec CMake.</p>
+
+    <div class="hero-badges" aria-label="Technologies utilisées">
+        <span class="badge">C</span>
+        <span class="badge">CMake</span>
+        <span class="badge">Terminal</span>
+        <span class="badge">Struct pointers</span>
+        <span class="badge">Multi-fichiers</span>
+    </div>
+
+    <div class="hero-actions">
+        <a href="https://github.com/Bibounet31/Snake" target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn--gh" aria-label="Voir sur GitHub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub
+        </a>
+    </div>
+</section>
+
+<!-- APERÇU TERMINAL -->
+<section class="section" aria-labelledby="preview-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">01 //</span>
+        <h2 class="section-title" id="preview-title">Aperçu du jeu</h2>
+    </div>
+    <div class="term-preview reveal">
+        <div class="term-bar">
+            <div class="term-dot" style="background:#ff5f57"></div>
+            <div class="term-dot" style="background:#febc2e"></div>
+            <div class="term-dot" style="background:#28c840"></div>
+            <span class="term-title">snake — terminal</span>
+        </div>
+        <div class="term-body"><span class="term-wall">################################</span>
+            <span class="term-wall">#</span>                              <span class="term-wall">#</span>
+            <span class="term-wall">#</span>     <span class="term-snake">OOOO></span>                   <span class="term-wall">#</span>
+            <span class="term-wall">#</span>                              <span class="term-wall">#</span>
+            <span class="term-wall">#</span>                  <span class="term-food">*</span>           <span class="term-wall">#</span>
+            <span class="term-wall">#</span>                              <span class="term-wall">#</span>
+            <span class="term-wall">#</span>                              <span class="term-wall">#</span>
+            <span class="term-wall">################################</span>
+            <span class="term-text">Score: 12   Vitesse: 3</span></div>
+    </div>
+</section>
+
+<!-- CONTRÔLES -->
+<section class="section" aria-labelledby="controls-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">02 //</span>
+        <h2 class="section-title" id="controls-title">Contrôles</h2>
+    </div>
+    <div class="controls-grid reveal">
+        <div class="control-card"><span class="control-key">↑</span><span class="control-label">Haut</span></div>
+        <div class="control-card"><span class="control-key">↓</span><span class="control-label">Bas</span></div>
+        <div class="control-card"><span class="control-key">←</span><span class="control-label">Gauche</span></div>
+        <div class="control-card"><span class="control-key">→</span><span class="control-label">Droite</span></div>
+        <div class="control-card"><span class="control-key">P</span><span class="control-label">Pause</span></div>
+        <div class="control-card"><span class="control-key">Q</span><span class="control-label">Quitter</span></div>
+    </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="section" aria-labelledby="arch-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">03 //</span>
+        <h2 class="section-title" id="arch-title">Architecture du projet</h2>
+    </div>
+    <div class="arch-tree reveal">
+        <pre><span class="tree-dir">snake/</span>
+│
+├── main.c                  <span class="tree-comment"># Point d'entrée — boucle de jeu principale</span>
+├── global.h                <span class="tree-comment"># Header centralisé — structs, constantes, prototypes</span>
+├── init.c                   <span class="tree-comment"># Initialisation — grille, serpent, état du jeu</span>
+├── display.c               <span class="tree-comment"># Affichage terminal — rendu de la grille et du score</span>
+├── input.c                  <span class="tree-comment"># Gestion des entrées clavier — non-bloquant</span>
+├── menu.c                   <span class="tree-comment"># Menu principal — démarrer, pause, quitter</span>
+├── snake.c                  <span class="tree-comment"># Logique du jeu — déplacement, collisions, score</span>
+│
+├── CMakeLists.txt          <span class="tree-comment"># Configuration de build CMake</span>
+├── LICENSE                  <span class="tree-comment"># GPL-3.0</span>
+└── .gitignore</pre>
+    </div>
+</section>
+
+<!-- STRUCTURES DE DONNÉES -->
+<section class="section" aria-labelledby="struct-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">04 //</span>
+        <h2 class="section-title" id="struct-title">Structures de données</h2>
+    </div>
+    <div class="struct-grid reveal">
+        <div class="struct-card">
+            <div class="struct-header">struct Position</div>
+            <div class="struct-field"><span class="struct-field-type">int</span> x <span class="struct-field-comment">// colonne</span></div>
+            <div class="struct-field"><span class="struct-field-type">int</span> y <span class="struct-field-comment">// ligne</span></div>
+        </div>
+        <div class="struct-card">
+            <div class="struct-header">struct Snake</div>
+            <div class="struct-field"><span class="struct-field-type">Position*</span> body <span class="struct-field-comment">// tableau de segments</span></div>
+            <div class="struct-field"><span class="struct-field-type">int</span> length <span class="struct-field-comment">// taille actuelle</span></div>
+            <div class="struct-field"><span class="struct-field-type">int</span> direction <span class="struct-field-comment">// direction courante</span></div>
+        </div>
+        <div class="struct-card">
+            <div class="struct-header">struct Game</div>
+            <div class="struct-field"><span class="struct-field-type">Snake*</span> snake <span class="struct-field-comment">// pointeur sur le serpent</span></div>
+            <div class="struct-field"><span class="struct-field-type">Position</span> food <span class="struct-field-comment">// position de la nourriture</span></div>
+            <div class="struct-field"><span class="struct-field-type">int</span> score <span class="struct-field-comment">// score courant</span></div>
+            <div class="struct-field"><span class="struct-field-type">int</span> running <span class="struct-field-comment">// flag boucle de jeu</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- DÉTAILS TECHNIQUES -->
+<section class="section" aria-labelledby="details-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">05 //</span>
+        <h2 class="section-title" id="details-title">Détails techniques</h2>
+    </div>
+    <div class="details-grid">
+        <div class="detail-card reveal"><span class="detail-key">Langage</span><span class="detail-val">C — standard, sans dépendances externes</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Build</span><span class="detail-val">CMake · CMakeLists.txt</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Environnement</span><span class="detail-val">CLion · MSYS64 · MinGW (Windows)</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Architecture</span><span class="detail-val">7 fichiers — header centralisé global.h</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Plateformes</span><span class="detail-val">Linux (main) · Windows (branche WindowsPort)</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Équipe</span><span class="detail-val">Binôme · 2 pers. · B1 Ynov Campus</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Affichage</span><span class="detail-val">Terminal — rendu ASCII en temps réel</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Licence</span><span class="detail-val">GPL-3.0</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Langages</span><span class="detail-val">C 96% · CMake 4%</span></div>
+        <div class="detail-card reveal"><span class="detail-key">Statut</span><span class="detail-val" style="color:var(--accent)">Terminé</span></div>
+    </div>
+</section>
+
+<!-- CE QUE J'AI APPRIS -->
+<section class="section" aria-labelledby="learned-title">
+    <div class="section-header">
+        <span class="section-tag" aria-hidden="true">06 //</span>
+        <h2 class="section-title" id="learned-title">Ce que j'ai appris</h2>
+    </div>
+    <div class="learned-grid">
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">01</div>
+            <h3 class="learned-name">Architecture multi-fichiers en C</h3>
+            <p class="learned-desc">Découper un programme C en modules logiques — affichage, logique, entrées, menu — avec un header centralisé global.h regroupant structs, constantes et prototypes partagés entre fichiers.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">02</div>
+            <h3 class="learned-name">Pointeurs et structures</h3>
+            <p class="learned-desc">Manipuler des structures via pointeurs pour représenter le serpent (tableau dynamique de positions) et l'état global du jeu, en évitant les copies inutiles et en modifiant l'état directement.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">03</div>
+            <h3 class="learned-name">Affichage terminal temps réel</h3>
+            <p class="learned-desc">Rafraîchir l'affichage dans le terminal sans clignotement — effacer et redessiner la grille à chaque frame, gérer le score et la vitesse de jeu de façon synchronisée.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">04</div>
+            <h3 class="learned-name">Entrées clavier non-bloquantes</h3>
+            <p class="learned-desc">Lire les touches du clavier sans bloquer la boucle de jeu — le serpent doit continuer à avancer même si aucune touche n'est pressée. Gestion différente entre Linux et Windows.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">05</div>
+            <h3 class="learned-name">Build avec CMake</h3>
+            <p class="learned-desc">Configurer CMakeLists.txt pour compiler plusieurs fichiers .c en un seul exécutable, gérer les includes et faciliter le build cross-platform avec CLion et MinGW.</p>
+        </div>
+        <div class="learned-card reveal">
+            <div class="learned-num" aria-hidden="true">06</div>
+            <h3 class="learned-name">Travail en équipe sur projet C</h3>
+            <p class="learned-desc">Collaborer à deux sur un projet C — répartition des modules, résolution de conflits Git, configuration CMake partagée entre environnements CLion/MSYS64/MinGW différents.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" aria-label="Pied de page">
+    <span class="prompt" aria-hidden="true">~/projects $</span>
+    <span aria-hidden="true">cd snake</span>
+    <a href="/project" class="footer-back">← Retour aux projets</a>
+    <span class="footer-year">© 2026</span>
+</footer>
+
+<script src="/js/background.js"></script>
+<script src="/js/nav.js"></script>
 </body>
 </html>
