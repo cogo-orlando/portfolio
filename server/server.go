@@ -66,6 +66,7 @@ var routes = map[string]http.HandlerFunc{
 	"/projects/annuaire":           handler.AnnuaireHandler,
 	"/projects/security-dashboard": handler.SecurityDashboardHandler,
 	"/projects/forum":              handler.ForumHandler,
+	"/projects/snake":              handler.SnakeHandler,
 }
 
 // ══════════════════════════════════════════
@@ -220,6 +221,7 @@ var sitemapURLs = []struct {
 	{"/projects/cisco", "0.6", "monthly"},
 	{"/projects/artemis", "0.6", "monthly"},
 	{"/projects/annuaire", "0.6", "monthly"},
+	{"/projects/snake", "0.6", "monthly"},
 }
 
 func sitemapHandler(w http.ResponseWriter, r *http.Request) {
