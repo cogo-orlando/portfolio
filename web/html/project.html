@@ -520,44 +520,79 @@
 
     </section>
 
-    <!-- ── ANNÉE B2 — À VENIR ── -->
-    <section class="section" aria-labelledby="b2-title">
-        <div class="year-card year-card--locked reveal">
-            <div class="year-card-header">
-                <div class="year-card-left">
-                    <span class="year-badge year-badge--locked">B2</span>
-                    <div class="year-info">
-                        <h2 class="year-title" id="b2-title">Bachelor 2 — Informatique</h2>
-                        <span class="year-sub">Ynov Campus Toulouse · 2026 — 2027</span>
-                    </div>
-                </div>
-                <div class="year-card-right">
-                    <span class="year-locked-label">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                        Bientôt
-                    </span>
+    <!-- ── ANNÉE B2 ── -->
+<section class="section" aria-labelledby="b2-title">
+    <div class="year-card reveal" id="year-b2">
+        <div class="year-card-header" id="yearB2Btn" role="button" tabindex="0" aria-expanded="true" aria-controls="year-b2-content">
+            <div class="year-card-left">
+                <span class="year-badge">B2</span>
+                <div class="year-info">
+                    <h2 class="year-title" id="b2-title">Bachelor 2 — Informatique</h2>
+                    <span class="year-sub">Ynov Campus Toulouse · 2026 — 2027</span>
                 </div>
             </div>
+            <div class="year-card-right">
+                <div class="year-stats">
+                    <span class="year-stat"><span class="year-stat-val">1</span><span class="year-stat-label">projet</span></span>
+                    <span class="year-stat"><span class="year-stat-val">1</span><span class="year-stat-label">dev</span></span>
+                </div>
+                <svg class="year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6"/>
+                </svg>
+            </div>
         </div>
-    </section>
 
-    <!-- PROCHAIN PROJET -->
-    <section class="section" aria-labelledby="next-title">
-        <div class="section-header">
-            <span class="section-tag" aria-hidden="true">// Next</span>
-            <h2 class="section-title" id="next-title">Ce qui arrive</h2>
-        </div>
-        <div class="next-grid">
-            <div class="next-card reveal">
-                <span class="next-num" aria-hidden="true">...</span>
-                <div class="next-info">
-                    <span class="next-name">soon...</span>
-                    <span class="next-desc">soon...</span>
+        <div class="year-content" id="year-b2-content">
+            <div class="subsection">
+                <div class="subsection-header">
+                    <div class="subsection-line" aria-hidden="true"></div>
+                    <span class="subsection-tag">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        Développement
+                    </span>
+                    <div class="subsection-line" aria-hidden="true"></div>
                 </div>
-                <span class="next-status">Bientôt</span>
+
+                <div class="projects-grid">
+
+                    <!-- MotoGP -->
+                    <article class="project-card reveal" data-filter="equipe python react">
+                        <div class="project-header">
+                            <div class="project-top">
+                                <span class="project-num" aria-hidden="true">01</span>
+                                <div class="project-badges">
+                                    <span class="project-tag">Python</span>
+                                    <span class="project-tag">FastAPI</span>
+                                    <span class="project-tag">React</span>
+                                     <span class="project-tag">PostgreSQL</span>
+                                    <span class="status-badge inprog">Terminé</span>
+                                </div>
+                            </div>
+                            <div class="project-type" aria-label="Projet en équipe de 4">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                                Équipe · 4 pers.
+                            </div>
+                        </div>
+                        <h3 class="project-name">MotoGP</h3>
+                        <p class="project-desc">Site web fullstack MotoGP — API REST Python/FastAPI avec base de données, frontend React affichant saisons, circuits, pilotes et statistiques de courses. Projet final B2 en équipe de 4.</p>
+                        <div class="project-details">
+                            <div class="detail-row"><span class="detail-key">Backend</span><span class="detail-val">Python · FastAPI · API REST maison</span></div>
+                            <div class="detail-row"><span class="detail-key">Frontend</span><span class="detail-val">React · JavaScript</span></div>
+                            <div class="detail-row"><span class="detail-key">Données</span><span class="detail-val">Saisons · Circuits · Pilotes · Stats</span></div>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/enzoandria1-oss/B2_FinalProject_TS_PY" target="_blank" rel="noopener noreferrer" class="project-link project-link--gh">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                                GitHub
+                            </a>
+                            <a href="/projects/motogp" class="project-link">Détails →</a>
+                        </div>
+                    </article>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 </main>
 

@@ -171,6 +171,10 @@ func SnakeHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "projects/snake.html")
 }
 
+func MotoGPHandler(w http.ResponseWriter, r *http.Request) {
+    renderTemplate(w, r, "projects/motogp.html")
+}
+
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet && r.Method != http.MethodHead {
 		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)

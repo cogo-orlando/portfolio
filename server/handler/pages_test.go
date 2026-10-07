@@ -28,7 +28,7 @@ func setupTestTemplates(t *testing.T) func() {
 		"faq.html", "tech.html", "maintenance.html", "404.html",
 		"projects/zoo.html", "projects/netflix.html", "projects/groupie.html",
 		"projects/power4.html", "projects/cisco.html", "projects/artemis.html",
-		"projects/annuaire.html", "projects/security-dashboard.html", "projects/forum.html",
+		"projects/annuaire.html", "projects/security-dashboard.html", "projects/forum.html", "projects/snake.html", "projects/motogp.html",
 	}
 
 	created := []string{}
@@ -461,6 +461,8 @@ func TestHandlers_AllReturn200(t *testing.T) {
 		{"Annuaire", AnnuaireHandler, "/projects/annuaire"},
 		{"SecurityDashboard", SecurityDashboardHandler, "/projects/security-dashboard"},
 		{"Forum", ForumHandler, "/projects/forum"},
+		{"Snake", SnakeHandler, "/projects/snake"},
+		{"MotoGP", MotoGPHandler, "/projects/motogp"},
 	}
 
 	for _, tt := range tests {

@@ -27,6 +27,7 @@ var maintenancePages = map[string]bool{
 	"/projects/annuaire": false, "/projects/netflix": false,
 	"/projects/zoo": false, "/projects/power4": false,
 	"/projects/groupie": false, "/projects/cisco": false, "/projects/artemis": false, "/projects/security-dashboard": false,
+	"/projects/motogp": false,
 }
 
 var MaintenanceMode = false
@@ -67,6 +68,7 @@ var routes = map[string]http.HandlerFunc{
 	"/projects/security-dashboard": handler.SecurityDashboardHandler,
 	"/projects/forum":              handler.ForumHandler,
 	"/projects/snake":              handler.SnakeHandler,
+	"/projects/motogp":             handler.MotoGPHandler,
 }
 
 // ══════════════════════════════════════════
