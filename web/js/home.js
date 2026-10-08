@@ -27,33 +27,6 @@ if (liveEl) {
     update();
     setInterval(update, 60000);
 }
-
-// ── CURRENTLY LEARNING TICKER ──
-const learningItems = [
-    'Administration Linux — Samba & annuaire LDAP...',
-    'Cybersécurité — CTF HackTheBox Labs...',
-    'Go — PostgreSQL & sécurité applicative...',
-    'Docker — hardening & multi-stage builds...',
-    'CI/CD — GitHub Actions & gosec...',
-    'Cloudflare — WAF & SSL configuration...',
-];
-const learningEl = document.getElementById('learningText');
-let lIdx = 0, lChar = 0, lDeleting = false;
-
-function typeLearning() {
-    if (!learningEl) return;
-    const current = learningItems[lIdx];
-    if (!lDeleting) {
-        learningEl.textContent = current.slice(0, ++lChar);
-        if (lChar === current.length) { lDeleting = true; setTimeout(typeLearning, 1800); return; }
-    } else {
-        learningEl.textContent = current.slice(0, --lChar);
-        if (lChar === 0) { lDeleting = false; lIdx = (lIdx + 1) % learningItems.length; }
-    }
-    setTimeout(typeLearning, lDeleting ? 40 : 70);
-}
-setTimeout(typeLearning, 800);
-
 // ── STATS LIVE depuis /health ──
 async function loadLiveStats() {
     try {

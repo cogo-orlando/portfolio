@@ -94,33 +94,6 @@ setTimeout(() => {
     if (goalPct)  goalPct.textContent  = pct + '%';
 }, 600);
 
-// ── CURRENTLY LEARNING TICKER ──
-const learningItems = [
-    'Administration Linux — Samba & annuaire LDAP...',
-    'CTF HackTheBox Labs...',
-    'Go — PostgreSQL & sécurité applicative...',
-    'Docker hardening & multi-stage builds...',
-    'CI/CD GitHub Actions & gosec...',
-    'Cloudflare WAF & SSL configuration...',
-    'OWASP Top 10...',
-];
-const learningEl = document.getElementById('learningText');
-let lIdx = 0, lChar = 0, lDeleting = false;
-
-function typeLearning() {
-    if (!learningEl) return;
-    const current = learningItems[lIdx];
-    if (!lDeleting) {
-        learningEl.textContent = current.slice(0, lChar + 1); lChar++;
-        if (lChar === current.length) { lDeleting = true; setTimeout(typeLearning, 1800); return; }
-    } else {
-        learningEl.textContent = current.slice(0, lChar - 1); lChar--;
-        if (lChar === 0) { lDeleting = false; lIdx = (lIdx + 1) % learningItems.length; }
-    }
-    setTimeout(typeLearning, lDeleting ? 40 : 70);
-}
-setTimeout(typeLearning, 1000);
-
 // ── COMPTEUR DE VISITES ──
 fetch('/api/visits')
     .then(r => r.json())
