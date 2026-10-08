@@ -2,106 +2,38 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{template "head-common"}}
+
     <title>Orlando Cogo — CV</title>
     <meta name="description"
         content="CV d'Orlando Cogo — étudiant Bachelor Informatique cybersécurité Ynov Campus, ex-Airbus. Disponible en téléchargement.">
-    <meta name="author" content="Orlando Cogo">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://orlandocogo.com/cv">
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orlandocogo.com/cv">
     <meta property="og:title" content="Orlando Cogo — CV">
-    <meta property="og:description"
-        content="CV d'Orlando Cogo — étudiant cybersécurité Ynov Campus, ex-Airbus. Téléchargeable.">
+    <meta property="og:description" content="CV d'Orlando Cogo — étudiant cybersécurité Ynov Campus, ex-Airbus. Téléchargeable.">
     <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
     <meta property="og:locale" content="fr_FR">
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Orlando Cogo — CV">
-    <meta name="twitter:description"
-        content="CV d'Orlando Cogo — étudiant cybersécurité Ynov Campus, ex-Airbus. Téléchargeable.">
+    <meta name="twitter:description" content="CV d'Orlando Cogo — étudiant cybersécurité Ynov Campus, ex-Airbus. Téléchargeable.">
     <meta name="twitter:image" content="https://orlandocogo.com/img/og-image.png">
-    <link rel="icon" href="/img/favicon.ico">
-    <link rel="icon" type="image/png" href="/img/favicon.png">
-    <link rel="apple-touch-icon" href="/img/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="/css/nav.css">
+
     <link rel="stylesheet" href="/css/cv.css">
 </head>
 
 <body>
-    <div class="blob1" aria-hidden="true"></div>
-    <div class="blob2" aria-hidden="true"></div>
-
-    <!-- NAV -->
-    <nav class="nav" aria-label="Navigation principale">
-        <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
-            <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
-        </a>
-        <ul class="nav-left nav-links" role="list">
-            <li><a href="/about" class="nav-link">À propos</a></li>
-            <li><a href="/contact" class="nav-link">Contact</a></li>
-            <li><a href="/cv" class="nav-link active">CV</a></li>
-        </ul>
-        <div class="nav-center">
-            <a href="/home" class="nav-home"><span>HOME</span></a>
-        </div>
-        <ul class="nav-right-links nav-links" role="list">
-            <li><a href="/skills" class="nav-link">Compétences</a></li>
-            <li><a href="/project" class="nav-link">Projets</a></li>
-            <li><a href="/tech" class="nav-link">Infrastructure</a></li>
-            <li class="nav-more">
-                <button class="nav-more-btn" id="navMoreBtn" aria-haspopup="true" aria-expanded="false"
-                    aria-controls="navMoreMenu" aria-label="Plus de pages">
-                    Plus
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                        <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <div class="nav-more-menu" id="navMoreMenu" role="menu">
-                    <a href="/status" class="more-item" role="menuitem"><span class="more-num"
-                            aria-hidden="true">06</span><span class="more-info"><span
-                                class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
-                    <a href="/faq" class="more-item" role="menuitem"><span class="more-num"
-                            aria-hidden="true">07</span><span class="more-info"><span class="more-name">FAQ</span><span
-                                class="more-desc">Questions / Réponses</span></span></a>
-                </div>
-            </li>
-        </ul>
-        <div class="nav-right">
-            <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false"
-                aria-controls="mobileMenu">
-                <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-            </button>
-            <div class="nav-status" aria-label="Disponible pour travailler">
-                <span class="status-dot" aria-hidden="true"></span>
-                <span>open to work</span>
-            </div>
-        </div>
-    </nav>
-
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-        <a href="/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>À propos</a>
-        <a href="/tech" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Infrastructure</a>
-        <a href="/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Compétences</a>
-        <a href="/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Projets</a>
-        <a href="/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>Contact</a>
-        <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>CV</a>
-        <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>Status</a>
-        <a href="/faq" class="mobile-link"><span class="mobile-num" aria-hidden="true">08</span>FAQ</a>
-    </div>
+    {{template "background"}}
+    {{template "nav"}}
 
     <main id="main-content">
 
         <!-- HERO -->
         <section class="hero" aria-labelledby="hero-title">
-            <div class="hero-tag" aria-hidden="true">
+            <div class="hero-tag" data-typed="cat cv.pdf" aria-hidden="true">
                 <span class="prompt">~/cv $</span>
                 <span class="typed"></span>
                 <span class="cursor"></span>
@@ -109,25 +41,13 @@
             <h1 class="hero-title" id="hero-title">Mon<br><span class="outline">CV</span></h1>
             <p class="hero-intro">Étudiant Bachelor Informatique · Spécialisation Cybersécurité · Ex-Airbus</p>
 
-            <!-- Actions hero -->
             <div class="hero-actions reveal">
-                <a href="/img/cv/CV.pdf" download="orlando_cogo_cv.pdf" class="cv-action-btn cv-action-btn--primary"
-                    aria-label="Télécharger le CV en PDF">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"
-                        aria-hidden="true">
-                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                        <polyline points="7 10 12 15 17 10" />
-                        <line x1="12" y1="15" x2="12" y2="3" />
-                    </svg>
+                <a href="/img/cv/CV.pdf" download="orlando_cogo_cv.pdf" class="cv-action-btn cv-action-btn--primary" aria-label="Télécharger le CV en PDF">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
                     Télécharger le CV
                 </a>
-                <a href="mailto:Orlando.cogo.pro@gmail.com" class="cv-action-btn cv-action-btn--secondary"
-                    aria-label="Contacter Orlando Cogo par email">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"
-                        aria-hidden="true">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                        <polyline points="22,6 12,13 2,6" />
-                    </svg>
+                <a href="mailto:Orlando.cogo.pro@gmail.com" class="cv-action-btn cv-action-btn--secondary" aria-label="Contacter Orlando Cogo par email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
                     Me contacter
                 </a>
             </div>
@@ -141,27 +61,15 @@
             </div>
             <div class="cv-info-grid">
                 <div class="cv-info-card reveal">
-                    <span class="cv-info-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20"
-                            height="20">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                            <path d="M6 12v5c3 3 9 3 12 0v-5" />
-                        </svg>
-                    </span>
+                    <span class="cv-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" /></svg></span>
                     <div>
                         <span class="cv-info-label">Formation</span>
-                        <span class="cv-info-val">Bachelor Informatique B2</span>
+                        <span class="cv-info-val">Bachelor Informatique {{template "niveau"}}</span>
                         <span class="cv-info-sub">Ynov Campus Toulouse · Cybersécurité</span>
                     </div>
                 </div>
                 <div class="cv-info-card reveal">
-                    <span class="cv-info-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20"
-                            height="20">
-                            <rect x="2" y="7" width="20" height="14" rx="2" />
-                            <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
-                        </svg>
-                    </span>
+                    <span class="cv-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" /></svg></span>
                     <div>
                         <span class="cv-info-label">Expérience</span>
                         <span class="cv-info-val">5 ans — Airbus</span>
@@ -169,13 +77,7 @@
                     </div>
                 </div>
                 <div class="cv-info-card reveal">
-                    <span class="cv-info-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20"
-                            height="20">
-                            <circle cx="11" cy="11" r="8" />
-                            <path d="M21 21l-4.35-4.35" />
-                        </svg>
-                    </span>
+                    <span class="cv-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg></span>
                     <div>
                         <span class="cv-info-label">Recherche</span>
                         <span class="cv-info-val">Stage · Alternance</span>
@@ -183,13 +85,7 @@
                     </div>
                 </div>
                 <div class="cv-info-card reveal">
-                    <span class="cv-info-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20"
-                            height="20">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
-                        </svg>
-                    </span>
+                    <span class="cv-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" /></svg></span>
                     <div>
                         <span class="cv-info-label">Localisation</span>
                         <span class="cv-info-val">Toulouse, France</span>
@@ -199,15 +95,14 @@
             </div>
         </section>
 
-        <!-- CV IMAGE + SIDEBAR -->
-        <section class="section" aria-label="CV visuel">
+        <!-- CV + SIDEBAR -->
+        <section class="section" aria-labelledby="cv-title">
             <div class="section-header">
                 <span class="section-tag" aria-hidden="true">02 //</span>
-                <h2 class="section-title">Curriculum Vitae</h2>
+                <h2 class="section-title" id="cv-title">Curriculum Vitae</h2>
             </div>
             <div class="cv-layout">
 
-                <!-- Image CV -->
                 <div class="cv-main reveal">
                     <div class="cv-frame">
                         <div class="cv-frame-bar" aria-hidden="true">
@@ -215,45 +110,26 @@
                             <div class="cv-dot" style="background:#febc2e"></div>
                             <div class="cv-dot" style="background:#28c840"></div>
                             <span class="cv-frame-title">orlando_cogo_cv.pdf</span>
-                            <a href="/img/cv/CV.pdf" download="orlando_cogo_cv.pdf" class="cv-frame-dl"
-                                aria-label="Télécharger">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13"
-                                    height="13">
-                                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                                    <polyline points="7 10 12 15 17 10" />
-                                    <line x1="12" y1="15" x2="12" y2="3" />
-                                </svg>
+                            <a href="/img/cv/CV.pdf" download="orlando_cogo_cv.pdf" class="cv-frame-dl" aria-label="Télécharger">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
                             </a>
                         </div>
-                        <iframe src="/img/cv/CV.pdf"
-                            alt="CV d'Orlando Cogo — étudiant Bachelor Informatique cybersécurité Ynov Campus, ex-Airbus"
-                            class="cv-img" id="cvImg" style="width:100%;height:1123px;border:none;"
-                            title="CV Orlando Cogo" height="1123">
-                        </iframe>
+                        <iframe src="/img/cv/CV.pdf" class="cv-img" id="cvImg"
+                            title="CV d'Orlando Cogo — étudiant Bachelor Informatique cybersécurité Ynov Campus, ex-Airbus"
+                            style="width:100%;height:1123px;border:none;" height="1123"></iframe>
                     </div>
                     <div class="cv-img-actions">
                         <a href="/img/cv/CV.pdf" download="orlando_cogo_cv.pdf" class="cv-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13"
-                                height="13" aria-hidden="true">
-                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                                <polyline points="7 10 12 15 17 10" />
-                                <line x1="12" y1="15" x2="12" y2="3" />
-                            </svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
                             Télécharger le CV
                         </a>
-                        <a href="/img/cv/CV.pdf" target="_blank" rel="noopener" class="cv-btn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13"
-                                height="13" aria-hidden="true">
-                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
-                                <polyline points="15 3 21 3 21 9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
-                            </svg>
+                        <a href="/img/cv/CV.pdf" target="_blank" rel="noopener noreferrer" class="cv-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
                             Voir en plein écran
                         </a>
                     </div>
                 </div>
 
-                <!-- Sidebar compétences clés -->
                 <div class="cv-sidebar">
 
                     <div class="cv-sidebar-card reveal">
@@ -279,7 +155,7 @@
                                 <div class="cv-proj-dot online" aria-hidden="true"></div>
                                 <div>
                                     <span class="cv-proj-name">Portfolio — orlandocogo.com</span>
-                                    <span class="cv-proj-sub">Go · Docker · Cloudflare · 47 tests</span>
+                                    <span class="cv-proj-sub">Go · Docker · Cloudflare · {{template "nb-tests"}} tests</span>
                                 </div>
                                 <span class="cv-proj-arrow" aria-hidden="true">→</span>
                             </a>
@@ -287,7 +163,7 @@
                                 <div class="cv-proj-dot online" aria-hidden="true"></div>
                                 <div>
                                     <span class="cv-proj-name">Security Dashboard</span>
-                                    <span class="cv-proj-sub">Go · PostgreSQL · Docker · 28 tests</span>
+                                    <span class="cv-proj-sub">Go · PostgreSQL · Docker · {{template "nb-tests-dashboard"}} tests</span>
                                 </div>
                                 <span class="cv-proj-arrow" aria-hidden="true">→</span>
                             </a>
@@ -297,14 +173,10 @@
                     <div class="cv-sidebar-card reveal">
                         <h3 class="cv-sidebar-title">Chiffres clés</h3>
                         <div class="cv-stats">
-                            <div class="cv-stat"><span class="cv-stat-val">129</span><span class="cv-stat-label">Tests
-                                    unitaires</span></div>
-                            <div class="cv-stat"><span class="cv-stat-val">5</span><span class="cv-stat-label">Ans
-                                    Airbus</span></div>
-                            <div class="cv-stat"><span class="cv-stat-val">2</span><span class="cv-stat-label">Projets
-                                    en prod</span></div>
-                            <div class="cv-stat"><span class="cv-stat-val">0</span><span class="cv-stat-label">gosec
-                                    issues</span></div>
+                            <div class="cv-stat"><span class="cv-stat-val">{{template "nb-tests"}}</span><span class="cv-stat-label">Tests unitaires</span></div>
+                            <div class="cv-stat"><span class="cv-stat-val">5</span><span class="cv-stat-label">Ans Airbus</span></div>
+                            <div class="cv-stat"><span class="cv-stat-val">{{template "nb-projets-prod"}}</span><span class="cv-stat-label">Projets en prod</span></div>
+                            <div class="cv-stat"><span class="cv-stat-val">{{template "nb-gosec"}}</span><span class="cv-stat-label">gosec issues</span></div>
                         </div>
                     </div>
 
@@ -312,28 +184,15 @@
                         <h3 class="cv-sidebar-title">Contact direct</h3>
                         <div class="cv-contact-list">
                             <a href="mailto:Orlando.cogo.pro@gmail.com" class="cv-contact-item">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14"
-                                    height="14" aria-hidden="true">
-                                    <path
-                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                    <polyline points="22,6 12,13 2,6" />
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
                                 Orlando.cogo.pro@gmail.com
                             </a>
-                            <a href="https://github.com/cogo-orlando" target="_blank" rel="noopener noreferrer"
-                                class="cv-contact-item">
-                                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true">
-                                    <path
-                                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-                                </svg>
+                            <a href="https://github.com/cogo-orlando" target="_blank" rel="noopener noreferrer" class="cv-contact-item">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg>
                                 github.com/cogo-orlando
                             </a>
-                            <a href="https://www.linkedin.com/in/orlando-liautard-cogo" target="_blank"
-                                rel="noopener noreferrer" class="cv-contact-item">
-                                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true">
-                                    <path
-                                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                                </svg>
+                            <a href="https://www.linkedin.com/in/orlando-liautard-cogo" target="_blank" rel="noopener noreferrer" class="cv-contact-item">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
                                 orlando-liautard-cogo
                             </a>
                         </div>
@@ -345,14 +204,7 @@
 
     </main>
 
-    <footer class="footer" aria-label="Pied de page">
-        <span class="prompt" aria-hidden="true">~/orlando.cogo $</span>
-        <span aria-hidden="true">cat cv.pdf</span>
-        <a href="/home" class="footer-back">← Retour à l'accueil</a>
-        <span class="footer-year">© 2026</span>
-    </footer>
-
-    <script src="/js/nav.js"></script>
+    {{template "footer"}}
     <script src="/js/cv.js"></script>
 </body>
 
