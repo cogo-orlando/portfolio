@@ -1,0 +1,16 @@
+{{/*
+  Pied de page + script commun — à placer avant </body> :
+  {{template "footer"}}
+  Les scripts propres à la page (home.js…) se mettent APRÈS.
+*/}}
+
+{{define "footer"}}
+<footer class="footer" aria-label="Pied de page">
+    <span class="prompt" aria-hidden="true">~/orlando.cogo $</span>
+    <a href="/" class="footer-back">← Retour à l'accueil</a>
+    <span aria-hidden="true">exit 0</span>
+    <span class="footer-year">© 2026</span>
+</footer>
+
+<script src="/js/nav.js"></script>
+{{end}}

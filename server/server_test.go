@@ -225,13 +225,3 @@ func TestVisitsHandler_VisitsIsNumber(t *testing.T) {
 		t.Errorf("visits devrait être un nombre, obtenu %T", result["visits"])
 	}
 }
-
-// ══════════════════════════════════════════
-//  TESTS — maintenanceMode
-// ══════════════════════════════════════════
-
-func TestMaintenanceMode_DefaultFalse(t *testing.T) {
-	if MaintenanceMode {
-		t.Error("MaintenanceMode devrait être false par défaut")
-	}
-}

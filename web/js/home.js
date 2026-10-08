@@ -1,16 +1,3 @@
-// ── TYPING ──
-const typingEl = document.querySelector('.hero-tag .typed');
-if (typingEl) {
-    const text = 'ls -la';
-    let i = 0;
-    setTimeout(() => {
-        const interval = setInterval(() => {
-            typingEl.textContent += text[i]; i++;
-            if (i >= text.length) clearInterval(interval);
-        }, 80);
-    }, 400); // délai réduit — plus de boot screen
-}
-
 // ── COUNTER ANIMATION ──
 const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

@@ -25,7 +25,7 @@ func setupTestTemplates(t *testing.T) func() {
 	pages := []string{
 		"index.html", "home.html", "about.html", "skills.html",
 		"project.html", "contact.html", "cv.html", "status.html",
-		"faq.html", "tech.html", "maintenance.html", "404.html",
+		"faq.html", "tech.html", "404.html",
 		"projects/zoo.html", "projects/netflix.html", "projects/groupie.html",
 		"projects/power4.html", "projects/cisco.html", "projects/artemis.html",
 		"projects/annuaire.html", "projects/security-dashboard.html", "projects/forum.html", "projects/snake.html", "projects/motogp.html",
@@ -451,7 +451,6 @@ func TestHandlers_AllReturn200(t *testing.T) {
 		{"Status", StatusHandler, "/status"},
 		{"FAQ", FaqHandler, "/faq"},
 		{"Tech", TechHandler, "/tech"},
-		{"Maintenance", MaintenanceHandler, "/maintenance"},
 		{"Zoo", ZooHandler, "/projects/zoo"},
 		{"Netflix", NetflixHandler, "/projects/netflix"},
 		{"Groupie", GroupieHandler, "/projects/groupie"},

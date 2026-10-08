@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,82 +12,83 @@
     <link rel="apple-touch-icon" href="/img/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav.css">    
     <link rel="stylesheet" href="/css/404.css">
 </head>
+
 <body>
 
-<div class="blob1" aria-hidden="true"></div>
-<div class="blob2" aria-hidden="true"></div>
-<div class="grid" aria-hidden="true"></div>
-<div class="corner corner--tl" aria-hidden="true"></div>
-<div class="corner corner--tr" aria-hidden="true"></div>
-<div class="corner corner--bl" aria-hidden="true"></div>
-<div class="corner corner--br" aria-hidden="true"></div>
-<canvas id="matrix" class="matrix-canvas" aria-hidden="true"></canvas>
-
-<div class="terminal-bar" aria-hidden="true">
-    <div class="dot dot-r"></div>
-    <div class="dot dot-y"></div>
-    <div class="dot dot-g"></div>
-    <span class="terminal-title">orlando@portfolio ~ %</span>
-</div>
-
-<main id="main-content" class="wrapper">
-
-    <!-- GLITCH 404 -->
-    <div class="glitch-wrap">
-        <h1 class="glitch" data-text="404" aria-label="Erreur 404">404</h1>
+    <div class="blob1" aria-hidden="true"></div>
+    <div class="blob2" aria-hidden="true"></div>
+    <div class="terminal-bar" aria-hidden="true">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span class="terminal-title">orlando@portfolio ~ %</span>
     </div>
 
-    <!-- TERMINAL -->
-    <div class="terminal-block" aria-hidden="true">
-        <div class="terminal-line">
-            <span class="prompt">~/portfolio $</span>
-            <span class="cmd typed-cmd"></span>
-            <span class="cursor"></span>
+    <main id="main-content" class="wrapper">
+
+        <!-- GLITCH 404 -->
+        <div class="glitch-wrap">
+            <h1 class="glitch" data-text="404" aria-label="Erreur 404">404</h1>
         </div>
-        <div class="terminal-output" id="term-output"></div>
-    </div>
 
-    <!-- SUBTITLE -->
-    <p class="subtitle">Cette page n'existe pas ou a été déplacée.<br>
-        <span class="subtitle-redirect">Redirection automatique dans <span id="countdown">10</span>s...</span></p>
+        <!-- TERMINAL -->
+        <div class="terminal-block" aria-hidden="true">
+            <div class="terminal-line">
+                <span class="prompt">~/portfolio $</span>
+                <span class="cmd typed-cmd"></span>
+                <span class="cursor"></span>
+            </div>
+            <div class="terminal-output" id="term-output"></div>
+        </div>
 
-    <!-- ACTIONS -->
-    <div class="actions">
-        <a href="/home" class="btn-primary" aria-label="Retour à l'accueil du portfolio">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M12 7H2M2 7L6 3M2 7L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Retour à l'accueil</span>
-        </a>
-        <a href="/contact" class="btn-secondary">Me contacter</a>
-    </div>
+        <!-- SUBTITLE -->
+        <p class="subtitle">Cette page n'existe pas ou a été déplacée.<br>
+            <span class="subtitle-redirect">Redirection automatique dans <span id="countdown">10</span>s...</span>
+        </p>
 
-    <!-- LIENS RAPIDES -->
-    <div class="quicklinks" aria-label="Pages disponibles">
-        <span class="quicklinks-label">Pages disponibles —</span>
-        <a href="/about" class="qlink">À propos</a>
-        <span class="qsep" aria-hidden="true">·</span>
-        <a href="/skills" class="qlink">Compétences</a>
-        <span class="qsep" aria-hidden="true">·</span>
-        <a href="/project" class="qlink">Projets</a>
-        <span class="qsep" aria-hidden="true">·</span>
-        <a href="/contact" class="qlink">Contact</a>
-        <span class="qsep" aria-hidden="true">·</span>
-        <a href="/cv" class="qlink">CV</a>
-        <span class="qsep" aria-hidden="true">·</span>
-        <a href="/faq" class="qlink">FAQ</a>
-    </div>
+        <!-- ACTIONS -->
+        <div class="actions">
+            <a href="/home" class="btn-primary" aria-label="Retour à l'accueil du portfolio">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M12 7H2M2 7L6 3M2 7L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <span>Retour à l'accueil</span>
+            </a>
+            <a href="/contact" class="btn-secondary">Me contacter</a>
+        </div>
 
-    <!-- STATUS -->
-    <div class="status-row" aria-label="Statut erreur">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span>Erreur 404 · Page introuvable · orlandocogo.com</span>
-    </div>
+        <!-- LIENS RAPIDES -->
+        <div class="quicklinks" aria-label="Pages disponibles">
+            <span class="quicklinks-label">Pages disponibles —</span>
+            <a href="/about" class="qlink">À propos</a>
+            <span class="qsep" aria-hidden="true">·</span>
+            <a href="/skills" class="qlink">Compétences</a>
+            <span class="qsep" aria-hidden="true">·</span>
+            <a href="/project" class="qlink">Projets</a>
+            <span class="qsep" aria-hidden="true">·</span>
+            <a href="/contact" class="qlink">Contact</a>
+            <span class="qsep" aria-hidden="true">·</span>
+            <a href="/cv" class="qlink">CV</a>
+            <span class="qsep" aria-hidden="true">·</span>
+            <a href="/faq" class="qlink">FAQ</a>
+        </div>
 
-</main>
+        <!-- STATUS -->
+        <div class="status-row" aria-label="Statut erreur">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>Erreur 404 · Page introuvable · orlandocogo.com</span>
+        </div>
 
-<script src="/js/background.js"></script>
-<script src="/js/404.js"></script>
+    </main>
+
+    <script src="/js/404.js"></script>
 </body>
+
 </html>

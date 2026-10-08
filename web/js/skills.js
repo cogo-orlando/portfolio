@@ -27,7 +27,7 @@ setTimeout(typeLearning, 1500);
 
 // ── SKILL ICON COLORS ──
 document.querySelectorAll('.skill-icon').forEach(icon => {
-    const color = getComputedStyle(icon).getPropertyValue('--ic').trim() || '#00f5a0';
+    const color = getComputedStyle(icon).getPropertyValue('--ic').trim() || 'var(--accent)';
     icon.style.background = color + '18';
     icon.style.borderColor = color + '33';
     icon.style.color = color;

@@ -2,52 +2,31 @@ package server
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log/slog"
+	"math"
 	"net/http"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"portfo/server/handler"
 	"portfo/server/middleware"
 	"runtime"
-	"sync"
+	"strings"
 	"syscall"
 	"time"
 )
 
-// ══════════════════════════════════════════
-//  MAINTENANCE
-// ══════════════════════════════════════════
-
-var maintenancePages = map[string]bool{
-	"/blog": false, "/about": false, "/skills": false,
-	"/contact": false, "/cv": false, "/home": false,
-	"/project": false, "/faq": false, "/status": false,
-	"/tech":              false,
-	"/projects/annuaire": false, "/projects/netflix": false,
-	"/projects/zoo": false, "/projects/power4": false,
-	"/projects/groupie": false, "/projects/cisco": false, "/projects/artemis": false, "/projects/security-dashboard": false,
-	"/projects/motogp": false,
-}
-
-var MaintenanceMode = false
-
-// ══════════════════════════════════════════
-//  COMPTEUR DE VISITES
-// ══════════════════════════════════════════
-
-var (
-	visitCount  int
-	visitMu     sync.Mutex
-	serverStart = time.Now()
-)
+// Heure de démarrage, utilisée pour calculer l'uptime dans /health
+var startTime = time.Now()
 
 // ══════════════════════════════════════════
 //  ROUTES
 // ══════════════════════════════════════════
 
 var routes = map[string]http.HandlerFunc{
-	"/":                            handler.IndexHandler,
+	"/":                            handler.IndexHandler, // géré à part dans newMux (catch-all + 404)
 	"/home":                        handler.HomeHandler,
 	"/about":                       handler.AboutHandler,
 	"/skills":                      handler.SkillsHandler,
@@ -57,7 +36,6 @@ var routes = map[string]http.HandlerFunc{
 	"/status":                      handler.StatusHandler,
 	"/faq":                         handler.FaqHandler,
 	"/tech":                        handler.TechHandler,
-	"/maintenance":                 handler.MaintenanceHandler,
 	"/projects/zoo":                handler.ZooHandler,
 	"/projects/netflix":            handler.NetflixHandler,
 	"/projects/groupie":            handler.GroupieHandler,
@@ -76,23 +54,22 @@ var routes = map[string]http.HandlerFunc{
 // ══════════════════════════════════════════
 
 func Start() {
-	mux := http.NewServeMux()
+	env := "production"
+	if handler.IsDev() {
+		env = "development"
+	}
 
-	mux.HandleFunc("/health", healthHandler)
-	mux.HandleFunc("/sitemap.xml", sitemapHandler)
-	mux.HandleFunc("/api/visits", visitsHandler)
-	mux.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "./web/img/favicon.ico")
-	})
-
-	fs := http.FileServer(http.Dir("./web"))
-	mux.Handle("/css/", fs)
-	mux.Handle("/js/", fs)
-	mux.Handle("/img/", fs)
-	mux.Handle("/robots.txt", http.FileServer(http.Dir("./web")))
-	mux.HandleFunc("/", mainHandler)
-
-	h := middleware.Chain(mux)
+	// Prod : on compile tous les templates tout de suite.
+	// Si un HTML est cassé, le serveur refuse de démarrer (visible dans les logs Render)
+	// au lieu de servir des pages en erreur.
+	count, err := handler.PreloadTemplates()
+	if err != nil {
+		slog.Error("chargement des templates impossible", "error", err)
+		os.Exit(1)
+	}
+	if count > 0 {
+		slog.Info("templates chargés", "count", count)
+	}
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -100,15 +77,22 @@ func Start() {
 	}
 
 	srv := &http.Server{
-		Addr:         ":" + port,
-		Handler:      h,
-		ReadTimeout:  15 * time.Second,
-		WriteTimeout: 30 * time.Second,
-		IdleTimeout:  60 * time.Second,
+		Addr:              ":" + port,
+		Handler:           middleware.Chain(newMux()),
+		ReadHeaderTimeout: 5 * time.Second, // protection Slowloris
+		ReadTimeout:       15 * time.Second,
+		WriteTimeout:      30 * time.Second,
+		IdleTimeout:       60 * time.Second,
+		MaxHeaderBytes:    1 << 20, // 1 Mo
 	}
 
 	go func() {
-		slog.Info("serveur démarré", "port", port, "url", fmt.Sprintf("http://localhost:%s", port))
+		slog.Info("serveur démarré",
+			"port", port,
+			"env", env,
+			"routes", len(routes),
+			"url", fmt.Sprintf("http://localhost:%s", port),
+		)
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			slog.Error("erreur fatale serveur", "error", err)
 			os.Exit(1)
@@ -131,71 +115,116 @@ func Start() {
 	}
 }
 
-// ══════════════════════════════════════════
-//  MAIN HANDLER
-// ══════════════════════════════════════════
+// newMux construit le routeur. Séparé de Start() pour pouvoir le tester.
+func newMux() *http.ServeMux {
+	mux := http.NewServeMux()
 
-func mainHandler(w http.ResponseWriter, r *http.Request) {
-	if _, err := r.Cookie("visited"); err != nil {
-		visitMu.Lock()
-		visitCount++
-		visitMu.Unlock()
-		http.SetCookie(w, &http.Cookie{
-			Name:     "visited",
-			Value:    "1",
-			MaxAge:   86400,
-			Path:     "/",
-			Secure:   true,
-			HttpOnly: true,
-			SameSite: http.SameSiteStrictMode,
-		})
+	// ── API & fichiers spéciaux ──
+	mux.HandleFunc("/health", healthHandler)
+	mux.HandleFunc("/sitemap.xml", sitemapHandler)
+	mux.HandleFunc("/api/visits", visitsHandler)
+	mux.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "./web/img/favicon.ico")
+	})
+
+	// ── Fichiers statiques (sans listing de dossiers) ──
+	static := noDirListing(http.FileServer(http.Dir("./web")))
+	mux.Handle("/css/", static)
+	mux.Handle("/js/", static)
+	mux.Handle("/img/", static)
+	mux.Handle("/robots.txt", static)
+
+	// ── Pages ──
+	for path, h := range routes {
+		if path == "/" {
+			continue
+		}
+		mux.HandleFunc(path, h)
 	}
 
-	if MaintenanceMode {
-		http.ServeFile(w, r, "web/html/maintenance.html")
-		return
-	}
-	if maintenancePages[r.URL.Path] {
-		http.ServeFile(w, r, "web/html/maintenance.html")
-		return
-	}
-	if h, ok := routes[r.URL.Path]; ok {
-		h(w, r)
-		return
-	}
-	handler.NotFoundHandler(w, r)
+	// "/" attrape toutes les URL inconnues :
+	// exactement "/" → index, tout le reste → page 404 personnalisée
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/" {
+			handler.NotFoundHandler(w, r)
+			return
+		}
+		handler.IndexHandler(w, r)
+	})
+
+	return mux
+}
+
+// noDirListing bloque l'affichage du contenu des dossiers (/css/, /js/…).
+// Sans ça, http.FileServer liste tous les fichiers d'un dossier :
+// pratique pour un attaquant qui fait de la reconnaissance.
+func noDirListing(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if strings.HasSuffix(r.URL.Path, "/") {
+			handler.NotFoundHandler(w, r)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
 }
 
 // ══════════════════════════════════════════
-//  HEALTH — enrichi avec métriques Go
+//  HELPERS
 // ══════════════════════════════════════════
 
+// writeJSON encode proprement une réponse JSON (échappement garanti, pas de JSON cassé).
+func writeJSON(w http.ResponseWriter, status int, v any) {
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.Header().Set("Cache-Control", "no-store")
+	w.WriteHeader(status)
+	if err := json.NewEncoder(w).Encode(v); err != nil {
+		slog.Error("encodage JSON", "error", err)
+	}
+}
+
+// allowGet refuse les méthodes autres que GET/HEAD.
+func allowGet(w http.ResponseWriter, r *http.Request) bool {
+	if r.Method == http.MethodGet || r.Method == http.MethodHead {
+		return true
+	}
+	w.Header().Set("Allow", "GET, HEAD")
+	http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
+	return false
+}
+
+// ══════════════════════════════════════════
+//  HEALTH — métriques Go live
+// ══════════════════════════════════════════
+
+type healthResponse struct {
+	Status     string  `json:"status"`
+	Service    string  `json:"service"`
+	Uptime     string  `json:"uptime"`
+	Visits     int     `json:"visits"`
+	GoVersion  string  `json:"go_version"`
+	Goroutines int     `json:"goroutines"`
+	MemoryMB   float64 `json:"memory_mb"`
+	GCCycles   uint32  `json:"gc_cycles"`
+}
+
 func healthHandler(w http.ResponseWriter, r *http.Request) {
+	if !allowGet(w, r) {
+		return
+	}
+
 	var mem runtime.MemStats
 	runtime.ReadMemStats(&mem)
 
-	visitMu.Lock()
-	visits := visitCount
-	visitMu.Unlock()
-
-	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprintf(w, `{`+
-		`"status":"ok",`+
-		`"service":"portfolio",`+
-		`"uptime":"%s",`+
-		`"visits":%d,`+
-		`"go_version":"%s",`+
-		`"goroutines":%d,`+
-		`"memory_mb":%.2f,`+
-		`"gc_cycles":%d`+
-		`}`,
-		time.Since(serverStart).Round(time.Second).String(),
-		visits,
-		runtime.Version(),
-		runtime.NumGoroutine(),
-		float64(mem.Alloc)/1024/1024,
-		mem.NumGC,
-	)
+	writeJSON(w, http.StatusOK, healthResponse{
+		Status:     "ok",
+		Service:    "portfolio",
+		Uptime:     time.Since(startTime).Round(time.Second).String(),
+		Visits:     0,
+		GoVersion:  runtime.Version(),
+		Goroutines: runtime.NumGoroutine(),
+		MemoryMB:   math.Round(float64(mem.Alloc)/1024/1024*100) / 100,
+		GCCycles:   mem.NumGC,
+	})
 }
 
 // ══════════════════════════════════════════
@@ -204,57 +233,79 @@ func healthHandler(w http.ResponseWriter, r *http.Request) {
 
 var sitemapURLs = []struct {
 	path     string
+	file     string // template utilisé pour calculer <lastmod>
 	priority string
 	freq     string
 }{
-	{"/home", "1.0", "weekly"},
-	{"/about", "0.9", "monthly"},
-	{"/skills", "0.9", "monthly"},
-	{"/project", "0.9", "weekly"},
-	{"/contact", "0.8", "monthly"},
-	{"/cv", "0.8", "monthly"},
-	{"/faq", "0.7", "monthly"},
-	{"/tech", "0.8", "monthly"},
-	{"/projects/security-dashboard", "0.8", "weekly"},
-	{"/projects/netflix", "0.6", "monthly"},
-	{"/projects/groupie", "0.6", "monthly"},
-	{"/projects/power4", "0.6", "monthly"},
-	{"/projects/zoo", "0.6", "monthly"},
-	{"/projects/cisco", "0.6", "monthly"},
-	{"/projects/artemis", "0.6", "monthly"},
-	{"/projects/annuaire", "0.6", "monthly"},
-	{"/projects/snake", "0.6", "monthly"},
+	{"/home", "home.html", "1.0", "weekly"},
+	{"/about", "about.html", "0.9", "monthly"},
+	{"/skills", "skills.html", "0.9", "monthly"},
+	{"/project", "project.html", "0.9", "weekly"},
+	{"/contact", "contact.html", "0.8", "monthly"},
+	{"/cv", "cv.html", "0.8", "monthly"},
+	{"/faq", "faq.html", "0.7", "monthly"},
+	{"/tech", "tech.html", "0.8", "monthly"},
+	{"/projects/security-dashboard", "projects/security-dashboard.html", "0.8", "weekly"},
+	{"/projects/forum", "projects/forum.html", "0.6", "monthly"},
+	{"/projects/motogp", "projects/motogp.html", "0.6", "monthly"},
+	{"/projects/netflix", "projects/netflix.html", "0.6", "monthly"},
+	{"/projects/groupie", "projects/groupie.html", "0.6", "monthly"},
+	{"/projects/power4", "projects/power4.html", "0.6", "monthly"},
+	{"/projects/zoo", "projects/zoo.html", "0.6", "monthly"},
+	{"/projects/cisco", "projects/cisco.html", "0.6", "monthly"},
+	{"/projects/artemis", "projects/artemis.html", "0.6", "monthly"},
+	{"/projects/annuaire", "projects/annuaire.html", "0.6", "monthly"},
+	{"/projects/snake", "projects/snake.html", "0.6", "monthly"},
+}
+
+// lastMod renvoie la vraie date de dernière modif du template
+// (Google se fie à cette date : la mettre à "aujourd'hui" à chaque fois la rend inutile).
+func lastMod(file string) string {
+	info, err := os.Stat(filepath.Join("web", "html", filepath.FromSlash(file)))
+	if err != nil {
+		return time.Now().Format("2006-01-02")
+	}
+	return info.ModTime().Format("2006-01-02")
 }
 
 func sitemapHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/xml; charset=utf-8")
-
-	now := time.Now().Format("2006-01-02")
-	base := "https://orlandocogo.com"
-
-	fmt.Fprint(w, `<?xml version="1.0" encoding="UTF-8"?>`+"\n")
-	fmt.Fprint(w, `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`+"\n")
-
-	for _, u := range sitemapURLs {
-		fmt.Fprintf(w, "  <url>\n")
-		fmt.Fprintf(w, "    <loc>%s%s</loc>\n", base, u.path)
-		fmt.Fprintf(w, "    <lastmod>%s</lastmod>\n", now)
-		fmt.Fprintf(w, "    <changefreq>%s</changefreq>\n", u.freq)
-		fmt.Fprintf(w, "    <priority>%s</priority>\n", u.priority)
-		fmt.Fprintf(w, "  </url>\n")
+	if !allowGet(w, r) {
+		return
 	}
 
-	fmt.Fprint(w, `</urlset>`)
+	const base = "https://orlandocogo.com"
+
+	w.Header().Set("Content-Type", "application/xml; charset=utf-8")
+
+	var b strings.Builder
+	b.WriteString(`<?xml version="1.0" encoding="UTF-8"?>` + "\n")
+	b.WriteString(`<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` + "\n")
+	for _, u := range sitemapURLs {
+		fmt.Fprintf(&b, "  <url>\n")
+		fmt.Fprintf(&b, "    <loc>%s%s</loc>\n", base, u.path)
+		fmt.Fprintf(&b, "    <lastmod>%s</lastmod>\n", lastMod(u.file))
+		fmt.Fprintf(&b, "    <changefreq>%s</changefreq>\n", u.freq)
+		fmt.Fprintf(&b, "    <priority>%s</priority>\n", u.priority)
+		fmt.Fprintf(&b, "  </url>\n")
+	}
+	b.WriteString(`</urlset>`)
+
+	if _, err := w.Write([]byte(b.String())); err != nil {
+		slog.Debug("écriture sitemap interrompue", "error", err)
+	}
 }
 
 // ══════════════════════════════════════════
 //  API VISITS
 // ══════════════════════════════════════════
 
+type visitsResponse struct {
+	Visits int `json:"visits"`
+}
+
 func visitsHandler(w http.ResponseWriter, r *http.Request) {
-	visitMu.Lock()
-	count := visitCount
-	visitMu.Unlock()
-	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprintf(w, `{"visits":%d}`, count)
+	if !allowGet(w, r) {
+		return
+	}
+	writeJSON(w, http.StatusOK, visitsResponse{Visits: 0})
 }
