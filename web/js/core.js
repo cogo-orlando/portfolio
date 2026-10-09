@@ -10,6 +10,9 @@
      Site.fetchJSON('/health').then(data => ...)
      Site.escapeHTML(texteUtilisateur)
 ══════════════════════════════════════════ */
+// Signale que le JS tourne : le CSS ne cache les éléments animés QUE dans ce cas
+document.documentElement.classList.add('js');
+
 (function () {
     'use strict';
 
@@ -125,6 +128,17 @@
             if (progress < 1) requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
+    };
+
+    // ── Durée Go ("26h3m4.5s") → texte lisible ("1j 2h", "3h 12min", "45min") ──
+    Site.formatUptime = (raw) => {
+        if (typeof raw !== 'string') return '—';
+        const h = Number(raw.match(/(\d+)h/)?.[1] || 0);
+        const m = Number(raw.match(/(\d+)m(?!s)/)?.[1] || 0);
+        const days = Math.floor(h / 24);
+        if (days > 0) return `${days}j ${h % 24}h`;
+        if (h > 0) return `${h}h ${m}min`;
+        return `${m}min`;
     };
 
     // ── Fermer un élément avec la touche Échap ──

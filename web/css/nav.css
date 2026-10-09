@@ -260,6 +260,70 @@ body::before {
 
 [hidden] { display:none !important; }
 
+/* ══════════════════════════════════════════
+   TITRES EN VERRE
+   Remplissage translucide (le fond se voit à travers)
+   + bord lumineux + reflet horizontal façon vitre
+══════════════════════════════════════════ */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+
+    /* Ligne 1 : verre clair */
+    .hero-name, .hero-title, .name-first {
+        background: linear-gradient(180deg,
+            rgba(255,255,255,0.98) 0%,
+            rgba(255,255,255,0.80) 38%,
+            rgba(210,200,255,0.30) 50%,   /* la "ligne" du reflet */
+            rgba(255,255,255,0.55) 62%,
+            rgba(235,230,255,0.90) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255,255,255,0.35);   /* bord de la vitre */
+        filter: drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.35))
+                drop-shadow(0 6px 18px rgba(0,0,0,0.45));
+    }
+
+    /* Ligne 2 : verre teinté + reflet qui traverse */
+    .outline, .name-last {
+        background:
+            linear-gradient(110deg, transparent 38%, rgba(255,255,255,0.9) 50%, transparent 62%) 0 0 / 250% 100%,
+            linear-gradient(180deg,
+                rgba(255,255,255,0.35) 0%,
+                transparent 45%,
+                rgba(255,255,255,0.12) 55%,
+                transparent 100%),
+            linear-gradient(120deg, var(--accent) 0%, #b79bff 50%, var(--accent2) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255,255,255,0.4);
+        animation: titleSheen 5s ease-in-out 1.2s infinite;
+    }
+
+    .hero-sub em, .accroche em {
+        background: linear-gradient(120deg, var(--accent), var(--accent2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .section-title {
+        background: linear-gradient(180deg, #ffffff 25%, rgba(185,189,240,0.85) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+}
+
+@keyframes titleSheen {
+    0%, 60% { background-position: 120% 0, 0 0, 0 0; }
+    100%    { background-position: -120% 0, 0 0, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .outline, .name-last { animation: none; }
+}
+
 /* ── ANIMATIONS ── */
 @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
 @keyframes fadeIn { to { opacity:1; } }
