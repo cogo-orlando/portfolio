@@ -1,55 +1,55 @@
-// ── TYPING CMD ──
-const typedCmd = document.querySelector('.typed-cmd');
-const termOutput = document.getElementById('term-output');
-const cmd = 'cat 404.log';
+/* ══════════════════════════════════════════
+   404.JS — page introuvable
+   Autonome (la 404 ne charge pas core.js)
+══════════════════════════════════════════ */
+(function () {
+    'use strict';
 
-let i = 0;
-const typeCmd = setInterval(() => {
-    if (!typedCmd) { clearInterval(typeCmd); return; }
-    typedCmd.textContent += cmd[i++];
-    if (i >= cmd.length) {
-        clearInterval(typeCmd);
-        setTimeout(showOutput, 400);
-    }
-}, 80);
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const typedCmd = document.querySelector('.typed-cmd');
+    const termOutput = document.getElementById('term-output');
+    const countdownEl = document.getElementById('countdown');
+    const redirectEl = document.querySelector('.subtitle-redirect');
 
-// ── TERMINAL OUTPUT ──
-function showOutput() {
+    // ── COMMANDE + SORTIE DU TERMINAL (sans effet de frappe) ──
+    if (typedCmd) typedCmd.textContent = 'cat 404.log';
+
     const lines = [
-        { cls: 't-err', text: '[ERROR] 404 — Route introuvable' },
-        { cls: 't-dim', text: `> Path: ${window.location.pathname}` },
-        { cls: 't-dim', text: '> Status: NOT_FOUND' },
-        { cls: 't-warn', text: '> Aucun handler Go enregistré pour cette route' },
-        { cls: 't-acc', text: '> Suggestion: redirection vers /home' },
+        { cls: 't-err',  text: '[ERROR] 404 — Page introuvable' },
+        { cls: 't-dim',  text: `> Chemin : ${window.location.pathname}` }, // textContent → aucun risque XSS
+        { cls: 't-dim',  text: '> Statut : NOT_FOUND' },
+        { cls: 't-acc',  text: '> Suggestion : retour à l\u2019accueil' },
     ];
 
-    let delay = 0;
-    lines.forEach(line => {
-        delay += 180;
-        setTimeout(() => {
+    lines.forEach((line, i) => {
+        const show = () => {
             if (!termOutput) return;
             const el = document.createElement('div');
             el.className = `t-line ${line.cls}`;
             el.textContent = line.text;
-            termOutput.appendChild(el);
-        }, delay);
+            termOutput.append(el);
+        };
+        if (reducedMotion) show();
+        else setTimeout(show, 300 + i * 180);
     });
-}
 
-// ── COUNTDOWN REDIRECTION ──
-const countdownEl = document.getElementById('countdown');
-let seconds = 10;
+    // ── REDIRECTION AUTOMATIQUE ──
+    // Annulée dès que le visiteur interagit : il est peut-être en train de lire.
+    let seconds = 10;
+    const timer = setInterval(() => {
+        if (document.hidden) return; // en pause si l'onglet n'est pas affiché
+        seconds -= 1;
+        if (countdownEl) countdownEl.textContent = seconds;
+        if (seconds <= 0) {
+            clearInterval(timer);
+            window.location.href = '/home';
+        }
+    }, 1000);
 
-const countdown = setInterval(() => {
-    seconds--;
-    if (countdownEl) countdownEl.textContent = seconds;
-    if (seconds <= 0) {
-        clearInterval(countdown);
-        window.location.href = '/home';
-    }
-}, 1000);
-
-// ── ANNULER REDIRECTION si click ──
-document.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => clearInterval(countdown));
-});
+    const cancel = () => {
+        clearInterval(timer);
+        if (redirectEl) redirectEl.textContent = 'Redirection annulée — choisis une page ci-dessous.';
+        ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach((ev) => window.removeEventListener(ev, cancel));
+    };
+    ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach((ev) => window.addEventListener(ev, cancel, { passive: true }));
+})();

@@ -84,11 +84,13 @@
 
 /* icône : tuile arrondie façon app iOS */
 .skill-icon {
+    --ic: var(--accent); /* couleur par défaut, surchargée dans le HTML : style="--ic:#f7df1e" */
     font-family:'DM Mono',monospace; font-size:10px; font-weight:700;
     width:48px; height:48px; min-width:48px;
     border-radius:var(--radius-sm);
-    background:rgba(255,255,255,0.06);
-    border:1px solid var(--glass-border);
+    color:var(--ic);
+    background:color-mix(in srgb, var(--ic) 12%, transparent);
+    border:1px solid color-mix(in srgb, var(--ic) 30%, transparent);
     box-shadow:var(--glass-highlight);
     display:flex; align-items:center; justify-content:center;
     letter-spacing:0.03em; text-align:center;

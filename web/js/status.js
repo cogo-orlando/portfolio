@@ -1,107 +1,113 @@
-// ── HORLOGE LIVE ──
-function updateClock() {
-    const now = new Date();
-    const h = String(now.getHours()).padStart(2,'0');
-    const m = String(now.getMinutes()).padStart(2,'0');
-    const s = String(now.getSeconds()).padStart(2,'0');
-    const timeStr = `${h}:${m}:${s}`;
-    const localTime = document.getElementById('localTime');
-    if (localTime) localTime.textContent = timeStr;
-}
-updateClock();
-setInterval(updateClock, 1000);
+/* ══════════════════════════════════════════
+   STATUS.JS — page Status (/status)
+   Dépend de core.js
+══════════════════════════════════════════ */
+(function () {
+    'use strict';
+    const { $, $$, onReady, fetchJSON } = window.Site;
 
-// ── UPTIME SESSION ──
-const pageStart = Date.now();
-function updateUptime() {
-    const el = document.getElementById('uptime');
-    if (!el) return;
-    const diff = Math.floor((Date.now() - pageStart) / 1000);
-    const h = Math.floor(diff / 3600);
-    const m = Math.floor((diff % 3600) / 60);
-    const s = diff % 60;
-    el.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-}
-updateUptime();
-setInterval(updateUptime, 1000);
+    const set = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+    };
+    const pad = (n) => String(n).padStart(2, '0');
 
-// ── DERNIÈRE MISE À JOUR ──
-const lastUpdateEl = document.getElementById('lastUpdate');
-if (lastUpdateEl) {
-    lastUpdateEl.textContent = new Date().toLocaleDateString('fr-FR', {
-        day: '2-digit', month: 'long', year: 'numeric',
-        hour: '2-digit', minute: '2-digit'
-    });
-}
+    // "26h3m4.5s" (format Go) → "1j 2h" / "3h 12min" / "45min"
+    const formatUptime = (raw) => {
+        if (typeof raw !== 'string') return '—';
+        const h = Number(raw.match(/(\d+)h/)?.[1] || 0);
+        const m = Number(raw.match(/(\d+)m(?!s)/)?.[1] || 0);
+        const days = Math.floor(h / 24);
+        if (days > 0) return `${days}j ${h % 24}h`;
+        if (h > 0) return `${h}h ${m}min`;
+        return `${m}min`;
+    };
 
-// ── MÉTRIQUES GO LIVE depuis /health ──
-async function loadGoMetrics() {
-    try {
-        const res = await fetch('/health');
-        if (!res.ok) return;
-        const data = await res.json();
+    const WEATHER = {
+        0: 'Ciel dégagé', 1: 'Généralement dégagé', 2: 'Partiellement nuageux', 3: 'Couvert',
+        45: 'Brouillard', 48: 'Brouillard givrant',
+        51: 'Bruine légère', 53: 'Bruine', 55: 'Bruine forte',
+        56: 'Bruine verglaçante', 57: 'Bruine verglaçante forte',
+        61: 'Pluie légère', 63: 'Pluie modérée', 65: 'Pluie forte',
+        66: 'Pluie verglaçante', 67: 'Pluie verglaçante forte',
+        71: 'Neige légère', 73: 'Neige modérée', 75: 'Neige forte', 77: 'Grains de neige',
+        80: 'Averses légères', 81: 'Averses modérées', 82: 'Averses violentes',
+        85: 'Averses de neige', 86: 'Fortes averses de neige',
+        95: 'Orage', 96: 'Orage avec grêle', 99: 'Orage avec forte grêle',
+    };
 
-        const set = (id, val) => {
-            const el = document.getElementById(id);
-            if (el && val !== undefined) el.textContent = val;
+    onReady(() => {
+        // ── HEURE DE TOULOUSE (et pas celle du visiteur) ──
+        const clock = () => set('localTime', new Date().toLocaleTimeString('fr-FR', { timeZone: 'Europe/Paris' }));
+
+        // ── DURÉE DE LA VISITE ──
+        const pageStart = Date.now();
+        const session = () => {
+            const diff = Math.floor((Date.now() - pageStart) / 1000);
+            set('uptime', `${pad(Math.floor(diff / 3600))}:${pad(Math.floor((diff % 3600) / 60))}:${pad(diff % 60)}`);
         };
 
-        set('m-goroutines', data.goroutines ?? '—');
-        set('m-uptime',     data.uptime     ?? '—');
-        set('m-alloc',      data.alloc      ?? '—');
-        set('m-gc',         data.gc         ?? '—');
-        set('m-runtime',    data.go_version  ?? data.runtime ?? '—');
-    } catch (e) {
-        console.warn('loadGoMetrics:', e);
-    }
-}
-loadGoMetrics();
-setInterval(loadGoMetrics, 30000); // refresh toutes les 30s
+        clock(); session();
+        setInterval(() => { clock(); session(); }, 1000);
 
-// ── MÉTÉO TOULOUSE via Open-Meteo ──
-async function fetchWeather() {
-    try {
-        const res  = await fetch('https://api.open-meteo.com/v1/forecast?latitude=43.6047&longitude=1.4442&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&wind_speed_unit=kmh&timezone=Europe/Paris');
-        const data = await res.json();
-        const c    = data.current;
-        const codes = {
-            0:'Ciel dégagé', 1:'Généralement dégagé', 2:'Partiellement nuageux', 3:'Couvert',
-            45:'Brouillard', 48:'Brouillard givrant',
-            51:'Bruine légère', 61:'Pluie légère', 63:'Pluie modérée', 65:'Pluie forte',
-            71:'Neige légère', 80:'Averses légères', 81:'Averses modérées',
-            95:'Orage', 96:'Orage avec grêle'
-        };
-        const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-        set('weatherTemp',  `${Math.round(c.temperature_2m)}°C`);
-        set('weatherDesc',  codes[c.weather_code] || 'Inconnu');
-        set('weatherFeels', `${Math.round(c.apparent_temperature)}°C`);
-        set('weatherHumid', `${c.relative_humidity_2m}%`);
-        set('weatherWind',  `${Math.round(c.wind_speed_10m)} km/h`);
-    } catch {
-        const el = document.getElementById('weatherDesc');
-        if (el) el.textContent = 'Données indisponibles';
-    }
-}
-fetchWeather();
+        // ── DATE D'AFFICHAGE ──
+        const lastUpdate = $('#lastUpdate');
+        if (lastUpdate) {
+            const now = new Date();
+            lastUpdate.dateTime = now.toISOString();
+            lastUpdate.textContent = now.toLocaleString('fr-FR', {
+                day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit',
+                timeZone: 'Europe/Paris',
+            });
+        }
 
-// ── OBJECTIF PROGRESSION ──
-const steps = ['done', 'done', 'inprog', 'pending'];
-const pct   = Math.round(steps.filter(s => s === 'done').length / steps.length * 100);
-setTimeout(() => {
-    const goalFill = document.getElementById('goalFill');
-    const goalPct  = document.getElementById('goalPct');
-    if (goalFill) goalFill.style.width = pct + '%';
-    if (goalPct)  goalPct.textContent  = pct + '%';
-}, 600);
+        // ── MÉTRIQUES GO depuis /health ──
+        const loadMetrics = () => fetchJSON('/health')
+            .then((d) => {
+                set('m-goroutines', d.goroutines ?? '—');
+                set('m-uptime', formatUptime(d.uptime));
+                set('m-alloc', d.memory_mb != null ? `${d.memory_mb} Mo` : '—');
+                set('m-gc', d.gc_cycles ?? '—');
+                set('m-runtime', d.go_version ?? '—');
+            })
+            .catch((err) => console.warn('métriques Go :', err.message));
 
-// ── COMPTEUR DE VISITES ──
-fetch('/api/visits')
-    .then(r => r.json())
-    .then(data => {
-        const el = document.getElementById('visitCount');
-        if (el) el.textContent = data.visits ?? '--';
-    })
-    .catch(() => {
-        const el = document.getElementById('visitCount');
-        if (el) el.textContent = '--';
+        loadMetrics();
+        // Rafraîchit toutes les 30 s, mais seulement quand l'onglet est visible
+        setInterval(() => { if (!document.hidden) loadMetrics(); }, 30000);
+
+        // ── MÉTÉO TOULOUSE (Open-Meteo) ──
+        const url = 'https://api.open-meteo.com/v1/forecast?latitude=43.6047&longitude=1.4442'
+            + '&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code'
+            + '&wind_speed_unit=kmh&timezone=Europe/Paris';
+        fetchJSON(url, { timeout: 8000 })
+            .then(({ current: c }) => {
+                set('weatherTemp', `${Math.round(c.temperature_2m)}°C`);
+                set('weatherDesc', WEATHER[c.weather_code] || 'Conditions inconnues');
+                set('weatherFeels', `${Math.round(c.apparent_temperature)}°C`);
+                set('weatherHumid', `${c.relative_humidity_2m}%`);
+                set('weatherWind', `${Math.round(c.wind_speed_10m)} km/h`);
+            })
+            .catch(() => set('weatherDesc', 'Données indisponibles'));
+
+        // ── OBJECTIF : % calculé depuis les étapes affichées dans le HTML ──
+        const steps = $$('.goal-block .sys-row');
+        const done = steps.filter((row) => row.querySelector('.done')).length;
+        const pct = steps.length ? Math.round((done / steps.length) * 100) : 0;
+        setTimeout(() => {
+            const fill = $('#goalFill');
+            if (fill) fill.style.width = `${pct}%`;
+            set('goalPct', `${pct}%`);
+            $('.goal-bar')?.setAttribute('aria-valuenow', String(pct));
+        }, 600);
+
+        // ── VISITES : la ligne est masquée tant que le compteur n'est pas en place ──
+        const visitRow = $('#visitCount')?.closest('.sys-row');
+        fetchJSON('/api/visits')
+            .then((d) => {
+                if (d.visits > 0) set('visitCount', d.visits);
+                else if (visitRow) visitRow.hidden = true;
+            })
+            .catch(() => { if (visitRow) visitRow.hidden = true; });
     });
+})();

@@ -1,162 +1,174 @@
-// ── TERMINAL FEEDBACK ──
-const ftBody = document.getElementById('ftBody');
+/* ══════════════════════════════════════════
+   CONTACT.JS — formulaire de contact (/contact)
+   Dépend de core.js
+══════════════════════════════════════════ */
+(function () {
+    'use strict';
+    const { $, onReady } = window.Site;
 
-function addTermLine(cls, prefix, msg) {
-    const line = document.createElement('div');
-    line.className = 'ft-line';
-    line.innerHTML = `<span class="ft-dim">${prefix}</span><span class="${cls}">${msg}</span>`;
-    ftBody.appendChild(line);
-    ftBody.scrollTop = ftBody.scrollHeight;
-}
+    // Champs du formulaire : id de l'input → id du message d'erreur + règle de validation
+    const FIELDS = {
+        firstname: { err: 'firstnameErr', label: 'Prénom', check: (v) => v ? '' : 'Le prénom est requis' },
+        lastname:  { err: 'lastnameErr',  label: 'Nom',    check: (v) => v ? '' : 'Le nom est requis' },
+        email:     { err: 'mailErr',      label: 'Email',  check: (v) => !v ? 'Un email est requis'
+                                                              : /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? '' : 'Adresse email invalide' },
+        subject:   { err: 'subjectErr',   label: 'Sujet',  check: (v) => v ? '' : 'Choisis un sujet' },
+        message:   { err: 'messageErr',   label: 'Message', check: (v) => v.length >= 10 ? '' : 'Message trop court (min 10 caractères)' },
+    };
 
-function clearTerminal() {
-    ftBody.innerHTML = '';
-    addTermLine('ft-acc', '$', './send_message');
-    addTermLine('ft-muted', '#', 'En attente de saisie...');
-}
+    onReady(() => {
+        const form = $('#contactForm');
+        if (!form) return;
 
-// ── COMPTEUR DE CARACTÈRES ──
-const messageEl = document.getElementById('message');
-const charCount = document.getElementById('charCount');
-if (messageEl && charCount) {
-    messageEl.addEventListener('input', () => {
-        const len = messageEl.value.length;
-        charCount.textContent = len;
-        charCount.style.color = len > 900 ? 'var(--err)' : len > 700 ? '#f5a000' : 'var(--muted)';
-    });
-}
+        const ftBody = $('#ftBody');
+        const charCount = $('#charCount');
+        const messageEl = $('#message');
+        const submitBtn = $('#submitBtn');
+        const submitText = submitBtn?.querySelector('.submit-text');
+        const submitLoad = submitBtn?.querySelector('.submit-loading');
+        const submitArr = submitBtn?.querySelector('.submit-arrow');
+        const successBox = $('#formSuccess');
+        const errorBox = $('#formError');
+        const errorMsg = $('#errorMsg');
 
-function setFieldError(inputId, errId, msg) {
-    const input = document.getElementById(inputId);
-    const err   = document.getElementById(errId);
-    if (input) input.classList.add('invalid');
-    if (err)   err.textContent = msg;
-}
+        // ── TERMINAL : textContent uniquement → aucune injection HTML possible ──
+        const addTermLine = (cls, prefix, msg) => {
+            if (!ftBody) return;
+            const line = document.createElement('div');
+            line.className = 'ft-line';
+            const p = document.createElement('span');
+            p.className = 'ft-dim';
+            p.textContent = prefix;
+            const m = document.createElement('span');
+            m.className = cls;
+            m.textContent = msg;
+            line.append(p, m);
+            ftBody.append(line);
+            ftBody.scrollTop = ftBody.scrollHeight;
+        };
 
-function clearFieldError(inputId, errId) {
-    const input = document.getElementById(inputId);
-    const err   = document.getElementById(errId);
-    if (input) input.classList.remove('invalid');
-    if (err)   err.textContent = '';
-}
+        const resetTerminal = () => {
+            if (!ftBody) return;
+            ftBody.replaceChildren();
+            addTermLine('ft-acc', '$', './send_message');
+            addTermLine('ft-muted', '#', 'En attente de saisie...');
+        };
 
-// ── LIVE VALIDATION ──
-document.getElementById('firstname')?.addEventListener('blur', () => {
-    const val = document.getElementById('firstname').value.trim();
-    if (!val) { setFieldError('firstname','firstnameErr','[ERR] Le prénom est requis'); addTermLine('ft-warn','#','Champ prénom vide'); }
-    else { clearFieldError('firstname','firstnameErr'); addTermLine('ft-ok','#','Prénom : OK'); }
-});
+        // ── ERREURS PAR CHAMP ──
+        const setError = (id, msg) => {
+            const input = document.getElementById(id);
+            const err = document.getElementById(FIELDS[id].err);
+            input?.classList.toggle('invalid', Boolean(msg));
+            input?.setAttribute('aria-invalid', String(Boolean(msg)));
+            if (err) err.textContent = msg ? `[ERR] ${msg}` : '';
+        };
 
-document.getElementById('lastname')?.addEventListener('blur', () => {
-    const val = document.getElementById('lastname').value.trim();
-    if (!val) { setFieldError('lastname','lastnameErr','[ERR] Le nom est requis'); addTermLine('ft-warn','#','Champ nom vide'); }
-    else { clearFieldError('lastname','lastnameErr'); addTermLine('ft-ok','#','Nom : OK'); }
-});
+        const validate = (id) => {
+            const value = (document.getElementById(id)?.value || '').trim();
+            const msg = FIELDS[id].check(value);
+            setError(id, msg);
+            return msg;
+        };
 
-document.getElementById('email')?.addEventListener('blur', () => {
-    const val = document.getElementById('email').value.trim();
-    if (!val) { setFieldError('email','mailErr','[ERR] Un email est requis'); addTermLine('ft-warn','#','Champ email vide'); }
-    else { clearFieldError('email','mailErr'); addTermLine('ft-ok','#','Email : OK'); }
-});
+        // ── COMPTEUR DE CARACTÈRES ──
+        const updateCount = () => {
+            if (!charCount || !messageEl) return;
+            const len = messageEl.value.length;
+            charCount.textContent = len;
+            charCount.style.color = len > 900 ? 'var(--err)' : len > 700 ? '#fbbf24' : '';
+        };
+        messageEl?.addEventListener('input', updateCount);
 
-document.getElementById('subject')?.addEventListener('change', () => {
-    const val = document.getElementById('subject').value;
-    if (!val) { setFieldError('subject','subjectErr','[ERR] Choisis un sujet'); }
-    else { clearFieldError('subject','subjectErr'); addTermLine('ft-ok','#','Sujet : ' + val); }
-});
-
-document.getElementById('message')?.addEventListener('blur', () => {
-    const val = document.getElementById('message').value.trim();
-    if (val.length < 10) { setFieldError('message','messageErr','[ERR] Message trop court (min 10 caractères)'); }
-    else { clearFieldError('message','messageErr'); addTermLine('ft-ok','#','Message : ' + val.length + ' caractères'); }
-});
-
-// ── SOUMISSION VIA FORMSPREE ──
-const form      = document.getElementById('contactForm');
-const submitBtn = document.getElementById('submitBtn');
-const submitText = submitBtn?.querySelector('.submit-text');
-const submitLoad = submitBtn?.querySelector('.submit-loading');
-const submitArr  = submitBtn?.querySelector('.submit-arrow');
-
-form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    // Reset erreurs
-    ['firstname','lastname','email','subject','message'].forEach(id => clearFieldError(id, id+'Err'));
-    document.getElementById('formError').style.display = 'none';
-
-    // Récupère les valeurs
-    const firstname = document.getElementById('firstname').value.trim();
-    const lastname  = document.getElementById('lastname').value.trim();
-    const email     = document.getElementById('email').value.trim();
-    const subject   = document.getElementById('subject').value;
-    const message   = document.getElementById('message').value.trim();
-    const honey     = form.querySelector('input[name="_gotcha"]')?.value;
-
-    // Honeypot check
-    if (honey) return;
-
-    // Validation
-    let valid = true;
-    if (!firstname)          { setFieldError('firstname','firstnameErr','[ERR] Le prénom est requis'); valid = false; }
-    if (!lastname)           { setFieldError('lastname','lastnameErr','[ERR] Le nom est requis'); valid = false; }
-    if (!email)              { setFieldError('email','mailErr','[ERR] Un email est requis'); valid = false; }
-    if (!subject)            { setFieldError('subject','subjectErr','[ERR] Choisis un sujet'); valid = false; }
-    if (message.length < 10) { setFieldError('message','messageErr','[ERR] Message trop court (min 10 caractères)'); valid = false; }
-
-    if (!valid) {
-        addTermLine('ft-err','#','[ERR] Validation échouée — corrige les champs');
-        return;
-    }
-
-    // UI loading
-    submitBtn.disabled       = true;
-    submitText.style.display = 'none';
-    submitArr.style.display  = 'none';
-    submitLoad.style.display = 'flex';
-    addTermLine('ft-warn','$','Connexion à Formspree...');
-
-    try {
-        const res = await fetch(form.action, {
-            method: 'POST',
-            headers: { 'Accept': 'application/json' },
-            body: new FormData(form)
+        // ── VALIDATION EN DIRECT (en quittant un champ) ──
+        Object.keys(FIELDS).forEach((id) => {
+            const input = document.getElementById(id);
+            const event = input?.tagName === 'SELECT' ? 'change' : 'blur';
+            input?.addEventListener(event, () => {
+                const msg = validate(id);
+                if (msg) addTermLine('ft-warn', '#', `${FIELDS[id].label} : ${msg}`);
+                else addTermLine('ft-ok', '#', `${FIELDS[id].label} : OK`);
+            });
+            // L'erreur disparaît dès que l'utilisateur corrige
+            input?.addEventListener('input', () => { if (input.classList.contains('invalid')) validate(id); });
         });
 
-        if (res.ok) {
-            addTermLine('ft-ok','#','[OK] Message envoyé avec succès');
-            addTermLine('ft-ok','#','[OK] Notification envoyée à Orlando');
+        // ── ÉTAT DU BOUTON ──
+        const setLoading = (loading) => {
+            if (!submitBtn) return;
+            submitBtn.disabled = loading;
+            submitBtn.setAttribute('aria-busy', String(loading));
+            if (submitText) submitText.style.display = loading ? 'none' : 'inline';
+            if (submitArr) submitArr.style.display = loading ? 'none' : 'inline';
+            if (submitLoad) submitLoad.style.display = loading ? 'flex' : 'none';
+        };
 
+        // ── ENVOI VERS FORMSPREE ──
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (errorBox) errorBox.style.display = 'none';
+
+            // Honeypot : un bot a rempli le champ caché → on fait semblant que tout va bien
+            if (form.querySelector('input[name="_gotcha"]')?.value) {
+                form.style.display = 'none';
+                if (successBox) successBox.style.display = 'block';
+                return;
+            }
+
+            const errors = Object.keys(FIELDS).filter((id) => validate(id));
+            if (errors.length) {
+                addTermLine('ft-err', '#', '[ERR] Validation échouée — corrige les champs');
+                document.getElementById(errors[0])?.focus(); // on emmène l'utilisateur au premier champ en erreur
+                return;
+            }
+
+            setLoading(true);
+            addTermLine('ft-warn', '$', 'Connexion à Formspree...');
+
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), 15000);
+
+            try {
+                const res = await fetch(form.action, {
+                    method: 'POST',
+                    headers: { Accept: 'application/json' },
+                    body: new FormData(form),
+                    signal: controller.signal,
+                });
+
+                if (!res.ok) {
+                    // Formspree renvoie le détail : { errors: [{ message: "..." }] }
+                    const data = await res.json().catch(() => ({}));
+                    const detail = data.errors?.map((x) => x.message).join(', ');
+                    throw new Error(detail || `Erreur serveur (${res.status})`);
+                }
+
+                addTermLine('ft-ok', '#', '[OK] Message envoyé avec succès');
+                form.reset();
+                updateCount();
+                form.style.display = 'none';
+                if (successBox) successBox.style.display = 'block';
+            } catch (err) {
+                const msg = err.name === 'AbortError'
+                    ? "Le serveur met trop de temps à répondre. Réessaie dans un instant."
+                    : err.message || 'Une erreur est survenue. Réessaie.';
+                addTermLine('ft-err', '#', `[ERR] ${msg}`);
+                if (errorMsg) errorMsg.textContent = msg;
+                if (errorBox) errorBox.style.display = 'block';
+            } finally {
+                clearTimeout(timer);
+                setLoading(false);
+            }
+        });
+
+        // ── ENVOYER UN AUTRE MESSAGE ──
+        $('#formReset')?.addEventListener('click', () => {
             form.reset();
-            charCount.textContent    = '0';
-            submitBtn.disabled       = false;
-            submitText.style.display = 'inline';
-            submitArr.style.display  = 'inline';
-            submitLoad.style.display = 'none';
-
-            document.getElementById('formSuccess').style.display = 'block';
-            form.style.display = 'none';
-        } else {
-            throw new Error('Erreur lors de l\'envoi');
-        }
-
-    } catch (err) {
-        addTermLine('ft-err','#','[ERR] ' + err.message);
-        document.getElementById('errorMsg').textContent = err.message;
-        document.getElementById('formError').style.display = 'block';
-
-        submitBtn.disabled       = false;
-        submitText.style.display = 'inline';
-        submitArr.style.display  = 'inline';
-        submitLoad.style.display = 'none';
-    }
-});
-
-// ── RESET FORMULAIRE ──
-document.getElementById('formReset')?.addEventListener('click', () => {
-    form.reset();
-    form.style.display = 'block';
-    document.getElementById('formSuccess').style.display = 'none';
-    charCount.textContent = '0';
-    clearTerminal();
-});
+            Object.keys(FIELDS).forEach((id) => setError(id, ''));
+            updateCount();
+            form.style.display = 'block';
+            if (successBox) successBox.style.display = 'none';
+            resetTerminal();
+            document.getElementById('firstname')?.focus();
+        });
+    });
+})();

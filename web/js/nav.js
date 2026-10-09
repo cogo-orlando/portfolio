@@ -1,55 +1,71 @@
-// ── GLASSMORPHISM NAV AU SCROLL ──
-const nav = document.querySelector('.nav');
-window.addEventListener('scroll', () => {
-    nav?.classList.toggle('scrolled', window.scrollY > 50);
-}, { passive: true });
+(function () {
+    'use strict';
+    const { $, $$, onReady, onEscape, rafThrottle, reveal } = window.Site;
 
-// ── PAGE ACTIVE ──
-const currentPath = window.location.pathname;
-document.querySelectorAll('.nav-link').forEach(link => {
-    if (link.getAttribute('href') === currentPath) link.classList.add('active');
-});
+    onReady(() => {
+        const nav = $('.nav');
+        const navMore = $('.nav-more');
+        const navMoreBtn = $('#navMoreBtn');
+        const navBurger = $('#navBurger');
+        const mobileMenu = $('#mobileMenu');
 
-// ── DROPDOWN "PLUS" ──
-const navMore = document.querySelector('.nav-more');
-const navMoreBtn = document.getElementById('navMoreBtn');
+        // ── NAV PLUS OPAQUE AU SCROLL ──
+        const onScroll = rafThrottle(() => nav?.classList.toggle('scrolled', window.scrollY > 50));
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
 
-navMoreBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const open = navMore.classList.toggle('open');
-    navMoreBtn.setAttribute('aria-expanded', open);
-});
-document.addEventListener('click', () => {
-    navMore?.classList.remove('open');
-    navMoreBtn?.setAttribute('aria-expanded', 'false');
-});
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        navMore?.classList.remove('open');
-        navMoreBtn?.setAttribute('aria-expanded', 'false');
-    }
-});
+        // ── PAGE ACTIVE (desktop + mobile, et /projects/* → "Projets") ──
+        const path = window.location.pathname.replace(/\/$/, '') || '/';
+        $$('.nav-link, .mobile-link').forEach((link) => {
+            const href = link.getAttribute('href');
+            const isActive = href === path || (href === '/project' && path.startsWith('/projects/'));
+            if (isActive) {
+                link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+            }
+        });
 
-// ── HAMBURGER MOBILE ──
-const navBurger = document.getElementById('navBurger');
-const mobileMenu = document.getElementById('mobileMenu');
+        // ── DROPDOWN "PLUS" ──
+        const closeMore = () => {
+            navMore?.classList.remove('open');
+            navMoreBtn?.setAttribute('aria-expanded', 'false');
+        };
+        navMoreBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const open = navMore.classList.toggle('open');
+            navMoreBtn.setAttribute('aria-expanded', String(open));
+        });
+        document.addEventListener('click', (e) => {
+            if (navMore && !navMore.contains(e.target)) closeMore();
+        });
 
-navBurger?.addEventListener('click', () => {
-    const open = navBurger.classList.toggle('open');
-    mobileMenu?.classList.toggle('open');
-    navBurger.setAttribute('aria-expanded', open);
-    mobileMenu?.setAttribute('aria-hidden', !open);
-});
-document.querySelectorAll('.glass-light').forEach(el => {
-    el.addEventListener('pointermove', e => {
-        const r = el.getBoundingClientRect();
-        el.style.setProperty('--mx', `${e.clientX - r.left}px`);
-        el.style.setProperty('--my', `${e.clientY - r.top}px`);
+        // ── MENU MOBILE ──
+        const setMobile = (open) => {
+            navBurger?.classList.toggle('open', open);
+            mobileMenu?.classList.toggle('open', open);
+            navBurger?.setAttribute('aria-expanded', String(open));
+            navBurger?.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+            mobileMenu?.setAttribute('aria-hidden', String(!open));
+        };
+        navBurger?.addEventListener('click', () => setMobile(!mobileMenu?.classList.contains('open')));
+        $$('.mobile-link').forEach((link) => link.addEventListener('click', () => setMobile(false)));
+        // Si on agrandit la fenêtre au-delà du mode mobile, on referme le menu
+        window.addEventListener('resize', rafThrottle(() => { if (window.innerWidth > 900) setMobile(false); }));
+
+        // Échap ferme tout
+        onEscape(() => { closeMore(); setMobile(false); });
+
+        // ── REFLET DE LUMIÈRE SUR LE VERRE ──
+        $$('.glass-light').forEach((el) => {
+            el.addEventListener('pointermove', rafThrottle((e) => {
+                const r = el.getBoundingClientRect();
+                el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+                el.style.setProperty('--my', `${e.clientY - r.top}px`);
+            }));
+        });
+
+        // ── APPARITION AU SCROLL ──
+        reveal('.reveal');
+
     });
-});
-
-// ── SCROLL REVEAL ──
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+})();

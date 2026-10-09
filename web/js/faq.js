@@ -1,168 +1,188 @@
-// ── FERME INTERVIEW avec Escape ──
-// (nav.js gère déjà Escape pour le dropdown, on ajoute closeInterview ici)
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeInterview();
-});
+/* ══════════════════════════════════════════
+   FAQ.JS — page FAQ (/faq)
+   Dépend de core.js
+══════════════════════════════════════════ */
+(function () {
+    'use strict';
+    const { $, $$, onReady, onEscape, reducedMotion } = window.Site;
 
-// ── FAQ DATA ──
-const items        = document.querySelectorAll('.faq-item');
-const totalEl      = document.getElementById('totalQ');
-const totalCountEl = document.getElementById('totalCount');
-const openCountEl  = document.getElementById('openCount');
-const progressFill = document.getElementById('progressFill');
+    onReady(() => {
+        const items = $$('.faq-item');
+        if (!items.length) return;
 
-if (totalEl)      totalEl.textContent      = items.length;
-if (totalCountEl) totalCountEl.textContent = items.length;
+        const totalEl = $('#totalQ');
+        const totalCountEl = $('#totalCount');
+        const openCountEl = $('#openCount');
+        const progressFill = $('#progressFill');
+        const progressBar = $('.progress-bar');
+        const searchInput = $('#searchInput');
+        const expandBtn = $('#expandAllBtn');
 
-items.forEach(item => item.classList.add('pulse'));
+        if (totalEl) totalEl.textContent = items.length;
 
-// ── ACCORDION ──
-let openedIds = new Set();
+        // État courant des filtres : catégorie + recherche se combinent
+        const state = { cat: 'all', query: '' };
+        const opened = new Set();
 
-function updateProgress() {
-    const total  = document.querySelectorAll('.faq-item:not(.hidden)').length;
-    const opened = [...openedIds].filter(id => {
-        const el = document.getElementById(id);
-        return el && !el.classList.contains('hidden');
-    }).length;
-    if (openCountEl)  openCountEl.textContent  = opened;
-    if (totalCountEl) totalCountEl.textContent = total;
-    if (progressFill) progressFill.style.width = total ? (opened / total * 100) + '%' : '0%';
-}
+        // ── OUVRIR / FERMER UNE QUESTION ──
+        const setOpen = (item, open) => {
+            item.classList.toggle('open', open);
+            item.querySelector('.faq-q')?.setAttribute('aria-expanded', String(open));
+            if (open) opened.add(item); else opened.delete(item);
+        };
 
-items.forEach((item, idx) => {
-    const id = 'faq-' + idx;
-    item.id  = id;
-    item.querySelector('.faq-q').addEventListener('click', () => {
-        const isOpen = item.classList.contains('open');
-        if (isOpen) {
-            item.classList.remove('open');
-            openedIds.delete(id);
-        } else {
-            item.classList.add('open');
-            item.classList.remove('pulse');
-            openedIds.add(id);
-        }
+        const isVisible = (item) => !item.classList.contains('hidden');
+
+        // ── BARRE DE PROGRESSION ──
+        const updateProgress = () => {
+            const visible = items.filter(isVisible);
+            const openedVisible = visible.filter((i) => opened.has(i)).length;
+            const pct = visible.length ? Math.round((openedVisible / visible.length) * 100) : 0;
+            if (openCountEl) openCountEl.textContent = openedVisible;
+            if (totalCountEl) totalCountEl.textContent = visible.length;
+            if (progressFill) progressFill.style.width = `${pct}%`;
+            progressBar?.setAttribute('aria-valuenow', String(pct));
+        };
+
+        // ── APPLIQUER CATÉGORIE + RECHERCHE ──
+        const applyFilters = () => {
+            const q = state.query;
+            items.forEach((item) => {
+                const inCat = state.cat === 'all' || item.dataset.cat === state.cat;
+                const text = `${item.querySelector('.faq-text')?.textContent || ''} ${item.querySelector('.faq-a-inner p')?.textContent || ''}`.toLowerCase();
+                const inSearch = !q || text.includes(q);
+                item.classList.toggle('hidden', !(inCat && inSearch));
+            });
+            updateProgress();
+        };
+
+        // ── ACCORDÉON ──
+        items.forEach((item) => {
+            item.querySelector('.faq-q')?.addEventListener('click', () => {
+                setOpen(item, !item.classList.contains('open'));
+                updateProgress();
+            });
+        });
+
+        // ── FILTRES PAR CATÉGORIE ──
+        const catButtons = $$('.cat-btn');
+        catButtons.forEach((btn) => {
+            btn.setAttribute('aria-pressed', String(btn.classList.contains('active')));
+            btn.addEventListener('click', () => {
+                catButtons.forEach((b) => {
+                    b.classList.toggle('active', b === btn);
+                    b.setAttribute('aria-pressed', String(b === btn));
+                });
+                state.cat = btn.dataset.cat;
+                applyFilters();
+            });
+        });
+
+        // ── RECHERCHE (+ easter egg : un mot secret ouvre sa question) ──
+        searchInput?.addEventListener('input', () => {
+            state.query = searchInput.value.toLowerCase().trim();
+            const secret = items.find((i) => i.dataset.secret && i.dataset.secret === state.query);
+            if (secret) {
+                items.forEach((i) => i.classList.toggle('hidden', i !== secret));
+                setOpen(secret, true);
+                secret.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+                updateProgress();
+                return;
+            }
+            applyFilters();
+        });
+
+        // ── QUESTION ALÉATOIRE ──
+        $('#randomBtn')?.addEventListener('click', () => {
+            const visible = items.filter(isVisible);
+            if (!visible.length) return;
+            const pick = visible[Math.floor(Math.random() * visible.length)];
+            items.forEach((i) => setOpen(i, false));
+            setOpen(pick, true);
+            pick.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+            updateProgress();
+        });
+
+        // ── TOUT OUVRIR / TOUT FERMER ──
+        let allOpen = false;
+        expandBtn?.addEventListener('click', () => {
+            allOpen = !allOpen;
+            items.filter(isVisible).forEach((i) => setOpen(i, allOpen));
+            expandBtn.textContent = allOpen ? 'Tout fermer' : 'Tout ouvrir';
+            updateProgress();
+        });
+
+        // ── MODE INTERVIEW ──
+        const overlay = $('#interviewOverlay');
+        const ivBody = $('#interviewBody');
+        const questions = items.map((item) => ({
+            q: item.querySelector('.faq-text')?.textContent.trim() || '',
+            a: item.querySelector('.faq-a-inner p')?.textContent.trim() || '',
+        }));
+        let ivIndex = 0;
+        let ivTimer = null;
+        let lastFocus = null;
+
+        const renderQuestion = (idx) => {
+            const data = questions[idx];
+            if (!data || !ivBody) return;
+            clearInterval(ivTimer); // stoppe l'écriture de la question précédente
+            ivBody.replaceChildren();
+
+            const head = document.createElement('div');
+            head.className = 'iv-question';
+            head.textContent = `Question ${idx + 1}/${questions.length}`;
+
+            const text = document.createElement('div');
+            text.className = 'iv-text';
+            text.textContent = data.q;
+
+            const answer = document.createElement('div');
+            answer.className = 'iv-answer';
+
+            ivBody.append(head, text, answer);
+
+            if (reducedMotion) { answer.textContent = data.a; return; }
+            const words = data.a.split(' ');
+            let i = 0;
+            ivTimer = setInterval(() => {
+                if (i >= words.length) { clearInterval(ivTimer); return; }
+                answer.textContent += (i > 0 ? ' ' : '') + words[i++];
+            }, 40);
+        };
+
+        const openInterview = () => {
+            if (!overlay) return;
+            lastFocus = document.activeElement;
+            ivIndex = 0;
+            overlay.hidden = false;                       // retire l'attribut hidden du HTML
+            requestAnimationFrame(() => overlay.classList.add('active'));
+            document.body.style.overflow = 'hidden';      // bloque le scroll derrière
+            renderQuestion(ivIndex);
+            $('#ivNext')?.focus();
+        };
+
+        const closeInterview = () => {
+            if (!overlay || overlay.hidden) return;
+            clearInterval(ivTimer);
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(() => { overlay.hidden = true; }, 300); // laisse le fondu se terminer
+            lastFocus?.focus();                           // rend le focus au bouton d'origine
+        };
+
+        $('#interviewBtn')?.addEventListener('click', openInterview);
+        $('#interviewClose')?.addEventListener('click', closeInterview);
+        $('#ivExit')?.addEventListener('click', closeInterview);
+        overlay?.addEventListener('click', (e) => { if (e.target === overlay) closeInterview(); });
+        $('#ivNext')?.addEventListener('click', () => {
+            ivIndex = (ivIndex + 1) % questions.length;
+            renderQuestion(ivIndex);
+        });
+        onEscape(closeInterview);
+
+        // ── INIT ──
+        items.forEach((i) => i.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false'));
         updateProgress();
     });
-});
-
-// ── FILTRES CATÉGORIES ──
-document.querySelectorAll('.cat-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const cat = btn.dataset.cat;
-        items.forEach(item => item.classList.toggle('hidden', cat !== 'all' && item.dataset.cat !== cat));
-        updateProgress();
-    });
-});
-
-// ── RECHERCHE ──
-const searchInput = document.getElementById('searchInput');
-const secretWords = { 'airbus': 'faq-2' };
-
-searchInput?.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase().trim();
-
-    // Easter egg
-    if (secretWords[query]) {
-        items.forEach(item => item.classList.add('hidden'));
-        const secret = document.getElementById(secretWords[query]);
-        if (secret) {
-            secret.classList.remove('hidden');
-            secret.classList.add('open');
-            openedIds.add(secretWords[query]);
-            setTimeout(() => secret.scrollIntoView({ behavior:'smooth', block:'center' }), 100);
-        }
-        updateProgress();
-        return;
-    }
-
-    items.forEach(item => {
-        if (!query) { item.classList.remove('hidden'); return; }
-        const qText = item.querySelector('.faq-text')?.textContent.toLowerCase() || '';
-        const aText = item.querySelector('.faq-a-inner p')?.textContent.toLowerCase() || '';
-        item.classList.toggle('hidden', !qText.includes(query) && !aText.includes(query));
-    });
-    updateProgress();
-});
-
-// ── QUESTION ALÉATOIRE ──
-document.getElementById('randomBtn')?.addEventListener('click', () => {
-    const visible = [...items].filter(i => !i.classList.contains('hidden'));
-    if (!visible.length) return;
-    const random = visible[Math.floor(Math.random() * visible.length)];
-    items.forEach(i => { i.classList.remove('open'); openedIds.delete(i.id); });
-    random.classList.add('open');
-    random.classList.remove('pulse');
-    openedIds.add(random.id);
-    random.scrollIntoView({ behavior:'smooth', block:'center' });
-    updateProgress();
-});
-
-// ── TOUT OUVRIR / FERMER ──
-let allOpen = false;
-document.getElementById('expandAllBtn')?.addEventListener('click', (e) => {
-    allOpen = !allOpen;
-    items.forEach(item => {
-        if (item.classList.contains('hidden')) return;
-        item.classList.toggle('open', allOpen);
-        if (allOpen) { item.classList.remove('pulse'); openedIds.add(item.id); }
-        else         { openedIds.delete(item.id); }
-    });
-    e.target.textContent = allOpen ? 'Tout fermer' : 'Tout ouvrir';
-    updateProgress();
-});
-
-// ── MODE INTERVIEW ──
-const interviewData = [...items].map(item => ({
-    q: item.querySelector('.faq-text')?.textContent || '',
-    a: item.querySelector('.faq-a-inner p')?.textContent || '',
-}));
-
-let ivIndex   = 0;
-const overlay = document.getElementById('interviewOverlay');
-const ivBody  = document.getElementById('interviewBody');
-
-function renderIVQuestion(idx) {
-    const q = interviewData[idx];
-    if (!q || !ivBody) return;
-    ivBody.innerHTML = '';
-
-    const qEl   = document.createElement('div');
-    qEl.className   = 'iv-question';
-    qEl.textContent = `~/interview $ Question ${idx + 1}/${interviewData.length}`;
-    ivBody.appendChild(qEl);
-
-    const textEl = document.createElement('div');
-    textEl.className   = 'iv-text';
-    textEl.textContent = q.q;
-    ivBody.appendChild(textEl);
-
-    const ansEl = document.createElement('div');
-    ansEl.className = 'iv-answer';
-    ivBody.appendChild(ansEl);
-
-    let i = 0;
-    const words    = q.a.split(' ');
-    const interval = setInterval(() => {
-        if (i >= words.length) { clearInterval(interval); return; }
-        ansEl.textContent += (i > 0 ? ' ' : '') + words[i++];
-    }, 40);
-}
-
-function openInterview()  { ivIndex = 0; overlay?.classList.add('active'); renderIVQuestion(ivIndex); }
-function closeInterview() { overlay?.classList.remove('active'); }
-
-document.getElementById('interviewBtn')?.addEventListener('click', openInterview);
-document.getElementById('interviewClose')?.addEventListener('click', closeInterview);
-document.getElementById('ivExit')?.addEventListener('click', closeInterview);
-overlay?.addEventListener('click', (e) => { if (e.target === overlay) closeInterview(); });
-document.getElementById('ivNext')?.addEventListener('click', () => {
-    ivIndex = (ivIndex + 1) % interviewData.length;
-    renderIVQuestion(ivIndex);
-});
-
-// ── INIT ──
-updateProgress();
+})();

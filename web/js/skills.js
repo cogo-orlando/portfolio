@@ -1,18 +1,26 @@
-// ── SKILL ICON COLORS ──
-document.querySelectorAll('.skill-icon').forEach(icon => {
-    const color = getComputedStyle(icon).getPropertyValue('--ic').trim() || 'var(--accent)';
-    icon.style.background = color + '18';
-    icon.style.borderColor = color + '33';
-    icon.style.color = color;
-});
+/* ══════════════════════════════════════════
+   SKILLS.JS — page compétences (/skills)
+   Dépend de core.js
+   (la couleur des icônes est maintenant gérée en CSS via --ic)
+══════════════════════════════════════════ */
+(function () {
+    'use strict';
+    const { $$, onReady, reducedMotion } = window.Site;
 
-// ── ANIMATION BARRES AU SCROLL ──
-const barObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-        if (e.isIntersecting) {
-            e.target.classList.add('bar-animated');
-            barObserver.unobserve(e.target);
+    onReady(() => {
+        // ── BARRES DE PROGRESSION : se remplissent quand la card arrive à l'écran ──
+        const cards = $$('.skill-card');
+        if (reducedMotion || !('IntersectionObserver' in window)) {
+            cards.forEach((card) => card.classList.add('bar-animated'));
+            return;
         }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('bar-animated');
+                observer.unobserve(entry.target);
+            });
+        }, { threshold: 0.3 });
+        cards.forEach((card) => observer.observe(card));
     });
-}, { threshold: 0.3 });
-document.querySelectorAll('.skill-card').forEach(card => barObserver.observe(card));
+})();

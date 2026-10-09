@@ -1,44 +1,56 @@
-// ── COUNTER ANIMATION ──
-const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const el     = entry.target;
-        const target = parseInt(el.dataset.target);
-        if (!target) return;
-        let current  = 0;
-        const step   = Math.ceil(target / 40);
-        const timer  = setInterval(() => {
-            current += step;
-            if (current >= target) { current = target; clearInterval(timer); }
-            el.textContent = current;
-        }, 40);
-        counterObserver.unobserve(el);
-    });
-}, { threshold: 0.5 });
-document.querySelectorAll('.stat-val[data-target]').forEach(el => counterObserver.observe(el));
+/* ══════════════════════════════════════════
+   HOME.JS — page d'accueil (/home)
+   Dépend de core.js
+══════════════════════════════════════════ */
+(function () {
+    'use strict';
+    const { $, $$, onReady, countUp, fetchJSON } = window.Site;
 
-// ── LIVE TIMER (jours depuis reconversion) ──
-const liveEl = document.getElementById('live-timer');
-if (liveEl) {
-    const startDate = new Date('2025-09-01');
-    const update = () => {
-        liveEl.textContent = Math.floor((new Date() - startDate) / 864e5);
+    // "26h3m4.5s" (format Go) → "1j 2h" / "3h 12min" / "45min"
+    const formatUptime = (raw) => {
+        if (typeof raw !== 'string') return '—';
+        const h = Number(raw.match(/(\d+)h/)?.[1] || 0);
+        const m = Number(raw.match(/(\d+)m(?!s)/)?.[1] || 0);
+        const days = Math.floor(h / 24);
+        if (days > 0) return `${days}j ${h % 24}h`;
+        if (h > 0) return `${h}h ${m}min`;
+        return `${m}min`;
     };
-    update();
-    setInterval(update, 60000);
-}
-// ── STATS LIVE depuis /health ──
-async function loadLiveStats() {
-    try {
-        const res = await fetch('/health');
-        if (!res.ok) return;
-        const data = await res.json();
-        const gorEl = document.getElementById('stat-goroutines');
-        const upEl  = document.getElementById('stat-uptime');
-        if (gorEl) gorEl.textContent = data.goroutines ?? '—';
-        if (upEl)  upEl.textContent  = data.uptime ?? '—';
-    } catch (e) {
-        console.warn('loadLiveStats:', e);
-    }
-}
-loadLiveStats();
+
+    onReady(() => {
+        // ── COMPTEURS : les chiffres (venus de _data.html) montent de 0 à leur valeur ──
+        const counters = $$('.stat-val').filter((el) => /^\d+$/.test(el.textContent.trim()));
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    const el = entry.target;
+                    countUp(el, el.textContent.trim());
+                    observer.unobserve(el);
+                });
+            }, { threshold: 0.5 });
+            counters.forEach((el) => observer.observe(el));
+        }
+
+        // ── JOURS DEPUIS LA RECONVERSION (si l'élément existe) ──
+        const liveEl = $('#live-timer');
+        if (liveEl) {
+            const startDate = new Date('2025-09-01');
+            const update = () => { liveEl.textContent = Math.floor((Date.now() - startDate) / 864e5); };
+            update();
+            setInterval(update, 60000);
+        }
+
+        // ── STATS LIVE depuis /health ──
+        const gorEl = $('#stat-goroutines');
+        const upEl = $('#stat-uptime');
+        if (gorEl || upEl) {
+            fetchJSON('/health')
+                .then((data) => {
+                    if (gorEl) gorEl.textContent = data.goroutines ?? '—';
+                    if (upEl) upEl.textContent = formatUptime(data.uptime);
+                })
+                .catch((err) => console.warn('stats live :', err.message));
+        }
+    });
+})();
