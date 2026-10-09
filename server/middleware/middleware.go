@@ -16,6 +16,7 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
+	"net"
 )
 
 // ══════════════════════════════════════════
@@ -299,11 +300,15 @@ func LoggerMiddleware(next http.Handler) http.Handler {
 // ══════════════════════════════════════════
 
 func GetIP(r *http.Request) string {
-	if ip := r.Header.Get("CF-Connecting-IP"); ip != "" {
-		return strings.TrimSpace(ip)
+	if ip := strings.TrimSpace(r.Header.Get("CF-Connecting-IP")); ip != "" {
+		return ip
 	}
-	if ip := r.Header.Get("X-Forwarded-For"); ip != "" {
-		return strings.TrimSpace(strings.Split(ip, ",")[0])
+	if xff := r.Header.Get("X-Forwarded-For"); xff != "" {
+		return strings.TrimSpace(strings.Split(xff, ",")[0])
+	}
+	// RemoteAddr = "ip:port" → on garde uniquement l'IP
+	if host, _, err := net.SplitHostPort(r.RemoteAddr); err == nil {
+		return host
 	}
 	return r.RemoteAddr
 }
@@ -378,14 +383,18 @@ func GzipMiddleware(next http.Handler) http.Handler {
 
 func CacheMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		path := r.URL.Path
+		isAsset := strings.HasPrefix(path, "/css/") || strings.HasPrefix(path, "/js/")
+
 		switch {
-		case strings.HasPrefix(r.URL.Path, "/img/"):
+		case strings.HasPrefix(path, "/img/"):
 			w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
-		case strings.HasPrefix(r.URL.Path, "/css/") || strings.HasPrefix(r.URL.Path, "/js/"):
-			w.Header().Set("Cache-Control", "public, max-age=604800")
+		case isAsset && r.URL.Query().Get("v") != "":
+			w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
+		case isAsset:
+			w.Header().Set("Cache-Control", "public, max-age=3600")
 		default:
-			w.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
-			w.Header().Set("Pragma", "no-cache")
+			w.Header().Set("Cache-Control", "no-cache")
 		}
 		next.ServeHTTP(w, r)
 	})
@@ -491,7 +500,8 @@ func TimeoutMiddleware(next http.Handler) http.Handler {
 // ══════════════════════════════════════════
 //  CHAIN
 // ══════════════════════════════════════════
-
+// Ordre d'exécution (de l'extérieur vers l'intérieur) :
+// RequestID → Logger → Recovery → Timeout → RateLimit → Honeypot → Security → Gzip → Cache → routes
 func Chain(h http.Handler) http.Handler {
 	h = CacheMiddleware(h)
 	h = GzipMiddleware(h)
@@ -500,8 +510,8 @@ func Chain(h http.Handler) http.Handler {
 	h = RateLimitMiddleware(h)
 	h = TimeoutMiddleware(h)
 	h = RecoveryMiddleware(h)
-	h = RequestIDMiddleware(h)
 	h = LoggerMiddleware(h)
+	h = RequestIDMiddleware(h) // en dernier = s'exécute en premier
 	return h
 }
 

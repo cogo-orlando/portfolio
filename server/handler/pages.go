@@ -3,18 +3,24 @@ package handler
 import (
 	"bytes"
 	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"html/template"
 	"log/slog"
 	"net/http"
 	"os"
+	"path"
 	"path/filepath"
 	"strconv"
+	"strings"
 	"sync"
 )
 
-// Dossier des templates HTML (relatif au dossier de lancement du serveur)
-const htmlDir = "web/html"
+// Dossiers (relatifs au dossier de lancement du serveur)
+const (
+	htmlDir   = "web/html"
+	staticDir = "web"
+)
 
 // ══════════════════════════════════════════
 //  ENVIRONNEMENT
@@ -30,6 +36,58 @@ func isDev() bool {
 // IsDev expose le mode au reste de l'application (logs de démarrage).
 func IsDev() bool {
 	return isDev()
+}
+
+// ══════════════════════════════════════════
+//  CACHE-BUSTING : {{asset "/css/nav.css"}} → /css/nav.css?v=3f9a1c2b7d
+//  Le hash change dès que le contenu du fichier change :
+//  le navigateur télécharge la nouvelle version, sans purge manuelle.
+// ══════════════════════════════════════════
+
+var (
+	assetCache = make(map[string]string)
+	assetMu    sync.RWMutex
+)
+
+// assetURL renvoie le chemin public suivi d'un hash court du contenu du fichier.
+// En cas de problème (fichier absent, chemin suspect), il renvoie le chemin tel quel :
+// la page s'affiche quand même, sans cache-busting pour ce fichier.
+func assetURL(publicPath string) string {
+	clean := path.Clean("/" + publicPath)
+	if strings.Contains(publicPath, "..") || clean == "/" {
+		slog.Warn("asset : chemin refusé", "path", publicPath)
+		return publicPath
+	}
+
+	// Prod : le hash est calculé une seule fois (les fichiers ne changent pas pendant l'exécution)
+	if !isDev() {
+		assetMu.RLock()
+		cached, ok := assetCache[clean]
+		assetMu.RUnlock()
+		if ok {
+			return cached
+		}
+	}
+
+	data, err := os.ReadFile(filepath.Join(staticDir, filepath.FromSlash(clean)))
+	if err != nil {
+		slog.Warn("asset introuvable", "path", clean, "error", err)
+		return clean
+	}
+	sum := sha256.Sum256(data)
+	versioned := clean + "?v=" + hex.EncodeToString(sum[:])[:10]
+
+	if !isDev() {
+		assetMu.Lock()
+		assetCache[clean] = versioned
+		assetMu.Unlock()
+	}
+	return versioned
+}
+
+// templateFuncs : fonctions utilisables dans tous les templates
+var templateFuncs = template.FuncMap{
+	"asset": assetURL,
 }
 
 // ══════════════════════════════════════════
@@ -64,7 +122,9 @@ func partialFiles() []string {
 // La page est parsée EN PREMIER : c'est elle qui est rendue par Execute,
 // les partials ne font qu'ajouter des {{define}} utilisables avec {{template "nom" .}}.
 func parseTemplate(file string) (*template.Template, error) {
-	tmpl, err := template.ParseFiles(templatePath(file))
+	// template.New doit porter le nom du fichier : c'est lui qu'Execute rendra.
+	// Les fonctions (asset…) doivent être déclarées AVANT le parsing.
+	tmpl, err := template.New(filepath.Base(file)).Funcs(templateFuncs).ParseFiles(templatePath(file))
 	if err != nil {
 		return nil, err
 	}
