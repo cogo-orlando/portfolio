@@ -625,13 +625,6 @@ func TestTimeout_HealthPath(t *testing.T) {
 	}
 }
 
-func TestTimeout_ProjectsPath(t *testing.T) {
-	d := timeoutForPath("/projects/security-dashboard")
-	if d != 8*time.Second {
-		t.Errorf("/projects/ devrait avoir timeout 8s, obtenu %v", d)
-	}
-}
-
 func TestTimeout_DefaultPath(t *testing.T) {
 	d := timeoutForPath("/home")
 	if d != 5*time.Second {

@@ -35,6 +35,11 @@
 
         <!-- HERO -->
         <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-tag" data-typed=" " aria-hidden="true">
+                <span class="prompt">~/home $</span>
+                <span class="typed"></span>
+                <span class="cursor"></span>
+            </div>
             <h1 class="hero-name" id="hero-title">
                 Orlando<br>
                 <span class="outline">Cogo</span>
@@ -47,9 +52,9 @@
                 backend Go, Docker, CI/CD, monitoring temps réel. Curieux, rigoureux, toujours en apprentissage.
             </p>
             <div class="hero-badges" aria-label="Statut actuel">
-                <span class="badge">Bachelor 2ème année</span>
+                <span class="badge">Bachelor 1ère année</span>
                 <span class="badge badge--open"><span class="badge-dot" aria-hidden="true"></span>Open to work</span>
-                <span class="badge">{{template "nb-projets-prod"}} projets en prod</span>
+                <span class="badge">{{template "nb-projets-prod"}} projet en prod</span>
             </div>
             <div class="scroll-hint" aria-hidden="true">
                 <span>scroll</span>
@@ -125,7 +130,7 @@
                     </div>
                     <h3 class="whatido-title">Développement backend</h3>
                     <p class="whatido-desc">Serveurs HTTP Go from scratch, API REST, middleware chain, tests unitaires,
-                        PostgreSQL. {{template "nb-projets-prod"}} applications en production.</p>
+                        PostgreSQL. Déployé en production.</p>
                     <div class="whatido-tags" aria-label="Technologies">
                         <span>Go</span><span>PostgreSQL</span><span>Docker</span><span>CI/CD</span>
                     </div>
@@ -167,7 +172,7 @@
             <div class="section-num" aria-hidden="true">03</div>
             <div class="section-header">
                 <span class="section-tag" aria-hidden="true">03 //</span>
-                <h2 class="section-title" id="flagship-title">Projets en production</h2>
+                <h2 class="section-title" id="flagship-title">En production</h2>
             </div>
             <div class="flagship-grid">
 
@@ -192,29 +197,6 @@
                         <div class="fm-item"><span class="fm-val">{{template "lighthouse"}}</span><span class="fm-label">Lighthouse</span></div>
                     </div>
                     <a href="/tech" class="flagship-link">Architecture →</a>
-                </div>
-
-                <div class="flagship-card flagship-card--flagship reveal">
-                    <div class="flagship-header">
-                        <div class="flagship-left">
-                            <span class="flagship-num" aria-hidden="true">02</span>
-                            <span class="flagship-badge flagship-badge--flagship">Flagship</span>
-                        </div>
-                        <div class="flagship-tags">
-                            <span>Go</span><span>PostgreSQL</span><span>Supabase</span><span>Docker</span>
-                        </div>
-                    </div>
-                    <h3 class="flagship-name">Security Dashboard</h3>
-                    <p class="flagship-desc">Plateforme de monitoring et supervision de sécurité connectée au portfolio
-                        en temps réel — 8 sections, auth bcrypt, sessions sécurisées, PostgreSQL RLS, export CSV,
-                        métriques Go live.</p>
-                    <div class="flagship-metrics">
-                        <div class="fm-item"><span class="fm-val">{{template "nb-tests-dashboard"}}</span><span class="fm-label">tests</span></div>
-                        <div class="fm-item"><span class="fm-val">{{template "docker-dashboard"}}</span><span class="fm-label">Docker</span></div>
-                        <div class="fm-item"><span class="fm-val">{{template "nb-gosec"}}</span><span class="fm-label">gosec issues</span></div>
-                        <div class="fm-item"><span class="fm-val">8</span><span class="fm-label">sections</span></div>
-                    </div>
-                    <a href="/projects/security-dashboard" class="flagship-link">Détails →</a>
                 </div>
 
             </div>
@@ -304,8 +286,7 @@
                         <span class="infra-name">Docker</span>
                         <span class="infra-badge infra-badge--blue">Containerisé</span>
                     </div>
-                    <p class="infra-desc">Multi-stage build — {{template "docker-portfolio"}} portfolio,
-                        {{template "docker-dashboard"}} dashboard. Image scratch, no-new-privileges, read_only
+                    <p class="infra-desc">Multi-stage build — image {{template "docker-portfolio"}}. Image scratch, no-new-privileges, read_only
                         filesystem, USER 1001.</p>
                     <div class="infra-tags"><span>Multi-stage</span><span>Non-root</span><span>Hardened</span></div>
                 </div>
@@ -486,6 +467,21 @@
                 <div class="setup-card reveal"><span class="setup-key">CTF</span><span class="setup-val">HackTheBox Labs</span></div>
             </div>
         </section>
+
+        <!-- CURRENTLY LEARNING -->
+        <section class="section" aria-labelledby="learning-title">
+            <div class="section-num" aria-hidden="true">08</div>
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">08 //</span>
+                <h2 class="section-title" id="learning-title">Currently learning</h2>
+            </div>
+            <div class="learning-ticker reveal" aria-live="polite" aria-label="En cours d'apprentissage">
+                <span class="learning-label" aria-hidden="true">~/learning $</span>
+                <span class="learning-text" id="learningText"></span>
+                <span class="cursor" aria-hidden="true"></span>
+            </div>
+        </section>
+
     </main>
 
     {{template "footer"}}

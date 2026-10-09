@@ -28,7 +28,7 @@ func setupTestTemplates(t *testing.T) func() {
 		"faq.html", "tech.html", "404.html",
 		"projects/zoo.html", "projects/netflix.html", "projects/groupie.html",
 		"projects/power4.html", "projects/cisco.html", "projects/artemis.html",
-		"projects/annuaire.html", "projects/security-dashboard.html", "projects/forum.html", "projects/snake.html", "projects/motogp.html",
+		"projects/annuaire.html", "projects/forum.html", "projects/snake.html", "projects/motogp.html",
 	}
 
 	created := []string{}
@@ -458,7 +458,6 @@ func TestHandlers_AllReturn200(t *testing.T) {
 		{"Cisco", CiscoHandler, "/projects/cisco"},
 		{"Artemis", ArtemisHandler, "/projects/artemis"},
 		{"Annuaire", AnnuaireHandler, "/projects/annuaire"},
-		{"SecurityDashboard", SecurityDashboardHandler, "/projects/security-dashboard"},
 		{"Forum", ForumHandler, "/projects/forum"},
 		{"Snake", SnakeHandler, "/projects/snake"},
 		{"MotoGP", MotoGPHandler, "/projects/motogp"},
@@ -495,7 +494,6 @@ func TestHandlers_HeadReturn200(t *testing.T) {
 		{"Status", StatusHandler, "/status"},
 		{"FAQ", FaqHandler, "/faq"},
 		{"Tech", TechHandler, "/tech"},
-		{"SecurityDashboard", SecurityDashboardHandler, "/projects/security-dashboard"},
 	}
 
 	for _, tt := range tests {
@@ -525,7 +523,6 @@ func TestHandlers_PostReturns405(t *testing.T) {
 		{"CV", CvHandler, "/cv"},
 		{"FAQ", FaqHandler, "/faq"},
 		{"Tech", TechHandler, "/tech"},
-		{"SecurityDashboard", SecurityDashboardHandler, "/projects/security-dashboard"},
 		{"Cisco", CiscoHandler, "/projects/cisco"},
 		{"Annuaire", AnnuaireHandler, "/projects/annuaire"},
 	}
@@ -591,7 +588,6 @@ func TestProjectHandlers_ContentType(t *testing.T) {
 		{"Cisco", CiscoHandler, "/projects/cisco"},
 		{"Artemis", ArtemisHandler, "/projects/artemis"},
 		{"Annuaire", AnnuaireHandler, "/projects/annuaire"},
-		{"SecurityDashboard", SecurityDashboardHandler, "/projects/security-dashboard"},
 		{"Zoo", ZooHandler, "/projects/zoo"},
 	}
 

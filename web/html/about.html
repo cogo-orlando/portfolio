@@ -35,6 +35,11 @@
 
         <!-- HERO -->
         <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-tag" data-typed="cat about.md" aria-hidden="true">
+                <span class="prompt">~/about $</span>
+                <span class="typed"></span>
+                <span class="cursor"></span>
+            </div>
             <h1 class="hero-title" id="hero-title">À propos<br><span class="outline">de moi</span></h1>
             <p class="hero-intro">Un parcours atypique, une reconversion assumée, une passion qui guide chaque décision.
                 De l'industrie aéronautique à la cybersécurité — avec des projets en production pour le prouver.</p>
@@ -43,7 +48,7 @@
                 <div class="hstat-sep" aria-hidden="true">·</div>
                 <div class="hstat"><span class="hstat-val">{{template "niveau"}}</span><span class="hstat-label">Ynov Campus</span></div>
                 <div class="hstat-sep" aria-hidden="true">·</div>
-                <div class="hstat"><span class="hstat-val">{{template "nb-projets-prod"}}</span><span class="hstat-label">Projets en prod</span></div>
+                <div class="hstat"><span class="hstat-val">{{template "nb-projets-prod"}}</span><span class="hstat-label">Projet en prod</span></div>
                 <div class="hstat-sep" aria-hidden="true">·</div>
                 <div class="hstat"><span class="hstat-val">{{template "nb-tests"}}</span><span class="hstat-label">Tests unitaires</span></div>
             </div>
@@ -67,8 +72,7 @@
                             <p class="timeline-place">Ynov Campus Toulouse · 2ème année</p>
                             <p class="timeline-desc">Reconversion dans ce qui me passionne vraiment : l'informatique,
                                 l'infrastructure et la cybersécurité. En parallèle de la formation, je construis des
-                                projets réels en production — un portfolio Go déployé sur orlandocogo.com et un security
-                                dashboard de monitoring connecté en temps réel.</p>
+                                projets réels en production — comme ce portfolio Go déployé sur orlandocogo.com.</p>
                         </div>
                     </div>
                 </div>
@@ -143,22 +147,6 @@
                         <span>Go</span><span>Docker</span><span>Cloudflare</span><span>CI/CD</span><span>{{template "nb-tests"}} tests</span>
                     </div>
                     <a href="/tech" class="building-link">Architecture →</a>
-                </div>
-
-                <div class="building-card building-card--flagship reveal">
-                    <div class="building-header">
-                        <span class="building-num" aria-hidden="true">02</span>
-                        <span class="building-status building-status--flagship">Flagship</span>
-                    </div>
-                    <h3 class="building-name">Security Dashboard</h3>
-                    <p class="building-desc">Plateforme de monitoring et supervision de sécurité connectée au portfolio
-                        en temps réel — 8 sections, auth bcrypt, sessions sécurisées, PostgreSQL RLS, Docker
-                        {{template "docker-dashboard"}}, CI/CD vert, {{template "nb-tests-dashboard"}} tests unitaires,
-                        gosec {{template "nb-gosec"}} issues.</p>
-                    <div class="building-tags">
-                        <span>Go</span><span>PostgreSQL</span><span>Supabase</span><span>Docker</span><span>{{template "nb-tests-dashboard"}} tests</span>
-                    </div>
-                    <a href="/projects/security-dashboard" class="building-link">Détails →</a>
                 </div>
 
             </div>

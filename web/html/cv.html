@@ -33,6 +33,11 @@
 
         <!-- HERO -->
         <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-tag" data-typed="cat cv.pdf" aria-hidden="true">
+                <span class="prompt">~/cv $</span>
+                <span class="typed"></span>
+                <span class="cursor"></span>
+            </div>
             <h1 class="hero-title" id="hero-title">Mon<br><span class="outline">CV</span></h1>
             <p class="hero-intro">Étudiant Bachelor Informatique · Spécialisation Cybersécurité · Ex-Airbus</p>
 
@@ -144,21 +149,13 @@
                     </div>
 
                     <div class="cv-sidebar-card reveal">
-                        <h3 class="cv-sidebar-title">Projets en prod</h3>
+                        <h3 class="cv-sidebar-title">En production</h3>
                         <div class="cv-proj-list">
                             <a href="/tech" class="cv-proj-item">
                                 <div class="cv-proj-dot online" aria-hidden="true"></div>
                                 <div>
                                     <span class="cv-proj-name">Portfolio — orlandocogo.com</span>
                                     <span class="cv-proj-sub">Go · Docker · Cloudflare · {{template "nb-tests"}} tests</span>
-                                </div>
-                                <span class="cv-proj-arrow" aria-hidden="true">→</span>
-                            </a>
-                            <a href="/projects/security-dashboard" class="cv-proj-item">
-                                <div class="cv-proj-dot online" aria-hidden="true"></div>
-                                <div>
-                                    <span class="cv-proj-name">Security Dashboard</span>
-                                    <span class="cv-proj-sub">Go · PostgreSQL · Docker · {{template "nb-tests-dashboard"}} tests</span>
                                 </div>
                                 <span class="cv-proj-arrow" aria-hidden="true">→</span>
                             </a>
@@ -170,7 +167,7 @@
                         <div class="cv-stats">
                             <div class="cv-stat"><span class="cv-stat-val">{{template "nb-tests"}}</span><span class="cv-stat-label">Tests unitaires</span></div>
                             <div class="cv-stat"><span class="cv-stat-val">5</span><span class="cv-stat-label">Ans Airbus</span></div>
-                            <div class="cv-stat"><span class="cv-stat-val">{{template "nb-projets-prod"}}</span><span class="cv-stat-label">Projets en prod</span></div>
+                            <div class="cv-stat"><span class="cv-stat-val">{{template "nb-projets-prod"}}</span><span class="cv-stat-label">Projet en prod</span></div>
                             <div class="cv-stat"><span class="cv-stat-val">{{template "nb-gosec"}}</span><span class="cv-stat-label">gosec issues</span></div>
                         </div>
                     </div>

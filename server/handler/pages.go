@@ -274,10 +274,6 @@ func AnnuaireHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "projects/annuaire.html")
 }
 
-func SecurityDashboardHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "projects/security-dashboard.html")
-}
-
 func ForumHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "projects/forum.html")
 }

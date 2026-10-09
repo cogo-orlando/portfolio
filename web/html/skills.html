@@ -35,6 +35,11 @@
 
         <!-- HERO -->
         <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-tag" data-typed="cat skills.md" aria-hidden="true">
+                <span class="prompt">~/skills $</span>
+                <span class="typed"></span>
+                <span class="cursor"></span>
+            </div>
             <h1 class="hero-title" id="hero-title">Mes<br><span class="outline">Compétences</span></h1>
             <p class="hero-intro">Du code à l'infrastructure, de la sécurité applicative au DevOps — je construis,
                 déploie et sécurise des systèmes réels en production.</p>
@@ -206,7 +211,7 @@
                             <div class="skill-fill" style="--pct:40%"></div>
                         </div>
                         <div class="skill-details">
-                            <span>Multi-stage build</span><span>Image scratch {{template "docker-dashboard"}}</span><span>docker-compose</span>
+                            <span>Multi-stage build</span><span>Image scratch</span><span>docker-compose</span>
                             <span>no-new-privileges</span><span>read_only fs</span><span>tmpfs</span>
                         </div>
                     </div>
@@ -295,10 +300,24 @@
             </div>
         </section>
 
+        <!-- CURRENTLY LEARNING -->
+        <section class="section" aria-labelledby="learning-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">05 //</span>
+                <h2 class="section-title" id="learning-title">En ce moment</h2>
+                <span class="section-desc">Ce que j'apprends activement</span>
+            </div>
+            <div class="learning-ticker reveal" aria-live="polite" aria-label="En cours d'apprentissage">
+                <span class="learning-label" aria-hidden="true">~/learning $</span>
+                <span class="learning-text" id="learningText"></span>
+                <span class="cursor" aria-hidden="true"></span>
+            </div>
+        </section>
+
         <!-- ROADMAP -->
         <section class="section" aria-labelledby="roadmap-title">
             <div class="section-header">
-                <span class="section-tag" aria-hidden="true">05 //</span>
+                <span class="section-tag" aria-hidden="true">06 //</span>
                 <h2 class="section-title" id="roadmap-title">Roadmap</h2>
                 <span class="section-desc">Progression & objectifs</span>
             </div>
@@ -322,7 +341,7 @@
                             <span class="roadmap-name">Docker — Conteneurisation</span>
                             <span class="roadmap-badge done-badge">Acquis</span>
                         </div>
-                        <p class="roadmap-desc">Multi-stage build, image scratch {{template "docker-dashboard"}}, docker-compose, hardening complet</p>
+                        <p class="roadmap-desc">Multi-stage build, image scratch, docker-compose, hardening complet</p>
                     </div>
                 </div>
 

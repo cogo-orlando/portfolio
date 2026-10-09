@@ -33,13 +33,18 @@
 
         <!-- HERO -->
         <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-tag" data-typed="cat architecture.md" aria-hidden="true">
+                <span class="prompt">~/tech $</span>
+                <span class="typed"></span>
+                <span class="cursor"></span>
+            </div>
             <h1 class="hero-title" id="hero-title">Architecture<br><span class="outline">& Infrastructure</span></h1>
             <p class="hero-intro">Ce portfolio n'est pas qu'un site vitrine — c'est un projet backend complet avec
-                sécurité, tests, CI/CD et déploiement containerisé. Deux applications en production.</p>
+                sécurité, tests, CI/CD et déploiement containerisé, en production.</p>
             <div class="hero-stats reveal">
                 <div class="hstat"><span class="hstat-val">{{template "nb-tests"}}</span><span class="hstat-label">Tests unitaires</span></div>
                 <div class="hstat-sep" aria-hidden="true">·</div>
-                <div class="hstat"><span class="hstat-val">{{template "nb-projets-prod"}}</span><span class="hstat-label">Apps en prod</span></div>
+                <div class="hstat"><span class="hstat-val">{{template "nb-projets-prod"}}</span><span class="hstat-label">App en prod</span></div>
                 <div class="hstat-sep" aria-hidden="true">·</div>
                 <div class="hstat"><span class="hstat-val">{{template "nb-gosec"}}</span><span class="hstat-label">gosec issues</span></div>
                 <div class="hstat-sep" aria-hidden="true">·</div>
@@ -233,7 +238,6 @@
                         <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>slog JSON structuré — compatible Render Logs, filtrable</span></div>
                         <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Graceful shutdown — 10s pour terminer les requêtes en cours</span></div>
                         <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Sitemap XML auto — dates de modification réelles, soumis à Google</span></div>
-                        <div class="security-item"><span class="si-check" aria-hidden="true">✓</span><span>Security Dashboard — supervision en temps réel des événements</span></div>
                     </div>
                 </div>
             </div>
