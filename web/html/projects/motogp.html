@@ -2,563 +2,239 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{template "head-common"}}
+
     <title>MotoGP — Orlando Cogo</title>
-    <meta name="description"
-        content="MotoGP — site web fullstack Python/FastAPI + React. API REST maison, base de données, saisons, circuits, pilotes et stats. Projet final B2 Ynov Campus, équipe de 4.">
+    <meta name="description" content="MotoGP — site web fullstack Python/FastAPI + React. API REST maison, base de données, saisons, circuits, pilotes et stats. Projet final B2 Ynov Campus, équipe de 4.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://orlandocogo.com/projects/motogp">
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orlandocogo.com/projects/motogp">
     <meta property="og:title" content="MotoGP — Orlando Cogo">
-    <meta property="og:description"
-        content="Site web fullstack Python/FastAPI + React — API REST, saisons, circuits, pilotes, stats.">
+    <meta property="og:description" content="Site web fullstack Python/FastAPI + React — API REST, saisons, circuits, pilotes, stats.">
     <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
     <meta property="og:locale" content="fr_FR">
-    <link rel="icon" href="/img/favicon.ico">
-    <link rel="icon" type="image/png" href="/img/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="/css/nav.css">
-    <link rel="stylesheet" href="/css/projects/zoo.css">
-    <style>
-        /* ── ARCH TREE ── */
-        .arch-tree {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--border2);
-            padding: 1.5rem;
-            overflow-x: auto;
-        }
 
-        .arch-tree pre {
-            font-family: 'DM Mono', monospace;
-            font-size: 12px;
-            color: var(--muted2);
-            line-height: 1.8;
-            margin: 0;
-            white-space: pre;
-        }
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MotoGP — Orlando Cogo">
+    <meta name="twitter:description" content="Site web fullstack Python/FastAPI + React — API REST, saisons, circuits, pilotes, stats.">
+    <meta name="twitter:image" content="https://orlandocogo.com/img/og-image.png">
 
-        .tree-dir {
-            color: var(--accent2);
-        }
-
-        .tree-comment {
-            color: var(--muted);
-            font-style: italic;
-        }
-
-        /* ── API TABLE ── */
-        .api-wrap {
-            background: var(--surface);
-            border: 1px solid var(--border2);
-            padding: 1.5rem;
-            overflow-x: auto;
-        }
-
-        .api-section-title {
-            font-family: 'DM Mono', monospace;
-            font-size: 11px;
-            color: var(--accent);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid var(--border2);
-        }
-
-        .api-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 1.5rem;
-        }
-
-        .api-table:last-child {
-            margin-bottom: 0;
-        }
-
-        .api-table th {
-            font-family: 'DM Mono', monospace;
-            font-size: 9px;
-            color: var(--accent);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            text-align: left;
-            padding: 6px 10px;
-            background: rgba(0, 245, 160, 0.03);
-            border-bottom: 1px solid var(--border2);
-        }
-
-        .api-table td {
-            font-family: 'DM Mono', monospace;
-            font-size: 11px;
-            color: var(--muted2);
-            padding: 7px 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            vertical-align: top;
-        }
-
-        .api-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .api-method {
-            font-weight: 700;
-            font-size: 10px;
-            padding: 2px 6px;
-            letter-spacing: 0.06em;
-        }
-
-        .api-method--get {
-            color: var(--accent);
-        }
-
-        .api-method--post {
-            color: var(--accent2);
-        }
-
-        .api-route {
-            color: var(--text);
-        }
-
-        /* ── STACK SPLIT ── */
-        .stack-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .stack-card {
-            background: var(--surface);
-            border: 1px solid var(--border2);
-            padding: 1.2rem 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stack-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 100%;
-        }
-
-        .stack-card--back::before {
-            background: #3776AB;
-        }
-
-        .stack-card--front::before {
-            background: #61DAFB;
-        }
-
-        .stack-card-title {
-            font-family: 'DM Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 0.75rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border2);
-        }
-
-        .stack-card--back .stack-card-title {
-            color: #3776AB;
-        }
-
-        .stack-card--front .stack-card-title {
-            color: #61DAFB;
-        }
-
-        .stack-item {
-            font-family: 'DM Mono', monospace;
-            font-size: 11px;
-            color: var(--muted2);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 4px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .stack-item:last-child {
-            border-bottom: none;
-        }
-
-        .stack-item::before {
-            content: '→';
-            color: var(--accent);
-            font-size: 10px;
-        }
-
-        @media (max-width: 600px) {
-            .stack-split {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/projects/demo-project.css">
 </head>
 
 <body>
+    {{template "background"}}
+    {{template "nav"}}
 
-    <div class="blob1" aria-hidden="true"></div>
-    <div class="blob2" aria-hidden="true"></div>
+    <main id="main-content">
 
+        <!-- HERO -->
+        <section class="hero" aria-labelledby="hero-title">
+            <nav class="hero-breadcrumb" aria-label="Fil d'Ariane">
+                <a href="/project" class="breadcrumb-link">← Projets</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <span class="breadcrumb-current" aria-current="page">MotoGP</span>
+            </nav>
+            <div class="hero-tag" data-typed="uvicorn main:app --reload" data-typing-delay="600" aria-hidden="true">
+                <span class="prompt">~/projects/motogp $</span>
+                <span class="typed"></span>
+                <span class="cursor"></span>
+            </div>
+            <div class="hero-meta">
+                <span class="hero-meta-badge">Python</span>
+                <span class="hero-meta-badge">FastAPI</span>
+                <span class="hero-meta-badge">React</span>
+                <span class="hero-meta-badge hero-meta-badge--status">Terminé</span>
+                <span class="hero-meta-type"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" /></svg> Équipe · 4 pers. · B2</span>
+            </div>
+            <h1 class="hero-title" id="hero-title">MotoGP<br><span class="outline">Fullstack</span></h1>
+            <p class="hero-intro">Site web fullstack sur le thème du MotoGP — API REST construite from scratch en
+                Python/FastAPI avec base de données, frontend React affichant saisons, circuits, pilotes et statistiques de
+                courses. Projet final B2 en équipe de 4.</p>
+            <div class="hero-badges" aria-label="Technologies utilisées">
+                <span class="badge">Python</span>
+                <span class="badge">FastAPI</span>
+                <span class="badge">React</span>
+                <span class="badge">JavaScript</span>
+                <span class="badge">API REST</span>
+                <span class="badge">Base de données</span>
+            </div>
+            <div class="hero-actions">
+                <a href="https://github.com/enzoandria1-oss/B2_FinalProject_TS_PY" target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn--gh" aria-label="Voir MotoGP sur GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg> GitHub</a>
+            </div>
+        </section>
 
-
-
-
-
-    <!-- NAV -->
-    <nav class="nav" aria-label="Navigation principale">
-        <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
-            <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
-        </a>
-        <ul class="nav-left nav-links" role="list">
-            <li><a href="/about" class="nav-link">À propos</a></li>
-            <li><a href="/contact" class="nav-link">Contact</a></li>
-            <li><a href="/cv" class="nav-link">CV</a></li>
-        </ul>
-        <div class="nav-center">
-            <a href="/home" class="nav-home"><span>HOME</span></a>
-        </div>
-        <ul class="nav-right-links nav-links" role="list">
-            <li><a href="/skills" class="nav-link">Compétences</a></li>
-            <li><a href="/project" class="nav-link">Projets</a></li>
-            <li><a href="/tech" class="nav-link">Infrastructure</a></li>
-            <li class="nav-more">
-                <button class="nav-more-btn" id="navMoreBtn" aria-haspopup="true" aria-expanded="false"
-                    aria-controls="navMoreMenu" aria-label="Plus de pages">
-                    Plus
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                        <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <div class="nav-more-menu" id="navMoreMenu" role="menu">
-                    <a href="/status" class="more-item" role="menuitem"><span class="more-num"
-                            aria-hidden="true">06</span><span class="more-info"><span
-                                class="more-name">Status</span><span class="more-desc">État du système</span></span></a>
-                    <a href="/faq" class="more-item" role="menuitem"><span class="more-num"
-                            aria-hidden="true">07</span><span class="more-info"><span class="more-name">FAQ</span><span
-                                class="more-desc">Questions / Réponses</span></span></a>
+        <!-- STACK -->
+        <section class="section" aria-labelledby="stack-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">01 //</span>
+                <h2 class="section-title" id="stack-title">Architecture fullstack</h2>
+            </div>
+            <div class="stack-split reveal">
+                <div class="stack-card stack-card--back">
+                    <div class="stack-card-title">Backend — Python / FastAPI</div>
+                    <div class="stack-item">Python — langage principal</div>
+                    <div class="stack-item">FastAPI — framework API REST</div>
+                    <div class="stack-item">Base de données — stockage des données</div>
+                    <div class="stack-item">Routes API maison — endpoints personnalisés</div>
+                    <div class="stack-item">JSON — format d'échange de données</div>
+                    <div class="stack-item">Uvicorn — serveur ASGI</div>
                 </div>
-            </li>
-        </ul>
-        <div class="nav-right">
-            <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false"
-                aria-controls="mobileMenu">
-                <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-            </button>
-            <div class="nav-status" aria-label="Disponible pour travailler">
-                <span class="status-dot" aria-hidden="true"></span>
-                <span>open to work</span>
+                <div class="stack-card stack-card--front">
+                    <div class="stack-card-title">Frontend — React / JavaScript</div>
+                    <div class="stack-item">React — bibliothèque UI</div>
+                    <div class="stack-item">JavaScript — langage frontend</div>
+                    <div class="stack-item">Composants React — interface modulaire</div>
+                    <div class="stack-item">Fetch API — appels vers le backend</div>
+                    <div class="stack-item">CSS — styles et mise en page</div>
+                </div>
             </div>
-        </div>
-    </nav>
+        </section>
 
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-        <a href="/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>À propos</a>
-        <a href="/tech" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Infrastructure</a>
-        <a href="/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Compétences</a>
-        <a href="/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Projets</a>
-        <a href="/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>Contact</a>
-        <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>CV</a>
-        <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>Status</a>
-    </div>
-
-    <!-- HERO -->
-    <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-breadcrumb">
-            <a href="/project" class="breadcrumb-link">← Projets</a>
-            <span class="breadcrumb-sep" aria-hidden="true">/</span>
-            <span class="breadcrumb-current">MotoGP</span>
-        </div>
-
-        <div class="hero-tag" data-typed="uvicorn main:app --reload" data-typing-delay="600" aria-hidden="true">
-            <span class="prompt">~/projects/motogp $</span>
-            <span class="typed"></span>
-            <span class="cursor"></span>
-        </div>
-
-        <div class="hero-meta">
-            <span class="hero-meta-badge">Python</span>
-            <span class="hero-meta-badge">FastAPI</span>
-            <span class="hero-meta-badge">React</span>
-            <span class="hero-meta-badge hero-meta-badge--status">Terminé</span>
-            <span class="hero-meta-type">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                    aria-hidden="true">
-                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-                </svg>
-                Équipe · 4 pers. · B2
-            </span>
-        </div>
-
-        <h1 class="hero-title" id="hero-title">MotoGP<br><span class="outline">Fullstack</span></h1>
-        <p class="hero-intro">Site web fullstack sur le thème du MotoGP — API REST construite from scratch en
-            Python/FastAPI avec base de données, frontend React affichant saisons, circuits, pilotes et statistiques de
-            courses. Projet final B2 en équipe de 4.</p>
-
-        <div class="hero-badges" aria-label="Technologies utilisées">
-            <span class="badge">Python</span>
-            <span class="badge">FastAPI</span>
-            <span class="badge">React</span>
-            <span class="badge">JavaScript</span>
-            <span class="badge">API REST</span>
-            <span class="badge">Base de données</span>
-        </div>
-
-        <div class="hero-actions">
-            <a href="https://github.com/enzoandria1-oss/B2_FinalProject_TS_PY" target="_blank" rel="noopener noreferrer"
-                class="hero-btn hero-btn--gh" aria-label="Voir sur GitHub">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path
-                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-                </svg>
-                GitHub
-            </a>
-        </div>
-    </section>
-
-    <!-- STACK -->
-    <section class="section" aria-labelledby="stack-title">
-        <div class="section-header">
-            <span class="section-tag" aria-hidden="true">01 //</span>
-            <h2 class="section-title" id="stack-title">Architecture fullstack</h2>
-        </div>
-        <div class="stack-split reveal">
-            <div class="stack-card stack-card--back">
-                <div class="stack-card-title">Backend — Python / FastAPI</div>
-                <div class="stack-item">Python — langage principal</div>
-                <div class="stack-item">FastAPI — framework API REST</div>
-                <div class="stack-item">Base de données — stockage des données</div>
-                <div class="stack-item">Routes API maison — endpoints personnalisés</div>
-                <div class="stack-item">JSON — format d'échange de données</div>
-                <div class="stack-item">Uvicorn — serveur ASGI</div>
+        <!-- STRUCTURE -->
+        <section class="section" aria-labelledby="arch-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">02 //</span>
+                <h2 class="section-title" id="arch-title">Structure du projet</h2>
             </div>
-            <div class="stack-card stack-card--front">
-                <div class="stack-card-title">Frontend — React / JavaScript</div>
-                <div class="stack-item">React — bibliothèque UI</div>
-                <div class="stack-item">JavaScript — langage frontend</div>
-                <div class="stack-item">Composants React — interface modulaire</div>
-                <div class="stack-item">Fetch API — appels vers le backend</div>
-                <div class="stack-item">CSS — styles et mise en page</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ARCHITECTURE -->
-    <section class="section" aria-labelledby="arch-title">
-        <div class="section-header">
-            <span class="section-tag" aria-hidden="true">02 //</span>
-            <h2 class="section-title" id="arch-title">Structure du projet</h2>
-        </div>
-        <div class="arch-tree reveal">
-            <pre><span class="tree-dir">B2_FinalProject_TS_PY/</span>
+            <div class="arch-tree reveal">
+                <pre><span class="tree-dir">B2_FinalProject_TS_PY/</span>
 │
 ├── <span class="tree-dir">backend/</span>                    <span class="tree-comment"># API Python / FastAPI</span>
-│   ├── main.py                 <span class="tree-comment"># Point d'entrée — routes FastAPI</span>
+│   ├── <span class="tree-file">main.py</span>                 <span class="tree-comment"># Point d'entrée — routes FastAPI</span>
 │   ├── <span class="tree-dir">models/</span>                 <span class="tree-comment"># Modèles de données</span>
 │   ├── <span class="tree-dir">routes/</span>                 <span class="tree-comment"># Endpoints API — saisons, circuits, pilotes</span>
 │   ├── <span class="tree-dir">database/</span>               <span class="tree-comment"># Connexion et requêtes BDD</span>
-│   └── requirements.txt        <span class="tree-comment"># Dépendances Python</span>
+│   └── <span class="tree-file">requirements.txt</span>        <span class="tree-comment"># Dépendances Python</span>
 │
 └── <span class="tree-dir">frontend/</span>                   <span class="tree-comment"># Application React</span>
     ├── <span class="tree-dir">src/</span>
     │   ├── <span class="tree-dir">components/</span>         <span class="tree-comment"># Composants React — pages, cartes</span>
     │   ├── <span class="tree-dir">pages/</span>              <span class="tree-comment"># Pages — Saisons, Circuits, Pilotes, Stats</span>
-    │   └── App.js              <span class="tree-comment"># Composant racine + routing</span>
-    └── package.json            <span class="tree-comment"># Dépendances React</span></pre>
-        </div>
-    </section>
+    │   └── <span class="tree-file">App.js</span>              <span class="tree-comment"># Composant racine + routing</span>
+    └── <span class="tree-file">package.json</span>            <span class="tree-comment"># Dépendances React</span></pre>
+            </div>
+        </section>
 
-    <!-- FONCTIONNALITÉS -->
-    <section class="section" aria-labelledby="features-title">
-        <div class="section-header">
-            <span class="section-tag" aria-hidden="true">03 //</span>
-            <h2 class="section-title" id="features-title">Fonctionnalités</h2>
-        </div>
-        <div class="learned-grid">
-            <div class="learned-card reveal">
-                <div class="learned-num" aria-hidden="true">01</div>
-                <h3 class="learned-name">Saisons MotoGP</h3>
-                <p class="learned-desc">Consultation des différentes saisons du championnat MotoGP. Navigation entre les
-                    années, résultats globaux et classements par saison.</p>
+        <!-- FONCTIONNALITÉS -->
+        <section class="section" aria-labelledby="features-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">03 //</span>
+                <h2 class="section-title" id="features-title">Fonctionnalités</h2>
             </div>
-            <div class="learned-card reveal">
-                <div class="learned-num" aria-hidden="true">02</div>
-                <h3 class="learned-name">Circuits</h3>
-                <p class="learned-desc">Liste et détail des circuits du calendrier MotoGP — nom, pays, longueur, nombre
-                    de virages. Données stockées en base et exposées via l'API.</p>
+            <div class="learned-grid">
+                <div class="learned-card reveal">
+                    <div class="learned-num" aria-hidden="true">01</div>
+                    <h3 class="learned-name">Saisons MotoGP</h3>
+                    <p class="learned-desc">Consultation des différentes saisons du championnat MotoGP. Navigation entre les années, résultats globaux et classements par saison.</p>
+                </div>
+                <div class="learned-card reveal">
+                    <div class="learned-num" aria-hidden="true">02</div>
+                    <h3 class="learned-name">Circuits</h3>
+                    <p class="learned-desc">Liste et détail des circuits du calendrier MotoGP — nom, pays, longueur, nombre de virages. Données stockées en base et exposées via l'API.</p>
+                </div>
+                <div class="learned-card reveal">
+                    <div class="learned-num" aria-hidden="true">03</div>
+                    <h3 class="learned-name">Pilotes</h3>
+                    <p class="learned-desc">Fiches pilotes avec informations clés — nationalité, numéro, équipe, palmarès. Consultables depuis le frontend React via les endpoints de l'API.</p>
+                </div>
+                <div class="learned-card reveal">
+                    <div class="learned-num" aria-hidden="true">04</div>
+                    <h3 class="learned-name">Statistiques</h3>
+                    <p class="learned-desc">Affichage de statistiques de courses — victoires, podiums, points. Données agrégées côté backend et affichées dynamiquement dans l'interface React.</p>
+                </div>
+                <div class="learned-card reveal">
+                    <div class="learned-num" aria-hidden="true">05</div>
+                    <h3 class="learned-name">API REST maison</h3>
+                    <p class="learned-desc">Tous les endpoints construits from scratch avec FastAPI — pas d'API externe. La base de données est peuplée manuellement par l'équipe avec les données MotoGP.</p>
+                </div>
+                <div class="learned-card reveal">
+                    <div class="learned-num" aria-hidden="true">06</div>
+                    <h3 class="learned-name">Interface React</h3>
+                    <p class="learned-desc">Frontend composants React — navigation entre les pages, affichage des données en cartes, appels API via fetch, état géré avec les hooks React.</p>
+                </div>
             </div>
-            <div class="learned-card reveal">
-                <div class="learned-num" aria-hidden="true">03</div>
-                <h3 class="learned-name">Pilotes</h3>
-                <p class="learned-desc">Fiches pilotes avec informations clés — nationalité, numéro, équipe, palmarès.
-                    Consultables depuis le frontend React via les endpoints de l'API.</p>
-            </div>
-            <div class="learned-card reveal">
-                <div class="learned-num" aria-hidden="true">04</div>
-                <h3 class="learned-name">Statistiques</h3>
-                <p class="learned-desc">Affichage de statistiques de courses — victoires, podiums, points. Données
-                    agrégées côté backend et affichées dynamiquement dans l'interface React.</p>
-            </div>
-            <div class="learned-card reveal">
-                <div class="learned-num" aria-hidden="true">05</div>
-                <h3 class="learned-name">API REST maison</h3>
-                <p class="learned-desc">Tous les endpoints construits from scratch avec FastAPI — pas d'API externe. La
-                    base de données est peuplée manuellement par l'équipe avec les données MotoGP.</p>
-            </div>
-            <div class="learned-card reveal">
-                <div class="learned-num" aria-hidden="true">06</div>
-                <h3 class="learned-name">Interface React</h3>
-                <p class="learned-desc">Frontend composants React — navigation entre les pages, affichage des données en
-                    cartes, appels API via fetch, état géré avec les hooks React.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- API -->
-    <section class="section" aria-labelledby="api-title">
-        <div class="section-header">
-            <span class="section-tag" aria-hidden="true">04 //</span>
-            <h2 class="section-title" id="api-title">Routes API</h2>
-        </div>
-        <div class="api-wrap reveal">
-            <div class="api-section-title">Endpoints FastAPI</div>
-            <table class="api-table">
-                <thead>
-                    <tr>
-                        <th>Méthode</th>
-                        <th>Route</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="api-method api-method--get">GET</span></td>
-                        <td class="api-route">/saisons</td>
-                        <td>Liste toutes les saisons</td>
-                    </tr>
-                    <tr>
-                        <td><span class="api-method api-method--get">GET</span></td>
-                        <td class="api-route">/saisons/{id}</td>
-                        <td>Détail d'une saison</td>
-                    </tr>
-                    <tr>
-                        <td><span class="api-method api-method--get">GET</span></td>
-                        <td class="api-route">/circuits</td>
-                        <td>Liste tous les circuits</td>
-                    </tr>
-                    <tr>
-                        <td><span class="api-method api-method--get">GET</span></td>
-                        <td class="api-route">/circuits/{id}</td>
-                        <td>Détail d'un circuit</td>
-                    </tr>
-                    <tr>
-                        <td><span class="api-method api-method--get">GET</span></td>
-                        <td class="api-route">/pilotes</td>
-                        <td>Liste tous les pilotes</td>
-                    </tr>
-                    <tr>
-                        <td><span class="api-method api-method--get">GET</span></td>
-                        <td class="api-route">/pilotes/{id}</td>
-                        <td>Détail d'un pilote</td>
-                    </tr>
-                    <tr>
-                        <td><span class="api-method api-method--get">GET</span></td>
-                        <td class="api-route">/stats</td>
-                        <td>Statistiques générales</td>
-                    </tr>
-                    <tr>
-                        <td><span class="api-method api-method--get">GET</span></td>
-                        <td class="api-route">/docs</td>
-                        <td>Documentation Swagger auto-générée</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- DÉTAILS -->
-    <section class="section" aria-labelledby="details-title">
-        <div class="section-header">
-            <span class="section-tag" aria-hidden="true">05 //</span>
-            <h2 class="section-title" id="details-title">Détails techniques</h2>
-        </div>
-        <div class="details-grid">
-            <div class="detail-card reveal"><span class="detail-key">Backend</span><span class="detail-val">Python ·
-                    FastAPI · Uvicorn</span></div>
-            <div class="detail-card reveal"><span class="detail-key">Frontend</span><span class="detail-val">React ·
-                    JavaScript · CSS</span></div>
-            <div class="detail-card reveal"><span class="detail-key">API</span><span class="detail-val">REST —
-                    construite from scratch</span></div>
-            <div class="detail-card reveal"><span class="detail-key">Données</span><span class="detail-val">Base de
-                    données — peuplée manuellement</span></div>
-            <div class="detail-card reveal"><span class="detail-key">Équipe</span><span class="detail-val">4 personnes ·
-                    B2 Ynov Campus</span></div>
-            <div class="detail-card reveal"><span class="detail-key">Déploiement</span><span
-                    class="detail-val">Local</span></div>
-            <div class="detail-card reveal"><span class="detail-key">Docs API</span><span class="detail-val">Swagger UI
-                    auto-généré par FastAPI</span></div>
-            <div class="detail-card reveal"><span class="detail-key">Statut</span><span class="detail-val"
-                    style="color:var(--accent)">Terminé</span></div>
-        </div>
-    </section>
-
-    <!-- CE QUE J'AI APPRIS -->
-    <section class="section" aria-labelledby="learned-title">
-        <div class="section-header">
-            <span class="section-tag" aria-hidden="true">06 //</span>
-            <h2 class="section-title" id="learned-title">Ce que j'ai appris</h2>
-        </div>
-        <div class="learned-grid">
-            <div class="learned-card reveal">
-                <div class="learned-num" aria-hidden="true">01</div>
-                <h3 class="learned-name">Python & FastAPI</h3>
-                <p class="learned-desc">Construire une API REST complète en Python avec FastAPI — routes, modèles
-                    Pydantic, connexion base de données, documentation Swagger auto-générée. Premier projet backend
-                    Python sérieux.</p>
+        <!-- API -->
+        <section class="section" aria-labelledby="api-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">04 //</span>
+                <h2 class="section-title" id="api-title">Routes API</h2>
             </div>
-            <div class="learned-card reveal">
-                <div class="learned-num" aria-hidden="true">02</div>
-                <h3 class="learned-name">React — frontend moderne</h3>
-                <p class="learned-desc">Composants fonctionnels React, hooks (useState, useEffect), appels API avec
-                    fetch, gestion de l'état. Première application React connectée à une vraie API maison.</p>
+            <div class="api-wrap reveal">
+                <div class="api-section">
+                    <div class="api-section-title">Endpoints FastAPI</div>
+                    <table class="api-table">
+                        <thead><tr><th>Méthode</th><th>Route</th><th>Description</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/saisons</td><td>Liste toutes les saisons</td></tr>
+                            <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/saisons/{id}</td><td>Détail d'une saison</td></tr>
+                            <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/circuits</td><td>Liste tous les circuits</td></tr>
+                            <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/circuits/{id}</td><td>Détail d'un circuit</td></tr>
+                            <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/pilotes</td><td>Liste tous les pilotes</td></tr>
+                            <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/pilotes/{id}</td><td>Détail d'un pilote</td></tr>
+                            <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/stats</td><td>Statistiques générales</td></tr>
+                            <tr><td><span class="api-method api-method--get">GET</span></td><td class="api-route">/docs</td><td>Documentation Swagger auto-générée</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="learned-card reveal">
-                <div class="learned-num" aria-hidden="true">03</div>
-                <h3 class="learned-name">Architecture fullstack</h3>
-                <p class="learned-desc">Faire communiquer un backend Python et un frontend React — CORS, format JSON,
-                    séparation des responsabilités, organisation du projet en deux parties indépendantes.</p>
-            </div>
-            <div class="learned-card reveal">
-                <div class="learned-num" aria-hidden="true">04</div>
-                <h3 class="learned-name">Travail en équipe de 4</h3>
-                <p class="learned-desc">Répartir les tâches entre backend et frontend, travailler sur des branches Git
-                    séparées, synchroniser les endpoints API avec les besoins du frontend, revue de code croisée.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- FOOTER -->
-    <footer class="footer" aria-label="Pied de page">
-        <span class="prompt" aria-hidden="true">~/projects $</span>
-        <span aria-hidden="true">cd motogp</span>
-        <a href="/project" class="footer-back">← Retour aux projets</a>
-        <span class="footer-year">© 2026</span>
-    </footer>
+        <!-- DÉTAILS -->
+        <section class="section" aria-labelledby="details-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">05 //</span>
+                <h2 class="section-title" id="details-title">Détails techniques</h2>
+            </div>
+            <div class="details-grid">
+                <div class="detail-card reveal"><span class="detail-key">Backend</span><span class="detail-val">Python · FastAPI · Uvicorn</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Frontend</span><span class="detail-val">React · JavaScript · CSS</span></div>
+                <div class="detail-card reveal"><span class="detail-key">API</span><span class="detail-val">REST — construite from scratch</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Données</span><span class="detail-val">Base de données — peuplée manuellement</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Équipe</span><span class="detail-val">4 personnes · B2 Ynov Campus</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Déploiement</span><span class="detail-val">Local</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Docs API</span><span class="detail-val">Swagger UI auto-généré par FastAPI</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Statut</span><span class="detail-val detail-val--ok">Terminé</span></div>
+            </div>
+        </section>
 
-    <script src="/js/nav.js"></script>
+        <!-- CE QUE J'AI APPRIS -->
+        <section class="section" aria-labelledby="learned-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">06 //</span>
+                <h2 class="section-title" id="learned-title">Ce que j'ai appris</h2>
+            </div>
+            <div class="learned-grid">
+                <div class="learned-card reveal">
+                    <div class="learned-num" aria-hidden="true">01</div>
+                    <h3 class="learned-name">Python &amp; FastAPI</h3>
+                    <p class="learned-desc">Construire une API REST complète en Python avec FastAPI — routes, modèles Pydantic, connexion base de données, documentation Swagger auto-générée. Premier projet backend Python sérieux.</p>
+                </div>
+                <div class="learned-card reveal">
+                    <div class="learned-num" aria-hidden="true">02</div>
+                    <h3 class="learned-name">React — frontend moderne</h3>
+                    <p class="learned-desc">Composants fonctionnels React, hooks (useState, useEffect), appels API avec fetch, gestion de l'état. Première application React connectée à une vraie API maison.</p>
+                </div>
+                <div class="learned-card reveal">
+                    <div class="learned-num" aria-hidden="true">03</div>
+                    <h3 class="learned-name">Architecture fullstack</h3>
+                    <p class="learned-desc">Faire communiquer un backend Python et un frontend React — CORS, format JSON, séparation des responsabilités, organisation du projet en deux parties indépendantes.</p>
+                </div>
+                <div class="learned-card reveal">
+                    <div class="learned-num" aria-hidden="true">04</div>
+                    <h3 class="learned-name">Travail en équipe de 4</h3>
+                    <p class="learned-desc">Répartir les tâches entre backend et frontend, travailler sur des branches Git séparées, synchroniser les endpoints API avec les besoins du frontend, revue de code croisée.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    {{template "footer"}}
 </body>
 
 </html>
