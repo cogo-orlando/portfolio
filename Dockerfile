@@ -3,7 +3,7 @@
 #  STAGE 1 — Build
 #  SDK Go complet pour compiler le binaire
 # ══════════════════════════════════════════
-FROM golang:1.23-alpine AS builder
+FROM golang:1.27-alpine AS builder
 
 # Certificats TLS (copiés dans l'image finale pour Supabase et les appels HTTPS)
 RUN apk add --no-cache ca-certificates

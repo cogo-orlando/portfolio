@@ -1,5 +1,5 @@
 module portfo
 
-go 1.21
+go 1.27.0
 
 require github.com/lib/pq v1.12.3
