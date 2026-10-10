@@ -27,26 +27,26 @@ var startTime = time.Now()
 // ══════════════════════════════════════════
 
 var routes = map[string]http.HandlerFunc{
-	"/":                            handler.IndexHandler, // géré à part dans newMux (catch-all + 404)
-	"/home":                        handler.HomeHandler,
-	"/about":                       handler.AboutHandler,
-	"/skills":                      handler.SkillsHandler,
-	"/project":                     handler.ProjectHandler,
-	"/contact":                     handler.ContactHandler,
-	"/cv":                          handler.CvHandler,
-	"/status":                      handler.StatusHandler,
-	"/faq":                         handler.FaqHandler,
-	"/tech":                        handler.TechHandler,
-	"/projects/zoo":                handler.ZooHandler,
-	"/projects/netflix":            handler.NetflixHandler,
-	"/projects/groupie":            handler.GroupieHandler,
-	"/projects/power4":             handler.Power4Handler,
-	"/projects/cisco":              handler.CiscoHandler,
-	"/projects/artemis":            handler.ArtemisHandler,
-	"/projects/annuaire":           handler.AnnuaireHandler,
-	"/projects/forum":              handler.ForumHandler,
-	"/projects/snake":              handler.SnakeHandler,
-	"/projects/motogp":             handler.MotoGPHandler,
+	"/":                  handler.IndexHandler, // géré à part dans newMux (catch-all + 404)
+	"/home":              handler.HomeHandler,
+	"/about":             handler.AboutHandler,
+	"/skills":            handler.SkillsHandler,
+	"/project":           handler.ProjectHandler,
+	"/contact":           handler.ContactHandler,
+	"/cv":                handler.CvHandler,
+	"/status":            handler.StatusHandler,
+	"/faq":               handler.FaqHandler,
+	"/tech":              handler.TechHandler,
+	"/projects/zoo":      handler.ZooHandler,
+	"/projects/netflix":  handler.NetflixHandler,
+	"/projects/groupie":  handler.GroupieHandler,
+	"/projects/power4":   handler.Power4Handler,
+	"/projects/cisco":    handler.CiscoHandler,
+	"/projects/artemis":  handler.ArtemisHandler,
+	"/projects/annuaire": handler.AnnuaireHandler,
+	"/projects/forum":    handler.ForumHandler,
+	"/projects/snake":    handler.SnakeHandler,
+	"/projects/motogp":   handler.MotoGPHandler,
 }
 
 // Pages vérifiées par le moniteur (affichées dans cet ordre sur /status)

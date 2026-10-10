@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"log/slog"
+	"net"
 	"net/http"
 	"os"
 	"portfo/server/db"
@@ -16,7 +17,6 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
-	"net"
 )
 
 // ══════════════════════════════════════════
@@ -498,7 +498,9 @@ func TimeoutMiddleware(next http.Handler) http.Handler {
 }
 
 // ══════════════════════════════════════════
-//  CHAIN
+//
+//	CHAIN
+//
 // ══════════════════════════════════════════
 // Ordre d'exécution (de l'extérieur vers l'intérieur) :
 // RequestID → Logger → Recovery → Timeout → RateLimit → Honeypot → Security → Gzip → Cache → routes
