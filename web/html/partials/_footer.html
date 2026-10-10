@@ -1,15 +1,15 @@
 {{/*
-  Pied de page + scripts communs (core.js puis nav.js) — à placer avant </body> :
-  {{template "footer"}}
-  Les scripts propres à la page (home.js…) se mettent APRÈS.
+Pied de page + scripts communs (core.js puis nav.js) — à placer avant </body> :
+{{template "footer"}}
+Les scripts propres à la page (home.js…) se mettent APRÈS.
 */}}
 
 {{define "footer"}}
 <footer class="footer" aria-label="Pied de page">
-    <a href="/" class="footer-back">← Retour à l'accueil</a>
-    <span class="footer-year">© 2026</span>
+  <a href="/" class="footer-back">← Retour à l'accueil</a>
+  <span class="footer-year">© 2026</span>
 </footer>
 
-<script src="{{asset "/js/core.js"}}"></script>
-<script src="{{asset "/js/nav.js"}}"></script>
+<script src="{{asset `/js/core.js`}}"></script>
+<script src="{{asset `/js/nav.js`}}"></script>
 {{end}}

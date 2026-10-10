@@ -1,28 +1,36 @@
 {{/*
-  Éléments communs du <head> — à placer DANS le <head> de chaque page :
-  {{template "head-common"}}
-  Le <title>, la description et le CSS propre à la page restent dans la page.
-*/}}
+Éléments communs du
 
-{{define "head-common"}}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0a0b16">
-    <meta name="author" content="Orlando Cogo">
+<head> — à placer DANS le
 
-    <link rel="icon" href="/img/favicon.ico">
-    <link rel="icon" type="image/png" href="/img/favicon.png">
-    <link rel="apple-touch-icon" href="/img/favicon.png">
+  <head> de chaque page :
+    {{template "head-common"}}
+    Le <title>, la description et le CSS propre à la page restent dans la page.
+      */}}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+      {{define "head-common"}}
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="theme-color" content="#0a0b16">
+      <meta name="author" content="Orlando Cogo">
 
-    <link rel="stylesheet" href="{{asset "/css/nav.css"}}">
-{{end}}
+      <link rel="icon" href="/img/favicon.ico">
+      <link rel="icon" type="image/png" href="/img/favicon.png">
+      <link rel="apple-touch-icon" href="/img/favicon.png">
 
-{{/* Fond partagé : à placer juste après <body> */}}
-{{define "background"}}
-<div class="blob1" aria-hidden="true"></div>
-<div class="blob2" aria-hidden="true"></div>
-{{end}}
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap"
+        rel="stylesheet">
+
+      <link rel="stylesheet" href="{{asset `/css/nav.css`}}">
+      {{end}}
+
+      {{/* Fond partagé : à placer juste après
+
+  <body> */}}
+    {{define "background"}}
+    <div class="blob1" aria-hidden="true"></div>
+    <div class="blob2" aria-hidden="true"></div>
+    {{end}}

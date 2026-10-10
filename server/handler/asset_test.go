@@ -27,3 +27,11 @@ func TestTemplateFuncs_HasAsset(t *testing.T) {
 		t.Fatal(`la fonction "asset" doit être enregistrée dans templateFuncs`)
 	}
 }
+
+// Un espace parasite autour du chemin (ajouté par un formateur) ne doit rien casser
+func TestAssetURL_TrimsSpaces(t *testing.T) {
+	got := assetURL("  /css/nexiste-pas.css ")
+	if got != "/css/nexiste-pas.css" {
+		t.Fatalf("attendu le chemin sans espaces, obtenu %q", got)
+	}
+}

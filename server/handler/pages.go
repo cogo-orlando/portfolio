@@ -53,6 +53,7 @@ var (
 // En cas de problème (fichier absent, chemin suspect), il renvoie le chemin tel quel :
 // la page s'affiche quand même, sans cache-busting pour ce fichier.
 func assetURL(publicPath string) string {
+	publicPath = strings.TrimSpace(publicPath) // tolère un espace ajouté par un formateur
 	clean := path.Clean("/" + publicPath)
 	if strings.Contains(publicPath, "..") || clean == "/" {
 		slog.Warn("asset : chemin refusé", "path", publicPath)
