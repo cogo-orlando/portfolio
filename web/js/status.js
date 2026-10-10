@@ -76,6 +76,62 @@
         // Rafraîchit toutes les 30 s, mais seulement quand l'onglet est visible
         setInterval(() => { if (!document.hidden) loadMetrics(); }, 30000);
 
+        // ── ÉTAT RÉEL DES PAGES (/api/status, vérifié par le serveur toutes les minutes) ──
+        const routesBox = $('#routesStatus');
+        const summary = $('#routesSummary');
+        const OVERALL = {
+            operational: { text: 'tout est opérationnel', cls: 'ok' },
+            degraded:    { text: 'service dégradé',       cls: 'warn' },
+            down:        { text: 'service indisponible',  cls: 'down' },
+            pending:     { text: 'vérification…',         cls: 'warn' },
+        };
+
+        const span = (cls, text) => {
+            const el = document.createElement('span');
+            el.className = cls;
+            el.textContent = text;
+            return el;
+        };
+
+        const renderRoutes = (snap) => {
+            if (summary) {
+                const o = OVERALL[snap.overall] || OVERALL.pending;
+                summary.textContent = o.text;
+                summary.className = `page-status ${o.cls} routes-summary`;
+            }
+            if (!routesBox || !snap.routes?.length) return;
+
+            const rows = snap.routes.map((r) => {
+                const row = document.createElement('div');
+                row.className = 'page-row';
+                row.setAttribute('role', 'listitem');
+                row.title = `Vérifié à ${new Date(r.checked_at).toLocaleTimeString('fr-FR', { timeZone: 'Europe/Paris' })}`;
+
+                const dot = span(`page-dot ${r.ok ? 'online' : 'offline'}`, '');
+                dot.setAttribute('aria-hidden', 'true');
+
+                row.append(
+                    dot,
+                    span('page-name', r.path),
+                    span('page-meta', `${Math.round(r.latency_ms)} ms · ${r.uptime}%`),
+                    span(`page-status ${r.ok ? 'ok' : 'down'}`, r.ok ? 'online' : `erreur ${r.status}`),
+                );
+                return row;
+            });
+            routesBox.replaceChildren(...rows);
+        };
+
+        const loadRoutes = () => fetchJSON('/api/status')
+            .then(renderRoutes)
+            .catch(() => {
+                if (!summary) return;
+                summary.textContent = 'état indisponible';
+                summary.className = 'page-status warn routes-summary';
+            });
+
+        loadRoutes();
+        setInterval(() => { if (!document.hidden) loadRoutes(); }, 60000);
+
         // ── MÉTÉO TOULOUSE (Open-Meteo) ──
         const url = 'https://api.open-meteo.com/v1/forecast?latitude=43.6047&longitude=1.4442'
             + '&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code'

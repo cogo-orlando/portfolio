@@ -5,7 +5,8 @@
     {{template "head-common"}}
 
     <title>Orlando Cogo — Status du portfolio</title>
-    <meta name="description" content="État en temps réel du portfolio d'Orlando Cogo — uptime, météo Toulouse, objectifs en cours.">
+    <meta name="description"
+        content="État en temps réel du portfolio d'Orlando Cogo — uptime, météo Toulouse, objectifs en cours.">
     <meta name="robots" content="noindex, follow">
     <link rel="canonical" href="https://orlandocogo.com/status">
 
@@ -16,7 +17,7 @@
     <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
     <meta property="og:locale" content="fr_FR">
 
-    <link rel="stylesheet" href="/css/status.css">
+    <link rel="stylesheet" href="{{asset " /css/status.css"}}">
 </head>
 
 <body>
@@ -47,10 +48,16 @@
                         <span class="sys-label">Tous les systèmes opérationnels</span>
                     </div>
                     <div class="sys-rows">
-                        <div class="sys-row"><span class="sys-key">Uptime session</span><span class="sys-val" id="uptime" aria-live="polite">calcul...</span></div>
-                        <div class="sys-row"><span class="sys-key">Localisation</span><span class="sys-val">Toulouse, France</span></div>
-                        <div class="sys-row"><span class="sys-key">Timezone</span><span class="sys-val">Europe/Paris</span></div>
-                        <div class="sys-row"><span class="sys-key">Heure locale</span><span class="sys-val" id="localTime" aria-live="polite">--:--:--</span></div>
+                        <div class="sys-row"><span class="sys-key">Uptime session</span><span class="sys-val"
+                                id="uptime" aria-live="polite">calcul...</span></div>
+                        <div class="sys-row"><span class="sys-key">Localisation</span><span class="sys-val">Toulouse,
+                                France</span></div>
+                        <div class="sys-row"><span class="sys-key">Timezone</span><span
+                                class="sys-val">Europe/Paris</span></div>
+                        <div class="sys-row"><span class="sys-key">Heure locale</span><span class="sys-val"
+                                id="localTime" aria-live="polite">--:--:--</span></div>
+                        <div class="sys-row"><span class="sys-key">Visites</span><span class="sys-val" id="visitCount"
+                                aria-live="polite">...</span></div>
                     </div>
                 </div>
 
@@ -58,38 +65,41 @@
                 <div class="status-card reveal" aria-labelledby="go-title">
                     <div class="card-header">
                         <span class="card-tag" aria-hidden="true">02 //</span>
-                        <h2 class="card-title" id="go-title">Métriques Go <span class="live-badge" aria-label="Données en direct">LIVE</span></h2>
+                        <h2 class="card-title" id="go-title">Métriques Go <span class="live-badge"
+                                aria-label="Données en direct">LIVE</span></h2>
                     </div>
                     <div class="metrics-grid" aria-label="Métriques serveur Go">
-                        <div class="metric-box"><span class="metric-val" id="m-goroutines">—</span><span class="metric-label">Goroutines</span></div>
-                        <div class="metric-box"><span class="metric-val" id="m-uptime">—</span><span class="metric-label">Uptime serveur</span></div>
-                        <div class="metric-box"><span class="metric-val" id="m-alloc">—</span><span class="metric-label">Mémoire</span></div>
-                        <div class="metric-box"><span class="metric-val" id="m-gc">—</span><span class="metric-label">Cycles GC</span></div>
+                        <div class="metric-box"><span class="metric-val" id="m-goroutines">—</span><span
+                                class="metric-label">Goroutines</span></div>
+                        <div class="metric-box"><span class="metric-val" id="m-uptime">—</span><span
+                                class="metric-label">Uptime serveur</span></div>
+                        <div class="metric-box"><span class="metric-val" id="m-alloc">—</span><span
+                                class="metric-label">Mémoire</span></div>
+                        <div class="metric-box"><span class="metric-val" id="m-gc">—</span><span
+                                class="metric-label">Cycles GC</span></div>
                     </div>
                     <div class="sys-rows" style="margin-top:1rem">
-                        <div class="sys-row"><span class="sys-key">Runtime</span><span class="sys-val" id="m-runtime">—</span></div>
-                        <div class="sys-row"><span class="sys-key">Déploiement</span><span class="sys-val">Render · Docker {{template "docker-portfolio"}}</span></div>
-                        <div class="sys-row"><span class="sys-key">CI/CD</span><span class="sys-val">GitHub Actions · {{template "nb-tests"}} tests · gosec {{template "nb-gosec"}}</span></div>
+                        <div class="sys-row"><span class="sys-key">Runtime</span><span class="sys-val"
+                                id="m-runtime">—</span></div>
+                        <div class="sys-row"><span class="sys-key">Déploiement</span><span class="sys-val">Render ·
+                                Docker {{template "docker-portfolio"}}</span></div>
+                        <div class="sys-row"><span class="sys-key">CI/CD</span><span class="sys-val">GitHub Actions ·
+                                {{template "nb-tests"}} tests · gosec {{template "nb-gosec"}}</span></div>
                     </div>
                 </div>
 
-                <!-- Pages -->
+                <!-- Pages : état réel, vérifié par le serveur toutes les minutes (status.js) -->
                 <div class="status-card reveal" aria-labelledby="pages-title">
                     <div class="card-header">
                         <span class="card-tag" aria-hidden="true">03 //</span>
                         <h2 class="card-title" id="pages-title">Pages</h2>
+                        <span class="page-status warn routes-summary" id="routesSummary"
+                            aria-live="polite">vérification…</span>
                     </div>
-                    <div class="pages-list" role="list">
-                        <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/</span><span class="page-status ok">online</span></div>
-                        <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/home</span><span class="page-status ok">online</span></div>
-                        <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/about</span><span class="page-status ok">online</span></div>
-                        <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/skills</span><span class="page-status ok">online</span></div>
-                        <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/project</span><span class="page-status ok">online</span></div>
-                        <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/contact</span><span class="page-status ok">online</span></div>
-                        <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/cv</span><span class="page-status ok">online</span></div>
-                        <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/tech</span><span class="page-status ok">online</span></div>
-                        <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/status</span><span class="page-status ok">online</span></div>
-                        <div class="page-row" role="listitem"><span class="page-dot online" aria-hidden="true"></span><span class="page-name">/faq</span><span class="page-status ok">online</span></div>
+                    <div class="pages-list" role="list" id="routesStatus">
+                        <div class="page-row" role="listitem"><span class="page-dot warning"
+                                aria-hidden="true"></span><span class="page-name">Chargement de l'état des pages…</span>
+                        </div>
                     </div>
                 </div>
 
@@ -105,9 +115,12 @@
                             <span class="weather-desc" id="weatherDesc">Chargement...</span>
                         </div>
                         <div class="sys-rows">
-                            <div class="sys-row"><span class="sys-key">Ressenti</span><span class="sys-val" id="weatherFeels">--°C</span></div>
-                            <div class="sys-row"><span class="sys-key">Humidité</span><span class="sys-val" id="weatherHumid">--%</span></div>
-                            <div class="sys-row"><span class="sys-key">Vent</span><span class="sys-val" id="weatherWind">-- km/h</span></div>
+                            <div class="sys-row"><span class="sys-key">Ressenti</span><span class="sys-val"
+                                    id="weatherFeels">--°C</span></div>
+                            <div class="sys-row"><span class="sys-key">Humidité</span><span class="sys-val"
+                                    id="weatherHumid">--%</span></div>
+                            <div class="sys-row"><span class="sys-key">Vent</span><span class="sys-val"
+                                    id="weatherWind">-- km/h</span></div>
                         </div>
                     </div>
                 </div>
@@ -125,24 +138,52 @@
                     </div>
                     <div class="current-status">
                         <div class="current-row">
-                            <span class="current-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" /></svg></span>
-                            <div><span class="current-label">Formation</span><span class="current-val">Bachelor Informatique {{template "niveau"}} — Ynov Campus Toulouse</span></div>
+                            <span class="current-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.5" width="18" height="18">
+                                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                                </svg></span>
+                            <div><span class="current-label">Formation</span><span class="current-val">Bachelor
+                                    Informatique {{template "niveau"}} — Ynov Campus Toulouse</span></div>
                         </div>
                         <div class="current-row">
-                            <span class="current-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg></span>
-                            <div><span class="current-label">Recherche</span><span class="current-val">Stage · IT - Réseaux, Systèmes &amp; Cybersécurité</span></div>
+                            <span class="current-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.5" width="18" height="18">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="M21 21l-4.35-4.35" />
+                                </svg></span>
+                            <div><span class="current-label">Recherche</span><span class="current-val">Stage · IT -
+                                    Réseaux, Systèmes &amp; Cybersécurité</span></div>
                         </div>
                         <div class="current-row">
-                            <span class="current-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" /></svg></span>
-                            <div><span class="current-label">Localisation</span><span class="current-val">Toulouse</span></div>
+                            <span class="current-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.5" width="18" height="18">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
+                                </svg></span>
+                            <div><span class="current-label">Localisation</span><span
+                                    class="current-val">Toulouse</span></div>
                         </div>
                         <div class="current-row">
-                            <span class="current-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg></span>
-                            <div><span class="current-label">En cours</span><span class="current-val">SQL Avancé</span></div>
+                            <span class="current-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.5" width="18" height="18">
+                                    <polyline points="16 18 22 12 16 6" />
+                                    <polyline points="8 6 2 12 8 18" />
+                                </svg></span>
+                            <div><span class="current-label">En cours</span><span class="current-val">Projet Samba ·
+                                    HackTheBox Labs · CI/CD</span></div>
                         </div>
                         <div class="current-row">
-                            <span class="current-icon mood-icon" id="moodIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><circle cx="12" cy="12" r="10" /><path d="M8 13s1.5 2 4 2 4-2 4-2" /><line x1="9" y1="9" x2="9.01" y2="9" /><line x1="15" y1="9" x2="15.01" y2="9" /></svg></span>
-                            <div><span class="current-label">Humeur</span><span class="current-val" id="moodVal">Motivé &amp; Focus</span></div>
+                            <span class="current-icon mood-icon" id="moodIcon" aria-hidden="true"><svg
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18"
+                                    height="18">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M8 13s1.5 2 4 2 4-2 4-2" />
+                                    <line x1="9" y1="9" x2="9.01" y2="9" />
+                                    <line x1="15" y1="9" x2="15.01" y2="9" />
+                                </svg></span>
+                            <div><span class="current-label">Humeur</span><span class="current-val" id="moodVal">Motivé
+                                    &amp; Focus</span></div>
                         </div>
                     </div>
                 </div>
@@ -156,14 +197,20 @@
                     <div class="dispo-block">
                         <div class="dispo-main">
                             <span class="dispo-dot" aria-hidden="true"></span>
-                            <span class="dispo-text">Disponible à partir du mois de juin 2027</span>
+                            <span class="dispo-text">Disponible dès maintenant</span>
                         </div>
                         <div class="sys-rows">
-                            <div class="sys-row"><span class="sys-key">Type</span><span class="sys-val">Stage · Alternance</span></div>
-                            <div class="sys-row"><span class="sys-key">Domaine</span><span class="sys-val">IT - Réseaux, Systèmes &amp; Cybersécurité</span></div>
-                            <div class="sys-row"><span class="sys-key">Localisation</span><span class="sys-val">Toulouse</span></div>
-                            <div class="sys-row"><span class="sys-key">Niveau</span><span class="sys-val">{{template "niveau-long"}} — Ynov Campus</span></div>
-                            <div class="sys-row"><span class="sys-key">Contact</span><span class="sys-val"><a href="mailto:Orlando.cogo.pro@gmail.com" class="dispo-link">Orlando.cogo.pro@gmail.com</a></span></div>
+                            <div class="sys-row"><span class="sys-key">Type</span><span class="sys-val">Stage ·
+                                    Alternance</span></div>
+                            <div class="sys-row"><span class="sys-key">Domaine</span><span class="sys-val">IT - Réseaux,
+                                    Systèmes &amp; Cybersécurité</span></div>
+                            <div class="sys-row"><span class="sys-key">Localisation</span><span
+                                    class="sys-val">Toulouse</span></div>
+                            <div class="sys-row"><span class="sys-key">Niveau</span><span class="sys-val">{{template
+                                    "niveau-long"}} — Ynov Campus</span></div>
+                            <div class="sys-row"><span class="sys-key">Contact</span><span class="sys-val"><a
+                                        href="mailto:Orlando.cogo.pro@gmail.com"
+                                        class="dispo-link">Orlando.cogo.pro@gmail.com</a></span></div>
                         </div>
                     </div>
                 </div>
@@ -177,19 +224,24 @@
                     <div class="goal-block">
                         <div class="goal-main">
                             <span class="goal-name">Obtenir un stage</span>
-                            <span class="goal-deadline">Deadline : Juin 2027</span>
+                            <span class="goal-deadline">Deadline : Juillet 2026</span>
                         </div>
                         <div class="goal-bar-wrap">
-                            <div class="goal-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" aria-label="Progression vers le stage">
+                            <div class="goal-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                                aria-valuemax="100" aria-label="Progression vers le stage">
                                 <div class="goal-fill" id="goalFill"></div>
                             </div>
                             <span class="goal-pct" id="goalPct" aria-live="polite">0%</span>
                         </div>
                         <div class="sys-rows" style="margin-top:1rem">
-                            <div class="sys-row"><span class="sys-val done">✓ Étape 1</span><span class="sys-val done">Portfolio en production</span></div>
-                            <div class="sys-row"><span class="sys-val done">✓ Étape 2</span><span class="sys-val done">CV à jour</span></div>
-                            <div class="sys-row"><span class="sys-val inprog">→ Étape 3</span><span class="sys-val inprog">Candidatures en cours</span></div>
-                            <div class="sys-row"><span class="sys-key">· Étape 4</span><span class="sys-val pending">Entretiens</span></div>
+                            <div class="sys-row"><span class="sys-val done">✓ Étape 1</span><span
+                                    class="sys-val done">Portfolio en production</span></div>
+                            <div class="sys-row"><span class="sys-val done">✓ Étape 2</span><span
+                                    class="sys-val done">CV à jour</span></div>
+                            <div class="sys-row"><span class="sys-val inprog">→ Étape 3</span><span
+                                    class="sys-val inprog">Candidatures en cours</span></div>
+                            <div class="sys-row"><span class="sys-key">· Étape 4</span><span
+                                    class="sys-val pending">Entretiens</span></div>
                         </div>
                     </div>
                 </div>
@@ -201,12 +253,18 @@
                         <h2 class="card-title" id="sec-title">Sécurité <span class="live-badge">LIVE</span></h2>
                     </div>
                     <div class="sys-rows">
-                        <div class="sys-row"><span class="sys-key">Honeypot routes</span><span class="sys-val">{{template "honeypot-routes"}} routes actives</span></div>
-                        <div class="sys-row"><span class="sys-key">Rate limiting</span><span class="sys-val">{{template "rate-limit"}} req/min/IP</span></div>
-                        <div class="sys-row"><span class="sys-key">WAF</span><span class="sys-val">Cloudflare — actif</span></div>
-                        <div class="sys-row"><span class="sys-key">SSL</span><span class="sys-val">Full Strict · HTTPS only</span></div>
-                        <div class="sys-row"><span class="sys-key">gosec</span><span class="sys-val">{{template "nb-gosec"}} issues</span></div>
-                        <div class="sys-row"><span class="sys-key">Docker</span><span class="sys-val">non-root · read_only · {{template "docker-portfolio"}}</span></div>
+                        <div class="sys-row"><span class="sys-key">Honeypot routes</span><span
+                                class="sys-val">{{template "honeypot-routes"}} routes actives</span></div>
+                        <div class="sys-row"><span class="sys-key">Rate limiting</span><span class="sys-val">{{template
+                                "rate-limit"}} req/min/IP</span></div>
+                        <div class="sys-row"><span class="sys-key">WAF</span><span class="sys-val">Cloudflare —
+                                actif</span></div>
+                        <div class="sys-row"><span class="sys-key">SSL</span><span class="sys-val">Full Strict · HTTPS
+                                only</span></div>
+                        <div class="sys-row"><span class="sys-key">gosec</span><span class="sys-val">{{template
+                                "nb-gosec"}} issues</span></div>
+                        <div class="sys-row"><span class="sys-key">Docker</span><span class="sys-val">non-root ·
+                                read_only · {{template "docker-portfolio"}}</span></div>
                     </div>
                 </div>
 
@@ -215,7 +273,7 @@
     </main>
 
     {{template "footer"}}
-    <script src="/js/status.js"></script>
+    <script src="{{asset " /js/status.js"}}"></script>
 </body>
 
 </html>

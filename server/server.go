@@ -12,6 +12,7 @@ import (
 	"path/filepath"
 	"portfo/server/handler"
 	"portfo/server/middleware"
+	"portfo/server/monitor"
 	"runtime"
 	"strings"
 	"syscall"
@@ -48,6 +49,22 @@ var routes = map[string]http.HandlerFunc{
 	"/projects/motogp":             handler.MotoGPHandler,
 }
 
+// Pages vérifiées par le moniteur (affichées dans cet ordre sur /status)
+var monitorTargets = []monitor.Target{
+	{Name: "Accueil", Path: "/"},
+	{Name: "Home", Path: "/home"},
+	{Name: "À propos", Path: "/about"},
+	{Name: "Compétences", Path: "/skills"},
+	{Name: "Projets", Path: "/project"},
+	{Name: "Infrastructure", Path: "/tech"},
+	{Name: "CV", Path: "/cv"},
+	{Name: "Contact", Path: "/contact"},
+	{Name: "FAQ", Path: "/faq"},
+	{Name: "Status", Path: "/status"},
+	{Name: "API Health", Path: "/health"},
+	{Name: "Sitemap", Path: "/sitemap.xml"},
+}
+
 // ══════════════════════════════════════════
 //  START
 // ══════════════════════════════════════════
@@ -75,9 +92,20 @@ func Start() {
 		port = "8080"
 	}
 
+	// ── Routeur + moniteur de disponibilité ──
+	// Le moniteur appelle chaque page en interne toutes les minutes
+	// et publie le résultat sur /api/status (affiché sur la page Status).
+	mux := newMux()
+	mon := monitor.New(mux, monitorTargets, time.Minute, 1440) // 1440 vérifs = 24 h d'historique
+	mux.HandleFunc("/api/status", mon.Handler)
+
+	monitorCtx, stopMonitor := context.WithCancel(context.Background())
+	defer stopMonitor()
+	go mon.Run(monitorCtx)
+
 	srv := &http.Server{
 		Addr:              ":" + port,
-		Handler:           middleware.Chain(newMux()),
+		Handler:           middleware.Chain(mux),
 		ReadHeaderTimeout: 5 * time.Second, // protection Slowloris
 		ReadTimeout:       15 * time.Second,
 		WriteTimeout:      30 * time.Second,
@@ -103,6 +131,7 @@ func Start() {
 	sig := <-quit
 
 	slog.Info("arrêt gracieux en cours", "signal", sig.String())
+	stopMonitor() // on arrête les vérifications avant de couper le serveur
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()

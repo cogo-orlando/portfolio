@@ -5,24 +5,27 @@
     {{template "head-common"}}
 
     <title>Forum Web — Orlando Cogo</title>
-    <meta name="description" content="Forum web complet en Go — authentification bcrypt, SQLite, posts, commentaires, likes/dislikes, Docker, modération, OAuth. Projet B1 Ynov Campus, équipe de 4.">
+    <meta name="description"
+        content="Forum web complet en Go — authentification bcrypt, SQLite, posts, commentaires, likes/dislikes, Docker, modération, OAuth. Projet B1 Ynov Campus, équipe de 4.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://orlandocogo.com/projects/forum">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orlandocogo.com/projects/forum">
     <meta property="og:title" content="Forum Web — Orlando Cogo">
-    <meta property="og:description" content="Forum web complet en Go — authentification bcrypt, SQLite, Docker, modération, OAuth.">
+    <meta property="og:description"
+        content="Forum web complet en Go — authentification bcrypt, SQLite, Docker, modération, OAuth.">
     <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
     <meta property="og:locale" content="fr_FR">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Forum Web — Orlando Cogo">
-    <meta name="twitter:description" content="Forum web complet en Go — authentification bcrypt, SQLite, Docker, modération, OAuth.">
+    <meta name="twitter:description"
+        content="Forum web complet en Go — authentification bcrypt, SQLite, Docker, modération, OAuth.">
     <meta name="twitter:image" content="https://orlandocogo.com/img/og-image.png">
 
-    <link rel="stylesheet" href="/css/projects/demo-project.css">
-    <link rel="stylesheet" href="/css/projects/forum.css">
+    <link rel="stylesheet" href="{{asset " /css/projects/demo-project.css"}}">
+    <link rel="stylesheet" href="{{asset " /css/projects/forum.css"}}">
 </head>
 
 <body>
@@ -43,10 +46,16 @@
                 <span class="hero-meta-badge">SQLite</span>
                 <span class="hero-meta-badge">Docker</span>
                 <span class="hero-meta-badge hero-meta-badge--status">Terminé</span>
-                <span class="hero-meta-type"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" /></svg> Équipe · 4 pers. · B1</span>
+                <span class="hero-meta-type"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                    </svg> Équipe · 4 pers. · B1</span>
             </div>
             <h1 class="hero-title" id="hero-title">Forum<br><span class="outline">Web</span></h1>
-            <p class="hero-intro">Forum web complet en Go from scratch — authentification sécurisée, posts avec catégories
+            <p class="hero-intro">Forum web complet en Go from scratch — authentification sécurisée, posts avec
+                catégories
                 et images, commentaires, système de likes/dislikes, modération 4 niveaux, OAuth, SQLite, Docker. Projet
                 d'équipe B1 Ynov Campus.</p>
             <div class="hero-badges" aria-label="Technologies utilisées">
@@ -60,7 +69,12 @@
                 <span class="badge">HTML/CSS</span>
             </div>
             <div class="hero-actions">
-                <a href="https://github.com/enzoandria1-oss/Forum-JS" target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn--gh" aria-label="Voir le Forum sur GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg> GitHub</a>
+                <a href="https://github.com/enzoandria1-oss/Forum-JS" target="_blank" rel="noopener noreferrer"
+                    class="hero-btn hero-btn--gh" aria-label="Voir le Forum sur GitHub"><svg width="14" height="14"
+                        viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                    </svg> GitHub</a>
             </div>
         </section>
 
@@ -122,7 +136,8 @@
                     <span class="fp-icon fp-icon--done" aria-hidden="true">✓</span>
                     <div class="fp-info">
                         <span class="fp-name">Bonus — OAuth, HTTPS, Notifications</span>
-                        <span class="fp-desc">Google &amp; GitHub OAuth · Rate limiting · Notifications · Page d'activité</span>
+                        <span class="fp-desc">Google &amp; GitHub OAuth · Rate limiting · Notifications · Page
+                            d'activité</span>
                     </div>
                     <span class="fp-badge fp-badge--done">Fait</span>
                 </div>
@@ -136,22 +151,38 @@
             </div>
             <div class="gallery-placeholder reveal">
                 <div class="gallery-ph-card">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /><circle cx="8" cy="6" r="1" /><circle cx="12" cy="6" r="1" /></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"
+                        aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <path d="M3 9h18" />
+                        <circle cx="8" cy="6" r="1" />
+                        <circle cx="12" cy="6" r="1" />
+                    </svg>
                     <span class="gallery-ph-label">Page d'accueil</span>
                     <span class="gallery-ph-sub">Capture à venir</span>
                 </div>
                 <div class="gallery-ph-card">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"
+                        aria-hidden="true">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
                     <span class="gallery-ph-label">Inscription / Connexion</span>
                     <span class="gallery-ph-sub">Capture à venir</span>
                 </div>
                 <div class="gallery-ph-card">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"
+                        aria-hidden="true">
+                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                    </svg>
                     <span class="gallery-ph-label">Posts &amp; Commentaires</span>
                     <span class="gallery-ph-sub">Capture à venir</span>
                 </div>
                 <div class="gallery-ph-card">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"
+                        aria-hidden="true">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
                     <span class="gallery-ph-label">Panel modération</span>
                     <span class="gallery-ph-sub">Capture à venir</span>
                 </div>
@@ -167,49 +198,77 @@
                 <div class="db-tables">
                     <div class="db-table">
                         <div class="db-table-name">users</div>
-                        <div class="db-field"><span class="db-field-key">PK</span><span>id</span><span class="db-field-type">UUID</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>email</span><span class="db-field-type">TEXT UNIQUE</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>username</span><span class="db-field-type">TEXT</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>password</span><span class="db-field-type">TEXT (bcrypt)</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>role</span><span class="db-field-type">TEXT</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>created_at</span><span class="db-field-type">DATETIME</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>oauth_provider</span><span class="db-field-type">TEXT</span></div>
+                        <div class="db-field"><span class="db-field-key">PK</span><span>id</span><span
+                                class="db-field-type">UUID</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>email</span><span
+                                class="db-field-type">TEXT UNIQUE</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>username</span><span
+                                class="db-field-type">TEXT</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>password</span><span
+                                class="db-field-type">TEXT (bcrypt)</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>role</span><span
+                                class="db-field-type">TEXT</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>created_at</span><span
+                                class="db-field-type">DATETIME</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>oauth_provider</span><span
+                                class="db-field-type">TEXT</span></div>
                     </div>
                     <div class="db-table">
                         <div class="db-table-name">sessions</div>
-                        <div class="db-field"><span class="db-field-key">PK</span><span>id</span><span class="db-field-type">UUID</span></div>
-                        <div class="db-field"><span class="db-field-key">FK</span><span>user_id</span><span class="db-field-type">UUID</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>token</span><span class="db-field-type">TEXT</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>expires_at</span><span class="db-field-type">DATETIME</span></div>
+                        <div class="db-field"><span class="db-field-key">PK</span><span>id</span><span
+                                class="db-field-type">UUID</span></div>
+                        <div class="db-field"><span class="db-field-key">FK</span><span>user_id</span><span
+                                class="db-field-type">UUID</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>token</span><span
+                                class="db-field-type">TEXT</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>expires_at</span><span
+                                class="db-field-type">DATETIME</span></div>
                     </div>
                     <div class="db-table">
                         <div class="db-table-name">posts</div>
-                        <div class="db-field"><span class="db-field-key">PK</span><span>id</span><span class="db-field-type">UUID</span></div>
-                        <div class="db-field"><span class="db-field-key">FK</span><span>user_id</span><span class="db-field-type">UUID</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>title</span><span class="db-field-type">TEXT</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>content</span><span class="db-field-type">TEXT</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>image_path</span><span class="db-field-type">TEXT</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>created_at</span><span class="db-field-type">DATETIME</span></div>
+                        <div class="db-field"><span class="db-field-key">PK</span><span>id</span><span
+                                class="db-field-type">UUID</span></div>
+                        <div class="db-field"><span class="db-field-key">FK</span><span>user_id</span><span
+                                class="db-field-type">UUID</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>title</span><span
+                                class="db-field-type">TEXT</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>content</span><span
+                                class="db-field-type">TEXT</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>image_path</span><span
+                                class="db-field-type">TEXT</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>created_at</span><span
+                                class="db-field-type">DATETIME</span></div>
                     </div>
                     <div class="db-table">
                         <div class="db-table-name">comments</div>
-                        <div class="db-field"><span class="db-field-key">PK</span><span>id</span><span class="db-field-type">UUID</span></div>
-                        <div class="db-field"><span class="db-field-key">FK</span><span>post_id</span><span class="db-field-type">UUID</span></div>
-                        <div class="db-field"><span class="db-field-key">FK</span><span>user_id</span><span class="db-field-type">UUID</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>content</span><span class="db-field-type">TEXT</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>created_at</span><span class="db-field-type">DATETIME</span></div>
+                        <div class="db-field"><span class="db-field-key">PK</span><span>id</span><span
+                                class="db-field-type">UUID</span></div>
+                        <div class="db-field"><span class="db-field-key">FK</span><span>post_id</span><span
+                                class="db-field-type">UUID</span></div>
+                        <div class="db-field"><span class="db-field-key">FK</span><span>user_id</span><span
+                                class="db-field-type">UUID</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>content</span><span
+                                class="db-field-type">TEXT</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>created_at</span><span
+                                class="db-field-type">DATETIME</span></div>
                     </div>
                     <div class="db-table">
                         <div class="db-table-name">categories</div>
-                        <div class="db-field"><span class="db-field-key">PK</span><span>id</span><span class="db-field-type">UUID</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>name</span><span class="db-field-type">TEXT</span></div>
+                        <div class="db-field"><span class="db-field-key">PK</span><span>id</span><span
+                                class="db-field-type">UUID</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>name</span><span
+                                class="db-field-type">TEXT</span></div>
                     </div>
                     <div class="db-table">
                         <div class="db-table-name">likes</div>
-                        <div class="db-field"><span class="db-field-key">FK</span><span>user_id</span><span class="db-field-type">UUID</span></div>
-                        <div class="db-field"><span class="db-field-key">FK</span><span>post_id</span><span class="db-field-type">UUID</span></div>
-                        <div class="db-field"><span class="db-field-key">FK</span><span>comment_id</span><span class="db-field-type">UUID</span></div>
-                        <div class="db-field"><span class="db-field-key"></span><span>value</span><span class="db-field-type">INT (+1/-1)</span></div>
+                        <div class="db-field"><span class="db-field-key">FK</span><span>user_id</span><span
+                                class="db-field-type">UUID</span></div>
+                        <div class="db-field"><span class="db-field-key">FK</span><span>post_id</span><span
+                                class="db-field-type">UUID</span></div>
+                        <div class="db-field"><span class="db-field-key">FK</span><span>comment_id</span><span
+                                class="db-field-type">UUID</span></div>
+                        <div class="db-field"><span class="db-field-key"></span><span>value</span><span
+                                class="db-field-type">INT (+1/-1)</span></div>
                     </div>
                 </div>
             </div>
@@ -273,32 +332,44 @@
                 <div class="learned-card reveal">
                     <div class="learned-num" aria-hidden="true">01</div>
                     <h3 class="learned-name">Authentification sécurisée</h3>
-                    <p class="learned-desc">Inscription avec email unique, mot de passe haché bcrypt. Sessions via cookies sécurisés avec expiration. Une seule session active par utilisateur. Déconnexion propre avec suppression du cookie.</p>
+                    <p class="learned-desc">Inscription avec email unique, mot de passe haché bcrypt. Sessions via
+                        cookies sécurisés avec expiration. Une seule session active par utilisateur. Déconnexion propre
+                        avec suppression du cookie.</p>
                 </div>
                 <div class="learned-card reveal">
                     <div class="learned-num" aria-hidden="true">02</div>
                     <h3 class="learned-name">Posts avec catégories &amp; images</h3>
-                    <p class="learned-desc">Création de posts avec une ou plusieurs catégories — fonctionne comme des sous-forums thématiques. Upload d'images JPEG/PNG/GIF jusqu'à 20Mo. Modification et suppression de ses propres posts.</p>
+                    <p class="learned-desc">Création de posts avec une ou plusieurs catégories — fonctionne comme des
+                        sous-forums thématiques. Upload d'images JPEG/PNG/GIF jusqu'à 20Mo. Modification et suppression
+                        de ses propres posts.</p>
                 </div>
                 <div class="learned-card reveal">
                     <div class="learned-num" aria-hidden="true">03</div>
                     <h3 class="learned-name">Commentaires</h3>
-                    <p class="learned-desc">Les utilisateurs connectés peuvent commenter n'importe quel post. Modification et suppression de ses propres commentaires. Les visiteurs peuvent lire les commentaires sans se connecter.</p>
+                    <p class="learned-desc">Les utilisateurs connectés peuvent commenter n'importe quel post.
+                        Modification et suppression de ses propres commentaires. Les visiteurs peuvent lire les
+                        commentaires sans se connecter.</p>
                 </div>
                 <div class="learned-card reveal">
                     <div class="learned-num" aria-hidden="true">04</div>
                     <h3 class="learned-name">Likes &amp; Dislikes</h3>
-                    <p class="learned-desc">Système de réactions +1/-1 sur posts et commentaires. Compteurs visibles par tous les visiteurs. Réservé aux utilisateurs connectés. Un seul vote par utilisateur par contenu — changeable.</p>
+                    <p class="learned-desc">Système de réactions +1/-1 sur posts et commentaires. Compteurs visibles par
+                        tous les visiteurs. Réservé aux utilisateurs connectés. Un seul vote par utilisateur par contenu
+                        — changeable.</p>
                 </div>
                 <div class="learned-card reveal">
                     <div class="learned-num" aria-hidden="true">05</div>
                     <h3 class="learned-name">Filtrage des posts</h3>
-                    <p class="learned-desc">Filtrer par catégories (tous les utilisateurs), par posts créés par l'utilisateur connecté, ou par posts likés par l'utilisateur connecté. Navigation fluide entre les vues.</p>
+                    <p class="learned-desc">Filtrer par catégories (tous les utilisateurs), par posts créés par
+                        l'utilisateur connecté, ou par posts likés par l'utilisateur connecté. Navigation fluide entre
+                        les vues.</p>
                 </div>
                 <div class="learned-card reveal">
                     <div class="learned-num" aria-hidden="true">06</div>
                     <h3 class="learned-name">Docker &amp; Gestion d'erreurs</h3>
-                    <p class="learned-desc">Application entièrement containerisée — lancement complet via Docker sans installation. Pages d'erreur personnalisées 404/500. Gestion complète des erreurs techniques sans crash.</p>
+                    <p class="learned-desc">Application entièrement containerisée — lancement complet via Docker sans
+                        installation. Pages d'erreur personnalisées 404/500. Gestion complète des erreurs techniques
+                        sans crash.</p>
                 </div>
             </div>
         </section>
@@ -315,7 +386,8 @@
                         <span class="bonus-name">OAuth — Google &amp; GitHub</span>
                         <span class="bonus-status">Fait</span>
                     </div>
-                    <p class="bonus-desc">Connexion via compte Google ou GitHub en plus de l'inscription classique. Implémentation du flux OAuth 2.0, gestion des tokens, liaison avec le compte local.</p>
+                    <p class="bonus-desc">Connexion via compte Google ou GitHub en plus de l'inscription classique.
+                        Implémentation du flux OAuth 2.0, gestion des tokens, liaison avec le compte local.</p>
                     <div class="bonus-tags">
                         <span class="bonus-tag">OAuth 2.0</span>
                         <span class="bonus-tag">Google API</span>
@@ -329,7 +401,9 @@
                         <span class="bonus-name">Upload d'images avancé</span>
                         <span class="bonus-status">Fait</span>
                     </div>
-                    <p class="bonus-desc">Joindre une image à un post — JPEG, PNG, GIF. Taille max 20Mo avec message d'erreur clair. Gestion des erreurs fichier : mauvais format, fichier corrompu, dépassement de taille.</p>
+                    <p class="bonus-desc">Joindre une image à un post — JPEG, PNG, GIF. Taille max 20Mo avec message
+                        d'erreur clair. Gestion des erreurs fichier : mauvais format, fichier corrompu, dépassement de
+                        taille.</p>
                     <div class="bonus-tags">
                         <span class="bonus-tag">Multipart form</span>
                         <span class="bonus-tag">MIME detection</span>
@@ -342,7 +416,9 @@
                         <span class="bonus-name">Système de modération</span>
                         <span class="bonus-status">Fait</span>
                     </div>
-                    <p class="bonus-desc">4 niveaux de rôles — Guest, User, Moderator, Admin. Les modérateurs peuvent supprimer et signaler les contenus inappropriés. L'admin gère les promotions et reçoit les signalements.</p>
+                    <p class="bonus-desc">4 niveaux de rôles — Guest, User, Moderator, Admin. Les modérateurs peuvent
+                        supprimer et signaler les contenus inappropriés. L'admin gère les promotions et reçoit les
+                        signalements.</p>
                     <div class="bonus-tags">
                         <span class="bonus-tag">RBAC</span>
                         <span class="bonus-tag">Middleware auth</span>
@@ -355,7 +431,8 @@
                         <span class="bonus-name">HTTPS + Rate Limiting</span>
                         <span class="bonus-status">Fait</span>
                     </div>
-                    <p class="bonus-desc">Certificat SSL auto-signé ou CA. Rate limiting par IP pour protéger contre le brute force et le spam. Chiffrement de la base de données SQLite avec mot de passe dédié.</p>
+                    <p class="bonus-desc">Certificat SSL auto-signé ou CA. Rate limiting par IP pour protéger contre le
+                        brute force et le spam. Chiffrement de la base de données SQLite avec mot de passe dédié.</p>
                     <div class="bonus-tags">
                         <span class="bonus-tag">TLS/SSL</span>
                         <span class="bonus-tag">Rate limiting</span>
@@ -368,7 +445,8 @@
                         <span class="bonus-name">Notifications &amp; Activité</span>
                         <span class="bonus-status">Fait</span>
                     </div>
-                    <p class="bonus-desc">Notifier un utilisateur quand son post reçoit un like, dislike ou commentaire. Page d'activité personnelle — posts créés, posts likés, commentaires laissés avec contexte.</p>
+                    <p class="bonus-desc">Notifier un utilisateur quand son post reçoit un like, dislike ou commentaire.
+                        Page d'activité personnelle — posts créés, posts likés, commentaires laissés avec contexte.</p>
                     <div class="bonus-tags">
                         <span class="bonus-tag">Notifications</span>
                         <span class="bonus-tag">Page activité</span>
@@ -384,16 +462,26 @@
                 <h2 class="section-title" id="details-title">Stack &amp; contraintes</h2>
             </div>
             <div class="details-grid">
-                <div class="detail-card reveal"><span class="detail-key">Langage</span><span class="detail-val">Go — zéro framework backend</span></div>
-                <div class="detail-card reveal"><span class="detail-key">Base de données</span><span class="detail-val">SQLite · lib/sqlite3</span></div>
-                <div class="detail-card reveal"><span class="detail-key">Sécurité</span><span class="detail-val">bcrypt · UUID · Sessions HttpOnly</span></div>
-                <div class="detail-card reveal"><span class="detail-key">Frontend</span><span class="detail-val">HTML/CSS vanilla — zéro framework</span></div>
-                <div class="detail-card reveal"><span class="detail-key">Container</span><span class="detail-val">Docker — lancement autonome complet</span></div>
-                <div class="detail-card reveal"><span class="detail-key">Équipe</span><span class="detail-val">4 personnes · B1 Ynov Campus</span></div>
-                <div class="detail-card reveal"><span class="detail-key">Statut</span><span class="detail-val detail-val--ok">Terminé</span></div>
-                <div class="detail-card reveal"><span class="detail-key">Images upload</span><span class="detail-val">JPEG · PNG · GIF · max 20MB</span></div>
-                <div class="detail-card reveal"><span class="detail-key">Libs autorisées</span><span class="detail-val">sqlite3 · bcrypt · UUID uniquement</span></div>
-                <div class="detail-card reveal"><span class="detail-key">Erreurs HTTP</span><span class="detail-val">404 · 500 · toutes gérées</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Langage</span><span class="detail-val">Go —
+                        zéro framework backend</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Base de données</span><span
+                        class="detail-val">SQLite · lib/sqlite3</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Sécurité</span><span class="detail-val">bcrypt
+                        · UUID · Sessions HttpOnly</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Frontend</span><span
+                        class="detail-val">HTML/CSS vanilla — zéro framework</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Container</span><span class="detail-val">Docker
+                        — lancement autonome complet</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Équipe</span><span class="detail-val">4
+                        personnes · B1 Ynov Campus</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Statut</span><span
+                        class="detail-val detail-val--ok">Terminé</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Images upload</span><span
+                        class="detail-val">JPEG · PNG · GIF · max 20MB</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Libs autorisées</span><span
+                        class="detail-val">sqlite3 · bcrypt · UUID uniquement</span></div>
+                <div class="detail-card reveal"><span class="detail-key">Erreurs HTTP</span><span class="detail-val">404
+                        · 500 · toutes gérées</span></div>
             </div>
         </section>
 
@@ -406,32 +494,42 @@
                 <div class="learned-card reveal">
                     <div class="learned-num" aria-hidden="true">01</div>
                     <h3 class="learned-name">Go — serveur web complet</h3>
-                    <p class="learned-desc">Templates HTML côté serveur, gestion des fichiers uploadés, routing manuel, middleware d'authentification, sessions et cookies sécurisés — tout from scratch sans framework.</p>
+                    <p class="learned-desc">Templates HTML côté serveur, gestion des fichiers uploadés, routing manuel,
+                        middleware d'authentification, sessions et cookies sécurisés — tout from scratch sans framework.
+                    </p>
                 </div>
                 <div class="learned-card reveal">
                     <div class="learned-num" aria-hidden="true">02</div>
                     <h3 class="learned-name">SQL &amp; conception BDD</h3>
-                    <p class="learned-desc">Concevoir un schéma relationnel complet avant de coder — diagramme entité-relation, normalisation, clés étrangères, jointures, requêtes optimisées avec SQLite.</p>
+                    <p class="learned-desc">Concevoir un schéma relationnel complet avant de coder — diagramme
+                        entité-relation, normalisation, clés étrangères, jointures, requêtes optimisées avec SQLite.</p>
                 </div>
                 <div class="learned-card reveal">
                     <div class="learned-num" aria-hidden="true">03</div>
                     <h3 class="learned-name">Sécurité applicative réelle</h3>
-                    <p class="learned-desc">bcrypt pour les mots de passe, sessions avec expiration, cookies HttpOnly et Secure, protection des routes par rôle, rate limiting, HTTPS — sécurité by design dès le départ.</p>
+                    <p class="learned-desc">bcrypt pour les mots de passe, sessions avec expiration, cookies HttpOnly et
+                        Secure, protection des routes par rôle, rate limiting, HTTPS — sécurité by design dès le départ.
+                    </p>
                 </div>
                 <div class="learned-card reveal">
                     <div class="learned-num" aria-hidden="true">04</div>
                     <h3 class="learned-name">OAuth 2.0</h3>
-                    <p class="learned-desc">Implémenter le flux OAuth 2.0 avec Google et GitHub — authorization code flow, gestion des tokens, liaison avec les comptes locaux, sécurisation des callbacks.</p>
+                    <p class="learned-desc">Implémenter le flux OAuth 2.0 avec Google et GitHub — authorization code
+                        flow, gestion des tokens, liaison avec les comptes locaux, sécurisation des callbacks.</p>
                 </div>
                 <div class="learned-card reveal">
                     <div class="learned-num" aria-hidden="true">05</div>
                     <h3 class="learned-name">Architecture en équipe</h3>
-                    <p class="learned-desc">Organiser un projet Go à 4 — branches Git par feature, pull requests, répartition des responsabilités, gestion des conflits de merge, revue de code, conventions partagées.</p>
+                    <p class="learned-desc">Organiser un projet Go à 4 — branches Git par feature, pull requests,
+                        répartition des responsabilités, gestion des conflits de merge, revue de code, conventions
+                        partagées.</p>
                 </div>
                 <div class="learned-card reveal">
                     <div class="learned-num" aria-hidden="true">06</div>
                     <h3 class="learned-name">Contrôle d'accès par rôle (RBAC)</h3>
-                    <p class="learned-desc">Implémenter un système de rôles hiérarchiques — Guest, User, Moderator, Admin — avec middleware d'autorisation, protection des routes et vérification des permissions à chaque action.</p>
+                    <p class="learned-desc">Implémenter un système de rôles hiérarchiques — Guest, User, Moderator,
+                        Admin — avec middleware d'autorisation, protection des routes et vérification des permissions à
+                        chaque action.</p>
                 </div>
             </div>
         </section>

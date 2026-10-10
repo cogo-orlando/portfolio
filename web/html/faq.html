@@ -13,16 +13,18 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orlandocogo.com/faq">
     <meta property="og:title" content="Orlando Cogo — FAQ">
-    <meta property="og:description" content="Questions fréquentes sur Orlando Cogo — parcours, reconversion, compétences.">
+    <meta property="og:description"
+        content="Questions fréquentes sur Orlando Cogo — parcours, reconversion, compétences.">
     <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
     <meta property="og:locale" content="fr_FR">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Orlando Cogo — FAQ">
-    <meta name="twitter:description" content="Questions fréquentes sur Orlando Cogo — parcours, reconversion, compétences.">
+    <meta name="twitter:description"
+        content="Questions fréquentes sur Orlando Cogo — parcours, reconversion, compétences.">
     <meta name="twitter:image" content="https://orlandocogo.com/img/og-image.png">
 
-    <link rel="stylesheet" href="/css/faq.css">
+    <link rel="stylesheet" href="{{asset " /css/faq.css"}}">
 </head>
 
 <body>
@@ -36,13 +38,16 @@
             <h1 class="hero-title" id="hero-title">FAQ<br><span class="outline">Questions</span></h1>
             <p class="hero-intro">Tout ce que tu veux savoir · <strong>sans filtre</strong></p>
             <div class="faq-counter reveal" aria-label="Statistiques FAQ">
-                <div class="fc-item"><span class="fc-val" id="totalQ">0</span><span class="fc-label">questions</span></div>
+                <div class="fc-item"><span class="fc-val" id="totalQ">0</span><span class="fc-label">questions</span>
+                </div>
                 <div class="fc-sep" aria-hidden="true">·</div>
                 <div class="fc-item"><span class="fc-val">7</span><span class="fc-label">catégories</span></div>
                 <div class="fc-sep" aria-hidden="true">·</div>
-                <div class="fc-item"><span class="fc-val">{{template "nb-projets-prod"}}</span><span class="fc-label">projet en prod</span></div>
+                <div class="fc-item"><span class="fc-val">{{template "nb-projets-prod"}}</span><span
+                        class="fc-label">projet en prod</span></div>
                 <div class="fc-sep" aria-hidden="true">·</div>
-                <div class="fc-item"><span class="fc-val">1</span><span class="fc-label">reconversion assumée</span></div>
+                <div class="fc-item"><span class="fc-val">1</span><span class="fc-label">reconversion assumée</span>
+                </div>
             </div>
         </section>
 
@@ -53,15 +58,21 @@
                     <span class="progress-label">Questions explorées</span>
                     <span class="progress-pct"><span id="openCount">0</span>/<span id="totalCount">0</span></span>
                 </div>
-                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progression">
+                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                    aria-label="Progression">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
             </div>
 
             <div class="faq-controls reveal">
                 <div class="search-wrap">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>
-                    <input type="search" id="searchInput" class="search-input" placeholder="Rechercher une question..." aria-label="Rechercher une question dans la FAQ">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                        aria-hidden="true">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="M21 21l-4.35-4.35" />
+                    </svg>
+                    <input type="search" id="searchInput" class="search-input" placeholder="Rechercher une question..."
+                        aria-label="Rechercher une question dans la FAQ">
                 </div>
                 <div class="faq-actions" role="group" aria-label="Actions FAQ">
                     <button class="action-btn" id="randomBtn" type="button">Question aléatoire</button>
@@ -72,12 +83,17 @@
 
             <div class="cat-filters reveal" role="group" aria-label="Filtrer par catégorie">
                 <button class="cat-btn active" data-cat="all" type="button">Toutes</button>
-                <button class="cat-btn" data-cat="parcours" style="--cat-color:var(--accent)" type="button">Parcours</button>
-                <button class="cat-btn" data-cat="formation" style="--cat-color:var(--accent2)" type="button">Formation</button>
-                <button class="cat-btn" data-cat="opportunites" style="--cat-color:#f5a000" type="button">Opportunités</button>
-                <button class="cat-btn" data-cat="infra" style="--cat-color:var(--accent2)" type="button">Infra &amp; Réseau</button>
+                <button class="cat-btn" data-cat="parcours" style="--cat-color:var(--accent)"
+                    type="button">Parcours</button>
+                <button class="cat-btn" data-cat="formation" style="--cat-color:var(--accent2)"
+                    type="button">Formation</button>
+                <button class="cat-btn" data-cat="opportunites" style="--cat-color:#f5a000"
+                    type="button">Opportunités</button>
+                <button class="cat-btn" data-cat="infra" style="--cat-color:var(--accent2)" type="button">Infra &amp;
+                    Réseau</button>
                 <button class="cat-btn" data-cat="securite" style="--cat-color:#f54040" type="button">Sécurité</button>
-                <button class="cat-btn" data-cat="portfolio" style="--cat-color:#c8a0f5" type="button">Portfolio</button>
+                <button class="cat-btn" data-cat="portfolio" style="--cat-color:#c8a0f5"
+                    type="button">Portfolio</button>
                 <button class="cat-btn" data-cat="perso" style="--cat-color:#f500a0" type="button">Perso</button>
             </div>
         </section>
@@ -91,12 +107,19 @@
                         <span class="faq-num" aria-hidden="true">01</span>
                         <span class="faq-text">Pourquoi tu as quitté l'industrie aéronautique ?</span>
                         <span class="faq-cat-tag" style="--c:var(--accent)">Parcours</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>J'ai passé plusieurs années dans l'aéronautique chez Airbus, d'abord à Toulouse puis à Marseille. C'était une expérience incroyable qui m'a appris la rigueur, la méthode et le travail en environnement exigeant. Mais j'ai réalisé que ma vraie passion était ailleurs — dans l'informatique, les systèmes, la sécurité. Quitter un secteur stable pour recommencer à zéro n'était pas une décision facile, mais c'était la bonne.</p>
+                            <p>J'ai passé plusieurs années dans l'aéronautique chez Airbus, d'abord à Toulouse puis à
+                                Marseille. C'était une expérience incroyable qui m'a appris la rigueur, la méthode et le
+                                travail en environnement exigeant. Mais j'ai réalisé que ma vraie passion était ailleurs
+                                — dans l'informatique, les systèmes, la sécurité. Quitter un secteur stable pour
+                                recommencer à zéro n'était pas une décision facile, mais c'était la bonne.</p>
                         </div>
                     </div>
                 </div>
@@ -106,12 +129,19 @@
                         <span class="faq-num" aria-hidden="true">02</span>
                         <span class="faq-text">Comment s'est passée ta reconversion ?</span>
                         <span class="faq-cat-tag" style="--c:var(--accent)">Parcours</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Après mon BTS CPRP obtenu en alternance chez Airbus Helicopters, j'ai pris la décision de me réorienter vers ce qui m'attirait vraiment. Je me suis inscrit en Bachelor Informatique à Ynov Campus Toulouse, spécialisation cybersécurité. En parallèle de la formation, j'ai construit et déployé ce portfolio Go en production, pour ancrer chaque compétence dans du concret.</p>
+                            <p>Après mon BTS CPRP obtenu en alternance chez Airbus Helicopters, j'ai pris la décision de
+                                me réorienter vers ce qui m'attirait vraiment. Je me suis inscrit en Bachelor
+                                Informatique à Ynov Campus Toulouse, spécialisation cybersécurité. En parallèle de la
+                                formation, j'ai construit et déployé ce portfolio Go en production, pour ancrer chaque
+                                compétence dans du concret.</p>
                         </div>
                     </div>
                 </div>
@@ -121,12 +151,20 @@
                         <span class="faq-num" aria-hidden="true">03</span>
                         <span class="faq-text">Ce que t'a vraiment appris Airbus...</span>
                         <span class="faq-cat-tag" style="--c:var(--accent)">Parcours</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Travailler sur des pièces d'avions avec des tolérances de quelques microns t'apprend quelque chose d'essentiel : une erreur peut avoir des conséquences catastrophiques. Cette mentalité "zéro défaut" que j'ai apprise dans l'usinage, je l'applique directement à la cybersécurité et au développement — tests unitaires, CI/CD, gosec, monitoring en production. Un port ouvert non justifié, une config mal sécurisée — même état d'esprit.</p>
+                            <p>Travailler sur des pièces d'avions avec des tolérances de quelques microns t'apprend
+                                quelque chose d'essentiel : une erreur peut avoir des conséquences catastrophiques.
+                                Cette mentalité "zéro défaut" que j'ai apprise dans l'usinage, je l'applique directement
+                                à la cybersécurité et au développement — tests unitaires, CI/CD, gosec, monitoring en
+                                production. Un port ouvert non justifié, une config mal sécurisée — même état d'esprit.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -136,12 +174,19 @@
                         <span class="faq-num" aria-hidden="true">04</span>
                         <span class="faq-text">Pourquoi la cybersécurité spécifiquement ?</span>
                         <span class="faq-cat-tag" style="--c:var(--accent2)">Formation</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Pour moi, la cybersécurité c'est vraiment l'avenir. Avec l'arrivée de l'IA et toutes les nouvelles technologies, le secteur change régulièrement et c'est ça qui me passionne. Je suis convaincu qu'il est devenu essentiel de comprendre ces évolutions pour bien protéger les systèmes. Et concrètement — j'ai déjà mis en place honeypot, rate limiting, bcrypt, RLS PostgreSQL, WAF Cloudflare sur mes propres projets.</p>
+                            <p>Pour moi, la cybersécurité c'est vraiment l'avenir. Avec l'arrivée de l'IA et toutes les
+                                nouvelles technologies, le secteur change régulièrement et c'est ça qui me passionne. Je
+                                suis convaincu qu'il est devenu essentiel de comprendre ces évolutions pour bien
+                                protéger les systèmes. Et concrètement — j'ai déjà mis en place honeypot, rate limiting,
+                                bcrypt, RLS PostgreSQL, WAF Cloudflare sur mes propres projets.</p>
                         </div>
                     </div>
                 </div>
@@ -151,12 +196,18 @@
                         <span class="faq-num" aria-hidden="true">05</span>
                         <span class="faq-text">Tu apprends quoi en ce moment ?</span>
                         <span class="faq-cat-tag" style="--c:var(--accent2)">Formation</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>En ce moment je travaille sur plusieurs fronts : l'administration Linux avancée avec Samba et annuaire LDAP, les CTF HackTheBox, Go avec PostgreSQL et sécurité applicative, Docker hardening et multi-stage builds, CI/CD GitHub Actions, et Cloudflare WAF &amp; SSL. Tout ça en parallèle de la formation à Ynov.</p>
+                            <p>En ce moment je travaille sur plusieurs fronts : l'administration Linux avancée avec
+                                Samba et annuaire LDAP, les CTF HackTheBox, Go avec PostgreSQL et sécurité applicative,
+                                Docker hardening et multi-stage builds, CI/CD GitHub Actions, et Cloudflare WAF &amp;
+                                SSL. Tout ça en parallèle de la formation à Ynov.</p>
                         </div>
                     </div>
                 </div>
@@ -166,12 +217,19 @@
                         <span class="faq-num" aria-hidden="true">06</span>
                         <span class="faq-text">Quel est ton niveau actuel honnêtement ?</span>
                         <span class="faq-cat-tag" style="--c:var(--accent2)">Formation</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Honnêtement ? Débutant avancé qui construit des choses réelles. Je suis en {{template "niveau-long"}}, donc je pose encore des bases solides. Mais j'ai déjà une application en production avec {{template "nb-tests"}} tests unitaires, CI/CD automatisé, gosec {{template "nb-gosec"}} issues, Docker hardening et du monitoring de sécurité. Je ne prétends pas tout savoir — c'est d'ailleurs ce qui me motive chaque jour.</p>
+                            <p>Honnêtement ? Débutant avancé qui construit des choses réelles. Je suis en {{template
+                                "niveau-long"}}, donc je pose encore des bases solides. Mais j'ai déjà une application
+                                en production avec {{template "nb-tests"}} tests unitaires, CI/CD automatisé, gosec
+                                {{template "nb-gosec"}} issues, Docker hardening et du monitoring de sécurité. Je ne
+                                prétends pas tout savoir — c'est d'ailleurs ce qui me motive chaque jour.</p>
                         </div>
                     </div>
                 </div>
@@ -181,12 +239,19 @@
                         <span class="faq-num" aria-hidden="true">07</span>
                         <span class="faq-text">Tu cherches quoi comme stage ?</span>
                         <span class="faq-cat-tag" style="--c:#f5a000">Opportunités</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Je recherche un stage dans les domaines de la cybersécurité, du DevOps ou du backend Go. Idéalement dans une entreprise où je peux mettre les mains dans les configurations réelles, participer à des audits, contribuer à la sécurisation d'infrastructures, ou travailler sur des pipelines CI/CD. Je suis basé à Toulouse mais mobile et ouvert au remote.</p>
+                            <p>Je recherche un stage dans les domaines de la cybersécurité, du DevOps ou du backend Go.
+                                Idéalement dans une entreprise où je peux mettre les mains dans les configurations
+                                réelles, participer à des audits, contribuer à la sécurisation d'infrastructures, ou
+                                travailler sur des pipelines CI/CD. Je suis basé à Toulouse mais mobile et ouvert au
+                                remote.</p>
                         </div>
                     </div>
                 </div>
@@ -196,12 +261,17 @@
                         <span class="faq-num" aria-hidden="true">08</span>
                         <span class="faq-text">Quelle est ta disponibilité ?</span>
                         <span class="faq-cat-tag" style="--c:#f5a000">Opportunités</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Je suis actuellement en {{template "niveau-long"}} à Ynov Campus Toulouse. Disponible dès maintenant pour un stage ou une alternance en cybersécurité, DevOps ou backend. Toulouse principalement, remote OK. N'hésite pas à me contacter directement.</p>
+                            <p>Je suis actuellement en {{template "niveau-long"}} à Ynov Campus Toulouse. Disponible dès
+                                maintenant pour un stage ou une alternance en cybersécurité, DevOps ou backend. Toulouse
+                                principalement, remote OK. N'hésite pas à me contacter directement.</p>
                         </div>
                     </div>
                 </div>
@@ -211,12 +281,20 @@
                         <span class="faq-num" aria-hidden="true">09</span>
                         <span class="faq-text">Comment ce portfolio a été fait ?</span>
                         <span class="faq-cat-tag" style="--c:#c8a0f5">Portfolio</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Entièrement from scratch en Go pour le backend — serveur HTTP custom, routing manuel, middleware chain, honeypot {{template "honeypot-routes"}} routes, rate limiting {{template "rate-limit"}} req/min, panic recovery, request ID, slog structuré, graceful shutdown. Front en HTML/CSS/JS vanilla, sans framework. Docker multi-stage {{template "docker-portfolio"}}, déployé sur Render avec Cloudflare WAF. CI/CD GitHub Actions — {{template "nb-tests"}} tests, gosec {{template "nb-gosec"}} issues à chaque push.</p>
+                            <p>Entièrement from scratch en Go pour le backend — serveur HTTP custom, routing manuel,
+                                middleware chain, honeypot {{template "honeypot-routes"}} routes, rate limiting
+                                {{template "rate-limit"}} req/min, panic recovery, request ID, slog structuré, graceful
+                                shutdown. Front en HTML/CSS/JS vanilla, sans framework. Docker multi-stage {{template
+                                "docker-portfolio"}}, déployé sur Render avec Cloudflare WAF. CI/CD GitHub Actions —
+                                {{template "nb-tests"}} tests, gosec {{template "nb-gosec"}} issues à chaque push.</p>
                         </div>
                     </div>
                 </div>
@@ -226,12 +304,19 @@
                         <span class="faq-num" aria-hidden="true">10</span>
                         <span class="faq-text">Pourquoi Go et pas Node.js ou Python ?</span>
                         <span class="faq-cat-tag" style="--c:#c8a0f5">Portfolio</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Go m'a attiré pour sa simplicité, ses performances, sa bibliothèque standard très complète pour le web, et surtout son utilisation croissante dans les outils de cybersécurité. Beaucoup d'outils offensifs et défensifs modernes sont écrits en Go. Apprendre ce langage c'est investir dans mon futur métier — et le résultat concret c'est une image Docker de {{template "docker-portfolio"}} qui tourne en production.</p>
+                            <p>Go m'a attiré pour sa simplicité, ses performances, sa bibliothèque standard très
+                                complète pour le web, et surtout son utilisation croissante dans les outils de
+                                cybersécurité. Beaucoup d'outils offensifs et défensifs modernes sont écrits en Go.
+                                Apprendre ce langage c'est investir dans mon futur métier — et le résultat concret c'est
+                                une image Docker de {{template "docker-portfolio"}} qui tourne en production.</p>
                         </div>
                     </div>
                 </div>
@@ -241,12 +326,19 @@
                         <span class="faq-num" aria-hidden="true">11</span>
                         <span class="faq-text">Pourquoi Docker pour un portfolio étudiant ?</span>
                         <span class="faq-cat-tag" style="--c:#c8a0f5">Portfolio</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Parce qu'un portfolio c'est aussi une démonstration de comment je travaille. Multi-stage build pour minimiser la surface d'attaque, image scratch sans OS, no-new-privileges, read_only filesystem, USER 1001 non-root — ce ne sont pas des options, c'est du hardening réel. Si je sécurise mon propre portfolio comme ça, imagine comment je vais traiter les systèmes de mes futurs employeurs.</p>
+                            <p>Parce qu'un portfolio c'est aussi une démonstration de comment je travaille. Multi-stage
+                                build pour minimiser la surface d'attaque, image scratch sans OS, no-new-privileges,
+                                read_only filesystem, USER 1001 non-root — ce ne sont pas des options, c'est du
+                                hardening réel. Si je sécurise mon propre portfolio comme ça, imagine comment je vais
+                                traiter les systèmes de mes futurs employeurs.</p>
                         </div>
                     </div>
                 </div>
@@ -256,12 +348,20 @@
                         <span class="faq-num" aria-hidden="true">12</span>
                         <span class="faq-text">Tu as fait quoi concrètement sur le projet Cisco ?</span>
                         <span class="faq-cat-tag" style="--c:var(--accent2)">Infra</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>J'ai conçu et configuré une architecture réseau d'entreprise complète sur Cisco Packet Tracer — 4 sites (Strasbourg, Bruxelles, Casablanca, Stockholm), 10 VLANs (VLAN10 à VLAN100), DHCP configuré directement sur les switchs Layer 3 (3650-24PS), routage statique hub-and-spoke vers un routeur central, redondance WiFi sur chaque site, et un serveur DNS + Web hébergé à Stockholm accessible depuis tous les sites. C'est de la vraie configuration réseau, pas de la théorie.</p>
+                            <p>J'ai conçu et configuré une architecture réseau d'entreprise complète sur Cisco Packet
+                                Tracer — 4 sites (Strasbourg, Bruxelles, Casablanca, Stockholm), 10 VLANs (VLAN10 à
+                                VLAN100), DHCP configuré directement sur les switchs Layer 3 (3650-24PS), routage
+                                statique hub-and-spoke vers un routeur central, redondance WiFi sur chaque site, et un
+                                serveur DNS + Web hébergé à Stockholm accessible depuis tous les sites. C'est de la
+                                vraie configuration réseau, pas de la théorie.</p>
                         </div>
                     </div>
                 </div>
@@ -271,12 +371,20 @@
                         <span class="faq-num" aria-hidden="true">13</span>
                         <span class="faq-text">C'est quoi le projet Samba / Annuaire ?</span>
                         <span class="faq-cat-tag" style="--c:var(--accent2)">Infra</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Un projet d'infrastructure Linux en binôme sur Proxmox — mise en place d'un serveur de fichiers Samba avec authentification via annuaire centralisé. Plusieurs équipes accèdent à des partages réseau avec des droits différenciés. J'ai configuré Samba, activé le module full_audit pour tracer toutes les actions dans les logs, et mis en place les ACL par équipe. Le tout sur des VMs Debian sous Proxmox VE, accessible simultanément par les deux membres de l'équipe.</p>
+                            <p>Un projet d'infrastructure Linux en binôme sur Proxmox — mise en place d'un serveur de
+                                fichiers Samba avec authentification via annuaire centralisé. Plusieurs équipes accèdent
+                                à des partages réseau avec des droits différenciés. J'ai configuré Samba, activé le
+                                module full_audit pour tracer toutes les actions dans les logs, et mis en place les ACL
+                                par équipe. Le tout sur des VMs Debian sous Proxmox VE, accessible simultanément par les
+                                deux membres de l'équipe.</p>
                         </div>
                     </div>
                 </div>
@@ -286,12 +394,19 @@
                         <span class="faq-num" aria-hidden="true">14</span>
                         <span class="faq-text">Tu utilises Proxmox comment ?</span>
                         <span class="faq-cat-tag" style="--c:var(--accent2)">Infra</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Proxmox VE est l'hyperviseur utilisé pour le projet Samba/Annuaire. Il nous permet de créer et gérer des VMs KVM — une VM serveur Linux pour Samba et l'annuaire, des VMs clients pour tester les accès. L'avantage c'est qu'on peut travailler sur les mêmes VMs depuis nos machines respectives simultanément via le réseau virtuel. C'est une approche très proche d'un environnement professionnel réel.</p>
+                            <p>Proxmox VE est l'hyperviseur utilisé pour le projet Samba/Annuaire. Il nous permet de
+                                créer et gérer des VMs KVM — une VM serveur Linux pour Samba et l'annuaire, des VMs
+                                clients pour tester les accès. L'avantage c'est qu'on peut travailler sur les mêmes VMs
+                                depuis nos machines respectives simultanément via le réseau virtuel. C'est une approche
+                                très proche d'un environnement professionnel réel.</p>
                         </div>
                     </div>
                 </div>
@@ -301,12 +416,20 @@
                         <span class="faq-num" aria-hidden="true">15</span>
                         <span class="faq-text">Quelle est la différence entre un switch L2 et L3 ?</span>
                         <span class="faq-cat-tag" style="--c:var(--accent2)">Infra</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Un switch L2 travaille au niveau de la couche liaison — il commute les trames MAC entre les ports, gère les VLANs, mais ne route pas. Un switch L3 fait tout ça plus du routage IP — il peut router entre VLANs sans passer par un routeur externe, et on peut y configurer le DHCP directement. Dans mon projet Cisco, j'ai utilisé des 3650-24PS (L3) pour le routage inter-VLAN et le DHCP, et des 2960-24TT (L2) pour la distribution dans chaque site.</p>
+                            <p>Un switch L2 travaille au niveau de la couche liaison — il commute les trames MAC entre
+                                les ports, gère les VLANs, mais ne route pas. Un switch L3 fait tout ça plus du routage
+                                IP — il peut router entre VLANs sans passer par un routeur externe, et on peut y
+                                configurer le DHCP directement. Dans mon projet Cisco, j'ai utilisé des 3650-24PS (L3)
+                                pour le routage inter-VLAN et le DHCP, et des 2960-24TT (L2) pour la distribution dans
+                                chaque site.</p>
                         </div>
                     </div>
                 </div>
@@ -316,12 +439,19 @@
                         <span class="faq-num" aria-hidden="true">16</span>
                         <span class="faq-text">C'est quoi concrètement un honeypot sur ton portfolio ?</span>
                         <span class="faq-cat-tag" style="--c:#f54040">Sécurité</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>J'ai configuré {{template "honeypot-routes"}} routes pièges sur mon serveur Go — /wp-admin, /phpmyadmin, /.env, /admin, /backup, etc. Quand un bot ou un scanner accède à une de ces routes, il est automatiquement blacklisté 24h et l'événement est loggué en base PostgreSQL. En production, je vois régulièrement des scanners automatisés se faire blacklister — c'est du monitoring défensif concret.</p>
+                            <p>J'ai configuré {{template "honeypot-routes"}} routes pièges sur mon serveur Go —
+                                /wp-admin, /phpmyadmin, /.env, /admin, /backup, etc. Quand un bot ou un scanner accède à
+                                une de ces routes, il est automatiquement blacklisté 24h et l'événement est loggué en
+                                base PostgreSQL. En production, je vois régulièrement des scanners automatisés se faire
+                                blacklister — c'est du monitoring défensif concret.</p>
                         </div>
                     </div>
                 </div>
@@ -331,12 +461,19 @@
                         <span class="faq-num" aria-hidden="true">17</span>
                         <span class="faq-text">Comment tu sécurises une base de données ?</span>
                         <span class="faq-cat-tag" style="--c:#f54040">Sécurité</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Sur mon projet Supabase PostgreSQL, j'ai appliqué plusieurs couches : RLS activé sur toutes les tables, un utilisateur dédié aux droits minimaux (security_app en INSERT only pour le portfolio), sslmode=require pour chiffrer toutes les connexions, API JWT désactivée, et REVOKE ALL sur les rôles anon et authenticated. C'est le principe du moindre privilège appliqué rigoureusement.</p>
+                            <p>Sur mon projet Supabase PostgreSQL, j'ai appliqué plusieurs couches : RLS activé sur
+                                toutes les tables, un utilisateur dédié aux droits minimaux (security_app en INSERT only
+                                pour le portfolio), sslmode=require pour chiffrer toutes les connexions, API JWT
+                                désactivée, et REVOKE ALL sur les rôles anon et authenticated. C'est le principe du
+                                moindre privilège appliqué rigoureusement.</p>
                         </div>
                     </div>
                 </div>
@@ -346,12 +483,19 @@
                         <span class="faq-num" aria-hidden="true">18</span>
                         <span class="faq-text">Tu fais quoi sur HackTheBox ?</span>
                         <span class="faq-cat-tag" style="--c:#f54040">Sécurité</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Je fais principalement des labs Linux — énumération de services, identification de vulnérabilités, exploitation basique. J'explore les techniques d'énumération (nmap, gobuster), l'analyse de vulnérabilités, et les bases du pentest. C'est complémentaire à la sécurité défensive que j'applique sur mes projets — comprendre l'attaque pour mieux construire la défense.</p>
+                            <p>Je fais principalement des labs Linux — énumération de services, identification de
+                                vulnérabilités, exploitation basique. J'explore les techniques d'énumération (nmap,
+                                gobuster), l'analyse de vulnérabilités, et les bases du pentest. C'est complémentaire à
+                                la sécurité défensive que j'applique sur mes projets — comprendre l'attaque pour mieux
+                                construire la défense.</p>
                         </div>
                     </div>
                 </div>
@@ -361,12 +505,20 @@
                         <span class="faq-num" aria-hidden="true">19</span>
                         <span class="faq-text">C'est quoi gosec et pourquoi c'est important ?</span>
                         <span class="faq-cat-tag" style="--c:#f54040">Sécurité</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>Gosec est un scanner de sécurité statique pour Go — il analyse le code source et détecte les vulnérabilités potentielles : gestion incorrecte des erreurs (G104), cookies sans attributs sécurisés (G124), injections SQL (G201/G202), variables d'environnement mal gérées (G701). Sur mon portfolio, gosec s'exécute à chaque push via GitHub Actions. Résultat : {{template "nb-gosec"}} issue sur tout le repo. Ce n'est pas optionnel — c'est partie intégrante de ma définition de "code terminé".</p>
+                            <p>Gosec est un scanner de sécurité statique pour Go — il analyse le code source et détecte
+                                les vulnérabilités potentielles : gestion incorrecte des erreurs (G104), cookies sans
+                                attributs sécurisés (G124), injections SQL (G201/G202), variables d'environnement mal
+                                gérées (G701). Sur mon portfolio, gosec s'exécute à chaque push via GitHub Actions.
+                                Résultat : {{template "nb-gosec"}} issue sur tout le repo. Ce n'est pas optionnel —
+                                c'est partie intégrante de ma définition de "code terminé".</p>
                         </div>
                     </div>
                 </div>
@@ -376,12 +528,19 @@
                         <span class="faq-num" aria-hidden="true">20</span>
                         <span class="faq-text">Tu as utilisé l'OSINT dans quel contexte ?</span>
                         <span class="faq-cat-tag" style="--c:#f54040">Sécurité</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>L'OSINT c'est la collecte d'informations depuis des sources publiques. Je l'explore dans le cadre de la formation et des CTF — Google Dorks pour trouver des informations exposées involontairement, recherche de métadonnées, reconnaissance passive. Comprendre ce qu'un attaquant peut trouver sur toi ou ton infrastructure, c'est la première étape pour s'en protéger.</p>
+                            <p>L'OSINT c'est la collecte d'informations depuis des sources publiques. Je l'explore dans
+                                le cadre de la formation et des CTF — Google Dorks pour trouver des informations
+                                exposées involontairement, recherche de métadonnées, reconnaissance passive. Comprendre
+                                ce qu'un attaquant peut trouver sur toi ou ton infrastructure, c'est la première étape
+                                pour s'en protéger.</p>
                         </div>
                     </div>
                 </div>
@@ -391,12 +550,18 @@
                         <span class="faq-num" aria-hidden="true">21</span>
                         <span class="faq-text">C'est quoi tes hobbies en dehors du code ?</span>
                         <span class="faq-cat-tag" style="--c:#f500a0">Perso</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>L'escalade — qui m'apprend la patience et la résolution de problèmes pas si différente du debugging. Les voyages — j'aime découvrir de nouveaux environnements et cultures. La musique — toujours un casque sur les oreilles. Les jeux vidéo — stratégie et exploration surtout.</p>
+                            <p>L'escalade — qui m'apprend la patience et la résolution de problèmes pas si différente du
+                                debugging. Les voyages — j'aime découvrir de nouveaux environnements et cultures. La
+                                musique — toujours un casque sur les oreilles. Les jeux vidéo — stratégie et exploration
+                                surtout.</p>
                         </div>
                     </div>
                 </div>
@@ -406,12 +571,18 @@
                         <span class="faq-num" aria-hidden="true">22</span>
                         <span class="faq-text">Un fait surprenant sur toi ?</span>
                         <span class="faq-cat-tag" style="--c:#f500a0">Perso</span>
-                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                            aria-hidden="true">
+                            <path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
                     </button>
                     <div class="faq-a">
                         <div class="faq-a-inner">
                             <span class="faq-prompt" aria-hidden="true">~/faq $</span>
-                            <p>J'ai participé aux Départementaux WorldSkills 2023 en Fraisage. WorldSkills c'est les "Olympiades des métiers" — des compétitions nationales et internationales de compétences professionnelles. Ça demande une précision extrême sur des machines CNC. Pas exactement ce qu'on attend d'un futur expert en cybersécurité, non ?</p>
+                            <p>J'ai participé aux Départementaux WorldSkills 2023 en Fraisage. WorldSkills c'est les
+                                "Olympiades des métiers" — des compétitions nationales et internationales de compétences
+                                professionnelles. Ça demande une précision extrême sur des machines CNC. Pas exactement
+                                ce qu'on attend d'un futur expert en cybersécurité, non ?</p>
                         </div>
                     </div>
                 </div>
@@ -425,12 +596,21 @@
                     <h2 class="section-title" id="yes-title">Ce que je <strong>suis</strong></h2>
                 </div>
                 <div class="not-grid">
-                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>Quelqu'un qui construit des projets réels en production</span></div>
-                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>Rigoureux — {{template "nb-tests"}} tests unitaires, gosec {{template "nb-gosec"}} issues, CI/CD vert</span></div>
-                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>Curieux — j'apprends en construisant, pas en regardant</span></div>
-                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>Un profil atypique qui apporte une vision différente</span></div>
-                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>Disponible et motivé pour un stage ou une alternance</span></div>
-                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>Honnête sur mon niveau — et ambitieux sur ma progression</span></div>
+                    <div class="not-item not-item--yes"><span class="not-check"
+                            aria-hidden="true">✓</span><span>Quelqu'un qui construit des projets réels en
+                            production</span></div>
+                    <div class="not-item not-item--yes"><span class="not-check"
+                            aria-hidden="true">✓</span><span>Rigoureux — {{template "nb-tests"}} tests unitaires, gosec
+                            {{template "nb-gosec"}} issues, CI/CD vert</span></div>
+                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>Curieux
+                            — j'apprends en construisant, pas en regardant</span></div>
+                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>Un
+                            profil atypique qui apporte une vision différente</span></div>
+                    <div class="not-item not-item--yes"><span class="not-check"
+                            aria-hidden="true">✓</span><span>Disponible et motivé pour un stage ou une alternance</span>
+                    </div>
+                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>Honnête
+                            sur mon niveau — et ambitieux sur ma progression</span></div>
                 </div>
             </div>
 
@@ -441,12 +621,18 @@
                     <h2 class="section-title" id="not-title">Ce que je ne suis <strong>pas</strong></h2>
                 </div>
                 <div class="not-grid">
-                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>Un expert qui prétend tout savoir</span></div>
-                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>Quelqu'un qui abandonne face à un problème</span></div>
-                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>Un dev qui refuse d'apprendre de nouvelles technologies</span></div>
-                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>Un hacker chapeau noir</span></div>
-                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>Quelqu'un qui a peur de la reconversion</span></div>
-                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>Un profil "classique" en informatique</span></div>
+                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>Un expert qui prétend
+                            tout savoir</span></div>
+                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>Quelqu'un qui abandonne
+                            face à un problème</span></div>
+                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>Un dev qui refuse
+                            d'apprendre de nouvelles technologies</span></div>
+                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>Un hacker chapeau
+                            noir</span></div>
+                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>Quelqu'un qui a peur de
+                            la reconversion</span></div>
+                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>Un profil "classique" en
+                            informatique</span></div>
                 </div>
             </div>
 
@@ -458,24 +644,45 @@
                 </div>
                 <div class="myths-list">
                     <div class="myth-item">
-                        <div class="myth-col myth"><span class="myth-tag">Mythe</span><p>"La cybersécurité c'est juste du hacking"</p></div>
+                        <div class="myth-col myth"><span class="myth-tag">Mythe</span>
+                            <p>"La cybersécurité c'est juste du hacking"</p>
+                        </div>
                         <div class="myth-sep" aria-hidden="true">→</div>
-                        <div class="myth-col reality"><span class="myth-tag reality-tag">Réalité</span><p>C'est 80% de prévention, architecture, audit, et formation. Le pentest c'est une infime partie du domaine.</p></div>
+                        <div class="myth-col reality"><span class="myth-tag reality-tag">Réalité</span>
+                            <p>C'est 80% de prévention, architecture, audit, et formation. Le pentest c'est une infime
+                                partie du domaine.</p>
+                        </div>
                     </div>
                     <div class="myth-item">
-                        <div class="myth-col myth"><span class="myth-tag">Mythe</span><p>"Il faut être un génie pour faire de la sécu"</p></div>
+                        <div class="myth-col myth"><span class="myth-tag">Mythe</span>
+                            <p>"Il faut être un génie pour faire de la sécu"</p>
+                        </div>
                         <div class="myth-sep" aria-hidden="true">→</div>
-                        <div class="myth-col reality"><span class="myth-tag reality-tag">Réalité</span><p>Il faut de la curiosité, de la rigueur et de la persévérance. La plupart des failles exploitées sont des erreurs de configuration basiques.</p></div>
+                        <div class="myth-col reality"><span class="myth-tag reality-tag">Réalité</span>
+                            <p>Il faut de la curiosité, de la rigueur et de la persévérance. La plupart des failles
+                                exploitées sont des erreurs de configuration basiques.</p>
+                        </div>
                     </div>
                     <div class="myth-item">
-                        <div class="myth-col myth"><span class="myth-tag">Mythe</span><p>"Une reconversion en info c'est impossible après 20 ans"</p></div>
+                        <div class="myth-col myth"><span class="myth-tag">Mythe</span>
+                            <p>"Une reconversion en info c'est impossible après 20 ans"</p>
+                        </div>
                         <div class="myth-sep" aria-hidden="true">→</div>
-                        <div class="myth-col reality"><span class="myth-tag reality-tag">Réalité</span><p>La preuve par l'exemple. Un parcours atypique est souvent un avantage — on apporte une vision différente des profils classiques.</p></div>
+                        <div class="myth-col reality"><span class="myth-tag reality-tag">Réalité</span>
+                            <p>La preuve par l'exemple. Un parcours atypique est souvent un avantage — on apporte une
+                                vision différente des profils classiques.</p>
+                        </div>
                     </div>
                     <div class="myth-item">
-                        <div class="myth-col myth"><span class="myth-tag">Mythe</span><p>"Un étudiant en Bachelor ne peut pas faire des projets sérieux"</p></div>
+                        <div class="myth-col myth"><span class="myth-tag">Mythe</span>
+                            <p>"Un étudiant en Bachelor ne peut pas faire des projets sérieux"</p>
+                        </div>
                         <div class="myth-sep" aria-hidden="true">→</div>
-                        <div class="myth-col reality"><span class="myth-tag reality-tag">Réalité</span><p>Une application en production, {{template "nb-tests"}} tests unitaires, CI/CD, Docker hardening, PostgreSQL RLS, WAF Cloudflare. Le niveau vient de ce qu'on construit, pas du diplôme.</p></div>
+                        <div class="myth-col reality"><span class="myth-tag reality-tag">Réalité</span>
+                            <p>Une application en production, {{template "nb-tests"}} tests unitaires, CI/CD, Docker
+                                hardening, PostgreSQL RLS, WAF Cloudflare. Le niveau vient de ce qu'on construit, pas du
+                                diplôme.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -485,14 +692,17 @@
     </main>
 
     <!-- MODE INTERVIEW OVERLAY -->
-    <div class="interview-overlay" id="interviewOverlay" role="dialog" aria-modal="true" aria-label="Mode interview" hidden>
+    <div class="interview-overlay" id="interviewOverlay" role="dialog" aria-modal="true" aria-label="Mode interview"
+        hidden>
         <div class="interview-box">
             <div class="interview-bar">
                 <div class="ft-dot" style="background:#ff5f57" aria-hidden="true"></div>
                 <div class="ft-dot" style="background:#febc2e" aria-hidden="true"></div>
                 <div class="ft-dot" style="background:#28c840" aria-hidden="true"></div>
-                <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted2);margin-left:8px">mode_interview.sh</span>
-                <button class="interview-close" id="interviewClose" type="button" aria-label="Fermer le mode interview">ESC</button>
+                <span
+                    style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted2);margin-left:8px">mode_interview.sh</span>
+                <button class="interview-close" id="interviewClose" type="button"
+                    aria-label="Fermer le mode interview">ESC</button>
             </div>
             <div class="interview-body" id="interviewBody"></div>
             <div class="interview-controls">
@@ -503,7 +713,7 @@
     </div>
 
     {{template "footer"}}
-    <script src="/js/faq.js"></script>
+    <script src="{{asset " /js/faq.js"}}"></script>
 </body>
 
 </html>

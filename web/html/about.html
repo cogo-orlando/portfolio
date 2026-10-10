@@ -24,7 +24,7 @@
         content="De l'industrie aéronautique Airbus à la cybersécurité — le parcours d'Orlando Cogo.">
     <meta name="twitter:image" content="https://orlandocogo.com/img/og-image.png">
 
-    <link rel="stylesheet" href="/css/about.css">
+    <link rel="stylesheet" href="{{asset " /css/about.css"}}">
 </head>
 
 <body>
@@ -41,11 +41,14 @@
             <div class="hero-stats reveal" aria-label="Quelques chiffres">
                 <div class="hstat"><span class="hstat-val">5</span><span class="hstat-label">ans Airbus</span></div>
                 <div class="hstat-sep" aria-hidden="true">·</div>
-                <div class="hstat"><span class="hstat-val">{{template "niveau"}}</span><span class="hstat-label">Ynov Campus</span></div>
+                <div class="hstat"><span class="hstat-val">{{template "niveau"}}</span><span class="hstat-label">Ynov
+                        Campus</span></div>
                 <div class="hstat-sep" aria-hidden="true">·</div>
-                <div class="hstat"><span class="hstat-val">{{template "nb-projets-prod"}}</span><span class="hstat-label">Projet en prod</span></div>
+                <div class="hstat"><span class="hstat-val">{{template "nb-projets-prod"}}</span><span
+                        class="hstat-label">Projet en prod</span></div>
                 <div class="hstat-sep" aria-hidden="true">·</div>
-                <div class="hstat"><span class="hstat-val">{{template "nb-tests"}}</span><span class="hstat-label">Tests unitaires</span></div>
+                <div class="hstat"><span class="hstat-val">{{template "nb-tests"}}</span><span class="hstat-label">Tests
+                        unitaires</span></div>
             </div>
         </section>
 
@@ -93,7 +96,8 @@
                         <div class="timeline-dot" aria-hidden="true"></div>
                         <div class="timeline-content">
                             <span class="timeline-tag">BTS en alternance</span>
-                            <h3 class="timeline-title">BTS CPRP — Conception des Processus de Réalisation de Produit</h3>
+                            <h3 class="timeline-title">BTS CPRP — Conception des Processus de Réalisation de Produit
+                            </h3>
                             <p class="timeline-place">Lycée Jean Perrin · Marseille &nbsp;×&nbsp; Airbus Helicopters</p>
                             <p class="timeline-desc">Deux ans en alternance chez Airbus Helicopters à Marseille.
                                 Conception et optimisation des processus industriels. BTS obtenu avec succès. C'est ici
@@ -109,10 +113,12 @@
                         <div class="timeline-content">
                             <span class="timeline-tag">Bac Pro en alternance</span>
                             <h3 class="timeline-title">Bac Pro Technicien d'Usinage — Mention</h3>
-                            <p class="timeline-place">Lycée Airbus Saint-Éloi · Toulouse &nbsp;×&nbsp; Airbus (Usine Saint-Éloi)</p>
+                            <p class="timeline-place">Lycée Airbus Saint-Éloi · Toulouse &nbsp;×&nbsp; Airbus (Usine
+                                Saint-Éloi)</p>
                             <p class="timeline-desc">Formation en alternance au sein de l'usine Saint-Éloi d'Airbus à
                                 Toulouse. Bac Pro obtenu avec mention. La rigueur industrielle acquise ici se retrouve
-                                aujourd'hui dans ma façon d'écrire du code — tests, CI/CD, monitoring, documentation.</p>
+                                aujourd'hui dans ma façon d'écrire du code — tests, CI/CD, monitoring, documentation.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -139,7 +145,8 @@
                         CI/CD GitHub Actions. {{template "nb-tests"}} tests unitaires, gosec {{template "nb-gosec"}}
                         issues, Lighthouse {{template "lighthouse"}}.</p>
                     <div class="building-tags">
-                        <span>Go</span><span>Docker</span><span>Cloudflare</span><span>CI/CD</span><span>{{template "nb-tests"}} tests</span>
+                        <span>Go</span><span>Docker</span><span>Cloudflare</span><span>CI/CD</span><span>{{template
+                            "nb-tests"}} tests</span>
                     </div>
                     <a href="/tech" class="building-link">Architecture →</a>
                 </div>
@@ -180,29 +187,35 @@
             </div>
             <div class="hobbies-grid">
                 <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                            <path d="M9 18V5l12-2v13M9 18c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-2c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z" />
+                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" width="28" height="28">
+                            <path
+                                d="M9 18V5l12-2v13M9 18c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-2c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z" />
                         </svg></div>
                     <span class="hobby-name">Musique</span>
                     <p class="hobby-desc">Toujours un casque sur les oreilles, la musique me permet de me libérer et
                         d'être dans ma bulle.</p>
                 </div>
                 <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" width="28" height="28">
+                            <path
+                                d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
                         </svg></div>
                     <span class="hobby-name">Amis</span>
                     <p class="hobby-desc">Sortir, profiter, partager — le reste du temps bien entouré de mes amis.</p>
                 </div>
                 <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
+                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" width="28" height="28">
                             <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9zM8 22V12h8v10" />
                         </svg></div>
                     <span class="hobby-name">Escalade</span>
                     <p class="hobby-desc">Grimper, résoudre, recommencer. Une logique pas si différente du code.</p>
                 </div>
                 <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
+                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" width="28" height="28">
                             <circle cx="12" cy="12" r="10" />
                             <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
                         </svg></div>
@@ -210,7 +223,8 @@
                     <p class="hobby-desc">Découvrir de nouveaux endroits, cultures et perspectives.</p>
                 </div>
                 <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
+                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" width="28" height="28">
                             <rect x="2" y="3" width="20" height="14" rx="2" />
                             <path d="M8 21h8M12 17v4" />
                         </svg></div>
