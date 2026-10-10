@@ -1,11 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
-	"time"
-	"fmt"
 	"strconv"
+	"time"
 
 	"portfo/server"
 	"portfo/server/db"
@@ -27,7 +27,6 @@ func main() {
 }
 
 // healthcheck renvoie 0 si /health répond 200, 1 sinon
-// healthcheck renvoie 0 si /health répond 200, 1 sinon
 func healthcheck() int {
 	// Le port vient de l'environnement : on vérifie que c'est bien un numéro de port
 	// (sinon "8080@autre-site.com" pourrait détourner la requête ailleurs).
@@ -47,6 +46,7 @@ func healthcheck() int {
 		return 1
 	}
 	defer resp.Body.Close()
+
 	if resp.StatusCode != http.StatusOK {
 		return 1
 	}
