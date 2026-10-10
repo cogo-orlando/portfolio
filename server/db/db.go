@@ -213,6 +213,10 @@ func shouldStore(path string, status int, eventType EventType) bool {
 	if eventType != EventRequest || status >= 400 {
 		return true
 	}
+	// Vérifications automatiques (healthcheck Docker, page Status) : aucun intérêt à stocker
+	if path == "/health" || path == "/api/status" {
+		return false
+	}
 	for _, prefix := range []string{"/css/", "/js/", "/img/", "/fonts/", "/favicon"} {
 		if strings.HasPrefix(path, prefix) {
 			return false

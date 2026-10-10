@@ -1,18 +1,17 @@
 # ══════════════════════════════════════════
 #  .dockerignore
-#  Exclut les fichiers inutiles du build context
-#  Réduit la taille de l'image et accélère le build
+#  Exclut du build tout ce qui n'est pas nécessaire (et les secrets)
 # ══════════════════════════════════════════
 
-# Git
+# Git & CI
 .git
 .gitignore
+.github/
 
 # Documentation
-README.md
 *.md
 
-# Environnement local
+# Secrets et environnement local
 .env
 .env.*
 !.env.example
@@ -21,7 +20,7 @@ README.md
 tmp/
 .air.toml
 
-# Docker (pas besoin dans l'image)
+# Docker
 Dockerfile*
 docker-compose*
 .dockerignore
@@ -35,9 +34,15 @@ docker-compose*
 .DS_Store
 Thumbs.db
 
-# Tests Go
+# Tests, couverture, scripts
 *_test.go
 testdata/
+*.out
+coverage.*
+scripts/
 
-# Données locales (montées via volume en prod)
+# Schéma SQL (exécuté dans Supabase, pas utile au serveur)
+*.sql
+
+# Données locales
 data/

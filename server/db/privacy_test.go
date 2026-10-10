@@ -77,6 +77,9 @@ func TestShouldStore_SkipsSuccessfulStaticFiles(t *testing.T) {
 		{"/img/favicon.png", 200, EventRequest, false},
 		{"/css/absent.css", 404, EventError, true}, // une erreur est toujours gardée
 		{"/home", 200, EventRequest, true},
+		{"/health", 200, EventRequest, false},     // healthcheck Docker
+		{"/api/status", 200, EventRequest, false}, // page Status
+		{"/health", 500, EventError, true},        // mais une panne est gardée
 		{"/wp-admin", 404, EventHoneypot, true},
 	}
 	for _, c := range cases {

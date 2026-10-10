@@ -1,6 +1,6 @@
 # ══════════════════════════════════════════
-#  DOCKER COMPOSE — Développement
-#  Usage : docker compose -f docker-compose.dev.yml up
+#  DOCKER COMPOSE — Développement (hot reload)
+#  Usage : docker compose -f docker-compose.dev.yml up --build
 # ══════════════════════════════════════════
 services:
 
@@ -10,15 +10,16 @@ services:
       dockerfile: Dockerfile.dev
     image: portfolio:dev
     container_name: portfolio_dev
-    restart: unless-stopped
     ports:
       - "8080:8080"
     environment:
       PORT: "8080"
       TZ: "Europe/Paris"
+      GO_ENV: "development"   # templates rechargés à chaque requête
     volumes:
-      # Monte tout le projet pour le hot-reload Air
-      - .:/app
-      # Exclut le dossier tmp d'Air du montage
-      - /app/tmp
-    # Pas de healthcheck en dev pour ne pas polluer les logs
+      - .:/app                 # tout le projet → hot reload Air
+      - /app/tmp               # dossier de build d'Air, hors du montage
+      - gomodcache:/go/pkg/mod # modules Go gardés entre deux lancements
+
+volumes:
+  gomodcache:

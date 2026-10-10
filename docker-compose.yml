@@ -1,6 +1,6 @@
 # ══════════════════════════════════════════
-#  DOCKER COMPOSE — Production
-#  Usage : docker compose up -d
+#  DOCKER COMPOSE — Production (en local, identique à Render)
+#  Usage : docker compose up -d --build
 # ══════════════════════════════════════════
 services:
 
@@ -16,29 +16,30 @@ services:
     environment:
       PORT: "8080"
       TZ: "Europe/Paris"
-    volumes:
-      # Persiste les données (messages JSON) entre les redémarrages
-      - portfolio_data:/data
-    healthcheck:
-      test: ["CMD-SHELL", "wget --spider -q http://localhost:8080/health || exit 1"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
-    # Limite les ressources (Render Free = 512MB RAM)
+    # DATABASE_URL (facultatif) : mets-la dans un fichier .env, jamais dans ce fichier
+    env_file:
+      - path: .env
+        required: false
+
+    # ── Durcissement ──
+    read_only: true                 # système de fichiers en lecture seule
+    cap_drop: [ALL]                 # aucun privilège Linux
+    security_opt:
+      - no-new-privileges:true      # impossible de regagner des droits
+
+    # Le healthcheck est défini dans le Dockerfile (le binaire vérifie /health)
+
+    # Render Free = 512 MB : on reste large en dessous
     deploy:
       resources:
         limits:
           memory: 256M
+          cpus: "0.5"
         reservations:
           memory: 64M
-    # Logs JSON structurés — compatible avec slog
+
     logging:
       driver: json-file
       options:
         max-size: "10m"
         max-file: "3"
-
-volumes:
-  portfolio_data:
-    driver: local
