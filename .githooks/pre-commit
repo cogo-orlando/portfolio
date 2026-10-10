@@ -1,0 +1,19 @@
+#!/bin/sh
+# Vérifications avant chaque commit (les mêmes que la CI)
+
+echo "▶ gofmt"
+unformatted=$(gofmt -l .)
+if [ -n "$unformatted" ]; then
+    echo "✗ Fichiers mal formatés :"
+    echo "$unformatted"
+    echo "→ lance : gofmt -w .   puis recommence le commit"
+    exit 1
+fi
+
+echo "▶ go vet"
+go vet ./... || { echo "✗ go vet a trouvé des problèmes"; exit 1; }
+
+echo "▶ go test"
+go test -count=1 ./... || { echo "✗ Des tests échouent"; exit 1; }
+
+echo "✓ Tout est bon, commit autorisé"
