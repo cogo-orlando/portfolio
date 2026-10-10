@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # Dépendances Go (lib/pq…)
+  - package-ecosystem: gomod
+    directory: /
+    schedule:
+      interval: weekly
+
+  # Image Docker (nouvelles versions de Go)
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+
+  # Actions GitHub (checkout, setup-go…)
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
