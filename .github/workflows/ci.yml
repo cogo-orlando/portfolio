@@ -31,9 +31,12 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.27.x'      # dernier patch de sécurité de Go 1.27
-          check-latest: true
-          cache: true               # modules en cache → CI plus rapide
+          go-version: '1.27.x' # dernier patch de Go 1.27 (correctifs de sécurité inclus)
+          check-latest: true   # vérifie à chaque run qu'un patch plus récent n'est pas sorti
+          cache: true          # modules Go en cache → CI plus rapide
+
+      - name: Version de Go
+        run: go version
 
       - name: Formatage (gofmt)
         run: |
@@ -41,6 +44,9 @@ jobs:
           if [ -n "$unformatted" ]; then
             echo "Fichiers mal formatés (lance : gofmt -w .) :"
             echo "$unformatted"
+            echo ""
+            echo "Différences exactes :"
+            gofmt -d .
             exit 1
           fi
 
@@ -60,12 +66,13 @@ jobs:
           echo "### Couverture : $(go tool cover -func=coverage.out | tail -1 | awk '{print $3}')" >> "$GITHUB_STEP_SUMMARY"
 
       # Vulnérabilités connues dans Go et les dépendances (outil officiel de l'équipe Go)
+      # Version épinglée : à mettre à jour à chaque nouvelle version majeure de Go
       - name: govulncheck
         run: |
           go install golang.org/x/vuln/cmd/govulncheck@v1.8.0
           govulncheck ./...
 
-      # Analyse de sécurité du code (version épinglée : pas de surprise d'une version "latest")
+      # Analyse de sécurité du code (version épinglée, compatible Go 1.27)
       - name: gosec
         run: |
           go install github.com/securego/gosec/v2/cmd/gosec@v2.29.0
@@ -85,13 +92,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build de l'image
-        run: docker build -t portfolio:ci .
+        run: docker build --pull -t portfolio:ci .
 
       - name: Démarrage + healthcheck
         run: |
           docker run -d --name portfolio-ci --read-only --cap-drop ALL \
             --security-opt no-new-privileges:true -p 8080:8080 portfolio:ci
-          for i in $(seq 1 30); do
+          # Le premier healthcheck a lieu ~30 s après le démarrage : on attend jusqu'à 90 s
+          for i in $(seq 1 45); do
             status=$(docker inspect --format '{{.State.Health.Status}}' portfolio-ci)
             echo "état : $status"
             [ "$status" = "healthy" ] && exit 0
