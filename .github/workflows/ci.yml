@@ -5,6 +5,12 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  # Chaque lundi à 6 h (UTC) : détecte les failles publiées depuis le dernier push
+  # (govulncheck) et l'expiration prochaine de security.txt
+  schedule:
+    - cron: '0 6 * * 1'
+  # Bouton "Run workflow" dans l'onglet Actions
+  workflow_dispatch:
 
 # Moindre privilège : le workflow peut seulement lire le code
 permissions:

@@ -1,0 +1,8 @@
+# Signaler une vulnérabilité sur orlandocogo.com
+# Merci de ne pas exploiter la faille au-delà de ce qui est nécessaire pour la démontrer.
+# Réponse sous 72 h. Les signalements de bonne foi sont les bienvenus.
+
+Contact: mailto:Orlando.cogo.pro@gmail.com
+Expires: 2027-10-01T00:00:00.000Z
+Preferred-Languages: fr, en
+Canonical: https://orlandocogo.com/.well-known/security.txt

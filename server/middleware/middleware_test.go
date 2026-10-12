@@ -23,8 +23,14 @@ func okHandler() http.Handler {
 	})
 }
 
+// cfEdge : une IP Cloudflare réelle (plage 173.245.48.0/20)
+const cfEdge = "173.245.48.10"
+
+// newRequest simule une requête passée par Cloudflare : le pair est un serveur
+// Cloudflare, donc CF-Connecting-IP (l'IP du visiteur) est pris en compte.
 func newRequest(method, path, ip string) *http.Request {
 	r := httptest.NewRequest(method, path, nil)
+	r.RemoteAddr = cfEdge + ":443"
 	r.Header.Set("CF-Connecting-IP", ip)
 	return r
 }
@@ -65,28 +71,63 @@ func captureLogs(t *testing.T) *bytes.Buffer {
 }
 
 // ══════════════════════════════════════════
-//  TESTS — GetIP
+//  TESTS — GetIP (IP non falsifiable)
 // ══════════════════════════════════════════
 
-func TestGetIP_CloudflareHeader(t *testing.T) {
+// Via Cloudflare : on fait confiance à CF-Connecting-IP
+func TestGetIP_ViaCloudflare(t *testing.T) {
 	r := httptest.NewRequest(http.MethodGet, "/", nil)
+	r.RemoteAddr = cfEdge + ":443"
 	r.Header.Set("CF-Connecting-IP", "1.2.3.4")
-	r.Header.Set("X-Forwarded-For", "9.9.9.9")
 	if ip := GetIP(r); ip != "1.2.3.4" {
 		t.Errorf("attendu 1.2.3.4, obtenu %s", ip)
 	}
 }
 
-func TestGetIP_XForwardedFor(t *testing.T) {
+// Derrière Render : le dernier saut de X-Forwarded-For est un serveur Cloudflare
+func TestGetIP_ViaCloudflareBehindRender(t *testing.T) {
 	r := httptest.NewRequest(http.MethodGet, "/", nil)
-	r.Header.Set("X-Forwarded-For", "5.6.7.8, 9.9.9.9")
-	if ip := GetIP(r); ip != "5.6.7.8" {
-		t.Errorf("attendu 5.6.7.8 (premier de la liste), obtenu %s", ip)
+	r.RemoteAddr = "10.0.0.5:5000" // proxy interne de Render
+	r.Header.Set("X-Forwarded-For", "1.2.3.4, "+cfEdge)
+	r.Header.Set("CF-Connecting-IP", "1.2.3.4")
+	if ip := GetIP(r); ip != "1.2.3.4" {
+		t.Errorf("attendu 1.2.3.4, obtenu %s", ip)
 	}
 }
 
-// RemoteAddr contient "ip:port" : seul l'IP doit être gardée.
-// Sinon chaque nouvelle connexion (nouveau port) contournerait le rate limit et le honeypot.
+// L'ATTAQUE : accès direct à onrender.com avec un faux CF-Connecting-IP
+func TestGetIP_SpoofedCloudflareHeaderIgnored(t *testing.T) {
+	r := httptest.NewRequest(http.MethodGet, "/", nil)
+	r.RemoteAddr = "10.0.0.5:5000"
+	r.Header.Set("X-Forwarded-For", "6.6.6.6")  // ajouté par Render : la vraie IP de l'attaquant
+	r.Header.Set("CF-Connecting-IP", "1.2.3.4") // falsifié par l'attaquant
+	if ip := GetIP(r); ip != "6.6.6.6" {
+		t.Errorf("le faux CF-Connecting-IP doit être ignoré : attendu 6.6.6.6, obtenu %s", ip)
+	}
+}
+
+// L'ATTAQUE (variante) : faux X-Forwarded-For ajouté devant par l'attaquant
+func TestGetIP_SpoofedForwardedForIgnored(t *testing.T) {
+	r := httptest.NewRequest(http.MethodGet, "/", nil)
+	r.RemoteAddr = "10.0.0.5:5000"
+	r.Header.Set("X-Forwarded-For", cfEdge+", 6.6.6.6") // l'attaquant écrit une IP Cloudflare, Render ajoute la vraie
+	r.Header.Set("CF-Connecting-IP", "1.2.3.4")
+	if ip := GetIP(r); ip != "6.6.6.6" {
+		t.Errorf("seul le dernier saut (ajouté par le proxy) compte : attendu 6.6.6.6, obtenu %s", ip)
+	}
+}
+
+// Un CF-Connecting-IP invalide n'est jamais utilisé, même via Cloudflare
+func TestGetIP_InvalidCloudflareHeader(t *testing.T) {
+	r := httptest.NewRequest(http.MethodGet, "/", nil)
+	r.RemoteAddr = cfEdge + ":443"
+	r.Header.Set("CF-Connecting-IP", "pas-une-ip<script>")
+	if ip := GetIP(r); ip != cfEdge {
+		t.Errorf("attendu l'IP du pair %s, obtenu %s", cfEdge, ip)
+	}
+}
+
+// En local (sans proxy) : RemoteAddr, sans le port
 func TestGetIP_RemoteAddrStripsPort(t *testing.T) {
 	r := httptest.NewRequest(http.MethodGet, "/", nil)
 	r.RemoteAddr = "192.168.1.1:1234"
@@ -113,13 +154,87 @@ func TestGetIP_SameIPDifferentPorts(t *testing.T) {
 	}
 }
 
-func TestGetIP_CloudflarePriority(t *testing.T) {
-	r := httptest.NewRequest(http.MethodGet, "/", nil)
-	r.Header.Set("CF-Connecting-IP", "1.1.1.1")
-	r.Header.Set("X-Forwarded-For", "2.2.2.2")
-	r.RemoteAddr = "3.3.3.3:80"
-	if ip := GetIP(r); ip != "1.1.1.1" {
-		t.Errorf("CF-Connecting-IP devrait avoir la priorité, obtenu %s", ip)
+func TestIsCloudflare(t *testing.T) {
+	cases := map[string]bool{
+		"173.245.48.10":     true,
+		"104.16.0.1":        true,
+		"2606:4700::1111":   true,
+		"::ffff:104.16.0.1": true, // IPv4 écrite en IPv6
+		"8.8.8.8":           false,
+		"6.6.6.6":           false,
+		"pas-une-ip":        false,
+		"":                  false,
+	}
+	for ip, want := range cases {
+		if got := isCloudflare(ip); got != want {
+			t.Errorf("isCloudflare(%q) : attendu %v, obtenu %v", ip, want, got)
+		}
+	}
+}
+
+// ══════════════════════════════════════════
+//  TESTS — CloudflareOnlyMiddleware
+// ══════════════════════════════════════════
+
+func directRequest(path string) *http.Request {
+	r := httptest.NewRequest(http.MethodGet, path, nil)
+	r.RemoteAddr = "10.0.0.5:5000"
+	r.Header.Set("X-Forwarded-For", "6.6.6.6") // pair public, hors Cloudflare
+	return r
+}
+
+func TestCloudflareOnly_BlocksDirectAccessWhenRequired(t *testing.T) {
+	_ = captureLogs(t)
+	t.Setenv("REQUIRE_CLOUDFLARE", "true")
+	w := httptest.NewRecorder()
+	CloudflareOnlyMiddleware(okHandler()).ServeHTTP(w, directRequest("/home"))
+	if w.Code != http.StatusForbidden {
+		t.Errorf("accès direct avec REQUIRE_CLOUDFLARE : attendu 403, obtenu %d", w.Code)
+	}
+}
+
+func TestCloudflareOnly_AllowsCloudflare(t *testing.T) {
+	t.Setenv("REQUIRE_CLOUDFLARE", "true")
+	w := httptest.NewRecorder()
+	CloudflareOnlyMiddleware(okHandler()).ServeHTTP(w, newRequest(http.MethodGet, "/home", "1.2.3.4"))
+	if w.Code != http.StatusOK {
+		t.Errorf("requête via Cloudflare : attendu 200, obtenu %d", w.Code)
+	}
+}
+
+// Le health check de Render n'arrive pas par Cloudflare : /health reste accessible
+func TestCloudflareOnly_HealthAlwaysAllowed(t *testing.T) {
+	t.Setenv("REQUIRE_CLOUDFLARE", "true")
+	w := httptest.NewRecorder()
+	CloudflareOnlyMiddleware(okHandler()).ServeHTTP(w, directRequest("/health"))
+	if w.Code != http.StatusOK {
+		t.Errorf("/health : attendu 200, obtenu %d", w.Code)
+	}
+}
+
+// En local (loopback / réseau privé), jamais bloqué
+func TestCloudflareOnly_LocalAllowed(t *testing.T) {
+	t.Setenv("REQUIRE_CLOUDFLARE", "true")
+	r := httptest.NewRequest(http.MethodGet, "/home", nil)
+	r.RemoteAddr = "127.0.0.1:50000"
+	w := httptest.NewRecorder()
+	CloudflareOnlyMiddleware(okHandler()).ServeHTTP(w, r)
+	if w.Code != http.StatusOK {
+		t.Errorf("accès local : attendu 200, obtenu %d", w.Code)
+	}
+}
+
+// Sans REQUIRE_CLOUDFLARE : l'accès direct est seulement logué
+func TestCloudflareOnly_LogOnlyByDefault(t *testing.T) {
+	logs := captureLogs(t)
+	t.Setenv("REQUIRE_CLOUDFLARE", "")
+	w := httptest.NewRecorder()
+	CloudflareOnlyMiddleware(okHandler()).ServeHTTP(w, directRequest("/home"))
+	if w.Code != http.StatusOK {
+		t.Errorf("sans REQUIRE_CLOUDFLARE : attendu 200, obtenu %d", w.Code)
+	}
+	if !strings.Contains(logs.String(), "accès direct") {
+		t.Error("l'accès direct doit être logué")
 	}
 }
 
@@ -362,6 +477,49 @@ func TestSecurity_XPoweredByRemoved(t *testing.T) {
 	}
 }
 
+// CSP stricte : aucun script inline, pas d'eval, pas d'iframe externe
+func TestSecurity_StrictCSP(t *testing.T) {
+	w := httptest.NewRecorder()
+	SecurityMiddleware(okHandler()).ServeHTTP(w, httptest.NewRequest(http.MethodGet, "/", nil))
+	csp := w.Header().Get("Content-Security-Policy")
+	if csp == "" {
+		t.Fatal("Content-Security-Policy manquante")
+	}
+	script := ""
+	for _, d := range strings.Split(csp, ";") {
+		if strings.HasPrefix(strings.TrimSpace(d), "script-src") {
+			script = d
+		}
+	}
+	if script == "" {
+		t.Fatal("directive script-src manquante")
+	}
+	for _, bad := range []string{"'unsafe-inline'", "'unsafe-eval'", "*", "http:"} {
+		if strings.Contains(script, bad) {
+			t.Errorf("script-src ne doit pas contenir %s : %s", bad, script)
+		}
+	}
+	for _, must := range []string{"frame-ancestors 'none'", "object-src 'none'", "base-uri 'self'"} {
+		if !strings.Contains(csp, must) {
+			t.Errorf("la CSP doit contenir %q", must)
+		}
+	}
+}
+
+func TestSecurity_HardeningHeaders(t *testing.T) {
+	w := httptest.NewRecorder()
+	SecurityMiddleware(okHandler()).ServeHTTP(w, httptest.NewRequest(http.MethodGet, "/", nil))
+	want := map[string]string{
+		"X-Content-Type-Options": "nosniff",
+		"Referrer-Policy":        "strict-origin-when-cross-origin",
+	}
+	for h, v := range want {
+		if got := w.Header().Get(h); got != v {
+			t.Errorf("%s : attendu %q, obtenu %q", h, v, got)
+		}
+	}
+}
+
 // ══════════════════════════════════════════
 //  TESTS — RequestIDMiddleware
 // ══════════════════════════════════════════
@@ -450,6 +608,14 @@ func TestCache_ImagesImmutable(t *testing.T) {
 	want := "public, max-age=31536000, immutable"
 	if got := cacheControlFor(t, "/img/favicon.png"); got != want {
 		t.Errorf("images : attendu %q, obtenu %q", want, got)
+	}
+}
+
+// Polices → 1 an + immutable
+func TestCache_FontsImmutable(t *testing.T) {
+	want := "public, max-age=31536000, immutable"
+	if got := cacheControlFor(t, "/fonts/syne-latin-800-normal.woff2"); got != want {
+		t.Errorf("polices : attendu %q, obtenu %q", want, got)
 	}
 }
 

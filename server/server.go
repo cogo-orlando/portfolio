@@ -154,12 +154,17 @@ func newMux() *http.ServeMux {
 	mux.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./web/img/favicon.ico")
 	})
+	// security.txt (RFC 9116) : comment signaler une faille de sécurité
+	mux.HandleFunc("/.well-known/security.txt", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "./web/.well-known/security.txt")
+	})
 
 	// ── Fichiers statiques (sans listing de dossiers) ──
 	static := noDirListing(http.FileServer(http.Dir("./web")))
 	mux.Handle("/css/", static)
 	mux.Handle("/js/", static)
 	mux.Handle("/img/", static)
+	mux.Handle("/fonts/", static)
 	mux.Handle("/robots.txt", static)
 
 	// ── Pages ──

@@ -1,36 +1,29 @@
 {{/*
-Éléments communs du
+  Éléments communs du <head> — à placer DANS le <head> de chaque page :
+  {{template "head-common"}}
+  Le <title>, la description et le CSS propre à la page restent dans la page.
+*/}}
 
-<head> — à placer DANS le
+{{define "head-common"}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0b16">
+    <meta name="author" content="Orlando Cogo">
 
-  <head> de chaque page :
-    {{template "head-common"}}
-    Le <title>, la description et le CSS propre à la page restent dans la page.
-      */}}
+    <link rel="icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
 
-      {{define "head-common"}}
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="theme-color" content="#0a0b16">
-      <meta name="author" content="Orlando Cogo">
+    <!-- Polices hébergées sur le site : les 2 plus visibles sont préchargées -->
+    <link rel="preload" href="/fonts/syne-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{{asset `/css/fonts.css`}}">
 
-      <link rel="icon" href="/img/favicon.ico">
-      <link rel="icon" type="image/png" href="/img/favicon.png">
-      <link rel="apple-touch-icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="{{asset `/css/nav.css`}}">
+{{end}}
 
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;1,400&display=swap"
-        rel="stylesheet">
-
-      <link rel="stylesheet" href="{{asset `/css/nav.css`}}">
-      {{end}}
-
-      {{/* Fond partagé : à placer juste après
-
-  <body> */}}
-    {{define "background"}}
-    <div class="blob1" aria-hidden="true"></div>
-    <div class="blob2" aria-hidden="true"></div>
-    {{end}}
+{{/* Fond partagé : à placer juste après <body> */}}
+{{define "background"}}
+<div class="blob1" aria-hidden="true"></div>
+<div class="blob2" aria-hidden="true"></div>
+{{end}}

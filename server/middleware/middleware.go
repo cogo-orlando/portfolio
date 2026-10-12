@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"io"
 	"log/slog"
-	"net"
 	"net/http"
 	"os"
 	"portfo/server/db"
@@ -295,33 +294,37 @@ func LoggerMiddleware(next http.Handler) http.Handler {
 	})
 }
 
-// ══════════════════════════════════════════
-//  IP RÉELLE (Cloudflare en priorité)
-// ══════════════════════════════════════════
-
-func GetIP(r *http.Request) string {
-	if ip := strings.TrimSpace(r.Header.Get("CF-Connecting-IP")); ip != "" {
-		return ip
-	}
-	if xff := r.Header.Get("X-Forwarded-For"); xff != "" {
-		return strings.TrimSpace(strings.Split(xff, ",")[0])
-	}
-	// RemoteAddr = "ip:port" → on garde uniquement l'IP
-	if host, _, err := net.SplitHostPort(r.RemoteAddr); err == nil {
-		return host
-	}
-	return r.RemoteAddr
-}
+// IP réelle du visiteur : voir clientip.go (GetIP, CloudflareOnlyMiddleware)
 
 // ══════════════════════════════════════════
 //  SECURITY
+//  Content-Security-Policy stricte : AUCUN script inline n'est exécuté.
+//  Les seules sources externes autorisées sont celles réellement utilisées.
 // ══════════════════════════════════════════
+
+// ContentSecurityPolicy est exportée pour être vérifiée par les tests
+const ContentSecurityPolicy = "default-src 'self'; " +
+	"script-src 'self'; " + // uniquement nos fichiers .js : pas d'inline, pas d'eval
+	"style-src 'self' 'unsafe-inline'; " + // attributs style="--var:…" utilisés pour les couleurs
+	"img-src 'self' data:; " +
+	"font-src 'self'; " + // polices hébergées sur le site
+	"connect-src 'self' https://api.open-meteo.com https://formspree.io; " +
+	"form-action 'self' https://formspree.io; " +
+	"frame-src 'self'; " +
+	"frame-ancestors 'none'; " + // le site ne peut pas être intégré dans une iframe (clickjacking)
+	"base-uri 'self'; " +
+	"object-src 'none'; " +
+	"upgrade-insecure-requests"
 
 func SecurityMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		h := w.Header()
 		h.Del("X-Powered-By")
 		h.Set("Server", "")
+		h.Set("Content-Security-Policy", ContentSecurityPolicy)
+		h.Set("X-Content-Type-Options", "nosniff")
+		h.Set("Referrer-Policy", "strict-origin-when-cross-origin")
+		h.Set("Permissions-Policy", "camera=(), microphone=(), geolocation=()")
 		next.ServeHTTP(w, r)
 	})
 }
@@ -379,6 +382,10 @@ func GzipMiddleware(next http.Handler) http.Handler {
 
 // ══════════════════════════════════════════
 //  CACHE
+//  - /img/ et /fonts/   : 1 an (contenu qui ne change pas)
+//  - CSS/JS versionnés  : 1 an, immutable → l'URL change à chaque modif (?v=hash)
+//  - CSS/JS sans ?v=    : 1 heure, par sécurité
+//  - HTML               : toujours revalidé (l'ETag renvoie un 304 si rien n'a changé)
 // ══════════════════════════════════════════
 
 func CacheMiddleware(next http.Handler) http.Handler {
@@ -387,7 +394,7 @@ func CacheMiddleware(next http.Handler) http.Handler {
 		isAsset := strings.HasPrefix(path, "/css/") || strings.HasPrefix(path, "/js/")
 
 		switch {
-		case strings.HasPrefix(path, "/img/"):
+		case strings.HasPrefix(path, "/img/") || strings.HasPrefix(path, "/fonts/"):
 			w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
 		case isAsset && r.URL.Query().Get("v") != "":
 			w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
@@ -498,12 +505,12 @@ func TimeoutMiddleware(next http.Handler) http.Handler {
 }
 
 // ══════════════════════════════════════════
-//
-//	CHAIN
-//
+//  CHAIN
+//  Ordre d'exécution (de l'extérieur vers l'intérieur) :
+//  RequestID → Logger → CloudflareOnly → Recovery → Timeout → RateLimit
+//  → Honeypot → Security → Gzip → Cache → routes
 // ══════════════════════════════════════════
-// Ordre d'exécution (de l'extérieur vers l'intérieur) :
-// RequestID → Logger → Recovery → Timeout → RateLimit → Honeypot → Security → Gzip → Cache → routes
+
 func Chain(h http.Handler) http.Handler {
 	h = CacheMiddleware(h)
 	h = GzipMiddleware(h)
@@ -512,6 +519,7 @@ func Chain(h http.Handler) http.Handler {
 	h = RateLimitMiddleware(h)
 	h = TimeoutMiddleware(h)
 	h = RecoveryMiddleware(h)
+	h = CloudflareOnlyMiddleware(h)
 	h = LoggerMiddleware(h)
 	h = RequestIDMiddleware(h) // en dernier = s'exécute en premier
 	return h
