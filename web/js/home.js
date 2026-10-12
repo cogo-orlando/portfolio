@@ -4,18 +4,7 @@
 ══════════════════════════════════════════ */
 (function () {
     'use strict';
-    const { $, $$, onReady, countUp, fetchJSON, rafThrottle, reducedMotion } = window.Site;
-
-    // "26h3m4.5s" (format Go) → "1j 2h" / "3h 12min" / "45min"
-    const formatUptime = (raw) => {
-        if (typeof raw !== 'string') return '—';
-        const h = Number(raw.match(/(\d+)h/)?.[1] || 0);
-        const m = Number(raw.match(/(\d+)m(?!s)/)?.[1] || 0);
-        const days = Math.floor(h / 24);
-        if (days > 0) return `${days}j ${h % 24}h`;
-        if (h > 0) return `${h}h ${m}min`;
-        return `${m}min`;
-    };
+    const { $, $$, onReady, countUp, fetchJSON, rafThrottle, reducedMotion, formatUptime } = window.Site;
 
     onReady(() => {
         // ── COMPTEURS : les chiffres (venus de _data.html) montent de 0 à leur valeur ──

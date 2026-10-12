@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{template "head-common"}}
+
+    <title>Orlando Cogo — FAQ</title>
+    <meta name="description"
+        content="Frequently asked questions about Orlando Cogo — background, career change, skills, availability. Cybersecurity student at Ynov Campus Toulouse.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orlandocogo.com/en/faq">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orlandocogo.com/en/faq">
+    <meta property="og:title" content="Orlando Cogo — FAQ">
+    <meta property="og:description" content="Frequently asked questions about Orlando Cogo — background, career change, skills.">
+    <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="fr_FR">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Orlando Cogo — FAQ">
+    <meta name="twitter:description" content="Frequently asked questions about Orlando Cogo — background, career change, skills.">
+    <meta name="twitter:image" content="https://orlandocogo.com/img/og-image.png">
+
+    <link rel="stylesheet" href="{{asset `/css/faq.css`}}">
+</head>
+
+<body>
+    {{template "background"}}
+    {{template "nav-en"}}
+
+    <main id="main-content">
+
+        <!-- HERO -->
+        <section class="hero" aria-labelledby="hero-title">
+            <h1 class="hero-title" id="hero-title">FAQ<br><span class="outline">Questions</span></h1>
+            <p class="hero-intro">Everything you want to know · <strong>no filter</strong></p>
+            <div class="faq-counter reveal" aria-label="FAQ statistics">
+                <div class="fc-item"><span class="fc-val" id="totalQ">0</span><span class="fc-label">questions</span></div>
+                <div class="fc-sep" aria-hidden="true">·</div>
+                <div class="fc-item"><span class="fc-val">7</span><span class="fc-label">categories</span></div>
+                <div class="fc-sep" aria-hidden="true">·</div>
+                <div class="fc-item"><span class="fc-val">{{template "nb-projets-prod"}}</span><span class="fc-label">project in production</span></div>
+                <div class="fc-sep" aria-hidden="true">·</div>
+                <div class="fc-item"><span class="fc-val">1</span><span class="fc-label">deliberate career change</span></div>
+            </div>
+        </section>
+
+        <!-- CONTROLS -->
+        <section class="section" aria-label="FAQ controls">
+            <div class="progress-wrap reveal" aria-label="Reading progress">
+                <div class="progress-header">
+                    <span class="progress-label">Questions explored</span>
+                    <span class="progress-pct"><span id="openCount">0</span>/<span id="totalCount">0</span></span>
+                </div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progress">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <div class="faq-controls reveal">
+                <div class="search-wrap">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>
+                    <input type="search" id="searchInput" class="search-input" placeholder="Search a question..." aria-label="Search the FAQ">
+                </div>
+                <div class="faq-actions" role="group" aria-label="FAQ actions">
+                    <button class="action-btn" id="randomBtn" type="button">Random question</button>
+                    <button class="action-btn" id="interviewBtn" type="button">Interview mode</button>
+                    <button class="action-btn" id="expandAllBtn" type="button">Expand all</button>
+                </div>
+            </div>
+
+            <div class="cat-filters reveal" role="group" aria-label="Filter by category">
+                <button class="cat-btn active" data-cat="all" type="button">All</button>
+                <button class="cat-btn" data-cat="parcours" style="--cat-color:var(--accent)" type="button">Background</button>
+                <button class="cat-btn" data-cat="formation" style="--cat-color:var(--accent2)" type="button">Education</button>
+                <button class="cat-btn" data-cat="opportunites" style="--cat-color:#f5a000" type="button">Opportunities</button>
+                <button class="cat-btn" data-cat="infra" style="--cat-color:var(--accent2)" type="button">Infra &amp; Networking</button>
+                <button class="cat-btn" data-cat="securite" style="--cat-color:#f54040" type="button">Security</button>
+                <button class="cat-btn" data-cat="portfolio" style="--cat-color:#c8a0f5" type="button">Portfolio</button>
+                <button class="cat-btn" data-cat="perso" style="--cat-color:#f500a0" type="button">Personal</button>
+            </div>
+        </section>
+
+        <!-- FAQ ITEMS -->
+        <section class="section" id="faqSection" aria-label="Frequently asked questions">
+            <div class="faq-list" id="faqList">
+                <div class="faq-item reveal" data-cat="parcours" data-color="var(--accent)">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">01</span>
+                        <span class="faq-text">Why did you leave the aerospace industry?</span>
+                        <span class="faq-cat-tag" style="--c:var(--accent)">Background</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>I spent several years in aerospace at Airbus, first in Toulouse and then in Marseille. It was an incredible experience that taught me rigor, method and how to work in a demanding environment. But I realized my real passion lay elsewhere — in computer science, systems and security. Leaving a stable industry to start from scratch was not an easy decision, but it was the right one.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="parcours" data-color="var(--accent)">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">02</span>
+                        <span class="faq-text">How did your career change go?</span>
+                        <span class="faq-cat-tag" style="--c:var(--accent)">Background</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>After earning my BTS CPRP (a two-year technical degree) through a work-study program at Airbus Helicopters, I decided to move towards what truly interested me. I enrolled in a Computer Science Bachelor at Ynov Campus Toulouse, specializing in cybersecurity. Alongside my studies, I built and deployed this Go portfolio in production, to anchor every skill in something real.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="parcours" data-color="var(--accent)" data-secret="airbus">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">03</span>
+                        <span class="faq-text">What Airbus really taught you...</span>
+                        <span class="faq-cat-tag" style="--c:var(--accent)">Background</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>Working on aircraft parts with tolerances of a few microns teaches you something essential: one mistake can have catastrophic consequences. I apply that “zero defect” mindset from machining directly to cybersecurity and development — automated tests, CI/CD, gosec, monitoring in production. An unjustified open port or a poorly secured configuration calls for the same mindset.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="formation" data-color="var(--accent2)">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">04</span>
+                        <span class="faq-text">Why cybersecurity specifically?</span>
+                        <span class="faq-cat-tag" style="--c:var(--accent2)">Education</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>To me, cybersecurity is truly the future. With the rise of AI and all the new technologies, the field keeps changing — and that is what excites me. I'm convinced that understanding these changes has become essential to protect systems properly. And in practice, I have already implemented a honeypot, rate limiting, a strict CSP, PostgreSQL RLS and a Cloudflare WAF on my own projects.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="formation" data-color="var(--accent2)">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">05</span>
+                        <span class="faq-text">What are you learning right now?</span>
+                        <span class="faq-cat-tag" style="--c:var(--accent2)">Education</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>I'm working on several fronts: advanced Linux administration with Samba and an LDAP directory, HackTheBox CTFs, Go with PostgreSQL and application security, Docker hardening and multi-stage builds, GitHub Actions CI/CD, and Cloudflare WAF &amp; SSL. All of this alongside my studies at Ynov.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="formation" data-color="var(--accent2)">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">06</span>
+                        <span class="faq-text">Honestly, what is your current level?</span>
+                        <span class="faq-cat-tag" style="--c:var(--accent2)">Education</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>Honestly? An advanced beginner who builds real things. I'm in my {{template "niveau-long-en"}}, so I'm still laying solid foundations. But I already have an application in production with {{template "nb-tests"}} automated tests, automated CI/CD, gosec {{template "nb-gosec"}} issues, Docker hardening and security monitoring. I don't claim to know everything — that's actually what motivates me every day.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="opportunites" data-color="#f5a000">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">07</span>
+                        <span class="faq-text">What kind of internship are you looking for?</span>
+                        <span class="faq-cat-tag" style="--c:#f5a000">Opportunities</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>I'm looking for an internship in cybersecurity, DevOps or Go backend development. Ideally in a company where I can get hands-on with real configurations, take part in audits, help secure infrastructure or work on CI/CD pipelines. I'm based in Toulouse, France, but I'm mobile and open to remote work.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="opportunites" data-color="#f5a000">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">08</span>
+                        <span class="faq-text">When are you available?</span>
+                        <span class="faq-cat-tag" style="--c:#f5a000">Opportunities</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>I'm currently in my {{template "niveau-long-en"}} at Ynov Campus Toulouse. Available now for an internship or a work-study program in cybersecurity, DevOps or backend development. Mainly Toulouse, remote is fine. Feel free to contact me directly.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="portfolio" data-color="#c8a0f5">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">09</span>
+                        <span class="faq-text">How was this portfolio built?</span>
+                        <span class="faq-cat-tag" style="--c:#c8a0f5">Portfolio</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>Entirely from scratch with a Go backend — custom HTTP server, manual routing, middleware chain, a honeypot with {{template "honeypot-routes"}} routes, rate limiting at {{template "rate-limit"}} req/min, panic recovery, request IDs, structured slog logging, graceful shutdown. The frontend is vanilla HTML/CSS/JS, no framework. Multi-stage Docker image ({{template "docker-portfolio"}}), deployed on Render behind Cloudflare WAF. GitHub Actions CI/CD — {{template "nb-tests"}} tests, govulncheck and gosec on every push.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="portfolio" data-color="#c8a0f5">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">10</span>
+                        <span class="faq-text">Why Go and not Node.js or Python?</span>
+                        <span class="faq-cat-tag" style="--c:#c8a0f5">Portfolio</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>Go attracted me for its simplicity, its performance, its very complete standard library for the web, and above all its growing use in security tooling. Many modern offensive and defensive tools are written in Go. Learning it is an investment in my future job — and the concrete result is a {{template "docker-portfolio"}} Docker image running in production.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="portfolio" data-color="#c8a0f5">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">11</span>
+                        <span class="faq-text">Why Docker for a student portfolio?</span>
+                        <span class="faq-cat-tag" style="--c:#c8a0f5">Portfolio</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>Because a portfolio also shows how I work. A multi-stage build to minimize the attack surface, a scratch image with no OS, no-new-privileges, a read-only filesystem, non-root USER 1001 — these aren't options, they're real hardening. If I secure my own portfolio like this, imagine how I'll treat my future employers' systems.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="infra" data-color="var(--accent2)">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">12</span>
+                        <span class="faq-text">What exactly did you do on the Cisco project?</span>
+                        <span class="faq-cat-tag" style="--c:var(--accent2)">Infra</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>I designed and configured a complete enterprise network in Cisco Packet Tracer — 4 sites (Strasbourg, Brussels, Casablanca, Stockholm), 10 VLANs (VLAN10 to VLAN100), DHCP configured directly on the Layer 3 switches (3650-24PS), hub-and-spoke static routing to a central router, Wi-Fi redundancy on every site, and a DNS + web server hosted in Stockholm and reachable from every site. Real network configuration, not theory.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="infra" data-color="var(--accent2)">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">13</span>
+                        <span class="faq-text">What is the Samba / directory project?</span>
+                        <span class="faq-cat-tag" style="--c:var(--accent2)">Infra</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>A Linux infrastructure project in pairs on Proxmox — a Samba file server with authentication through a centralized directory. Several teams access network shares with different permissions. I configured Samba, enabled the full_audit module to log every action, and set up per-team ACLs. All of it on VMs under Proxmox VE, accessible by both team members at the same time.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="infra" data-color="var(--accent2)">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">14</span>
+                        <span class="faq-text">How do you use Proxmox?</span>
+                        <span class="faq-cat-tag" style="--c:var(--accent2)">Infra</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>Proxmox VE is the hypervisor we used for the Samba/directory project. It lets us create and manage KVM VMs — a Linux server VM for Samba and the directory, and client VMs to test access. The advantage is that we can work on the same VMs from our own machines at the same time through the virtual network. It's very close to a real professional environment.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="infra" data-color="var(--accent2)">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">15</span>
+                        <span class="faq-text">What's the difference between an L2 and an L3 switch?</span>
+                        <span class="faq-cat-tag" style="--c:var(--accent2)">Infra</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>An L2 switch works at the data link layer — it switches MAC frames between ports and handles VLANs, but doesn't route. An L3 switch does all that plus IP routing — it can route between VLANs without an external router, and you can configure DHCP directly on it. In my Cisco project, I used 3650-24PS (L3) switches for inter-VLAN routing and DHCP, and 2960-24TT (L2) switches for distribution within each site.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="securite" data-color="#f54040">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">16</span>
+                        <span class="faq-text">What exactly is the honeypot on your portfolio?</span>
+                        <span class="faq-cat-tag" style="--c:#f54040">Security</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>I set up {{template "honeypot-routes"}} trap routes on my Go server — /wp-admin, /.env, /.git/config, /admin, /phpinfo.php and more. When a bot or scanner hits one of them, it's automatically blacklisted for 24 hours and the event is logged in PostgreSQL. In production, I regularly see automated scanners getting blacklisted — that's real defensive monitoring.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="securite" data-color="#f54040">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">17</span>
+                        <span class="faq-text">How do you secure a database?</span>
+                        <span class="faq-cat-tag" style="--c:#f54040">Security</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>On my Supabase PostgreSQL project I applied several layers: RLS enabled on every table, a dedicated user with minimal rights (security_app, limited to writing logs and purging old ones), sslmode=require to encrypt every connection, the JWT API disabled, and REVOKE ALL on the anon and authenticated roles. That's least privilege, applied rigorously.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="securite" data-color="#f54040">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">18</span>
+                        <span class="faq-text">What do you do on HackTheBox?</span>
+                        <span class="faq-cat-tag" style="--c:#f54040">Security</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>Mainly Linux labs — service enumeration, vulnerability identification, basic exploitation. I explore enumeration techniques (nmap, gobuster), vulnerability analysis and pentest fundamentals. It complements the defensive security I apply to my projects — understanding the attack to build a better defense.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="securite" data-color="#f54040">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">19</span>
+                        <span class="faq-text">What is gosec and why does it matter?</span>
+                        <span class="faq-cat-tag" style="--c:#f54040">Security</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>gosec is a static security scanner for Go — it analyzes source code and flags potential vulnerabilities: unchecked errors (G104), SQL queries built from strings (G201/G202), data flowing from user input into risky calls like an SSRF (G704). On my portfolio, gosec runs on every push through GitHub Actions. Result: {{template "nb-gosec"}} issues across the repo. It isn't optional — it's part of my definition of “done”.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="securite" data-color="#f54040">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">20</span>
+                        <span class="faq-text">In what context have you used OSINT?</span>
+                        <span class="faq-cat-tag" style="--c:#f54040">Security</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>OSINT is gathering information from public sources. I explore it in my studies and in CTFs — Google Dorks to find unintentionally exposed information, metadata analysis, passive reconnaissance. Understanding what an attacker can find about you or your infrastructure is the first step to protecting yourself.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="perso" data-color="#f500a0">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">21</span>
+                        <span class="faq-text">What are your hobbies outside of code?</span>
+                        <span class="faq-cat-tag" style="--c:#f500a0">Personal</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>Climbing — which teaches patience and problem-solving, not that different from debugging. Travel — I love discovering new places and cultures. Music — always wearing headphones. Video games — mostly strategy and exploration.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal" data-cat="perso" data-color="#f500a0">
+                    <button class="faq-q" aria-expanded="false">
+                        <span class="faq-num" aria-hidden="true">22</span>
+                        <span class="faq-text">A surprising fact about you?</span>
+                        <span class="faq-cat-tag" style="--c:#f500a0">Personal</span>
+                        <svg class="faq-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">
+                            <span class="faq-prompt" aria-hidden="true">~/faq $</span>
+                            <p>I competed in the 2023 WorldSkills departmental round in milling. WorldSkills is the “Olympics of skilled trades” — national and international competitions of professional skills. It requires extreme precision on CNC machines. Not exactly what you'd expect from a future cybersecurity expert, right?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What I am -->
+            <div class="not-section reveal" aria-labelledby="yes-title">
+                <div class="not-header">
+                    <span class="section-tag" aria-hidden="true">// Clarification</span>
+                    <h2 class="section-title" id="yes-title">What I <strong>am</strong></h2>
+                </div>
+                <div class="not-grid">
+                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>Someone who builds real projects running in production</span></div>
+                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>Rigorous — {{template "nb-tests"}} automated tests, gosec {{template "nb-gosec"}} issues, green CI/CD</span></div>
+                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>Curious — I learn by building, not by watching</span></div>
+                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>An unconventional profile that brings a different perspective</span></div>
+                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>Available and motivated for an internship or a work-study program</span></div>
+                    <div class="not-item not-item--yes"><span class="not-check" aria-hidden="true">✓</span><span>Honest about my level — and ambitious about my progress</span></div>
+                </div>
+            </div>
+
+            <!-- What I am NOT -->
+            <div class="not-section reveal" aria-labelledby="not-title">
+                <div class="not-header">
+                    <span class="section-tag" aria-hidden="true">// Clarification</span>
+                    <h2 class="section-title" id="not-title">What I am <strong>not</strong></h2>
+                </div>
+                <div class="not-grid">
+                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>An expert who claims to know everything</span></div>
+                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>Someone who gives up when facing a problem</span></div>
+                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>A developer who refuses to learn new technologies</span></div>
+                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>A black-hat hacker</span></div>
+                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>Someone afraid of changing careers</span></div>
+                    <div class="not-item"><span class="not-x" aria-hidden="true">✗</span><span>A “classic” computer science profile</span></div>
+                </div>
+            </div>
+
+            <!-- Myths & Reality -->
+            <div class="myths-section reveal" aria-labelledby="myths-title">
+                <div class="myths-header">
+                    <span class="section-tag" aria-hidden="true">// Myth-busting</span>
+                    <h2 class="section-title" id="myths-title">Myths &amp; Reality</h2>
+                </div>
+                <div class="myths-list">
+                    <div class="myth-item">
+                        <div class="myth-col myth"><span class="myth-tag">Myth</span><p>“Cybersecurity is just hacking”</p></div>
+                        <div class="myth-sep" aria-hidden="true">→</div>
+                        <div class="myth-col reality"><span class="myth-tag reality-tag">Reality</span><p>It's 80% prevention, architecture, auditing and training. Pentesting is only a tiny part of the field.</p></div>
+                    </div>
+                    <div class="myth-item">
+                        <div class="myth-col myth"><span class="myth-tag">Myth</span><p>“You have to be a genius to work in security”</p></div>
+                        <div class="myth-sep" aria-hidden="true">→</div>
+                        <div class="myth-col reality"><span class="myth-tag reality-tag">Reality</span><p>You need curiosity, rigor and perseverance. Most exploited flaws are basic configuration mistakes.</p></div>
+                    </div>
+                    <div class="myth-item">
+                        <div class="myth-col myth"><span class="myth-tag">Myth</span><p>“Switching to IT after 20 is impossible”</p></div>
+                        <div class="myth-sep" aria-hidden="true">→</div>
+                        <div class="myth-col reality"><span class="myth-tag reality-tag">Reality</span><p>Proof by example. An unconventional background is often an advantage — it brings a different view from classic profiles.</p></div>
+                    </div>
+                    <div class="myth-item">
+                        <div class="myth-col myth"><span class="myth-tag">Myth</span><p>“A Bachelor student can't build serious projects”</p></div>
+                        <div class="myth-sep" aria-hidden="true">→</div>
+                        <div class="myth-col reality"><span class="myth-tag reality-tag">Reality</span><p>An application in production, {{template "nb-tests"}} automated tests, CI/CD, Docker hardening, PostgreSQL RLS, Cloudflare WAF. Skill comes from what you build, not from the diploma.</p></div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- INTERVIEW MODE OVERLAY -->
+    <div class="interview-overlay" id="interviewOverlay" role="dialog" aria-modal="true" aria-label="Interview mode" hidden>
+        <div class="interview-box">
+            <div class="interview-bar">
+                <div class="ft-dot" style="background:#ff5f57" aria-hidden="true"></div>
+                <div class="ft-dot" style="background:#febc2e" aria-hidden="true"></div>
+                <div class="ft-dot" style="background:#28c840" aria-hidden="true"></div>
+                <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted2);margin-left:8px">interview_mode.sh</span>
+                <button class="interview-close" id="interviewClose" type="button" aria-label="Close interview mode">ESC</button>
+            </div>
+            <div class="interview-body" id="interviewBody"></div>
+            <div class="interview-controls">
+                <button class="iv-btn" id="ivNext" type="button">Next question →</button>
+                <button class="iv-btn iv-exit" id="ivExit" type="button">Quit</button>
+            </div>
+        </div>
+    </div>
+
+    {{template "footer-en"}}
+    <script src="{{asset `/js/faq.js`}}"></script>
+</body>
+
+</html>

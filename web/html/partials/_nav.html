@@ -7,7 +7,7 @@
 {{define "nav"}}
 <nav class="nav" aria-label="Navigation principale">
     <a href="/home" class="nav-logo" aria-label="Accueil — Orlando Cogo">
-        <span class="prompt" aria-hidden="true"></span>orlando.cogo
+        <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
     </a>
 
     <ul class="nav-left nav-links" role="list">
@@ -37,9 +37,18 @@
     </ul>
 
     <div class="nav-right">
+        <a href="/en" class="lang-switch" data-lang-switch="en" hreflang="en" lang="en" aria-label="English version">EN</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Activer le mode clair" title="Changer de thème">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" /></svg>
+        </button>
         <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
             <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
         </button>
+        <div class="nav-status" aria-label="Disponible pour travailler">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>open to work</span>
+        </div>
     </div>
 </nav>
 
@@ -52,5 +61,66 @@
     <a href="/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>CV</a>
     <a href="/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>Status</a>
     <a href="/faq" class="mobile-link"><span class="mobile-num" aria-hidden="true">08</span>FAQ</a>
+</div>
+{{end}}
+
+{{/* Version anglaise : {{template "nav-en"}} */}}
+{{define "nav-en"}}
+<nav class="nav" aria-label="Main navigation">
+    <a href="/en/home" class="nav-logo" aria-label="Home — Orlando Cogo">
+        <span class="prompt" aria-hidden="true">~/</span>orlando.cogo
+    </a>
+
+    <ul class="nav-left nav-links" role="list">
+        <li><a href="/en/about" class="nav-link">About</a></li>
+        <li><a href="/en/contact" class="nav-link">Contact</a></li>
+        <li><a href="/en/cv" class="nav-link">Resume</a></li>
+    </ul>
+
+    <div class="nav-center">
+        <a href="/en/home" class="nav-home"><span>HOME</span></a>
+    </div>
+
+    <ul class="nav-right-links nav-links" role="list">
+        <li><a href="/en/skills" class="nav-link">Skills</a></li>
+        <li><a href="/en/project" class="nav-link">Projects</a></li>
+        <li><a href="/en/tech" class="nav-link">Infrastructure</a></li>
+        <li class="nav-more">
+            <button class="nav-more-btn" id="navMoreBtn" aria-haspopup="true" aria-expanded="false" aria-controls="navMoreMenu" aria-label="More pages">
+                More
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-more-menu" id="navMoreMenu" role="menu">
+                <a href="/en/status" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">06</span><span class="more-info"><span class="more-name">Status</span><span class="more-desc">System status</span></span></a>
+                <a href="/en/faq" class="more-item" role="menuitem"><span class="more-num" aria-hidden="true">07</span><span class="more-info"><span class="more-name">FAQ</span><span class="more-desc">Questions &amp; answers</span></span></a>
+            </div>
+        </li>
+    </ul>
+
+    <div class="nav-right">
+        <a href="/" class="lang-switch" data-lang-switch="fr" hreflang="fr" lang="fr" aria-label="Version française">FR</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Change theme">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" /></svg>
+        </button>
+        <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+            <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+        </button>
+        <div class="nav-status" aria-label="Available for work">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>open to work</span>
+        </div>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="/en/about" class="mobile-link"><span class="mobile-num" aria-hidden="true">01</span>About</a>
+    <a href="/en/tech" class="mobile-link"><span class="mobile-num" aria-hidden="true">02</span>Infrastructure</a>
+    <a href="/en/skills" class="mobile-link"><span class="mobile-num" aria-hidden="true">03</span>Skills</a>
+    <a href="/en/project" class="mobile-link"><span class="mobile-num" aria-hidden="true">04</span>Projects</a>
+    <a href="/en/contact" class="mobile-link"><span class="mobile-num" aria-hidden="true">05</span>Contact</a>
+    <a href="/en/cv" class="mobile-link"><span class="mobile-num" aria-hidden="true">06</span>Resume</a>
+    <a href="/en/status" class="mobile-link"><span class="mobile-num" aria-hidden="true">07</span>Status</a>
+    <a href="/en/faq" class="mobile-link"><span class="mobile-num" aria-hidden="true">08</span>FAQ</a>
 </div>
 {{end}}

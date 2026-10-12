@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{template "head-common"}}
+
+    <title>404 — Page not found · Orlando Cogo</title>
+    <meta name="description" content="Page not found on Orlando Cogo's portfolio.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="stylesheet" href="{{asset `/css/404.css`}}">
+</head>
+
+<body>
+    {{template "background"}}
+    <a href="/" class="lang-switch lang-switch--floating" hreflang="fr" lang="fr" aria-label="Version française">FR</a>
+
+    <div class="terminal-bar" aria-hidden="true">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span class="terminal-title">orlando@portfolio ~ %</span>
+    </div>
+
+    <main id="main-content" class="wrapper">
+
+        <!-- GLITCH 404 -->
+        <div class="glitch-wrap">
+            <h1 class="glitch" data-text="404" aria-label="Error 404">404</h1>
+        </div>
+
+        <!-- TERMINAL -->
+        <div class="terminal-block" aria-hidden="true">
+            <div class="terminal-output" id="term-output"></div>
+        </div>
+
+        <!-- SUBTITLE -->
+        <p class="subtitle">This page doesn't exist or has been moved.<br>
+            <span class="subtitle-redirect">Redirecting automatically in <span id="countdown">10</span>s...</span>
+        </p>
+
+        <!-- ACTIONS -->
+        <div class="actions">
+            <a href="/en/home" class="btn-primary" aria-label="Back to the portfolio home page">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M12 7H2M2 7L6 3M2 7L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span>Back to home</span>
+            </a>
+            <a href="/en/contact" class="btn-secondary">Contact me</a>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div class="quicklinks" aria-label="Available pages">
+            <span class="quicklinks-label">Available pages —</span>
+            <a href="/en/about" class="qlink">About</a>
+            <span class="qsep" aria-hidden="true">·</span>
+            <a href="/en/skills" class="qlink">Skills</a>
+            <span class="qsep" aria-hidden="true">·</span>
+            <a href="/en/project" class="qlink">Projects</a>
+            <span class="qsep" aria-hidden="true">·</span>
+            <a href="/en/contact" class="qlink">Contact</a>
+            <span class="qsep" aria-hidden="true">·</span>
+            <a href="/en/cv" class="qlink">Resume</a>
+            <span class="qsep" aria-hidden="true">·</span>
+            <a href="/en/faq" class="qlink">FAQ</a>
+        </div>
+
+        <!-- STATUS -->
+        <div class="status-row" aria-label="Error status">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>Error 404 · Page not found · orlandocogo.com</span>
+        </div>
+
+    </main>
+
+    <script src="{{asset `/js/404.js`}}"></script>
+</body>
+
+</html>

@@ -172,8 +172,11 @@ func newMux() *http.ServeMux {
 		if path == "/" {
 			continue
 		}
-		mux.HandleFunc(path, h)
+		mux.HandleFunc(path, withAlternates(path, h))
 	}
+
+	// ── Version anglaise (/en/...) ──
+	registerEnglish(mux)
 
 	// "/" attrape toutes les URL inconnues :
 	// exactement "/" → index, tout le reste → page 404 personnalisée
@@ -182,7 +185,7 @@ func newMux() *http.ServeMux {
 			handler.NotFoundHandler(w, r)
 			return
 		}
-		handler.IndexHandler(w, r)
+		withAlternates("/", handler.IndexHandler)(w, r)
 	})
 
 	return mux
@@ -319,6 +322,15 @@ func sitemapHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(&b, "    <changefreq>%s</changefreq>\n", u.freq)
 		fmt.Fprintf(&b, "    <priority>%s</priority>\n", u.priority)
 		fmt.Fprintf(&b, "  </url>\n")
+		// Version anglaise, si la page est traduite
+		if translated[u.path] {
+			fmt.Fprintf(&b, "  <url>\n")
+			fmt.Fprintf(&b, "    <loc>%s%s</loc>\n", base, enPath(u.path))
+			fmt.Fprintf(&b, "    <lastmod>%s</lastmod>\n", lastMod("en/"+u.file))
+			fmt.Fprintf(&b, "    <changefreq>%s</changefreq>\n", u.freq)
+			fmt.Fprintf(&b, "    <priority>%s</priority>\n", u.priority)
+			fmt.Fprintf(&b, "  </url>\n")
+		}
 	}
 	b.WriteString(`</urlset>`)
 

@@ -18,6 +18,11 @@ document.documentElement.classList.add('js');
 
     const Site = {};
 
+    // ── Langue de la page ("fr" ou "en"), d'après <html lang="…"> ──
+    Site.lang = (document.documentElement.lang || 'fr').toLowerCase().startsWith('en') ? 'en' : 'fr';
+    // Site.t('Bonjour', 'Hello') → le texte dans la langue de la page
+    Site.t = (fr, en) => (Site.lang === 'en' ? en : fr);
+
     // ── Sélecteurs raccourcis ──
     Site.$ = (sel, root = document) => root.querySelector(sel);
     Site.$$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -136,7 +141,7 @@ document.documentElement.classList.add('js');
         const h = Number(raw.match(/(\d+)h/)?.[1] || 0);
         const m = Number(raw.match(/(\d+)m(?!s)/)?.[1] || 0);
         const days = Math.floor(h / 24);
-        if (days > 0) return `${days}j ${h % 24}h`;
+        if (days > 0) return `${days}${Site.t('j', 'd')} ${h % 24}h`;
         if (h > 0) return `${h}h ${m}min`;
         return `${m}min`;
     };

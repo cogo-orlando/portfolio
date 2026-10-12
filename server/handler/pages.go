@@ -347,9 +347,27 @@ func MotoGPHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "projects/motogp.html")
 }
 
+// PageHandler sert un template donné (utilisé pour les pages anglaises : "en/home.html")
+func PageHandler(file string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		renderTemplate(w, r, file)
+	}
+}
+
 // ── 404 ──
 
 // NotFoundHandler rend la page 404 avec un vrai statut 404.
+// Sous /en/, c'est la 404 anglaise qui s'affiche (si elle existe).
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
-	renderPage(w, r, "404.html", http.StatusNotFound)
+	file := "404.html"
+	if isEnglishPath(r.URL.Path) {
+		if _, err := os.Stat(templatePath("en/404.html")); err == nil {
+			file = "en/404.html"
+		}
+	}
+	renderPage(w, r, file, http.StatusNotFound)
+}
+
+func isEnglishPath(p string) bool {
+	return p == "/en" || strings.HasPrefix(p, "/en/")
 }

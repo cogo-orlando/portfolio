@@ -4,7 +4,7 @@
 ══════════════════════════════════════════ */
 (function () {
     'use strict';
-    const { $, $$, onReady, fetchJSON } = window.Site;
+    const { $, $$, onReady, fetchJSON, t, lang, formatUptime } = window.Site;
 
     const set = (id, value) => {
         const el = document.getElementById(id);
@@ -12,33 +12,25 @@
     };
     const pad = (n) => String(n).padStart(2, '0');
 
-    // "26h3m4.5s" (format Go) → "1j 2h" / "3h 12min" / "45min"
-    const formatUptime = (raw) => {
-        if (typeof raw !== 'string') return '—';
-        const h = Number(raw.match(/(\d+)h/)?.[1] || 0);
-        const m = Number(raw.match(/(\d+)m(?!s)/)?.[1] || 0);
-        const days = Math.floor(h / 24);
-        if (days > 0) return `${days}j ${h % 24}h`;
-        if (h > 0) return `${h}h ${m}min`;
-        return `${m}min`;
-    };
-
+    // Codes météo Open-Meteo → [français, anglais]
     const WEATHER = {
-        0: 'Ciel dégagé', 1: 'Généralement dégagé', 2: 'Partiellement nuageux', 3: 'Couvert',
-        45: 'Brouillard', 48: 'Brouillard givrant',
-        51: 'Bruine légère', 53: 'Bruine', 55: 'Bruine forte',
-        56: 'Bruine verglaçante', 57: 'Bruine verglaçante forte',
-        61: 'Pluie légère', 63: 'Pluie modérée', 65: 'Pluie forte',
-        66: 'Pluie verglaçante', 67: 'Pluie verglaçante forte',
-        71: 'Neige légère', 73: 'Neige modérée', 75: 'Neige forte', 77: 'Grains de neige',
-        80: 'Averses légères', 81: 'Averses modérées', 82: 'Averses violentes',
-        85: 'Averses de neige', 86: 'Fortes averses de neige',
-        95: 'Orage', 96: 'Orage avec grêle', 99: 'Orage avec forte grêle',
+        0: ['Ciel dégagé', 'Clear sky'], 1: ['Généralement dégagé', 'Mainly clear'],
+        2: ['Partiellement nuageux', 'Partly cloudy'], 3: ['Couvert', 'Overcast'],
+        45: ['Brouillard', 'Fog'], 48: ['Brouillard givrant', 'Freezing fog'],
+        51: ['Bruine légère', 'Light drizzle'], 53: ['Bruine', 'Drizzle'], 55: ['Bruine forte', 'Heavy drizzle'],
+        56: ['Bruine verglaçante', 'Freezing drizzle'], 57: ['Bruine verglaçante forte', 'Heavy freezing drizzle'],
+        61: ['Pluie légère', 'Light rain'], 63: ['Pluie modérée', 'Moderate rain'], 65: ['Pluie forte', 'Heavy rain'],
+        66: ['Pluie verglaçante', 'Freezing rain'], 67: ['Pluie verglaçante forte', 'Heavy freezing rain'],
+        71: ['Neige légère', 'Light snow'], 73: ['Neige modérée', 'Moderate snow'], 75: ['Neige forte', 'Heavy snow'],
+        77: ['Grains de neige', 'Snow grains'],
+        80: ['Averses légères', 'Light showers'], 81: ['Averses modérées', 'Moderate showers'], 82: ['Averses violentes', 'Violent showers'],
+        85: ['Averses de neige', 'Snow showers'], 86: ['Fortes averses de neige', 'Heavy snow showers'],
+        95: ['Orage', 'Thunderstorm'], 96: ['Orage avec grêle', 'Thunderstorm with hail'], 99: ['Orage avec forte grêle', 'Thunderstorm with heavy hail'],
     };
 
     onReady(() => {
         // ── HEURE DE TOULOUSE (et pas celle du visiteur) ──
-        const clock = () => set('localTime', new Date().toLocaleTimeString('fr-FR', { timeZone: 'Europe/Paris' }));
+        const clock = () => set('localTime', new Date().toLocaleTimeString(t('fr-FR', 'en-GB'), { timeZone: 'Europe/Paris' }));
 
         // ── DURÉE DE LA VISITE ──
         const pageStart = Date.now();
@@ -55,7 +47,7 @@
         if (lastUpdate) {
             const now = new Date();
             lastUpdate.dateTime = now.toISOString();
-            lastUpdate.textContent = now.toLocaleString('fr-FR', {
+            lastUpdate.textContent = now.toLocaleString(t('fr-FR', 'en-GB'), {
                 day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit',
                 timeZone: 'Europe/Paris',
             });
@@ -66,7 +58,7 @@
             .then((d) => {
                 set('m-goroutines', d.goroutines ?? '—');
                 set('m-uptime', formatUptime(d.uptime));
-                set('m-alloc', d.memory_mb != null ? `${d.memory_mb} Mo` : '—');
+                set('m-alloc', d.memory_mb != null ? `${d.memory_mb} ${t('Mo', 'MB')}` : '—');
                 set('m-gc', d.gc_cycles ?? '—');
                 set('m-runtime', d.go_version ?? '—');
             })
@@ -80,10 +72,10 @@
         const routesBox = $('#routesStatus');
         const summary = $('#routesSummary');
         const OVERALL = {
-            operational: { text: 'tout est opérationnel', cls: 'ok' },
-            degraded:    { text: 'service dégradé',       cls: 'warn' },
-            down:        { text: 'service indisponible',  cls: 'down' },
-            pending:     { text: 'vérification…',         cls: 'warn' },
+            operational: { text: t('tout est opérationnel', 'all systems operational'), cls: 'ok' },
+            degraded:    { text: t('service dégradé', 'degraded service'), cls: 'warn' },
+            down:        { text: t('service indisponible', 'service unavailable'), cls: 'down' },
+            pending:     { text: t('vérification…', 'checking…'), cls: 'warn' },
         };
 
         const span = (cls, text) => {
@@ -105,7 +97,7 @@
                 const row = document.createElement('div');
                 row.className = 'page-row';
                 row.setAttribute('role', 'listitem');
-                row.title = `Vérifié à ${new Date(r.checked_at).toLocaleTimeString('fr-FR', { timeZone: 'Europe/Paris' })}`;
+                row.title = `${t('Vérifié à', 'Checked at')} ${new Date(r.checked_at).toLocaleTimeString(t('fr-FR', 'en-GB'), { timeZone: 'Europe/Paris' })}`;
 
                 const dot = span(`page-dot ${r.ok ? 'online' : 'offline'}`, '');
                 dot.setAttribute('aria-hidden', 'true');
@@ -114,7 +106,7 @@
                     dot,
                     span('page-name', r.path),
                     span('page-meta', `${Math.round(r.latency_ms)} ms · ${r.uptime}%`),
-                    span(`page-status ${r.ok ? 'ok' : 'down'}`, r.ok ? 'online' : `erreur ${r.status}`),
+                    span(`page-status ${r.ok ? 'ok' : 'down'}`, r.ok ? 'online' : `${t('erreur', 'error')} ${r.status}`),
                 );
                 return row;
             });
@@ -125,7 +117,7 @@
             .then(renderRoutes)
             .catch(() => {
                 if (!summary) return;
-                summary.textContent = 'état indisponible';
+                summary.textContent = t('état indisponible', 'status unavailable');
                 summary.className = 'page-status warn routes-summary';
             });
 
@@ -139,12 +131,12 @@
         fetchJSON(url, { timeout: 8000 })
             .then(({ current: c }) => {
                 set('weatherTemp', `${Math.round(c.temperature_2m)}°C`);
-                set('weatherDesc', WEATHER[c.weather_code] || 'Conditions inconnues');
+                set('weatherDesc', WEATHER[c.weather_code]?.[lang === 'en' ? 1 : 0] || t('Conditions inconnues', 'Unknown conditions'));
                 set('weatherFeels', `${Math.round(c.apparent_temperature)}°C`);
                 set('weatherHumid', `${c.relative_humidity_2m}%`);
                 set('weatherWind', `${Math.round(c.wind_speed_10m)} km/h`);
             })
-            .catch(() => set('weatherDesc', 'Données indisponibles'));
+            .catch(() => set('weatherDesc', t('Données indisponibles', 'Data unavailable')));
 
         // ── OBJECTIF : % calculé depuis les étapes affichées dans le HTML ──
         const steps = $$('.goal-block .sys-row');

@@ -4,16 +4,16 @@
 ══════════════════════════════════════════ */
 (function () {
     'use strict';
-    const { $, onReady } = window.Site;
+    const { $, onReady, t } = window.Site;
 
     // Champs du formulaire : id de l'input → id du message d'erreur + règle de validation
     const FIELDS = {
-        firstname: { err: 'firstnameErr', label: 'Prénom', check: (v) => v ? '' : 'Le prénom est requis' },
-        lastname:  { err: 'lastnameErr',  label: 'Nom',    check: (v) => v ? '' : 'Le nom est requis' },
-        email:     { err: 'mailErr',      label: 'Email',  check: (v) => !v ? 'Un email est requis'
-                                                              : /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? '' : 'Adresse email invalide' },
-        subject:   { err: 'subjectErr',   label: 'Sujet',  check: (v) => v ? '' : 'Choisis un sujet' },
-        message:   { err: 'messageErr',   label: 'Message', check: (v) => v.length >= 10 ? '' : 'Message trop court (min 10 caractères)' },
+        firstname: { err: 'firstnameErr', label: t('Prénom', 'First name'), check: (v) => v ? '' : t('Le prénom est requis', 'First name is required') },
+        lastname:  { err: 'lastnameErr',  label: t('Nom', 'Last name'),     check: (v) => v ? '' : t('Le nom est requis', 'Last name is required') },
+        email:     { err: 'mailErr',      label: 'Email',                  check: (v) => !v ? t('Un email est requis', 'Email is required')
+                                                                              : /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? '' : t('Adresse email invalide', 'Invalid email address') },
+        subject:   { err: 'subjectErr',   label: t('Sujet', 'Subject'),    check: (v) => v ? '' : t('Choisis un sujet', 'Please choose a subject') },
+        message:   { err: 'messageErr',   label: 'Message',                check: (v) => v.length >= 10 ? '' : t('Message trop court (min 10 caractères)', 'Message too short (10 characters minimum)') },
     };
 
     onReady(() => {
@@ -51,7 +51,7 @@
             if (!ftBody) return;
             ftBody.replaceChildren();
             addTermLine('ft-acc', '$', './send_message');
-            addTermLine('ft-muted', '#', 'En attente de saisie...');
+            addTermLine('ft-muted', '#', t('En attente de saisie...', 'Waiting for input...'));
         };
 
         // ── ERREURS PAR CHAMP ──
@@ -116,13 +116,13 @@
 
             const errors = Object.keys(FIELDS).filter((id) => validate(id));
             if (errors.length) {
-                addTermLine('ft-err', '#', '[ERR] Validation échouée — corrige les champs');
+                addTermLine('ft-err', '#', t('[ERR] Validation échouée — corrige les champs', '[ERR] Validation failed — please fix the fields'));
                 document.getElementById(errors[0])?.focus(); // on emmène l'utilisateur au premier champ en erreur
                 return;
             }
 
             setLoading(true);
-            addTermLine('ft-warn', '$', 'Connexion à Formspree...');
+            addTermLine('ft-warn', '$', t('Connexion à Formspree...', 'Connecting to Formspree...'));
 
             const controller = new AbortController();
             const timer = setTimeout(() => controller.abort(), 15000);
@@ -139,18 +139,18 @@
                     // Formspree renvoie le détail : { errors: [{ message: "..." }] }
                     const data = await res.json().catch(() => ({}));
                     const detail = data.errors?.map((x) => x.message).join(', ');
-                    throw new Error(detail || `Erreur serveur (${res.status})`);
+                    throw new Error(detail || `${t('Erreur serveur', 'Server error')} (${res.status})`);
                 }
 
-                addTermLine('ft-ok', '#', '[OK] Message envoyé avec succès');
+                addTermLine('ft-ok', '#', t('[OK] Message envoyé avec succès', '[OK] Message sent successfully'));
                 form.reset();
                 updateCount();
                 form.style.display = 'none';
                 if (successBox) successBox.style.display = 'block';
             } catch (err) {
                 const msg = err.name === 'AbortError'
-                    ? "Le serveur met trop de temps à répondre. Réessaie dans un instant."
-                    : err.message || 'Une erreur est survenue. Réessaie.';
+                    ? t('Le serveur met trop de temps à répondre. Réessaie dans un instant.', 'The server is taking too long to respond. Please try again shortly.')
+                    : err.message || t('Une erreur est survenue. Réessaie.', 'Something went wrong. Please try again.');
                 addTermLine('ft-err', '#', `[ERR] ${msg}`);
                 if (errorMsg) errorMsg.textContent = msg;
                 if (errorBox) errorBox.style.display = 'block';

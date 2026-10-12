@@ -4,7 +4,7 @@
 ══════════════════════════════════════════ */
 (function () {
     'use strict';
-    const { $, $$, onReady, onEscape, reducedMotion } = window.Site;
+    const { $, $$, onReady, onEscape, reducedMotion, t } = window.Site;
 
     onReady(() => {
         const items = $$('.faq-item');
@@ -108,7 +108,7 @@
         expandBtn?.addEventListener('click', () => {
             allOpen = !allOpen;
             items.filter(isVisible).forEach((i) => setOpen(i, allOpen));
-            expandBtn.textContent = allOpen ? 'Tout fermer' : 'Tout ouvrir';
+            expandBtn.textContent = allOpen ? t('Tout fermer', 'Collapse all') : t('Tout ouvrir', 'Expand all');
             updateProgress();
         });
 
