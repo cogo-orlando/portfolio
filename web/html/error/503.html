@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    {{template "head-common"}}
+
+    <title>503 — Maintenance en cours · Orlando Cogo</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="stylesheet" href="{{asset `/css/404.css`}}">
+    <link rel="stylesheet" href="{{asset `/css/error.css`}}">
+</head>
+
+<body>
+    {{template "background"}}
+
+    <main id="main-content" class="wrapper">
+
+        <div class="glitch-wrap">
+            <h1 class="glitch glitch--warn" data-text="503" aria-label="Erreur 503">503</h1>
+        </div>
+
+        <div class="terminal-block" aria-hidden="true">
+            <div class="terminal-output">
+                <div class="t-line t-warn">[MAINT] 503 — SERVICE_UNAVAILABLE</div>
+                <div class="t-line t-dim">> Mise à jour en cours…</div>
+                <div class="t-line t-dim">> Le serveur et la sécurité restent actifs.</div>
+                <div class="t-line t-ok">> Retour prévu dans moins d'une heure.</div>
+            </div>
+        </div>
+
+        <p class="subtitle">Le site est en maintenance pour une mise à jour.<br><span class="subtitle-redirect">Il revient très vite.</span></p>
+
+        <div class="actions">
+            <a href="" class="btn-primary">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 11-3-6.7L21 8" /><path d="M21 3v5h-5" /></svg>
+                <span>Réessayer</span>
+            </a>
+            <a href="mailto:Orlando.cogo.pro@gmail.com" class="btn-secondary">Me contacter</a>
+        </div>
+
+        <div class="status-row">
+            <span class="status-dot is-warn" aria-hidden="true"></span>
+            <span>Maintenance · orlandocogo.com</span>
+        </div>
+
+    </main>
+</body>
+
+</html>

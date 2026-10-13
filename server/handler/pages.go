@@ -209,10 +209,14 @@ func renderTemplate(w http.ResponseWriter, r *http.Request, file string) {
 func renderPage(w http.ResponseWriter, r *http.Request, file string, status int) {
 	if r.Method != http.MethodGet && r.Method != http.MethodHead {
 		w.Header().Set("Allow", "GET, HEAD")
-		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
+		ErrorHandler(w, r, http.StatusMethodNotAllowed)
 		return
 	}
+	writePage(w, r, file, status)
+}
 
+// writePage génère la page en mémoire puis l'envoie (sans vérifier la méthode HTTP)
+func writePage(w http.ResponseWriter, r *http.Request, file string, status int) {
 	tmpl, err := getTemplate(file)
 	if err != nil {
 		slog.Error("template introuvable", "file", file, "error", err)
@@ -357,14 +361,56 @@ func PageHandler(file string) http.HandlerFunc {
 // ── 404 ──
 
 // NotFoundHandler rend la page 404 avec un vrai statut 404.
-// Sous /en/, c'est la 404 anglaise qui s'affiche (si elle existe).
-func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
-	file := "404.html"
-	if isEnglishPath(r.URL.Path) {
-		if _, err := os.Stat(templatePath("en/404.html")); err == nil {
-			file = "en/404.html"
+// ══════════════════════════════════════════
+//  PAGES D'ERREUR (403, 405, 429, 500, 503)
+//  Fichiers : web/html/error/<code>.html et web/html/en/error/<code>.html
+//  Utilisées par les middlewares (rate limit, honeypot, panic…) via un
+//  branchement fait dans server.go.
+// ══════════════════════════════════════════
+
+// ErrorCodes : codes qui ont une page dédiée (vérifiés par les tests)
+var ErrorCodes = []int{
+	http.StatusForbidden,
+	http.StatusMethodNotAllowed,
+	http.StatusTooManyRequests,
+	http.StatusInternalServerError,
+	http.StatusServiceUnavailable,
+}
+
+// errorFile : page d'erreur à afficher (error/404.html, error/429.html…),
+// en anglais sous /en/ si elle existe
+func errorFile(path string, status int) string {
+	file := fmt.Sprintf("error/%d.html", status)
+	if isEnglishPath(path) {
+		if _, err := os.Stat(templatePath("en/" + file)); err == nil {
+			return "en/" + file
 		}
 	}
+	return file
+}
+
+// ErrorHandler envoie la page d'erreur du code donné.
+// Elle ne doit JAMAIS planter : au moindre souci, réponse texte simple.
+func ErrorHandler(w http.ResponseWriter, r *http.Request, status int) {
+	defer func() {
+		if rec := recover(); rec != nil {
+			slog.Error("page d'erreur : panic", "status", status, "error", fmt.Sprint(rec))
+			http.Error(w, strconv.Itoa(status)+" — "+http.StatusText(status), status)
+		}
+	}()
+	file := errorFile(r.URL.Path, status)
+	if _, err := os.Stat(templatePath(file)); err != nil {
+		http.Error(w, strconv.Itoa(status)+" — "+http.StatusText(status), status)
+		return
+	}
+	w.Header().Set("Cache-Control", "no-store")
+	writePage(w, r, file, status) // pas de contrôle de méthode : un POST peut recevoir une 429
+}
+
+// Sous /en/, c'est la 404 anglaise qui s'affiche (si elle existe).
+func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
+	file := errorFile(r.URL.Path, http.StatusNotFound)
+	w.Header().Set("Cache-Control", "no-store")
 	renderPage(w, r, file, http.StatusNotFound)
 }
 

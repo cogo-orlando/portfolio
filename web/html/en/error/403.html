@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{template "head-common"}}
+
+    <title>403 — Access denied · Orlando Cogo</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="stylesheet" href="{{asset `/css/404.css`}}">
+    <link rel="stylesheet" href="{{asset `/css/error.css`}}">
+</head>
+
+<body>
+    {{template "background"}}
+
+    <div class="terminal-bar" aria-hidden="true">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span class="terminal-title">orlando@portfolio ~ %</span>
+    </div>
+
+    <main id="main-content" class="wrapper">
+
+        <div class="glitch-wrap">
+            <h1 class="glitch glitch--err" data-text="403" aria-label="Error 403">403</h1>
+        </div>
+
+        <div class="terminal-block" aria-hidden="true">
+            <div class="terminal-output">
+                <div class="t-line t-err">[ERROR] 403 — FORBIDDEN</div>
+                <div class="t-line t-dim">> Your request was blocked by the site's protections.</div>
+                <div class="t-line t-dim">> Likely cause: automated scanner behaviour.</div>
+                <div class="t-line t-acc">> The block lifts automatically after 24 hours.</div>
+            </div>
+        </div>
+
+        <p class="subtitle">Access to this resource was denied.</p>
+
+        <div class="actions">
+            <a href="/en/home" class="btn-primary">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M12 7H2M2 7L6 3M2 7L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                <span>Back to home</span>
+            </a>
+            <a href="mailto:Orlando.cogo.pro@gmail.com" class="btn-secondary">Report a mistake</a>
+        </div>
+
+        <div class="status-row">
+            <span class="status-dot is-err" aria-hidden="true"></span>
+            <span>Error 403 · Access denied · orlandocogo.com</span>
+        </div>
+
+    </main>
+</body>
+
+</html>

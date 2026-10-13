@@ -25,7 +25,7 @@ func setupTestTemplates(t *testing.T) func() {
 	pages := []string{
 		"index.html", "home.html", "about.html", "skills.html",
 		"project.html", "contact.html", "cv.html", "status.html",
-		"faq.html", "tech.html", "404.html",
+		"faq.html", "tech.html", "error/404.html",
 		"projects/zoo.html", "projects/netflix.html", "projects/groupie.html",
 		"projects/power4.html", "projects/cisco.html", "projects/artemis.html",
 		"projects/annuaire.html", "projects/forum.html", "projects/snake.html", "projects/motogp.html",
@@ -35,8 +35,11 @@ func setupTestTemplates(t *testing.T) func() {
 	if err := os.MkdirAll(filepath.Join("web", "html", "projects"), 0755); err != nil {
 		t.Fatalf("impossible de créer web/html/projects : %v", err)
 	}
-	for _, page := range pages {
-		path := filepath.Join(dir, page)
+		for _, page := range pages {
+		path := filepath.Join(dir, filepath.FromSlash(page))
+		if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
+			t.Fatalf("impossible de créer %s : %v", filepath.Dir(path), err)
+		}
 		content := "<!DOCTYPE html><html><body>test:" + page + "</body></html>"
 		if err := os.WriteFile(path, []byte(content), 0644); err != nil {
 			t.Fatalf("impossible de créer %s : %v", path, err)
@@ -555,7 +558,7 @@ func TestNotFoundHandler_BodyContains404(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest(http.MethodGet, "/page-inexistante", nil)
 	NotFoundHandler(w, r)
-	if !strings.Contains(w.Body.String(), "test:404.html") {
+	if !strings.Contains(w.Body.String(), "test:error/404.html") {
 		t.Error("NotFoundHandler devrait servir le template 404.html")
 	}
 }

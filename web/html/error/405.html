@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    {{template "head-common"}}
+
+    <title>405 — Méthode non autorisée · Orlando Cogo</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="stylesheet" href="{{asset `/css/404.css`}}">
+    <link rel="stylesheet" href="{{asset `/css/error.css`}}">
+</head>
+
+<body>
+    {{template "background"}}
+
+    <main id="main-content" class="wrapper">
+
+        <div class="glitch-wrap">
+            <h1 class="glitch glitch--warn" data-text="405" aria-label="Erreur 405">405</h1>
+        </div>
+
+        <div class="terminal-block" aria-hidden="true">
+            <div class="terminal-output">
+                <div class="t-line t-warn">[WARN] 405 — METHOD_NOT_ALLOWED</div>
+                <div class="t-line t-dim">> Méthodes acceptées : GET, HEAD</div>
+                <div class="t-line t-dim">> Ce site ne reçoit aucune donnée directement.</div>
+                <div class="t-line t-acc">> Pour m'écrire : le formulaire de la page Contact.</div>
+            </div>
+        </div>
+
+        <p class="subtitle">Cette page accepte seulement la consultation (GET).</p>
+
+        <div class="actions">
+            <a href="/home" class="btn-primary">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M12 7H2M2 7L6 3M2 7L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                <span>Retour à l'accueil</span>
+            </a>
+            <a href="/contact" class="btn-secondary">Me contacter</a>
+        </div>
+
+        <div class="status-row">
+            <span class="status-dot is-warn" aria-hidden="true"></span>
+            <span>Erreur 405 · Méthode non autorisée · orlandocogo.com</span>
+        </div>
+
+    </main>
+</body>
+
+</html>

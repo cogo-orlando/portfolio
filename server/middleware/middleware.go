@@ -74,8 +74,7 @@ func RecoveryMiddleware(next http.Handler) http.Handler {
 					"error", fmt.Sprintf("%v", err),
 					"stack", string(debug.Stack()),
 				)
-				w.WriteHeader(http.StatusInternalServerError)
-				fmt.Fprint(w, "500 — Erreur interne du serveur")
+				writeError(w, r, http.StatusInternalServerError)
 			}
 		}()
 		next.ServeHTTP(w, r)
@@ -208,13 +207,13 @@ func init() { //nolint:gochecknoinits
 func HoneypotMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ip := GetIP(r)
-		if ipBlacklist.has(ip) {
+		if ipBlacklist.has(ip) && !isStaticAsset(r.URL.Path) {
 			slog.Warn("ip blacklistée bloquée",
 				"ip", ip,
 				"path", r.URL.Path,
 				"request_id", GetRequestID(r.Context()),
 			)
-			http.Error(w, "Forbidden", http.StatusForbidden)
+			writeError(w, r, http.StatusForbidden)
 			return
 		}
 		if honeypotRoutes[r.URL.Path] {
@@ -229,7 +228,7 @@ func HoneypotMiddleware(next http.Handler) http.Handler {
 			if DBCircuit.Allow() {
 				db.LogHoneypot(ip, r.URL.Path, r.UserAgent())
 			}
-			http.NotFound(w, r)
+			writeNotFound(w, r) // même 404 que partout ailleurs : le piège reste invisible
 			return
 		}
 		next.ServeHTTP(w, r)
@@ -316,15 +315,19 @@ const ContentSecurityPolicy = "default-src 'self'; " +
 	"object-src 'none'; " +
 	"upgrade-insecure-requests"
 
+// setSecurityHeaders pose les en-têtes de sécurité (aussi utilisé par les pages d'erreur)
+func setSecurityHeaders(h http.Header) {
+	h.Del("X-Powered-By")
+	h.Set("Server", "")
+	h.Set("Content-Security-Policy", ContentSecurityPolicy)
+	h.Set("X-Content-Type-Options", "nosniff")
+	h.Set("Referrer-Policy", "strict-origin-when-cross-origin")
+	h.Set("Permissions-Policy", "camera=(), microphone=(), geolocation=()")
+}
+
 func SecurityMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		h := w.Header()
-		h.Del("X-Powered-By")
-		h.Set("Server", "")
-		h.Set("Content-Security-Policy", ContentSecurityPolicy)
-		h.Set("X-Content-Type-Options", "nosniff")
-		h.Set("Referrer-Policy", "strict-origin-when-cross-origin")
-		h.Set("Permissions-Policy", "camera=(), microphone=(), geolocation=()")
+		setSecurityHeaders(w.Header())
 		next.ServeHTTP(w, r)
 	})
 }
@@ -460,6 +463,10 @@ func init() { //nolint:gochecknoinits
 
 func RateLimitMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if isStaticAsset(r.URL.Path) { // voir isStaticAsset (errors.go)
+			next.ServeHTTP(w, r)
+			return
+		}
 		ip := GetIP(r)
 		if !globalRateLimiter.allow(ip) {
 			slog.Warn("rate limit global dépassé",
@@ -470,7 +477,7 @@ func RateLimitMiddleware(next http.Handler) http.Handler {
 				db.LogRateLimit(ip, r.URL.Path)
 			}
 			w.Header().Set("Retry-After", "60")
-			http.Error(w, "Too Many Requests", http.StatusTooManyRequests)
+			writeError(w, r, http.StatusTooManyRequests)
 			return
 		}
 		next.ServeHTTP(w, r)
@@ -507,8 +514,8 @@ func TimeoutMiddleware(next http.Handler) http.Handler {
 // ══════════════════════════════════════════
 //  CHAIN
 //  Ordre d'exécution (de l'extérieur vers l'intérieur) :
-//  RequestID → Logger → CloudflareOnly → Recovery → Timeout → RateLimit
-//  → Honeypot → Security → Gzip → Cache → routes
+//  RequestID → Logger → CloudflareOnly → Recovery → Maintenance → Timeout
+//  → RateLimit → Honeypot → Security → Gzip → Cache → routes
 // ══════════════════════════════════════════
 
 func Chain(h http.Handler) http.Handler {
@@ -518,6 +525,7 @@ func Chain(h http.Handler) http.Handler {
 	h = HoneypotMiddleware(h)
 	h = RateLimitMiddleware(h)
 	h = TimeoutMiddleware(h)
+	h = MaintenanceMiddleware(h)
 	h = RecoveryMiddleware(h)
 	h = CloudflareOnlyMiddleware(h)
 	h = LoggerMiddleware(h)

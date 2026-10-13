@@ -1,0 +1,41 @@
+/* ══════════════════════════════════════════
+   ERROR.CSS — pages 403 · 405 · 429 · 500 · 503
+   S'appuie sur 404.css (même mise en page) et ajoute :
+   - les lignes du terminal écrites en HTML (pas besoin de JavaScript :
+     une page d'erreur doit s'afficher même si le reste du site va mal)
+   - une couleur par famille d'erreur
+══════════════════════════════════════════ */
+
+/* Lignes du terminal : apparition l'une après l'autre */
+.terminal-output .t-line {
+    opacity: 0;
+    animation: errLine 0.35s ease forwards;
+}
+.terminal-output .t-line:nth-child(1) { animation-delay: 0.4s; }
+.terminal-output .t-line:nth-child(2) { animation-delay: 0.65s; }
+.terminal-output .t-line:nth-child(3) { animation-delay: 0.9s; }
+.terminal-output .t-line:nth-child(4) { animation-delay: 1.15s; }
+.terminal-output .t-line:nth-child(5) { animation-delay: 1.4s; }
+
+@keyframes errLine {
+    from { opacity: 0; transform: translateX(-6px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* Couleurs d'état (variables de theme.css : s'adaptent au mode clair) */
+.terminal-output .t-err  { color: var(--err); }
+.terminal-output .t-warn { color: var(--warn); }
+.terminal-output .t-ok   { color: var(--ok); }
+
+/* Point du bas de page selon la gravité */
+.status-row .status-dot.is-warn { background: var(--warn); box-shadow: 0 0 8px rgba(251, 191, 36, 0.6); }
+.status-row .status-dot.is-err  { background: var(--err);  box-shadow: 0 0 8px rgba(248, 113, 113, 0.6); }
+
+/* Le chiffre géant prend la couleur de l'erreur au survol du glitch */
+.glitch--warn::before { color: var(--warn); }
+.glitch--err::before  { color: var(--err); }
+
+/* Moins d'animations demandé : tout s'affiche directement */
+@media (prefers-reduced-motion: reduce) {
+    .terminal-output .t-line { opacity: 1; animation: none; }
+}

@@ -145,6 +145,10 @@ func Start() {
 
 // newMux construit le routeur. Séparé de Start() pour pouvoir le tester.
 func newMux() *http.ServeMux {
+	// Pages d'erreur HTML pour les middlewares (rate limit, honeypot, panic…)
+	middleware.ErrorPage = handler.ErrorHandler
+	middleware.NotFoundPage = handler.NotFoundHandler
+
 	mux := http.NewServeMux()
 
 	// ── API & fichiers spéciaux ──

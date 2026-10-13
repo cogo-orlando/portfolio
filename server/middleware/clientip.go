@@ -118,7 +118,7 @@ func CloudflareOnlyMiddleware(next http.Handler) http.Handler {
 					"peer", peer, "path", r.URL.Path,
 					"request_id", GetRequestID(r.Context()),
 				)
-				http.Error(w, "Forbidden", http.StatusForbidden)
+				writeError(w, r, http.StatusForbidden)
 				return
 			}
 			slog.Info("accès direct (hors Cloudflare)",
