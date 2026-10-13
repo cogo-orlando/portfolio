@@ -387,3 +387,14 @@
     }
     :root .nav .nav-right::before { display: none; }   /* plus besoin du trait séparateur */
 }
+
+/* ══════════════════════════════════════════
+   PIED DE PAGE — liens légaux
+══════════════════════════════════════════ */
+.footer-legal { display: inline-flex; gap: 1rem; margin-left: auto; }
+.footer-legal + .footer-year { margin-left: 1rem; }
+.footer-legal a { color: var(--muted2); text-decoration: none; font-size: 11px; transition: color 0.2s; }
+.footer-legal a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 600px) {
+    .footer-legal { margin-left: 0; width: 100%; order: 10; }
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    {{template "head-common"}}
+
+    <title>Politique de confidentialité · Orlando Liautard-Cogo</title>
+    <meta name="description" content="Quelles données le portfolio d'Orlando Liautard-Cogo traite, pourquoi, combien de temps, et comment exercer vos droits (RGPD).">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orlandocogo.com/privacy">
+
+    <link rel="stylesheet" href="{{asset `/css/legal.css`}}">
+</head>
+
+<body>
+    {{template "background"}}
+    {{template "nav"}}
+
+    <main id="main-content" class="legal">
+        <h1 class="legal-title">Politique de confidentialité</h1>
+        <p class="legal-intro">Ce site collecte le moins de données possible : pas de cookie, pas de publicité, pas
+            d'outil de mesure d'audience externe. Voici exactement ce qui est traité, pourquoi, et combien de temps.</p>
+        <span class="legal-updated">Dernière mise à jour : 13 octobre 2026</span>
+
+        <ul class="legal-toc" aria-label="Sommaire">
+            <li><a href="#responsable">Responsable</a></li>
+            <li><a href="#donnees">Données traitées</a></li>
+            <li><a href="#cookies">Cookies</a></li>
+            <li><a href="#prestataires">Prestataires</a></li>
+            <li><a href="#securite">Sécurité</a></li>
+            <li><a href="#droits">Vos droits</a></li>
+        </ul>
+
+        <section class="legal-section" id="responsable" aria-labelledby="responsable-titre">
+            <h2 id="responsable-titre">Responsable du traitement</h2>
+            <p><strong>Orlando Liautard-Cogo</strong>, éditeur du site —
+                <a href="mailto:Orlando.cogo.pro@gmail.com">Orlando.cogo.pro@gmail.com</a></p>
+        </section>
+
+        <section class="legal-section" id="donnees" aria-labelledby="donnees-titre">
+            <h2 id="donnees-titre">Données traitées</h2>
+            <div class="legal-table-wrap">
+                <table class="legal-table">
+                    <thead>
+                        <tr><th scope="col">Quoi</th><th scope="col">Pourquoi</th><th scope="col">Base légale</th><th scope="col">Durée</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Journal des visites : adresse IP <strong>anonymisée</strong> (le dernier bloc est
+                                effacé, ex. 203.0.113.0), page demandée, date, navigateur</td>
+                            <td>Faire fonctionner le site, détecter les pannes</td>
+                            <td>Intérêt légitime</td>
+                            <td>30 jours, puis suppression automatique</td>
+                        </tr>
+                        <tr>
+                            <td>Journal de sécurité : adresse IP <strong>complète</strong>, uniquement en cas de
+                                comportement d'attaque (accès à une page piège, trop de requêtes)</td>
+                            <td>Protéger le site contre les attaques</td>
+                            <td>Intérêt légitime</td>
+                            <td>30 jours ; blocage temporaire de l'adresse pendant 24 h</td>
+                        </tr>
+                        <tr>
+                            <td>Journaux techniques de l'hébergeur (adresse IP, page, date)</td>
+                            <td>Diagnostic des erreurs</td>
+                            <td>Intérêt légitime</td>
+                            <td>Quelques jours, selon la conservation des journaux de l'hébergeur</td>
+                        </tr>
+                        <tr>
+                            <td>Formulaire de contact : prénom, nom, e-mail, sujet, message</td>
+                            <td>Répondre à votre message</td>
+                            <td>Votre demande (consentement)</td>
+                            <td>Le temps de l'échange, puis 12 mois maximum</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Aucune de ces données n'est vendue, partagée à des fins publicitaires ou utilisée pour établir un
+                profil.</p>
+        </section>
+
+        <section class="legal-section" id="cookies" aria-labelledby="cookies-titre">
+            <h2 id="cookies-titre">Cookies et stockage local</h2>
+            <p>Le site <strong>ne dépose aucun cookie</strong>, c'est pourquoi il n'affiche pas de bandeau de
+                consentement.</p>
+            <p>Si vous choisissez le mode clair ou sombre, ce choix est enregistré <strong>dans votre navigateur
+                uniquement</strong> (stockage local, clé « theme »). Il n'est jamais envoyé au serveur, et vous pouvez
+                l'effacer en vidant les données du site dans votre navigateur.</p>
+            <p>Les polices d'écriture sont hébergées sur le site lui-même : aucune requête n'est envoyée à Google ou à
+                un autre service de polices.</p>
+        </section>
+
+        <section class="legal-section" id="prestataires" aria-labelledby="prestataires-titre">
+            <h2 id="prestataires-titre">Prestataires</h2>
+            <ul>
+                <li><strong>Render</strong> (hébergement de l'application) — États-Unis</li>
+                <li><strong>Cloudflare</strong> (domaine, HTTPS, protection contre les attaques) — reçoit votre adresse IP
+                    pour acheminer et filtrer le trafic</li>
+                <li><strong>Supabase</strong> (base de données des journaux de sécurité)</li>
+                <li><strong>Formspree</strong> (transmission des messages du formulaire de contact)</li>
+                <li><strong>Open-Meteo</strong> : la météo de la page Status est demandée directement par votre
+                    navigateur, qui transmet donc votre adresse IP à ce service</li>
+            </ul>
+            <p>Certains de ces prestataires peuvent traiter des données en dehors de l'Union européenne, notamment aux
+                États-Unis. Ces transferts sont encadrés par les garanties prévues par le RGPD (cadre de protection des
+                données UE–États-Unis ou clauses contractuelles types, selon le prestataire).</p>
+        </section>
+
+        <section class="legal-section" id="securite" aria-labelledby="securite-titre">
+            <h2 id="securite-titre">Sécurité</h2>
+            <p>Toutes les connexions sont chiffrées (HTTPS, et TLS vers la base de données). L'accès à la base est
+                limité au strict nécessaire, et les données des visiteurs sont anonymisées avant d'être enregistrées.
+                Le détail des protections est présenté sur la page <a href="/tech">Infrastructure</a>.</p>
+        </section>
+
+        <section class="legal-section" id="droits" aria-labelledby="droits-titre">
+            <h2 id="droits-titre">Vos droits</h2>
+            <p>Vous pouvez demander l'accès à vos données, leur rectification, leur effacement, la limitation de leur
+                traitement, ou vous opposer à leur traitement. Écrivez à
+                <a href="mailto:Orlando.cogo.pro@gmail.com">Orlando.cogo.pro@gmail.com</a> : une réponse vous sera
+                apportée dans un délai d'un mois.</p>
+            <p>Les adresses IP des visiteurs étant anonymisées, il n'est généralement pas possible de retrouver les
+                journaux d'une personne en particulier.</p>
+            <p>Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la
+                <a href="https://www.cnil.fr/fr/plaintes" rel="noopener noreferrer">CNIL</a>.</p>
+        </section>
+    </main>
+
+    {{template "footer"}}
+</body>
+
+</html>

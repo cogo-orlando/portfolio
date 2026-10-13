@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{template "head-common"}}
+
+    <title>Privacy policy · Orlando Liautard-Cogo</title>
+    <meta name="description" content="What data Orlando Liautard-Cogo's portfolio processes, why, for how long, and how to exercise your rights (GDPR).">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orlandocogo.com/en/privacy">
+
+    <link rel="stylesheet" href="{{asset `/css/legal.css`}}">
+</head>
+
+<body>
+    {{template "background"}}
+    {{template "nav-en"}}
+
+    <main id="main-content" class="legal">
+        <h1 class="legal-title">Privacy policy</h1>
+        <p class="legal-intro">This site collects as little data as possible: no cookies, no ads, no third-party
+            analytics. Here is exactly what is processed, why, and for how long.</p>
+        <span class="legal-updated">Last updated: 13 October 2026</span>
+
+        <ul class="legal-toc" aria-label="Contents">
+            <li><a href="#responsable">Controller</a></li>
+            <li><a href="#donnees">Data processed</a></li>
+            <li><a href="#cookies">Cookies</a></li>
+            <li><a href="#prestataires">Service providers</a></li>
+            <li><a href="#securite">Security</a></li>
+            <li><a href="#droits">Your rights</a></li>
+        </ul>
+
+        <section class="legal-section" id="responsable" aria-labelledby="responsable-titre">
+            <h2 id="responsable-titre">Data controller</h2>
+            <p><strong>Orlando Liautard-Cogo</strong>, publisher of this site —
+                <a href="mailto:Orlando.cogo.pro@gmail.com">Orlando.cogo.pro@gmail.com</a></p>
+        </section>
+
+        <section class="legal-section" id="donnees" aria-labelledby="donnees-titre">
+            <h2 id="donnees-titre">Data processed</h2>
+            <div class="legal-table-wrap">
+                <table class="legal-table">
+                    <thead>
+                        <tr><th scope="col">What</th><th scope="col">Why</th><th scope="col">Legal basis</th><th scope="col">Retention</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Visit log: <strong>anonymized</strong> IP address (last block removed, e.g.
+                                203.0.113.0), page requested, date, browser</td>
+                            <td>Running the site, detecting outages</td>
+                            <td>Legitimate interest</td>
+                            <td>30 days, then deleted automatically</td>
+                        </tr>
+                        <tr>
+                            <td>Security log: <strong>full</strong> IP address, only for attack behaviour (hitting a
+                                trap page, too many requests)</td>
+                            <td>Protecting the site against attacks</td>
+                            <td>Legitimate interest</td>
+                            <td>30 days; the address is temporarily blocked for 24 hours</td>
+                        </tr>
+                        <tr>
+                            <td>Hosting provider's technical logs (IP address, page, date)</td>
+                            <td>Diagnosing errors</td>
+                            <td>Legitimate interest</td>
+                            <td>A few days, depending on the provider's log retention</td>
+                        </tr>
+                        <tr>
+                            <td>Contact form: first name, last name, email, subject, message</td>
+                            <td>Replying to your message</td>
+                            <td>Your request (consent)</td>
+                            <td>For the duration of the conversation, then 12 months maximum</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>None of this data is sold, shared for advertising, or used for profiling.</p>
+        </section>
+
+        <section class="legal-section" id="cookies" aria-labelledby="cookies-titre">
+            <h2 id="cookies-titre">Cookies and local storage</h2>
+            <p>This site <strong>sets no cookies</strong>, which is why there is no consent banner.</p>
+            <p>If you pick light or dark mode, that choice is stored <strong>in your browser only</strong> (local
+                storage, key "theme"). It is never sent to the server, and you can remove it by clearing this site's
+                data in your browser.</p>
+            <p>Fonts are hosted on the site itself: no request is sent to Google or any other font service.</p>
+        </section>
+
+        <section class="legal-section" id="prestataires" aria-labelledby="prestataires-titre">
+            <h2 id="prestataires-titre">Service providers</h2>
+            <ul>
+                <li><strong>Render</strong> (application hosting) — United States</li>
+                <li><strong>Cloudflare</strong> (domain, HTTPS, attack protection) — receives your IP address to route and
+                    filter traffic</li>
+                <li><strong>Supabase</strong> (security log database)</li>
+                <li><strong>Formspree</strong> (delivers contact form messages)</li>
+                <li><strong>Open-Meteo</strong>: the weather on the Status page is requested directly by your browser,
+                    which therefore sends your IP address to this service</li>
+            </ul>
+            <p>Some of these providers may process data outside the European Union, notably in the United States. These
+                transfers rely on the safeguards provided by the GDPR (EU–US Data Privacy Framework or standard
+                contractual clauses, depending on the provider).</p>
+        </section>
+
+        <section class="legal-section" id="securite" aria-labelledby="securite-titre">
+            <h2 id="securite-titre">Security</h2>
+            <p>Every connection is encrypted (HTTPS, and TLS to the database). Database access is limited to what is
+                strictly needed, and visitor data is anonymized before being stored. The protections are detailed on
+                the <a href="/en/tech">Infrastructure</a> page.</p>
+        </section>
+
+        <section class="legal-section" id="droits" aria-labelledby="droits-titre">
+            <h2 id="droits-titre">Your rights</h2>
+            <p>You can request access to your data, its correction or deletion, restriction of its processing, or object
+                to its processing. Write to
+                <a href="mailto:Orlando.cogo.pro@gmail.com">Orlando.cogo.pro@gmail.com</a>: you will receive an answer within
+                one month.</p>
+            <p>Because visitor IP addresses are anonymized, it is usually not possible to find the logs of a specific
+                person.</p>
+            <p>If you believe your rights are not respected, you can lodge a complaint with the French data protection
+                authority, the <a href="https://www.cnil.fr/en/complaints" rel="noopener noreferrer">CNIL</a>, or the
+                authority of your country.</p>
+        </section>
+    </main>
+
+    {{template "footer-en"}}
+</body>
+
+</html>

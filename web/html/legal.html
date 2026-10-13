@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    {{template "head-common"}}
+
+    <title>Mentions légales · Orlando Cogo</title>
+    <meta name="description" content="Mentions légales du portfolio d'Orlando Cogo : éditeur, hébergement, propriété intellectuelle.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orlandocogo.com/legal">
+
+    <link rel="stylesheet" href="{{asset `/css/legal.css`}}">
+</head>
+
+<body>
+    {{template "background"}}
+    {{template "nav"}}
+
+    <main id="main-content" class="legal">
+        <h1 class="legal-title">Mentions légales</h1>
+        <p class="legal-intro">Informations prévues par la loi n° 2004-575 du 21 juin 2004 pour la confiance dans
+            l'économie numérique (LCEN).</p>
+        <span class="legal-updated">Dernière mise à jour : 13 octobre 2026</span>
+
+        <section class="legal-section" aria-labelledby="editeur">
+            <h2 id="editeur">Éditeur du site</h2>
+            <p><strong>Orlando Liautard-Cogo</strong>, particulier, étudiant en Bachelor Informatique à Ynov Campus Toulouse.</p>
+            <p>Directeur de la publication : Orlando Liautard-Cogo.</p>
+            <p>Contact : <a href="mailto:Orlando.cogo.pro@gmail.com">Orlando.cogo.pro@gmail.com</a></p>
+            <p>Ce site est un portfolio personnel, sans activité commerciale.</p>
+        </section>
+
+        <section class="legal-section" aria-labelledby="hebergement">
+            <h2 id="hebergement">Hébergement</h2>
+            <p><strong>Render Services, Inc.</strong> — San Francisco, Californie, États-Unis —
+                <a href="https://render.com" rel="noopener noreferrer">render.com</a><br>
+                Hébergement de l'application (conteneur Docker).</p>
+            <p><strong>Cloudflare, Inc.</strong> — 101 Townsend St, San Francisco, CA 94107, États-Unis —
+                <a href="https://www.cloudflare.com" rel="noopener noreferrer">cloudflare.com</a><br>
+                Nom de domaine, réseau de diffusion (CDN), certificat HTTPS et pare-feu applicatif.</p>
+        </section>
+
+        <section class="legal-section" aria-labelledby="propriete">
+            <h2 id="propriete">Propriété intellectuelle</h2>
+            <p>Les textes, captures d'écran et visuels de ce site sont la propriété d'Orlando Cogo, sauf mention
+                contraire. Leur reproduction sans autorisation n'est pas permise.</p>
+            <p>Le <strong>code source</strong> du site est publié sous licence MIT sur
+                <a href="https://github.com/cogo-orlando/portfolio" rel="noopener noreferrer">GitHub</a>.</p>
+            <p>Les polices <strong>Syne</strong> et <strong>DM Mono</strong> sont distribuées sous licence SIL Open
+                Font License 1.1. Les noms et logos de technologies cités (Go, Docker, Cloudflare…) appartiennent à
+                leurs propriétaires respectifs.</p>
+            <p>Les projets réalisés en équipe sont présentés avec la mention de l'équipe ; chaque membre reste
+                auteur de sa contribution.</p>
+        </section>
+
+        <section class="legal-section" aria-labelledby="donnees">
+            <h2 id="donnees">Données personnelles</h2>
+            <p>Le site ne dépose aucun cookie et n'utilise aucun outil de suivi publicitaire. Les données
+                techniques et celles du formulaire de contact sont décrites dans la
+                <a href="/privacy">politique de confidentialité</a>.</p>
+        </section>
+
+        <section class="legal-section" aria-labelledby="securite">
+            <h2 id="securite">Signaler une faille de sécurité</h2>
+            <p>Si vous découvrez une vulnérabilité, merci de la signaler de façon responsable, sans l'exploiter au-delà
+                de ce qui est nécessaire pour la démontrer. La marche à suivre est décrite dans
+                <a href="/.well-known/security.txt">security.txt</a>.</p>
+        </section>
+
+        <section class="legal-section" aria-labelledby="responsabilite">
+            <h2 id="responsabilite">Responsabilité</h2>
+            <p>Les informations de ce site sont fournies à titre indicatif et peuvent évoluer. Les liens vers des sites
+                externes sont proposés pour information ; leur contenu ne relève pas de la responsabilité de
+                l'éditeur.</p>
+        </section>
+    </main>
+
+    {{template "footer"}}
+</body>
+
+</html>
