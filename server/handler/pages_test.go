@@ -35,7 +35,7 @@ func setupTestTemplates(t *testing.T) func() {
 	if err := os.MkdirAll(filepath.Join("web", "html", "projects"), 0755); err != nil {
 		t.Fatalf("impossible de créer web/html/projects : %v", err)
 	}
-		for _, page := range pages {
+	for _, page := range pages {
 		path := filepath.Join(dir, filepath.FromSlash(page))
 		if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
 			t.Fatalf("impossible de créer %s : %v", filepath.Dir(path), err)
