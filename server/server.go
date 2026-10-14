@@ -50,7 +50,6 @@ var routes = map[string]http.HandlerFunc{
 
 // Pages vérifiées par le moniteur (affichées dans cet ordre sur /status)
 var monitorTargets = []monitor.Target{
-	{Name: "Accueil", Path: "/"},
 	{Name: "Home", Path: "/home"},
 	{Name: "À propos", Path: "/about"},
 	{Name: "Compétences", Path: "/skills"},
@@ -185,7 +184,7 @@ func newMux() *http.ServeMux {
 			handler.NotFoundHandler(w, r)
 			return
 		}
-		withAlternates("/", handler.IndexHandler)(w, r)
+		http.Redirect(w, r, "/home", http.StatusMovedPermanently)
 	})
 
 	return mux

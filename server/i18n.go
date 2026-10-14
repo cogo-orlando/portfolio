@@ -31,9 +31,10 @@ type page struct {
 	file string
 }
 
-// translatablePages : l'accueil + toutes les pages du sitemap
+// translatablePages : toutes les pages du sitemap
+// (la racine "/" n'est plus une page : elle redirige vers /home)
 func translatablePages() []page {
-	pages := []page{{"/", "index.html"}}
+	pages := []page{}
 	for _, u := range sitemapURLs {
 		pages = append(pages, page{u.path, u.file})
 	}
@@ -112,7 +113,11 @@ func fallbackTarget(path string) (string, bool) {
 		return "", false
 	}
 	if fr == "/" {
-		return "/", true
+		// "/en" → accueil anglais s'il existe, sinon accueil français
+		if translated["/home"] {
+			return enPath("/home"), true
+		}
+		return "/home", true
 	}
 	if _, exists := routes[fr]; exists {
 		return fr, true

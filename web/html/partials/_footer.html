@@ -6,7 +6,9 @@
 
 {{define "footer"}}
 <footer class="footer" aria-label="Pied de page">
-    <a href="/" class="footer-back">← Retour à l'accueil</a>
+    <span class="prompt" aria-hidden="true">~/orlando.cogo $</span>
+    <a href="/home" class="footer-back">← Retour à l'accueil</a>
+    <span aria-hidden="true">exit 0</span>
     <nav class="footer-legal" aria-label="Informations légales">
         <a href="/legal">Mentions légales</a>
         <a href="/privacy">Confidentialité</a>
@@ -21,7 +23,9 @@
 {{/* Version anglaise : {{template "footer-en"}} */}}
 {{define "footer-en"}}
 <footer class="footer" aria-label="Footer">
-    <a href="/en" class="footer-back">← Back to home</a>
+    <span class="prompt" aria-hidden="true">~/orlando.cogo $</span>
+    <a href="/en/home" class="footer-back">← Back to home</a>
+    <span aria-hidden="true">exit 0</span>
     <nav class="footer-legal" aria-label="Legal information">
         <a href="/en/legal">Legal notice</a>
         <a href="/en/privacy">Privacy</a>

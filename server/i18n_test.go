@@ -1,9 +1,38 @@
 package server
 
 import (
+	"net/http"
+	"net/http/httptest"
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 )
+
+// goToRepoRoot se place à la racine du projet (là où est go.mod),
+// pour que le serveur trouve web/html pendant le test
+func goToRepoRoot(t *testing.T) {
+	t.Helper()
+	dir, err := os.Getwd()
+	if err != nil {
+		t.Fatal(err)
+	}
+	for {
+		if _, err := os.Stat(filepath.Join(dir, "go.mod")); err == nil {
+			break
+		}
+		parent := filepath.Dir(dir)
+		if parent == dir {
+			t.Fatal("go.mod introuvable")
+		}
+		dir = parent
+	}
+	old, _ := os.Getwd()
+	if err := os.Chdir(dir); err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(func() { _ = os.Chdir(old) })
+}
 
 func TestI18n_EnPath(t *testing.T) {
 	cases := map[string]string{"/": "/en", "/home": "/en/home", "/projects/zoo": "/en/projects/zoo"}
@@ -34,8 +63,13 @@ func TestI18n_FallbackToFrench(t *testing.T) {
 	if got, ok := fallbackTarget("/en/home"); !ok || got != "/home" {
 		t.Errorf("/en/home : attendu /home, obtenu %q (%v)", got, ok)
 	}
-	if got, ok := fallbackTarget("/en/"); !ok || got != "/" {
-		t.Errorf("/en/ : attendu /, obtenu %q (%v)", got, ok)
+	if got, ok := fallbackTarget("/en/"); !ok || got != "/home" {
+		t.Errorf("/en/ sans accueil anglais : attendu /home, obtenu %q (%v)", got, ok)
+	}
+	translated["/home"] = true
+	defer delete(translated, "/home")
+	if got, _ := fallbackTarget("/en"); got != "/en/home" {
+		t.Errorf("/en avec accueil anglais : attendu /en/home, obtenu %q", got)
 	}
 }
 
@@ -57,6 +91,23 @@ func TestI18n_AlternatesHeader(t *testing.T) {
 	} {
 		if !strings.Contains(h, want) {
 			t.Errorf("en-tête Link : %q manquant dans %q", want, h)
+		}
+	}
+}
+
+// La racine redirige vers la home, et /en vers la home anglaise
+func TestRootRedirects(t *testing.T) {
+	goToRepoRoot(t)
+	mux := newMux()
+	cases := map[string]string{"/": "/home", "/en": "/en/home", "/en/": "/en/home"}
+	for from, want := range cases {
+		w := httptest.NewRecorder()
+		mux.ServeHTTP(w, httptest.NewRequest(http.MethodGet, from, nil))
+		if w.Code != http.StatusMovedPermanently && w.Code != http.StatusFound {
+			t.Errorf("%s : attendu une redirection, obtenu %d", from, w.Code)
+		}
+		if got := w.Header().Get("Location"); got != want {
+			t.Errorf("%s : attendu %s, obtenu %s", from, want, got)
 		}
 	}
 }
