@@ -4,26 +4,17 @@
 <head>
     {{template "head-common"}}
 
-    <title>Orlando Cogo — About &amp; Background</title>
-    <meta name="description"
-        content="Orlando Cogo's journey — from the Airbus aerospace industry to cybersecurity. A deliberate career change, Computer Science Bachelor at Ynov Campus Toulouse.">
+    <title>Orlando Cogo — About</title>
+    <meta name="description" content="Orlando Cogo's background: five years at Airbus, then a career change into computer science and cybersecurity at Ynov Campus Toulouse.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://orlandocogo.com/en/about">
-
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orlandocogo.com/en/about">
-    <meta property="og:title" content="Orlando Cogo — About &amp; Background">
-    <meta property="og:description"
-        content="From the Airbus aerospace industry to cybersecurity — Orlando Cogo's journey.">
+    <meta property="og:title" content="Orlando Cogo — About">
+    <meta property="og:description" content="Orlando Cogo's background: five years at Airbus, then a career change into computer science and cybersecurity at Ynov Campus Toulouse.">
     <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="fr_FR">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Orlando Cogo — About &amp; Background">
-    <meta name="twitter:description"
-        content="From the Airbus aerospace industry to cybersecurity — Orlando Cogo's journey.">
-    <meta name="twitter:image" content="https://orlandocogo.com/img/og-image.png">
 
     <link rel="stylesheet" href="{{asset `/css/about.css`}}">
 </head>
@@ -34,28 +25,17 @@
 
     <main id="main-content">
 
-        <!-- HERO -->
         <section class="hero" aria-labelledby="hero-title">
             <h1 class="hero-title" id="hero-title">About<br><span class="outline">me</span></h1>
-            <p class="hero-intro">An unconventional path, a deliberate career change, and a passion that drives every decision.
-                From the aerospace industry to cybersecurity.</p>
-            <div class="hero-stats reveal" aria-label="A few numbers">
-                <div class="hstat"><span class="hstat-val">5</span><span class="hstat-label">years at Airbus</span></div>
-                <div class="hstat-sep" aria-hidden="true">·</div>
-                <div class="hstat"><span class="hstat-val">{{template "niveau"}}</span><span class="hstat-label">Ynov Campus</span></div>
-                <div class="hstat-sep" aria-hidden="true">·</div>
-                <div class="hstat"><span class="hstat-val">{{template "nb-tests"}}</span><span class="hstat-label">Automated tests</span></div>
-            </div>
+            <p class="hero-intro">From machining aircraft parts at Airbus to securing systems: an unusual path, driven by the same demand for rigor.</p>
         </section>
 
-        <!-- TIMELINE -->
         <section class="section" aria-labelledby="parcours-title">
             <div class="section-header">
                 <span class="section-tag" aria-hidden="true">01 //</span>
                 <h2 class="section-title" id="parcours-title">Background</h2>
             </div>
             <div class="timeline">
-
                 <div class="timeline-item reveal">
                     <div class="timeline-left"><span class="timeline-year">2025 — 2027</span></div>
                     <div class="timeline-right">
@@ -63,14 +43,11 @@
                         <div class="timeline-content">
                             <span class="timeline-tag">Today</span>
                             <h3 class="timeline-title">Computer Science Bachelor — Cybersecurity</h3>
-                            <p class="timeline-place">Ynov Campus Toulouse · 2nd year</p>
-                            <p class="timeline-desc">A career change into what truly drives me: computer science,
-                                infrastructure and cybersecurity. Alongside my studies, I build real projects that run in
-                                production — like this Go portfolio deployed at orlandocogo.com.</p>
+                            <p class="timeline-place">Ynov Campus Toulouse · {{template "niveau"}}</p>
+                            <p class="timeline-desc">A career change into what truly drives me. Alongside my studies, I build real projects, like this portfolio running in production.</p>
                         </div>
                     </div>
                 </div>
-
                 <div class="timeline-item reveal">
                     <div class="timeline-left"><span class="timeline-year">2026</span></div>
                     <div class="timeline-right">
@@ -79,140 +56,51 @@
                             <span class="timeline-tag">Internship</span>
                             <h3 class="timeline-title">IT internship — 1 month</h3>
                             <p class="timeline-place">AI.com · Castelmaurou, France</p>
-                            <p class="timeline-desc">Firewall configuration and installation, setting up a complete network
-                                and providing IT support to clients. My first hands-on experience in infrastructure and
-                                network security.</p>
+                            <p class="timeline-desc">Firewall installation and configuration, setting up a complete network, client support. My first hands-on experience.</p>
                         </div>
                     </div>
                 </div>
-
                 <div class="timeline-item reveal">
                     <div class="timeline-left"><span class="timeline-year">2023 — 2025</span></div>
                     <div class="timeline-right">
                         <div class="timeline-dot" aria-hidden="true"></div>
                         <div class="timeline-content">
-                            <span class="timeline-tag">Work-study degree</span>
-                            <h3 class="timeline-title">BTS CPRP — Two-year technical degree in manufacturing process design</h3>
-                            <p class="timeline-place">Lycée Jean Perrin · Marseille &nbsp;×&nbsp; Airbus Helicopters</p>
-                            <p class="timeline-desc">Two years of work-study at Airbus Helicopters in Marseille, designing
-                                and optimizing industrial processes. Degree obtained. This is where I realized I wanted to
-                                move into computer science.</p>
+                            <span class="timeline-tag">Work-study</span>
+                            <h3 class="timeline-title">BTS CPRP — two-year degree in manufacturing process design</h3>
+                            <p class="timeline-place">Lycée Jean Perrin · Marseille × Airbus Helicopters</p>
+                            <p class="timeline-desc">Two years designing and optimizing industrial processes. This is where I decided to move into computer science.</p>
                         </div>
                     </div>
                 </div>
-
                 <div class="timeline-item reveal">
                     <div class="timeline-left"><span class="timeline-year">2020 — 2023</span></div>
                     <div class="timeline-right">
                         <div class="timeline-dot" aria-hidden="true"></div>
                         <div class="timeline-content">
-                            <span class="timeline-tag">Work-study diploma</span>
+                            <span class="timeline-tag">Work-study</span>
                             <h3 class="timeline-title">Vocational Baccalaureate in Machining — with honors</h3>
-                            <p class="timeline-place">Lycée Airbus Saint-Éloi · Toulouse &nbsp;×&nbsp; Airbus (Saint-Éloi plant)</p>
-                            <p class="timeline-desc">Work-study training at Airbus's Saint-Éloi plant in Toulouse. Diploma
-                                obtained with honors. The industrial rigor I learned there shows today in the way I write
-                                code — tests, CI/CD, monitoring, documentation.</p>
+                            <p class="timeline-place">Lycée Airbus Saint-Éloi · Toulouse × Airbus</p>
+                            <p class="timeline-desc">Aircraft parts machined to the micron. A mistake can be very costly: I now bring that rigor to code.</p>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- WHAT I BUILD -->
-        <section class="section" aria-labelledby="building-title">
-            <div class="section-header">
-                <span class="section-tag" aria-hidden="true">02 //</span>
-                <h2 class="section-title" id="building-title">What I build</h2>
-            </div>
-            <div class="building-grid">
-
-                <div class="building-card reveal">
-                    <div class="building-header">
-                        <span class="building-num" aria-hidden="true">01</span>
-                        <span class="building-status building-status--live">Live</span>
-                    </div>
-                    <h3 class="building-name">Portfolio — orlandocogo.com</h3>
-                    <p class="building-desc">Go HTTP server built from scratch — routing, middleware chain, honeypot, rate
-                        limiting, panic recovery. Multi-stage Docker image ({{template "docker-portfolio"}}), Cloudflare WAF,
-                        GitHub Actions CI/CD. {{template "nb-tests"}} automated tests, gosec {{template "nb-gosec"}}
-                        issues, Lighthouse {{template "lighthouse"}}.</p>
-                    <div class="building-tags">
-                        <span>Go</span><span>Docker</span><span>Cloudflare</span><span>CI/CD</span><span>{{template "nb-tests"}} tests</span>
-                    </div>
-                    <a href="/en/tech" class="building-link">Architecture →</a>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- MOTIVATION -->
         <section class="section" aria-labelledby="motivation-title">
             <div class="section-header">
-                <span class="section-tag" aria-hidden="true">03 //</span>
+                <span class="section-tag" aria-hidden="true">02 //</span>
                 <h2 class="section-title" id="motivation-title">Why cybersecurity</h2>
             </div>
             <div class="motivation-block reveal">
                 <blockquote class="motivation-quote">
                     <span class="quote-mark" aria-hidden="true">"</span>
-                    <p>To me, cybersecurity is truly the future. With the rise of artificial intelligence and all the new
-                        technologies, the IT field keeps changing — and that is exactly what excites me. I'm convinced
-                        that understanding these changes has become essential to protect systems properly.</p>
+                    <p>Cybersecurity is the future. With AI and new technologies, the field never stops changing, and that is exactly what excites me.</p>
                 </blockquote>
-                <p class="motivation-text">After working in the aerospace industry, I realized I wanted to grow in a field
-                    that never stops moving. Cybersecurity is exactly that: a sector that never sleeps, where every day
-                    brings new challenges and new threats to analyze and counter.</p>
-                <p class="motivation-text">Working in highly structured industrial environments like Airbus taught me rigor
-                    and method — two essential qualities in security. Today I bring that rigor to every project: automated
-                    tests, static security analysis with gosec, automated CI/CD, monitoring in production.</p>
+                <p class="motivation-text">After the aerospace industry, I wanted a field that keeps moving, where every day brings new challenges and new threats to understand.</p>
+                <p class="motivation-text">Airbus taught me rigor and method, two essential qualities in security. I bring them to every project: automated tests, vulnerability scanning, controlled deployments.</p>
             </div>
-        </section>
-
-        <!-- HOBBIES -->
-        <section class="section" aria-labelledby="hobbies-title">
-            <div class="section-header">
-                <span class="section-tag" aria-hidden="true">04 //</span>
-                <h2 class="section-title" id="hobbies-title">Beyond code</h2>
-            </div>
-            <div class="hobbies-grid">
-                <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                            <path d="M9 18V5l12-2v13M9 18c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-2c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z" />
-                        </svg></div>
-                    <span class="hobby-name">Music</span>
-                    <p class="hobby-desc">Always wearing headphones — music helps me unwind and stay in my own bubble.</p>
-                </div>
-                <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-                        </svg></div>
-                    <span class="hobby-name">Friends</span>
-                    <p class="hobby-desc">Going out, enjoying life, sharing — the rest of the time, surrounded by my friends.</p>
-                </div>
-                <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9zM8 22V12h8v10" />
-                        </svg></div>
-                    <span class="hobby-name">Climbing</span>
-                    <p class="hobby-desc">Climb, solve, try again. Not that different from writing code.</p>
-                </div>
-                <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
-                        </svg></div>
-                    <span class="hobby-name">Travel</span>
-                    <p class="hobby-desc">Discovering new places, cultures and perspectives.</p>
-                </div>
-                <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                            <rect x="2" y="3" width="20" height="14" rx="2" />
-                            <path d="M8 21h8M12 17v4" />
-                        </svg></div>
-                    <span class="hobby-name">Video games</span>
-                    <p class="hobby-desc">Strategy, exploration, competition — depending on the mood.</p>
-                </div>
-            </div>
+            <p class="about-offline reveal"><strong>Beyond code</strong> — climbing (climb, search, try again: not that far from debugging), music, travel and strategy games.</p>
         </section>
 
     </main>

@@ -4,26 +4,17 @@
 <head>
     {{template "head-common"}}
 
-    <title>Orlando Cogo — Skills: Go, Cybersecurity, Linux, Docker</title>
-    <meta name="description"
-        content="Orlando Cogo's technical skills: Go, Docker, CI/CD, PostgreSQL, Linux, Cisco, Cloudflare, HackTheBox CTF. Cybersecurity student at Ynov Campus.">
+    <title>Orlando Cogo — Skills</title>
+    <meta name="description" content="Orlando Cogo's skills in development, security and infrastructure, sorted by what actually runs in production.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://orlandocogo.com/en/skills">
-
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orlandocogo.com/en/skills">
-    <meta property="og:title" content="Orlando Cogo — Skills: Go, Cybersecurity, Linux, Docker">
-    <meta property="og:description"
-        content="Go, Docker, CI/CD, PostgreSQL, Linux, Cisco, Cloudflare — Orlando Cogo's skills.">
+    <meta property="og:title" content="Orlando Cogo — Skills">
+    <meta property="og:description" content="Orlando Cogo's skills in development, security and infrastructure, sorted by what actually runs in production.">
     <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="fr_FR">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Orlando Cogo — Skills: Go, Cybersecurity, Linux, Docker">
-    <meta name="twitter:description"
-        content="Go, Docker, CI/CD, PostgreSQL, Linux, Cisco, Cloudflare — Orlando Cogo's skills.">
-    <meta name="twitter:image" content="https://orlandocogo.com/img/og-image.png">
 
     <link rel="stylesheet" href="{{asset `/css/skills.css`}}">
 </head>
@@ -33,341 +24,101 @@
     {{template "nav-en"}}
 
     <main id="main-content">
-
-        <!-- HERO -->
         <section class="hero" aria-labelledby="hero-title">
             <h1 class="hero-title" id="hero-title">My<br><span class="outline">Skills</span></h1>
-            <p class="hero-intro">From code to infrastructure, from application security to DevOps — I build, deploy and
-                secure real systems running in production.</p>
-            <div class="hero-stats reveal" aria-label="Skill statistics">
-                <div class="hstat"><span class="hstat-val">{{template "nb-competences"}}</span><span class="hstat-label">Skills</span></div>
-                <div class="hstat-sep" aria-hidden="true">·</div>
-                <div class="hstat"><span class="hstat-val">4</span><span class="hstat-label">Domains</span></div>
-                <div class="hstat-sep" aria-hidden="true">·</div>
-                <div class="hstat"><span class="hstat-val">{{template "niveau"}}</span><span class="hstat-label">Current year</span></div>
-            </div>
+            <p class="hero-intro">Sorted honestly: what runs in production on this site, what I have used in projects, and what I am discovering.</p>
         </section>
 
-        <!-- DEVELOPMENT -->
-        <section class="section" aria-labelledby="dev-title">
-            <div class="section-header">
-                <span class="section-tag" aria-hidden="true">01 //</span>
-                <h2 class="section-title" id="dev-title">Development</h2>
-                <span class="section-desc">Languages &amp; databases</span>
+        <div class="sk">
+            <div class="sk-legend" aria-hidden="true"><span><i class="lvl-dot lvl-prod" aria-hidden="true"></i>Used in production</span><span><i class="lvl-dot lvl-ok" aria-hidden="true"></i>Comfortable in projects</span><span><i class="lvl-dot lvl-learn" aria-hidden="true"></i>Learning</span></div>
+            <div class="sk-grid">
+                <section class="sk-domain reveal" aria-labelledby="sk-dev">
+                    <div class="sk-domain-head">
+                        <span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg></span>
+                        <h2 id="sk-dev">Development</h2>
+                    </div>
+                    <div class="sk-level">
+                        <span class="sk-level-name"><i class="lvl-dot lvl-prod" aria-hidden="true"></i>Used in production</span>
+                        <div class="sk-tags"><span>Go <small>server, middleware, tests</small></span><span>HTML / CSS</span><span>JavaScript</span></div>
+                    </div>
+                    <div class="sk-level">
+                        <span class="sk-level-name"><i class="lvl-dot lvl-ok" aria-hidden="true"></i>Comfortable in projects</span>
+                        <div class="sk-tags"><span>SQL / PostgreSQL</span><span>Python · FastAPI</span><span>Git</span></div>
+                    </div>
+                    <div class="sk-level">
+                        <span class="sk-level-name"><i class="lvl-dot lvl-learn" aria-hidden="true"></i>Learning</span>
+                        <div class="sk-tags"><span>React</span><span>Java</span><span>C#</span><span>C</span></div>
+                    </div>
+                </section>
+                <section class="sk-domain reveal" aria-labelledby="sk-sec">
+                    <div class="sk-domain-head">
+                        <span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg></span>
+                        <h2 id="sk-sec">Security</h2>
+                    </div>
+                    <div class="sk-level">
+                        <span class="sk-level-name"><i class="lvl-dot lvl-prod" aria-hidden="true"></i>Used in production</span>
+                        <div class="sk-tags"><span>CSP · headers</span><span>Rate limiting</span><span>Honeypot</span><span>PostgreSQL RLS</span><span>Cloudflare WAF</span></div>
+                    </div>
+                    <div class="sk-level">
+                        <span class="sk-level-name"><i class="lvl-dot lvl-ok" aria-hidden="true"></i>Comfortable in projects</span>
+                        <div class="sk-tags"><span>gosec · govulncheck</span><span>gitleaks</span><span>Auditing (curl, testssl, nmap)</span><span>DMARC / SPF</span></div>
+                    </div>
+                    <div class="sk-level">
+                        <span class="sk-level-name"><i class="lvl-dot lvl-learn" aria-hidden="true"></i>Learning</span>
+                        <div class="sk-tags"><span>Pentesting · HackTheBox</span><span>OSINT</span><span>Metasploit</span></div>
+                    </div>
+                </section>
+                <section class="sk-domain reveal" aria-labelledby="sk-infra">
+                    <div class="sk-domain-head">
+                        <span class="sk-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="8" rx="2" /><rect x="2" y="14" width="20" height="8" rx="2" /><line x1="6" y1="6" x2="6.01" y2="6" /><line x1="6" y1="18" x2="6.01" y2="18" /></svg></span>
+                        <h2 id="sk-infra">Infra &amp; DevOps</h2>
+                    </div>
+                    <div class="sk-level">
+                        <span class="sk-level-name"><i class="lvl-dot lvl-prod" aria-hidden="true"></i>Used in production</span>
+                        <div class="sk-tags"><span>Docker <small>multi-stage, hardened</small></span><span>GitHub Actions</span><span>Render</span><span>Cloudflare</span></div>
+                    </div>
+                    <div class="sk-level">
+                        <span class="sk-level-name"><i class="lvl-dot lvl-ok" aria-hidden="true"></i>Comfortable in projects</span>
+                        <div class="sk-tags"><span>Linux <small>Debian, Arch</small></span><span>SSH · Samba</span><span>Proxmox VE</span><span>Cisco <small>VLAN, DHCP, routing</small></span></div>
+                    </div>
+                    <div class="sk-level">
+                        <span class="sk-level-name"><i class="lvl-dot lvl-learn" aria-hidden="true"></i>Learning</span>
+                        <div class="sk-tags"><span>Kubernetes</span><span>Wireshark</span></div>
+                    </div>
+                </section>
             </div>
-            <div class="skills-grid">
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:var(--accent)" aria-label="Go">Go</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">Golang</span><span class="skill-level">Intermediate</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" aria-label="Go level 55%">
-                            <div class="skill-fill" style="--pct:55%"></div>
-                        </div>
-                        <div class="skill-details"><span>HTTP server</span><span>Routing</span><span>Middleware</span><span>Automated tests</span><span>PostgreSQL</span><span>Goroutines</span><span>gosec</span></div>
-                    </div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:#f7df1e" aria-label="JavaScript">JS</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">JavaScript</span><span class="skill-level">Beginner</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" aria-label="JavaScript level 25%">
-                            <div class="skill-fill" style="--pct:25%"></div>
-                        </div>
-                        <div class="skill-details"><span>DOM</span><span>Fetch API</span><span>Canvas</span><span>Animations</span><span>IntersectionObserver</span></div>
-                    </div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:#336791" aria-label="SQL">SQL</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">SQL / PostgreSQL</span><span class="skill-level">Beginner</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" aria-label="SQL level 30%">
-                            <div class="skill-fill" style="--pct:30%"></div>
-                        </div>
-                        <div class="skill-details"><span>SELECT / INSERT</span><span>Joins</span><span>RLS</span><span>Supabase</span><span>lib/pq</span></div>
-                    </div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:#805a5a" aria-label="Java">Java</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">Java</span><span class="skill-level">Beginner</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" aria-label="Java level 20%">
-                            <div class="skill-fill" style="--pct:20%"></div>
-                        </div>
-                        <div class="skill-details"><span>OOP</span><span>Singleton</span><span>Custom exceptions</span><span>Packages</span></div>
-                    </div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:#9b59b6" aria-label="C#">C#</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">C#</span><span class="skill-level">Beginner</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" aria-label="C# level 20%">
-                            <div class="skill-fill" style="--pct:20%"></div>
-                        </div>
-                        <div class="skill-details"><span>OOP &amp; architecture</span><span>Inheritance</span><span>Polymorphism</span><span>.NET console</span></div>
-                    </div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:#e44d26" aria-label="HTML5 CSS3">HTML/CSS</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">HTML5 / CSS3</span><span class="skill-level">Beginner</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" aria-label="HTML5 CSS3 level 30%">
-                            <div class="skill-fill" style="--pct:30%"></div>
-                        </div>
-                        <div class="skill-details"><span>Responsive</span><span>Advanced CSS</span><span>Accessibility</span><span>SEO</span><span>Animations</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- APPLICATION SECURITY -->
-        <section class="section" aria-labelledby="appsec-title">
-            <div class="section-header">
-                <span class="section-tag" aria-hidden="true">02 //</span>
-                <h2 class="section-title" id="appsec-title">Application security</h2>
-                <span class="section-desc">Backend, database &amp; network</span>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:var(--accent)" aria-label="Backend security">SEC</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">Backend security</span><span class="skill-level">Learning</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" aria-label="Backend security level 35%">
-                            <div class="skill-fill" style="--pct:35%"></div>
-                        </div>
-                        <div class="skill-details"><span>Strict CSP</span><span>Spoof-proof client IP</span><span>Rate limiting</span><span>Honeypot</span><span>Security headers</span><span>bcrypt</span></div>
-                    </div>
+            <section class="sk-next" aria-labelledby="next-title">
+                <h2 class="sk-next-title" id="next-title">Right now</h2>
+                <div class="sk-next-grid">
+                <div class="sk-next-item reveal">
+                    <span class="sk-badge sk-badge--now">In progress</span>
+                    <h3>Offensive security</h3>
+                    <p>HackTheBox and TryHackMe labs: enumeration, exploitation, and writing up each lab.</p>
                 </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:#f5a000" aria-label="Cloudflare WAF">WAF</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">Cloudflare WAF</span><span class="skill-level">Beginner</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" aria-label="Cloudflare WAF level 25%">
-                            <div class="skill-fill" style="--pct:25%"></div>
-                        </div>
-                        <div class="skill-details"><span>WAF</span><span>SSL Full Strict</span><span>DDoS protection</span><span>Bot Fight Mode</span><span>CDN</span></div>
-                    </div>
+                <div class="sk-next-item reveal">
+                    <span class="sk-badge sk-badge--now">In progress</span>
+                    <h3>Linux administration</h3>
+                    <p>LDAP directory, Samba shares, permission management on Proxmox.</p>
                 </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:#336791" aria-label="Database security">DB SEC</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">Database security</span><span class="skill-level">Beginner</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" aria-label="Database security level 30%">
-                            <div class="skill-fill" style="--pct:30%"></div>
-                        </div>
-                        <div class="skill-details"><span>Supabase RLS</span><span>Dedicated users</span><span>sslmode=require</span><span>Least privilege</span></div>
-                    </div>
+                <div class="sk-next-item reveal">
+                    <span class="sk-badge sk-badge--next">Next</span>
+                    <h3>Network analysis</h3>
+                    <p>Wireshark, packet inspection, anomaly detection.</p>
                 </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:#ff4d4d" aria-label="Cybersecurity">CTF</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">Offensive security</span><span class="skill-level">Learning</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" aria-label="Cybersecurity level 25%">
-                            <div class="skill-fill" style="--pct:25%"></div>
-                        </div>
-                        <div class="skill-details"><span>HackTheBox CTF</span><span>OSINT</span><span>Google Dorks</span><span>Enumeration</span><span>Pentest basics</span></div>
-                    </div>
+                <div class="sk-next-item reveal">
+                    <span class="sk-badge sk-badge--next">Next</span>
+                    <h3>Orchestration</h3>
+                    <p>Kubernetes and cloud deployments.</p>
                 </div>
-            </div>
-        </section>
+                </div>
+            </section>
 
-        <!-- INFRASTRUCTURE & DEVOPS -->
-        <section class="section" aria-labelledby="infra-title">
-            <div class="section-header">
-                <span class="section-tag" aria-hidden="true">03 //</span>
-                <h2 class="section-title" id="infra-title">Infrastructure &amp; DevOps</h2>
-                <span class="section-desc">Deployment, containers &amp; networking</span>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:var(--accent2)" aria-label="Docker">🐳</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">Docker</span><span class="skill-level">Beginner</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="Docker level 40%">
-                            <div class="skill-fill" style="--pct:40%"></div>
-                        </div>
-                        <div class="skill-details"><span>Multi-stage build</span><span>Scratch image</span><span>docker-compose</span><span>no-new-privileges</span><span>Read-only fs</span><span>Healthcheck</span></div>
-                    </div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:var(--accent)" aria-label="CI/CD">CI/CD</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">GitHub Actions</span><span class="skill-level">Beginner</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" aria-label="CI/CD level 35%">
-                            <div class="skill-fill" style="--pct:35%"></div>
-                        </div>
-                        <div class="skill-details"><span>Go build</span><span>Automated tests</span><span>gosec</span><span>govulncheck</span><span>Coverage</span><span>Dependabot</span></div>
-                    </div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:#f5a000" aria-label="Linux">Linux</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">Linux</span><span class="skill-level">Beginner</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" aria-label="Linux level 30%">
-                            <div class="skill-fill" style="--pct:30%"></div>
-                        </div>
-                        <div class="skill-details"><span>SSH</span><span>Bash</span><span>Samba</span><span>User management</span><span>ArchLinux · Debian · Kali</span></div>
-                    </div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:#6e3ff3" aria-label="Proxmox">PVE</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">Proxmox VE</span><span class="skill-level">Beginner</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" aria-label="Proxmox level 25%">
-                            <div class="skill-fill" style="--pct:25%"></div>
-                        </div>
-                        <div class="skill-details"><span>KVM</span><span>VMs</span><span>Virtual networking</span><span>Snapshots</span></div>
-                    </div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:#1ba0d8" aria-label="Cisco">CISCO</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">Cisco Packet Tracer</span><span class="skill-level">Beginner</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" aria-label="Cisco level 30%">
-                            <div class="skill-fill" style="--pct:30%"></div>
-                        </div>
-                        <div class="skill-details"><span>VLANs</span><span>L3 DHCP</span><span>Static routing</span><span>DNS · Web</span><span>4 sites</span></div>
-                    </div>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon" style="--ic:var(--accent2)" aria-label="Deployment">PROD</div>
-                    <div class="skill-body">
-                        <div class="skill-info"><span class="skill-name">Production deployment</span><span class="skill-level">Beginner</span></div>
-                        <div class="skill-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" aria-label="Deployment level 30%">
-                            <div class="skill-fill" style="--pct:30%"></div>
-                        </div>
-                        <div class="skill-details"><span>Render</span><span>Cloudflare</span><span>Environment variables</span><span>Graceful shutdown</span><span>Health checks</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TOOLS -->
-        <section class="section" aria-labelledby="tools-title">
-            <div class="section-header">
-                <span class="section-tag" aria-hidden="true">04 //</span>
-                <h2 class="section-title" id="tools-title">Everyday tools</h2>
-                <span class="section-desc">My working environment</span>
-            </div>
-            <div class="tools-grid reveal" aria-label="List of tools">
-                <div class="tool-badge"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 9l6 6M15 9l-6 6" /></svg></span><span>GoLand</span></div>
-                <div class="tool-badge"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" /></svg></span><span>GitHub</span></div>
-                <div class="tool-badge"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg></span><span>Git</span></div>
-                <div class="tool-badge"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" /></svg></span><span>Docker</span></div>
-                <div class="tool-badge"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="2" y="2" width="20" height="8" rx="2" /><rect x="2" y="14" width="20" height="8" rx="2" /></svg></span><span>Supabase</span></div>
-                <div class="tool-badge"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg></span><span>Cloudflare</span></div>
-                <div class="tool-badge"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /></svg></span><span>Render</span></div>
-                <div class="tool-badge"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M5 3l14 9-14 9V3z" /></svg></span><span>PowerShell</span></div>
-                <div class="tool-badge"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="2" y="2" width="20" height="8" rx="2" /><rect x="2" y="14" width="20" height="8" rx="2" /></svg></span><span>VirtualBox</span></div>
-                <div class="tool-badge"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /></svg></span><span>Cisco Packet Tracer</span></div>
-                <div class="tool-badge"><span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /></svg></span><span>Windows 11</span></div>
-            </div>
-        </section>
-
-        <!-- ROADMAP -->
-        <section class="section" aria-labelledby="roadmap-title">
-            <div class="section-header">
-                <span class="section-tag" aria-hidden="true">05 //</span>
-                <h2 class="section-title" id="roadmap-title">Roadmap</h2>
-                <span class="section-desc">Progress &amp; goals</span>
-            </div>
-            <div class="roadmap-list">
-                <div class="roadmap-item reveal done">
-                    <div class="roadmap-dot" aria-hidden="true"></div>
-                    <div class="roadmap-content">
-                        <div class="roadmap-top">
-                            <span class="roadmap-name">Go — Web server &amp; REST API</span>
-                            <span class="roadmap-badge done-badge">Acquired</span>
-                        </div>
-                        <p class="roadmap-desc">Routing, middleware, automated tests, goroutines, PostgreSQL, gosec {{template "nb-gosec"}} issues</p>
-                    </div>
-                </div>
-                <div class="roadmap-item reveal done">
-                    <div class="roadmap-dot" aria-hidden="true"></div>
-                    <div class="roadmap-content">
-                        <div class="roadmap-top">
-                            <span class="roadmap-name">Docker — Containerization</span>
-                            <span class="roadmap-badge done-badge">Acquired</span>
-                        </div>
-                        <p class="roadmap-desc">Multi-stage build, scratch image, docker-compose, full hardening</p>
-                    </div>
-                </div>
-                <div class="roadmap-item reveal done">
-                    <div class="roadmap-dot" aria-hidden="true"></div>
-                    <div class="roadmap-content">
-                        <div class="roadmap-top">
-                            <span class="roadmap-name">CI/CD — GitHub Actions</span>
-                            <span class="roadmap-badge done-badge">Acquired</span>
-                        </div>
-                        <p class="roadmap-desc">Build, automated tests, gosec, govulncheck, code coverage, Docker image testing</p>
-                    </div>
-                </div>
-                <div class="roadmap-item reveal done">
-                    <div class="roadmap-dot" aria-hidden="true"></div>
-                    <div class="roadmap-content">
-                        <div class="roadmap-top">
-                            <span class="roadmap-name">Application security</span>
-                            <span class="roadmap-badge done-badge">Acquired</span>
-                        </div>
-                        <p class="roadmap-desc">Strict CSP, rate limiting, honeypot, PostgreSQL RLS, Cloudflare WAF, bcrypt and secure sessions</p>
-                    </div>
-                </div>
-                <div class="roadmap-item reveal inprog">
-                    <div class="roadmap-dot" aria-hidden="true"></div>
-                    <div class="roadmap-content">
-                        <div class="roadmap-top">
-                            <span class="roadmap-name">Linux — System administration</span>
-                            <span class="roadmap-badge inprog-badge">In progress</span>
-                        </div>
-                        <p class="roadmap-desc">SSH, user management, Samba, LDAP directory, ArchLinux, Debian</p>
-                    </div>
-                </div>
-                <div class="roadmap-item reveal inprog">
-                    <div class="roadmap-dot" aria-hidden="true"></div>
-                    <div class="roadmap-content">
-                        <div class="roadmap-top">
-                            <span class="roadmap-name">Cybersecurity — CTF &amp; labs</span>
-                            <span class="roadmap-badge inprog-badge">In progress</span>
-                        </div>
-                        <p class="roadmap-desc">HackTheBox, OSINT, enumeration, vulnerability analysis</p>
-                    </div>
-                </div>
-                <div class="roadmap-item reveal planned">
-                    <div class="roadmap-dot" aria-hidden="true"></div>
-                    <div class="roadmap-content">
-                        <div class="roadmap-top">
-                            <span class="roadmap-name">Python</span>
-                            <span class="roadmap-badge planned-badge">Planned</span>
-                        </div>
-                        <p class="roadmap-desc">Automation scripts, security tooling, pentest scripting</p>
-                    </div>
-                </div>
-                <div class="roadmap-item reveal planned">
-                    <div class="roadmap-dot" aria-hidden="true"></div>
-                    <div class="roadmap-content">
-                        <div class="roadmap-top">
-                            <span class="roadmap-name">Kubernetes</span>
-                            <span class="roadmap-badge planned-badge">Planned</span>
-                        </div>
-                        <p class="roadmap-desc">Container orchestration, scaling, cloud deployments</p>
-                    </div>
-                </div>
-                <div class="roadmap-item reveal planned">
-                    <div class="roadmap-dot" aria-hidden="true"></div>
-                    <div class="roadmap-content">
-                        <div class="roadmap-top">
-                            <span class="roadmap-name">Wireshark &amp; network analysis</span>
-                            <span class="roadmap-badge planned-badge">Planned</span>
-                        </div>
-                        <p class="roadmap-desc">Packet analysis, anomaly detection, forensics</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+            <p class="sk-tools reveal"><strong>Everyday tools</strong> — GoLand · VS Code · Git · Docker · PowerShell · Bash · VirtualBox · Proxmox · Cisco Packet Tracer · Kali Linux</p>
+        </div>
     </main>
 
     {{template "footer-en"}}
-    <script src="{{asset `/js/skills.js`}}"></script>
 </body>
 
 </html>

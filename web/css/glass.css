@@ -438,3 +438,7 @@
 .tech-source { margin-top: 2rem; font-family: 'DM Mono', monospace; font-size: 13px; }
 .tech-source a { color: var(--accent); text-decoration: none; }
 .tech-source a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Page À propos : loisirs en une ligne */
+.about-offline { margin-top: 2rem; max-width: 720px; font-size: 14px; line-height: 1.8; color: var(--muted2); }
+.about-offline strong { color: var(--text); }

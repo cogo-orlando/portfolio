@@ -4,25 +4,17 @@
 <head>
     {{template "head-common"}}
 
-    <title>Orlando Cogo — À propos & Parcours</title>
-    <meta name="description"
-        content="Découvrez le parcours d'Orlando Cogo — de l'industrie aéronautique Airbus à la cybersécurité. Reconversion assumée, Bachelor Informatique Ynov Campus Toulouse.">
+    <title>Orlando Cogo — À propos</title>
+    <meta name="description" content="Le parcours d'Orlando Cogo : cinq ans chez Airbus, puis une reconversion vers l'informatique et la cybersécurité à Ynov Campus Toulouse.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://orlandocogo.com/about">
-
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orlandocogo.com/about">
-    <meta property="og:title" content="Orlando Cogo — À propos & Parcours">
-    <meta property="og:description"
-        content="De l'industrie aéronautique Airbus à la cybersécurité — le parcours d'Orlando Cogo.">
+    <meta property="og:title" content="Orlando Cogo — À propos">
+    <meta property="og:description" content="Le parcours d'Orlando Cogo : cinq ans chez Airbus, puis une reconversion vers l'informatique et la cybersécurité à Ynov Campus Toulouse.">
     <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
     <meta property="og:locale" content="fr_FR">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Orlando Cogo — À propos & Parcours">
-    <meta name="twitter:description"
-        content="De l'industrie aéronautique Airbus à la cybersécurité — le parcours d'Orlando Cogo.">
-    <meta name="twitter:image" content="https://orlandocogo.com/img/og-image.png">
+    <meta property="og:locale:alternate" content="en_US">
 
     <link rel="stylesheet" href="{{asset `/css/about.css`}}">
 </head>
@@ -33,21 +25,17 @@
 
     <main id="main-content">
 
-        <!-- HERO -->
         <section class="hero" aria-labelledby="hero-title">
             <h1 class="hero-title" id="hero-title">À propos<br><span class="outline">de moi</span></h1>
-            <p class="hero-intro">Un parcours atypique, une reconversion assumée, une passion qui guide chaque décision.
-                De l'industrie aéronautique à la cybersécurité.</p>
+            <p class="hero-intro">De l'usinage de pièces d'avion chez Airbus à la sécurité des systèmes : un parcours atypique, et une même exigence de rigueur.</p>
         </section>
 
-        <!-- TIMELINE -->
         <section class="section" aria-labelledby="parcours-title">
             <div class="section-header">
                 <span class="section-tag" aria-hidden="true">01 //</span>
                 <h2 class="section-title" id="parcours-title">Parcours</h2>
             </div>
             <div class="timeline">
-
                 <div class="timeline-item reveal">
                     <div class="timeline-left"><span class="timeline-year">2025 — 2027</span></div>
                     <div class="timeline-right">
@@ -55,66 +43,50 @@
                         <div class="timeline-content">
                             <span class="timeline-tag">Aujourd'hui</span>
                             <h3 class="timeline-title">Bachelor Informatique — Cybersécurité</h3>
-                            <p class="timeline-place">Ynov Campus Toulouse · 2ème année</p>
-                            <p class="timeline-desc">Reconversion dans ce qui me passionne vraiment : l'informatique,
-                                l'infrastructure et la cybersécurité. En parallèle de la formation, je construis des
-                                projets réels en production — comme ce portfolio Go déployé sur orlandocogo.com.</p>
+                            <p class="timeline-place">Ynov Campus Toulouse · {{template "niveau"}}</p>
+                            <p class="timeline-desc">Une reconversion vers ce qui me passionne vraiment. En parallèle des cours, je construis des projets réels, comme ce portfolio en production.</p>
                         </div>
                     </div>
                 </div>
-
                 <div class="timeline-item reveal">
                     <div class="timeline-left"><span class="timeline-year">2026</span></div>
                     <div class="timeline-right">
                         <div class="timeline-dot" aria-hidden="true"></div>
                         <div class="timeline-content">
                             <span class="timeline-tag">Stage</span>
-                            <h3 class="timeline-title">Stage Informatique — 1 mois</h3>
+                            <h3 class="timeline-title">Stage informatique — 1 mois</h3>
                             <p class="timeline-place">AI.com · Castelmaurou</p>
-                            <p class="timeline-desc">Configuration et installation d'un pare-feu, mise en place d'un
-                                système réseau complet et assistance informatique client. Première expérience terrain en
-                                infrastructure et sécurité réseau.</p>
+                            <p class="timeline-desc">Installation et configuration d'un pare-feu, mise en place d'un réseau complet, assistance aux clients. Ma première expérience de terrain.</p>
                         </div>
                     </div>
                 </div>
-
                 <div class="timeline-item reveal">
                     <div class="timeline-left"><span class="timeline-year">2023 — 2025</span></div>
                     <div class="timeline-right">
                         <div class="timeline-dot" aria-hidden="true"></div>
                         <div class="timeline-content">
-                            <span class="timeline-tag">BTS en alternance</span>
-                            <h3 class="timeline-title">BTS CPRP — Conception des Processus de Réalisation de Produit
-                            </h3>
-                            <p class="timeline-place">Lycée Jean Perrin · Marseille &nbsp;×&nbsp; Airbus Helicopters</p>
-                            <p class="timeline-desc">Deux ans en alternance chez Airbus Helicopters à Marseille.
-                                Conception et optimisation des processus industriels. BTS obtenu avec succès. C'est ici
-                                que j'ai réalisé que je voulais me reconvertir vers l'informatique.</p>
+                            <span class="timeline-tag">Alternance</span>
+                            <h3 class="timeline-title">BTS CPRP — Conception des processus de réalisation</h3>
+                            <p class="timeline-place">Lycée Jean Perrin · Marseille × Airbus Helicopters</p>
+                            <p class="timeline-desc">Deux ans à concevoir et optimiser des processus industriels. C'est là que j'ai décidé de me tourner vers l'informatique.</p>
                         </div>
                     </div>
                 </div>
-
                 <div class="timeline-item reveal">
                     <div class="timeline-left"><span class="timeline-year">2020 — 2023</span></div>
                     <div class="timeline-right">
                         <div class="timeline-dot" aria-hidden="true"></div>
                         <div class="timeline-content">
-                            <span class="timeline-tag">Bac Pro en alternance</span>
-                            <h3 class="timeline-title">Bac Pro Technicien d'Usinage — Mention</h3>
-                            <p class="timeline-place">Lycée Airbus Saint-Éloi · Toulouse &nbsp;×&nbsp; Airbus (Usine
-                                Saint-Éloi)</p>
-                            <p class="timeline-desc">Formation en alternance au sein de l'usine Saint-Éloi d'Airbus à
-                                Toulouse. Bac Pro obtenu avec mention. La rigueur industrielle acquise ici se retrouve
-                                aujourd'hui dans ma façon d'écrire du code — tests, CI/CD, monitoring, documentation.
-                            </p>
+                            <span class="timeline-tag">Alternance</span>
+                            <h3 class="timeline-title">Bac Pro Technicien d'usinage — mention</h3>
+                            <p class="timeline-place">Lycée Airbus Saint-Éloi · Toulouse × Airbus</p>
+                            <p class="timeline-desc">Des pièces d'avion usinées au micron près. Une erreur peut coûter très cher : cette rigueur, je l'applique aujourd'hui au code.</p>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- MOTIVATION -->
         <section class="section" aria-labelledby="motivation-title">
             <div class="section-header">
                 <span class="section-tag" aria-hidden="true">02 //</span>
@@ -123,75 +95,12 @@
             <div class="motivation-block reveal">
                 <blockquote class="motivation-quote">
                     <span class="quote-mark" aria-hidden="true">"</span>
-                    <p>Pour moi, la cybersécurité c'est vraiment l'avenir. Avec l'arrivée de l'intelligence artificielle
-                        et toutes les nouvelles technologies, le secteur de l'informatique change régulièrement et c'est
-                        ça qui me passionne. Je suis convaincu qu'il est devenu essentiel de comprendre ces évolutions
-                        pour bien protéger les systèmes.</p>
+                    <p>La cybersécurité, c'est l'avenir. Avec l'IA et les nouvelles technologies, le secteur change sans cesse, et c'est exactement ce qui me passionne.</p>
                 </blockquote>
-                <p class="motivation-text">Après un parcours dans l'industrie aéronautique, j'ai compris que je voulais
-                    évoluer dans un domaine en perpétuel mouvement. La cybersécurité, c'est exactement ça : un secteur
-                    qui ne dort jamais, où chaque jour apporte de nouveaux défis, de nouvelles menaces à analyser et à
-                    contrer.</p>
-                <p class="motivation-text">Le fait d'avoir travaillé dans des environnements industriels très structurés
-                    comme Airbus m'a appris la rigueur et la méthode — deux qualités essentielles en sécurité
-                    informatique. Aujourd'hui, je mets cette rigueur dans chaque projet : tests unitaires, scan de
-                    sécurité statique gosec, CI/CD automatisé, monitoring en production.</p>
+                <p class="motivation-text">Après l'industrie aéronautique, je voulais un domaine en mouvement permanent, où chaque jour apporte de nouveaux défis et de nouvelles menaces à comprendre.</p>
+                <p class="motivation-text">Airbus m'a appris la rigueur et la méthode, deux qualités essentielles en sécurité. Je les retrouve dans chaque projet : tests automatisés, analyse de vulnérabilités, déploiements contrôlés.</p>
             </div>
-        </section>
-
-        <!-- HOBBIES -->
-        <section class="section" aria-labelledby="hobbies-title">
-            <div class="section-header">
-                <span class="section-tag" aria-hidden="true">03 //</span>
-                <h2 class="section-title" id="hobbies-title">En dehors des études</h2>
-            </div>
-            <div class="hobbies-grid">
-                <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                            <path
-                                d="M9 18V5l12-2v13M9 18c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-2c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z" />
-                        </svg></div>
-                    <span class="hobby-name">Musique</span>
-                    <p class="hobby-desc">Toujours un casque sur les oreilles, la musique me permet de me libérer et
-                        d'être dans ma bulle.</p>
-                </div>
-                <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                            <path
-                                d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-                        </svg></div>
-                    <span class="hobby-name">Amis</span>
-                    <p class="hobby-desc">Sortir, profiter, partager — le reste du temps bien entouré de mes amis.</p>
-                </div>
-                <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9zM8 22V12h8v10" />
-                        </svg></div>
-                    <span class="hobby-name">Escalade</span>
-                    <p class="hobby-desc">Grimper, résoudre, recommencer. Une logique pas si différente du code.</p>
-                </div>
-                <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
-                        </svg></div>
-                    <span class="hobby-name">Voyages</span>
-                    <p class="hobby-desc">Découvrir de nouveaux endroits, cultures et perspectives.</p>
-                </div>
-                <div class="hobby-card reveal">
-                    <div class="hobby-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="1.5" width="28" height="28">
-                            <rect x="2" y="3" width="20" height="14" rx="2" />
-                            <path d="M8 21h8M12 17v4" />
-                        </svg></div>
-                    <span class="hobby-name">Jeux vidéo</span>
-                    <p class="hobby-desc">Stratégie, exploration, compétition — selon l'humeur.</p>
-                </div>
-            </div>
+            <p class="about-offline reveal"><strong>En dehors du code</strong> — l'escalade (grimper, chercher, recommencer : pas si loin du débogage), la musique, les voyages et les jeux vidéo de stratégie.</p>
         </section>
 
     </main>
