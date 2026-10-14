@@ -141,7 +141,7 @@ func TestSitemapHandler_ContainsRequiredPages(t *testing.T) {
 	sitemapHandler(w, r)
 	body := w.Body.String()
 
-	pages := []string{"/home", "/about", "/skills", "/project", "/contact", "/cv", "/faq", "/tech"}
+	pages := []string{"/home", "/about", "/skills", "/project", "/contact", "/tech", "/legal", "/privacy"}
 	for _, page := range pages {
 		if !strings.Contains(body, page) {
 			t.Errorf("sitemap devrait contenir la page %s", page)

@@ -450,9 +450,6 @@ func TestHandlers_AllReturn200(t *testing.T) {
 		{"Skills", SkillsHandler, "/skills"},
 		{"Project", ProjectHandler, "/project"},
 		{"Contact", ContactHandler, "/contact"},
-		{"CV", CvHandler, "/cv"},
-		{"Status", StatusHandler, "/status"},
-		{"FAQ", FaqHandler, "/faq"},
 		{"Tech", TechHandler, "/tech"},
 		{"Zoo", ZooHandler, "/projects/zoo"},
 		{"Netflix", NetflixHandler, "/projects/netflix"},
@@ -493,9 +490,6 @@ func TestHandlers_HeadReturn200(t *testing.T) {
 		{"Skills", SkillsHandler, "/skills"},
 		{"Project", ProjectHandler, "/project"},
 		{"Contact", ContactHandler, "/contact"},
-		{"CV", CvHandler, "/cv"},
-		{"Status", StatusHandler, "/status"},
-		{"FAQ", FaqHandler, "/faq"},
 		{"Tech", TechHandler, "/tech"},
 	}
 
@@ -523,8 +517,6 @@ func TestHandlers_PostReturns405(t *testing.T) {
 		{"About", AboutHandler, "/about"},
 		{"Skills", SkillsHandler, "/skills"},
 		{"Contact", ContactHandler, "/contact"},
-		{"CV", CvHandler, "/cv"},
-		{"FAQ", FaqHandler, "/faq"},
 		{"Tech", TechHandler, "/tech"},
 		{"Cisco", CiscoHandler, "/projects/cisco"},
 		{"Annuaire", AnnuaireHandler, "/projects/annuaire"},

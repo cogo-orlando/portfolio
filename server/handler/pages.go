@@ -293,18 +293,6 @@ func ContactHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "contact.html")
 }
 
-func CvHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "cv.html")
-}
-
-func StatusHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "status.html")
-}
-
-func FaqHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "faq.html")
-}
-
 func TechHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "tech.html")
 }
