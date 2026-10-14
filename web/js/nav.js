@@ -22,14 +22,33 @@
         // "/en/home" et "/home" désignent la même page : on compare sans le préfixe /en
         const stripLang = (p) => (p.replace(/^\/en(?=\/|$)/, '') || '/').replace(/\/$/, '') || '/';
         const path = stripLang(window.location.pathname);
-        $$('.nav-link, .mobile-link').forEach((link) => {
+        $$('.nav-link, .mobile-link, .dock-item[href]').forEach((link) => {
             const href = stripLang(link.getAttribute('href') || '');
-            const isActive = href === path || (href === '/project' && path.startsWith('/projects/'));
+            const isActive = !link.dataset.langSwitch &&
+                (href === path || (href === '/project' && path.startsWith('/projects/')));
             if (isActive) {
                 link.classList.add('active');
                 link.setAttribute('aria-current', 'page');
             }
         });
+
+        // ── DOCK : les icônes grossissent à l'approche de la souris (comme sur macOS) ──
+        const dock = $('.dock');
+        const canMagnify = dock && window.matchMedia('(hover: hover) and (pointer: fine)').matches && !Site.reducedMotion;
+        if (canMagnify) {
+            const items = $$('.dock-item', dock);
+            const RANGE = 110;   // distance (px) à laquelle l'effet commence
+            const MAX = 0.55;    // grossissement maximal : 1 + 0.55
+            dock.addEventListener('pointermove', rafThrottle((e) => {
+                items.forEach((item) => {
+                    const r = item.getBoundingClientRect();
+                    const d = Math.abs(e.clientX - (r.left + r.width / 2));
+                    const s = 1 + MAX * Math.max(0, 1 - d / RANGE) ** 2;
+                    item.style.setProperty('--s', s.toFixed(3));
+                });
+            }));
+            dock.addEventListener('pointerleave', () => items.forEach((i) => i.style.setProperty('--s', '1')));
+        }
 
         // ── BOUTON FR / EN : même page dans l'autre langue ──
         $$('[data-lang-switch]').forEach((link) => {

@@ -398,3 +398,43 @@
 @media (max-width: 600px) {
     .footer-legal { margin-left: 0; width: 100%; order: 10; }
 }
+
+/* ══════════════════════════════════════════
+   UTILITAIRES PARTAGÉS
+══════════════════════════════════════════ */
+
+/* Texte réservé aux lecteurs d'écran */
+.sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* Bloc repliable « Voir le détail » */
+.fold {
+    margin-top: 1.2rem;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    background: var(--glass-1-bg, var(--glass-bg));
+    box-shadow: var(--glass-highlight);
+}
+.fold summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 1rem 1.3rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+}
+.fold summary::-webkit-details-marker { display: none; }
+.fold summary::before { content: '+ '; }
+.fold[open] summary::before { content: '− '; }
+.fold-list { margin: 0; padding: 0 1.3rem 1.2rem; list-style: none; display: grid; gap: 0.5rem; }
+.fold-list li { display: flex; gap: 0.8rem; align-items: baseline; font-size: 14px; color: var(--muted2); line-height: 1.6; }
+.fold-list .mw-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); min-width: 1.4rem; }
+
+/* Page Infrastructure : texte des blocs sécurité, lien vers le code */
+.security-block-text { font-size: 14px; line-height: 1.7; color: var(--muted2); }
+.tech-flow { max-width: 640px; }
+.tech-source { margin-top: 2rem; font-family: 'DM Mono', monospace; font-size: 13px; }
+.tech-source a { color: var(--accent); text-decoration: none; }
+.tech-source a:hover { text-decoration: underline; text-underline-offset: 3px; }

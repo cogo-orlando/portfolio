@@ -4,26 +4,19 @@
 <head>
     {{template "head-common"}}
 
-    <title>Orlando Cogo — Cybersecurity Student</title>
-    <meta name="description"
-        content="Portfolio of Orlando Cogo, Computer Science Bachelor student specializing in cybersecurity at Ynov Campus Toulouse. Go developer, passionate about systems and network security.">
+    <title>Orlando Cogo — Cybersecurity student</title>
+    <meta name="description" content="Portfolio of Orlando Cogo, Computer Science Bachelor student specializing in cybersecurity at Ynov Campus Toulouse: Go backend, application security and infrastructure.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://orlandocogo.com/en/home">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orlandocogo.com/en/home">
-    <meta property="og:title" content="Orlando Cogo — Cybersecurity Student">
-    <meta property="og:description"
-        content="Portfolio of Orlando Cogo, Computer Science Bachelor student specializing in cybersecurity at Ynov Campus.">
+    <meta property="og:title" content="Orlando Cogo — Cybersecurity student">
+    <meta property="og:description" content="Portfolio of Orlando Cogo, Computer Science Bachelor student specializing in cybersecurity at Ynov Campus Toulouse: Go backend, application security and infrastructure.">
     <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="fr_FR">
-
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Orlando Cogo — Cybersecurity Student">
-    <meta name="twitter:description"
-        content="Portfolio of Orlando Cogo, Computer Science Bachelor student specializing in cybersecurity at Ynov Campus.">
-    <meta name="twitter:image" content="https://orlandocogo.com/img/og-image.png">
 
     <link rel="stylesheet" href="{{asset `/css/home.css`}}">
 </head>
@@ -32,440 +25,87 @@
     {{template "background"}}
     {{template "nav-en"}}
 
-    <main id="main-content">
+    <main id="main-content" class="home">
 
-        <!-- HERO -->
-        <section class="hero" aria-labelledby="hero-title">
-            <h1 class="hero-name" id="hero-title">
-                Orlando<br>
-                <span class="outline">Cogo</span>
-            </h1>
-            <p class="hero-sub">
-                <em>Computer Science Bachelor</em> student · Specializing in <em>Cybersecurity</em>
-            </p>
-            <p class="hero-about">
-                Passionate about systems and network security, I build real projects that run in production —
-                Go backend, Docker, CI/CD. Curious, rigorous, always learning.
-            </p>
-            <div class="hero-badges" aria-label="Current status">
-                <span class="badge">{{template "niveau-long-en"}}</span>
-                <span class="badge badge--open"><span class="badge-dot" aria-hidden="true"></span>Open to work</span>
+        <!-- 1. HERO -->
+        <section class="home-block home-hero" aria-labelledby="hero-title">
+            <h1 class="hero-name" id="hero-title">Orlando<br><span class="outline">Cogo</span></h1>
+            <p class="home-lead">I learn cybersecurity by <strong>building real projects</strong>: a Go server in production, secured layer by layer, tested and deployed automatically.</p>
+            <div class="home-meta">
+                <span>{{template "niveau-long-en"}} · Ynov Campus</span>
+                <span>Toulouse, France</span>
+                <span><i class="dot" aria-hidden="true"></i>Open to internships and work-study</span>
             </div>
-            <div class="scroll-hint" aria-hidden="true">
-                <span>scroll</span>
-                <div class="scroll-line"></div>
+            <div class="home-actions">
+                <a href="/en/project" class="btn btn--primary">See my projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+                <a href="/en/contact" class="btn btn--ghost">Contact me</a>
             </div>
         </section>
 
-        <!-- MARQUEE -->
-        <div class="marquee-wrap" aria-hidden="true">
-            <div class="marquee-track">
-                <span>CYBERSECURITY</span><span class="sep">·</span>
-                <span>DEVELOPMENT</span><span class="sep">·</span>
-                <span>INFRASTRUCTURE</span><span class="sep">·</span>
-                <span>DOCKER</span><span class="sep">·</span>
-                <span>OPEN TO WORK</span><span class="sep">·</span>
-                <span>CI/CD</span><span class="sep">·</span>
-                <span>GOLANG</span><span class="sep">·</span>
-                <span>POSTGRESQL</span><span class="sep">·</span>
-                <span>YNOV CAMPUS</span><span class="sep">·</span>
-                <span>CYBERSECURITY</span><span class="sep">·</span>
-                <span>DEVELOPMENT</span><span class="sep">·</span>
-                <span>INFRASTRUCTURE</span><span class="sep">·</span>
-                <span>DOCKER</span><span class="sep">·</span>
-                <span>OPEN TO WORK</span><span class="sep">·</span>
-                <span>CI/CD</span><span class="sep">·</span>
-                <span>GOLANG</span><span class="sep">·</span>
-                <span>POSTGRESQL</span><span class="sep">·</span>
-                <span>YNOV CAMPUS</span><span class="sep">·</span>
-            </div>
-        </div>
-
-        <!-- LIVE STATS -->
-        <section class="section" aria-label="Live system statistics">
-            <div class="section-num" aria-hidden="true">01</div>
-            <div class="stats-grid">
-                <div class="stat-card reveal">
-                    <span class="stat-val" id="stat-tests">{{template "nb-tests"}}</span>
-                    <span class="stat-unit">tests</span>
-                    <span class="stat-label">Automated — CI green</span>
-                </div>
-                <div class="stat-card reveal">
-                    <span class="stat-val" id="stat-projects">{{template "nb-projets"}}</span>
-                    <span class="stat-unit">+</span>
-                    <span class="stat-label">Projects completed</span>
-                </div>
-                <div class="stat-card reveal">
-                    <span class="stat-val" id="stat-goroutines">—</span>
-                    <span class="stat-unit">go</span>
-                    <span class="stat-label">Active goroutines</span>
-                </div>
-                <div class="stat-card reveal">
-                    <span class="stat-val" id="stat-uptime">—</span>
-                    <span class="stat-unit"></span>
-                    <span class="stat-label">Server uptime</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- WHAT I DO -->
-        <section class="section" aria-labelledby="whatido-title">
-            <div class="section-num" aria-hidden="true">02</div>
-            <div class="section-header">
-                <span class="section-tag" aria-hidden="true">02 //</span>
-                <h2 class="section-title" id="whatido-title">What I do</h2>
-            </div>
-            <div class="whatido-grid">
-                <article class="whatido-card reveal">
-                    <div class="whatido-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
-                            <polyline points="16 18 22 12 16 6" />
-                            <polyline points="8 6 2 12 8 18" />
-                        </svg>
-                    </div>
-                    <h3 class="whatido-title">Backend development</h3>
-                    <p class="whatido-desc">Go HTTP servers built from scratch, REST APIs, middleware chains, automated
-                        tests, PostgreSQL. Deployed in production.</p>
-                    <div class="whatido-tags" aria-label="Technologies">
-                        <span>Go</span><span>PostgreSQL</span><span>Docker</span><span>CI/CD</span>
-                    </div>
-                </article>
-                <article class="whatido-card reveal">
-                    <div class="whatido-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                        </svg>
-                    </div>
-                    <h3 class="whatido-title">Application security</h3>
-                    <p class="whatido-desc">Strict CSP, spoof-proof client IP, rate limiting, honeypot, Cloudflare WAF,
-                        PostgreSQL RLS, gosec {{template "nb-gosec"}} issues, govulncheck. Secure by design.</p>
-                    <div class="whatido-tags" aria-label="Areas">
-                        <span>CSP</span><span>WAF</span><span>gosec</span><span>RLS</span>
-                    </div>
-                </article>
-                <article class="whatido-card reveal">
-                    <div class="whatido-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
-                            <rect x="2" y="2" width="20" height="8" rx="2" />
-                            <rect x="2" y="14" width="20" height="8" rx="2" />
-                            <line x1="6" y1="6" x2="6.01" y2="6" />
-                            <line x1="6" y1="18" x2="6.01" y2="18" />
-                        </svg>
-                    </div>
-                    <h3 class="whatido-title">Infrastructure &amp; DevOps</h3>
-                    <p class="whatido-desc">Multi-stage Docker builds, GitHub Actions CI/CD, Cloudflare, Render, Proxmox VE,
-                        Linux, Cisco Packet Tracer, multi-site networking.</p>
-                    <div class="whatido-tags" aria-label="Tools">
-                        <span>Docker</span><span>Cloudflare</span><span>Proxmox</span><span>Cisco</span>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- FLAGSHIP PROJECTS -->
-        <section class="section" aria-labelledby="flagship-title">
-            <div class="section-num" aria-hidden="true">03</div>
-            <div class="section-header">
-                <span class="section-tag" aria-hidden="true">03 //</span>
-                <h2 class="section-title" id="flagship-title">In production</h2>
-            </div>
-            <div class="flagship-grid">
-
-                <div class="flagship-card reveal">
-                    <div class="flagship-header">
-                        <div class="flagship-left">
-                            <span class="flagship-num" aria-hidden="true">01</span>
-                            <span class="flagship-badge flagship-badge--live">Live</span>
-                        </div>
-                        <div class="flagship-tags">
-                            <span>Go</span><span>Docker</span><span>Cloudflare</span><span>CI/CD</span>
-                        </div>
-                    </div>
-                    <h3 class="flagship-name">Portfolio — orlandocogo.com</h3>
-                    <p class="flagship-desc">Go HTTP server built from scratch — routing, middleware chain, honeypot with
-                        {{template "honeypot-routes"}} trap routes, rate limiting at {{template "rate-limit"}} req/min, panic
-                        recovery. Multi-stage Docker image ({{template "docker-portfolio"}}), Cloudflare WAF, GitHub Actions.
-                    </p>
-                    <div class="flagship-metrics">
-                        <div class="fm-item"><span class="fm-val">{{template "nb-tests"}}</span><span class="fm-label">tests</span></div>
-                        <div class="fm-item"><span class="fm-val">{{template "docker-portfolio"}}</span><span class="fm-label">Docker</span></div>
-                        <div class="fm-item"><span class="fm-val">{{template "nb-gosec"}}</span><span class="fm-label">gosec issues</span></div>
-                        <div class="fm-item"><span class="fm-val">{{template "lighthouse"}}</span><span class="fm-label">Lighthouse</span></div>
-                    </div>
-                    <a href="/en/tech" class="flagship-link">Architecture →</a>
-                </div>
-
-            </div>
-            <div class="flagship-cta reveal">
-                <a href="/en/project" class="infra-link">See all projects →</a>
-            </div>
-        </section>
-
-        <!-- INFRASTRUCTURE & DEPLOYMENT -->
-        <section class="section" aria-labelledby="infra-title">
-            <div class="section-num" aria-hidden="true">04</div>
-            <div class="section-header">
-                <span class="section-tag" aria-hidden="true">04 //</span>
-                <h2 class="section-title" id="infra-title">Infrastructure &amp; Deployment</h2>
-            </div>
-
-            <!-- Architecture diagram -->
-            <div class="arch-diagram reveal" aria-label="Portfolio architecture diagram">
-                <div class="arch-step">
-                    <div class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
-                            <rect x="2" y="3" width="20" height="14" rx="2" />
-                            <path d="M8 21h8M12 17v4" />
-                        </svg></div>
-                    <span class="arch-label">Visitor</span>
-                </div>
-                <div class="arch-arrow" aria-hidden="true">↓</div>
-                <div class="arch-step arch-step--highlight">
-                    <div class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                        </svg></div>
-                    <span class="arch-label">Cloudflare</span>
-                    <span class="arch-sub">WAF · DDoS · HTTPS · CDN</span>
-                </div>
-                <div class="arch-arrow" aria-hidden="true">↓</div>
-                <div class="arch-step">
-                    <div class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
-                            <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
-                        </svg></div>
-                    <span class="arch-label">Render</span>
-                    <span class="arch-sub">PaaS · Deploys after green CI</span>
-                </div>
-                <div class="arch-arrow" aria-hidden="true">↓</div>
-                <div class="arch-step">
-                    <div class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
-                            <rect x="2" y="2" width="20" height="8" rx="2" />
-                            <rect x="2" y="14" width="20" height="8" rx="2" />
-                            <line x1="6" y1="6" x2="6.01" y2="6" />
-                            <line x1="6" y1="18" x2="6.01" y2="18" />
-                        </svg></div>
-                    <span class="arch-label">Docker</span>
-                    <span class="arch-sub">Multi-stage · {{template "docker-portfolio"}}</span>
-                </div>
-                <div class="arch-arrow" aria-hidden="true">↓</div>
-                <div class="arch-step arch-step--accent">
-                    <div class="arch-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20">
-                            <polyline points="16 18 22 12 16 6" />
-                            <polyline points="8 6 2 12 8 18" />
-                        </svg></div>
-                    <span class="arch-label">Go Backend</span>
-                    <span class="arch-sub">Native HTTP · Middleware · Slog</span>
-                </div>
-            </div>
-
-            <!-- Stack cards -->
-            <div class="infra-grid reveal">
-                <div class="infra-card">
-                    <div class="infra-card-top">
-                        <div class="infra-icon infra-icon--go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22">
-                                <polyline points="16 18 22 12 16 6" />
-                                <polyline points="8 6 2 12 8 18" />
-                            </svg></div>
-                        <span class="infra-name">Go Backend</span>
-                        <span class="infra-badge infra-badge--green">Production</span>
-                    </div>
-                    <p class="infra-desc">Native HTTP server, no framework. Manual routing, middleware chain, template
-                        cache, graceful shutdown, automated tests.</p>
-                    <div class="infra-tags"><span>{{template "nb-tests"}} tests</span><span>slog JSON</span><span>gosec {{template "nb-gosec"}}</span></div>
-                </div>
-                <div class="infra-card">
-                    <div class="infra-card-top">
-                        <div class="infra-icon infra-icon--docker" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22">
-                                <rect x="2" y="2" width="20" height="8" rx="2" />
-                                <rect x="2" y="14" width="20" height="8" rx="2" />
-                                <line x1="6" y1="6" x2="6.01" y2="6" />
-                                <line x1="6" y1="18" x2="6.01" y2="18" />
-                            </svg></div>
-                        <span class="infra-name">Docker</span>
-                        <span class="infra-badge infra-badge--blue">Containerized</span>
-                    </div>
-                    <p class="infra-desc">Multi-stage build — {{template "docker-portfolio"}} image. Scratch base,
-                        no-new-privileges, read-only filesystem, non-root user (1001).</p>
-                    <div class="infra-tags"><span>Multi-stage</span><span>Non-root</span><span>Hardened</span></div>
-                </div>
-                <div class="infra-card">
-                    <div class="infra-card-top">
-                        <div class="infra-icon infra-icon--cloudflare" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                            </svg></div>
-                        <span class="infra-name">Cloudflare</span>
-                        <span class="infra-badge infra-badge--orange">Secured</span>
-                    </div>
-                    <p class="infra-desc">WAF, DDoS protection, SSL Full Strict, Bot Fight Mode. Security headers
-                        rated {{template "score-headers"}}.</p>
-                    <div class="infra-tags"><span>WAF</span><span>Rating {{template "score-headers"}}</span><span>SSL Strict</span></div>
-                </div>
-                <div class="infra-card">
-                    <div class="infra-card-top">
-                        <div class="infra-icon infra-icon--render" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22">
-                                <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
-                            </svg></div>
-                        <span class="infra-name">Render</span>
-                        <span class="infra-badge infra-badge--purple">Deployed</span>
-                    </div>
-                    <p class="infra-desc">Automatic deployment from GitHub, only once every CI check is green. Health
-                        check on /health and a built-in uptime monitor.</p>
-                    <div class="infra-tags"><span>Gated deploys</span><span>Health check</span></div>
-                </div>
-                <div class="infra-card">
-                    <div class="infra-card-top">
-                        <div class="infra-icon infra-icon--ci" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22">
-                                <circle cx="12" cy="12" r="3" />
-                                <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
-                            </svg></div>
-                        <span class="infra-name">GitHub Actions</span>
-                        <span class="infra-badge infra-badge--green">CI/CD</span>
-                    </div>
-                    <p class="infra-desc">{{template "nb-tests"}} tests run on every push, plus a weekly scan.
-                        govulncheck and gosec ({{template "nb-gosec"}} issues), and the Docker image must start healthy.</p>
-                    <div class="infra-tags"><span>{{template "nb-tests"}} tests</span><span>govulncheck</span><span>gosec</span></div>
-                </div>
-                <div class="infra-card">
-                    <div class="infra-card-top">
-                        <div class="infra-icon infra-icon--security" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22">
-                                <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                            </svg></div>
-                        <span class="infra-name">Go security</span>
-                        <span class="infra-badge infra-badge--green">Hardened</span>
-                    </div>
-                    <p class="infra-desc">Honeypot with {{template "honeypot-routes"}} routes, rate limiting, spoof-proof
-                        client IP, strict CSP, Supabase RLS, panic recovery, request ID.</p>
-                    <div class="infra-tags"><span>Honeypot</span><span>CSP</span><span>RLS</span></div>
-                </div>
-            </div>
-
-            <!-- Security checks -->
-            <div class="security-checks reveal" aria-label="Security checks">
-                <div class="check-item"><span class="check-icon" aria-hidden="true">✓</span><span>HTTPS — SSL Full Strict via Cloudflare</span></div>
-                <div class="check-item"><span class="check-icon" aria-hidden="true">✓</span><span>Security headers — rated {{template "score-headers"}} on securityheaders.com</span></div>
-                <div class="check-item"><span class="check-icon" aria-hidden="true">✓</span><span>Docker — non-root image, no-new-privileges, read-only</span></div>
-                <div class="check-item"><span class="check-icon" aria-hidden="true">✓</span><span>CI/CD — {{template "nb-tests"}} tests, govulncheck and gosec on every push</span></div>
-                <div class="check-item"><span class="check-icon" aria-hidden="true">✓</span><span>Honeypot — {{template "honeypot-routes"}} trap routes, automatic 24h blacklist</span></div>
-                <div class="check-item"><span class="check-icon" aria-hidden="true">✓</span><span>Strict CSP — no inline script can run</span></div>
-            </div>
-
-            <div class="infra-cta reveal">
-                <a href="/en/tech" class="infra-link">See the full architecture →</a>
-            </div>
-        </section>
-
-        <!-- EXPLORE -->
-        <section class="section" aria-labelledby="explorer-title">
-            <div class="section-num" aria-hidden="true">05</div>
-            <div class="section-header">
-                <span class="section-tag" aria-hidden="true">05 //</span>
-                <h2 class="section-title" id="explorer-title">Explore</h2>
-            </div>
-            <nav class="quicknav-grid" aria-label="Quick navigation">
-                <a href="/en/about" class="quicknav-card reveal">
-                    <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">01</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg></div>
-                    <h3>About</h3>
-                    <p>My journey, from Airbus to computer science.</p>
+        <!-- 2. TROIS PROJETS -->
+        <section class="home-block home-section" aria-labelledby="projects-title">
+            <span class="home-kicker">Selection</span>
+            <h2 class="home-h2" id="projects-title">Three projects, three sides</h2>
+            <div class="home-projects">
+                <a href="/en/tech" class="hp-card hp-card--live reveal">
+                    <div class="hp-top"><span class="hp-num" aria-hidden="true">01</span><span class="hp-domain">Dev · Security</span></div>
+                    <h3 class="hp-title">This portfolio</h3>
+                    <p class="hp-desc">A framework-free Go server in production: strict CSP, rate limiting, honeypot, and a CI that blocks deployment at the slightest issue.</p>
+                    <div class="hp-stack" aria-label="Technologies"><span>Go</span><span>Docker</span><span>Cloudflare</span><span>CI/CD</span></div>
+                    <span class="hp-link">See the architecture →</span>
                 </a>
-                <a href="/en/skills" class="quicknav-card reveal">
-                    <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">02</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg></div>
-                    <h3>Skills</h3>
-                    <p>Go, Docker, CI/CD, PostgreSQL, Linux, Cisco.</p>
+                <a href="/en/projects/forum" class="hp-card reveal">
+                    <div class="hp-top"><span class="hp-num" aria-hidden="true">02</span><span class="hp-domain">Web · Team</span></div>
+                    <h3 class="hp-title">Web forum</h3>
+                    <p class="hp-desc">A complete Go forum built by four: bcrypt authentication, secure sessions, categories, likes. I owned the infrastructure, CI and security.</p>
+                    <div class="hp-stack" aria-label="Technologies"><span>Go</span><span>SQLite</span><span>Docker</span><span>bcrypt</span></div>
+                    <span class="hp-link">See the project →</span>
                 </a>
-                <a href="/en/project" class="quicknav-card reveal">
-                    <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">03</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg></div>
-                    <h3>Projects</h3>
+                <a href="/en/projects/cisco" class="hp-card reveal">
+                    <div class="hp-top"><span class="hp-num" aria-hidden="true">03</span><span class="hp-domain">Networking</span></div>
+                    <h3 class="hp-title">Cisco network — 4 sites</h3>
+                    <p class="hp-desc">An enterprise network across four sites: 10 VLANs, DHCP on L3 switches, hub-and-spoke routing and central DNS / web servers.</p>
+                    <div class="hp-stack" aria-label="Technologies"><span>Cisco</span><span>VLAN</span><span>DHCP</span><span>DNS</span></div>
+                    <span class="hp-link">See the project →</span>
                 </a>
-                <a href="/en/contact" class="quicknav-card reveal">
-                    <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">04</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg></div>
-                    <h3>Contact</h3>
-                    <p>GitHub, LinkedIn, email — available.</p>
-                </a>
-                <a href="/en/cv" class="quicknav-card reveal">
-                    <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">05</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg></div>
-                    <h3>Resume</h3>
-                    <p>My full resume.</p>
-                </a>
-                <a href="/en/status" class="quicknav-card reveal">
-                    <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">06</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg></div>
-                    <h3>Status</h3>
-                    <p>Live system status.</p>
-                </a>
-                <a href="/en/faq" class="quicknav-card reveal">
-                    <div class="quicknav-top"><span class="quicknav-num" aria-hidden="true">07</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg></div>
-                    <h3>FAQ</h3>
-                    <p>Frequently asked questions about the portfolio.</p>
-                </a>
-            </nav>
+            </div>
+            <div class="home-more reveal">
+                <a href="/en/project" class="btn btn--ghost">All projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+            </div>
         </section>
 
-        <!-- CERTIFICATIONS -->
-        <section class="section" aria-labelledby="certif-title">
-            <div class="section-num" aria-hidden="true">06</div>
-            <div class="section-header">
-                <span class="section-tag" aria-hidden="true">06 //</span>
-                <h2 class="section-title" id="certif-title">Certifications &amp; Goals</h2>
-            </div>
-            <div class="certif-list">
-                <div class="certif-item reveal">
-                    <div class="certif-left">
-                        <span class="certif-name">CompTIA A+</span>
-                        <span class="certif-status status--planned">Planned</span>
-                    </div>
-                    <div class="certif-bar-wrap">
-                        <div class="certif-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="CompTIA A+ progress">
-                            <div class="certif-fill" style="--pct:0%"></div>
-                        </div>
-                        <span class="certif-pct" aria-hidden="true">0%</span>
-                    </div>
+        <!-- 3. À PROPOS -->
+        <section class="home-block home-section" aria-labelledby="about-title">
+            <div class="home-about">
+                <div>
+                    <span class="home-kicker">About</span>
+                    <h2 class="home-h2" id="about-title">An unusual path</h2>
                 </div>
-                <div class="certif-item reveal">
-                    <div class="certif-left">
-                        <span class="certif-name">Cisco CCNA</span>
-                        <span class="certif-status status--planned">Planned</span>
-                    </div>
-                    <div class="certif-bar-wrap">
-                        <div class="certif-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Cisco CCNA progress">
-                            <div class="certif-fill" style="--pct:0%"></div>
-                        </div>
-                        <span class="certif-pct" aria-hidden="true">0%</span>
-                    </div>
-                </div>
-                <div class="certif-item reveal">
-                    <div class="certif-left">
-                        <span class="certif-name">Amazon Web Services (AWS)</span>
-                        <span class="certif-status status--planned">Planned</span>
-                    </div>
-                    <div class="certif-bar-wrap">
-                        <div class="certif-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="AWS progress">
-                            <div class="certif-fill" style="--pct:0%"></div>
-                        </div>
-                        <span class="certif-pct" aria-hidden="true">0%</span>
-                    </div>
+                <div class="home-about-text reveal">
+                    <p>Before computer science, I spent <strong>5 years at Airbus</strong> in work-study programs, first in machining, then in industrial process design. I learned a simple rule there: a mistake can be very costly, so you check everything.</p>
+                    <p>Now in my {{template "niveau-long-en"}} at Ynov Campus Toulouse, I bring that rigor to security: automated tests, vulnerability scanning, controlled deployments.</p>
+                    <a href="/en/about" class="btn btn--ghost">My background <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
                 </div>
             </div>
         </section>
 
-        <!-- SETUP -->
-        <section class="section" aria-labelledby="setup-title">
-            <div class="section-num" aria-hidden="true">07</div>
-            <div class="section-header">
-                <span class="section-tag" aria-hidden="true">07 //</span>
-                <h2 class="section-title" id="setup-title">My setup</h2>
-            </div>
-            <div class="setup-grid">
-                <div class="setup-card reveal"><span class="setup-key">OS</span><span class="setup-val">Windows 11 Pro + Linux VM</span></div>
-                <div class="setup-card reveal"><span class="setup-key">IDE</span><span class="setup-val">GoLand · VS Code</span></div>
-                <div class="setup-card reveal"><span class="setup-key">Terminal</span><span class="setup-val">PowerShell · Bash</span></div>
-                <div class="setup-card reveal"><span class="setup-key">Container</span><span class="setup-val">Docker Desktop</span></div>
-                <div class="setup-card reveal"><span class="setup-key">VM</span><span class="setup-val">VirtualBox · Proxmox VE</span></div>
-                <div class="setup-card reveal"><span class="setup-key">Network</span><span class="setup-val">Cisco Packet Tracer</span></div>
-                <div class="setup-card reveal"><span class="setup-key">DB</span><span class="setup-val">PostgreSQL · Supabase</span></div>
-                <div class="setup-card reveal"><span class="setup-key">CTF</span><span class="setup-val">HackTheBox Labs</span></div>
+        <!-- 4. CONTACT -->
+        <section class="home-block" aria-labelledby="contact-title">
+            <div class="home-contact reveal">
+                <span class="home-kicker">Contact</span>
+                <h2 class="home-h2" id="contact-title">An internship, a work-study role, a question?</h2>
+                <p>I'm looking for an internship or a work-study position in cybersecurity, DevOps / SecOps or network infrastructure. I reply within 24 hours.</p>
+                <div class="home-actions">
+                    <a href="mailto:Orlando.cogo.pro@gmail.com" class="btn btn--primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg> Send an email</a>
+                    <a href="https://www.linkedin.com/in/orlando-liautard-cogo" class="btn btn--ghost" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://github.com/cogo-orlando" class="btn btn--ghost" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
             </div>
         </section>
+
     </main>
 
     {{template "footer-en"}}
-    <script src="{{asset `/js/home.js`}}"></script>
 </body>
 
 </html>
