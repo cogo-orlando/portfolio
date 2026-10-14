@@ -95,37 +95,6 @@
             }));
         });
 
-        // ── THÈME CLAIR / SOMBRE ──
-        const themeBtn = $('#themeToggle');
-        const metaTheme = document.querySelector('meta[name="theme-color"]');
-        const applyThemeUI = (theme) => {
-            themeBtn?.setAttribute('aria-label', theme === 'light'
-                ? t('Activer le mode sombre', 'Switch to dark mode')
-                : t('Activer le mode clair', 'Switch to light mode'));
-            themeBtn?.setAttribute('aria-pressed', String(theme === 'light'));
-            metaTheme?.setAttribute('content', theme === 'light' ? '#eef0fa' : '#0a0b16');
-        };
-        applyThemeUI(document.documentElement.dataset.theme || 'dark');
-
-        themeBtn?.addEventListener('click', () => {
-            const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-            const root = document.documentElement;
-            root.classList.add('theme-transition');           // fondu des couleurs
-            root.dataset.theme = next;
-            try { localStorage.setItem('theme', next); } catch { /* navigation privée */ }
-            applyThemeUI(next);
-            setTimeout(() => root.classList.remove('theme-transition'), 400);
-        });
-
-        // Si le visiteur n'a rien choisi, on suit le réglage de son appareil en direct
-        window.matchMedia('(prefers-color-scheme: light)').addEventListener?.('change', (e) => {
-            let saved = null;
-            try { saved = localStorage.getItem('theme'); } catch { /* ignoré */ }
-            if (saved) return;
-            document.documentElement.dataset.theme = e.matches ? 'light' : 'dark';
-            applyThemeUI(document.documentElement.dataset.theme);
-        });
-
         // ── APPARITION AU SCROLL ──
         reveal('.reveal');
 

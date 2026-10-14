@@ -10,7 +10,7 @@
 .sk { position: relative; z-index: 10; max-width: 1080px; margin: 0 auto; padding: 0 1.5rem 3rem; }
 
 /* Légende des niveaux */
-.sk-legend { display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem; margin: 1rem 0 2.5rem; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted2); }
+.sk-legend { display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem; margin: 1rem 0 2.5rem; font-family: "DM Mono", monospace; font-size: 12px; color: var(--muted2); }
 .sk-legend span { display: inline-flex; align-items: center; gap: 0.5rem; }
 .lvl-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
 .lvl-prod  { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
@@ -37,7 +37,7 @@
 .sk-domain h2 { font-size: 1.2rem; font-weight: 800; }
 
 .sk-level { display: flex; flex-direction: column; gap: 0.55rem; }
-.sk-level-name { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted2); }
+.sk-level-name { display: inline-flex; align-items: center; gap: 0.5rem; font-family: "DM Mono", monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted2); }
 .sk-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .sk-tags span {
     padding: 5px 10px;
@@ -47,7 +47,7 @@
     border: 1px solid var(--glass-border);
     border-radius: 8px;
 }
-:root[data-theme="light"] .sk-tags span { background: rgba(255, 255, 255, 0.6); }
+
 .sk-tags small { color: var(--muted2); font-size: 11px; margin-left: 4px; }
 
 /* En ce moment / ensuite */
@@ -57,12 +57,12 @@
 .sk-next-item { padding: 1.2rem 1.4rem; border: 1px solid var(--glass-border); border-radius: var(--radius); background: var(--glass-1-bg, var(--glass-bg)); box-shadow: var(--glass-highlight); }
 .sk-next-item h3 { font-size: 1rem; font-weight: 800; }
 .sk-next-item p { margin-top: 0.4rem; font-size: 14px; line-height: 1.7; color: var(--muted2); }
-.sk-badge { display: inline-block; margin-bottom: 0.6rem; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: var(--radius-pill); }
+.sk-badge { display: inline-block; margin-bottom: 0.6rem; font-family: "DM Mono", monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: var(--radius-pill); }
 .sk-badge--now  { color: var(--ok); border: 1px solid var(--ok); }
 .sk-badge--next { color: var(--muted2); border: 1px solid var(--glass-border); }
 
 /* Outils */
-.sk-tools { margin-top: 3rem; font-family: 'DM Mono', monospace; font-size: 13px; color: var(--muted2); line-height: 2; }
+.sk-tools { margin-top: 3rem; font-family: "DM Mono", monospace; font-size: 13px; color: var(--muted2); line-height: 2; }
 .sk-tools strong { color: var(--text); font-weight: 400; }
 
 @media (max-width: 960px) { .sk-grid { grid-template-columns: 1fr; } }

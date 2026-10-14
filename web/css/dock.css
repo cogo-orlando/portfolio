@@ -47,10 +47,10 @@
     cursor: pointer;
     transition: width 0.12s ease-out, height 0.12s ease-out, color 0.2s, background 0.2s, border-color 0.2s;
 }
-:root[data-theme="light"] .dock .dock-item { background: rgba(30, 36, 80, 0.05); }
+
 
 .dock .dock-item svg { width: calc(20px * var(--s)); height: calc(20px * var(--s)); transition: width 0.12s ease-out, height 0.12s ease-out; }
-.dock .dock-text { font-family: 'DM Mono', monospace; font-size: calc(12px * var(--s)); font-weight: 700; letter-spacing: 0.08em; }
+.dock .dock-text { font-family: "DM Mono", monospace; font-size: calc(12px * var(--s)); font-weight: 700; letter-spacing: 0.08em; }
 
 .dock .dock-item:hover,
 .dock .dock-item:focus-visible {
@@ -64,7 +64,7 @@
 /* Page active : icône colorée + petit point lumineux dessous */
 .dock .dock-item.active { color: var(--accent); background: rgba(var(--accent-rgb), 0.14); }
 .dock .dock-item.active::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -7px;
     left: 50%;
@@ -86,7 +86,7 @@
     left: 50%;
     transform: translate(-50%, 4px);
     padding: 5px 10px;
-    font-family: 'DM Mono', monospace;
+    font-family: "DM Mono", monospace;
     font-size: 11px;
     letter-spacing: 0.04em;
     white-space: nowrap;

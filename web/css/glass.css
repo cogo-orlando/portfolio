@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════
-   GLASS.CSS — finitions du verre (chargé après nav.css et theme.css)
+   GLASS.CSS — finitions du verre (chargé après nav.css)
 
    1. Halos de couleur plus présents : le flou a enfin quelque chose à déformer
    2. Grain très fin sur tout le site : aspect verre dépoli
@@ -49,37 +49,13 @@
 /* ══════════════════════════════════════════
    TOKENS — MODE CLAIR
 ══════════════════════════════════════════ */
-:root[data-theme="light"] {
-    --muted2: #474d6c;
-    --accent: #3a46b8;
-    --accent-rgb: 58, 70, 184;
-    --accent2: #7d2fb0;
-    --accent2-rgb: 125, 47, 176;
-    --ok: #08704c;
-    --warn: #7f5200;
-    --err: #b42d2d;
 
-    --glass-edge:
-        inset 1px 1px 0 rgba(255, 255, 255, 0.95),
-        inset -1px -1px 0 rgba(30, 36, 80, 0.07);
-    --glass-highlight: var(--glass-edge);
-    --glass-border: rgba(30, 36, 80, 0.09);
-
-    --glass-1-bg: linear-gradient(160deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.28));
-    --glass-bg: rgba(255, 255, 255, 0.58);
-    --glass-2-bg: linear-gradient(150deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.5));
-    --glass-bg-strong: rgba(255, 255, 255, 0.78);
-    --glass-3-shadow: 0 18px 50px rgba(40, 50, 110, 0.16), 0 2px 8px rgba(40, 50, 110, 0.08);
-
-    --grain-opacity: 0.06;
-    --grain-blend: multiply;
-}
 
 /* ══════════════════════════════════════════
    1. HALOS — plus de couleur derrière le verre
 ══════════════════════════════════════════ */
 :root body::before {
-    content: '';
+    content: "";
     position: fixed;
     inset: 0;
     z-index: 0;
@@ -91,14 +67,7 @@
         radial-gradient(ellipse 38% 36% at 18% 88%, rgba(34, 211, 238, 0.18), transparent 70%),
         radial-gradient(ellipse 30% 26% at 50% 50%, rgba(99, 102, 241, 0.10), transparent 70%);
 }
-:root[data-theme="light"] body::before {
-    background:
-        radial-gradient(ellipse 45% 40% at 12% 18%, rgba(120, 140, 255, 0.34), transparent 70%),
-        radial-gradient(ellipse 40% 38% at 88% 22%, rgba(210, 140, 255, 0.30), transparent 70%),
-        radial-gradient(ellipse 42% 40% at 78% 82%, rgba(255, 150, 200, 0.24), transparent 70%),
-        radial-gradient(ellipse 38% 36% at 18% 88%, rgba(110, 200, 255, 0.26), transparent 70%),
-        linear-gradient(160deg, #f4f5ff 0%, #eef0fa 50%, #f5effb 100%);
-}
+
 
 /* Troisième halo animé : il passe derrière les cartes pendant le scroll */
 .blob3 {
@@ -114,7 +83,7 @@
     z-index: 0;
     animation: drift3 22s ease-in-out infinite;
 }
-:root[data-theme="light"] .blob3 { background: radial-gradient(circle, rgba(255, 150, 200, 0.22) 0%, transparent 70%); }
+
 @keyframes drift3 {
     0%, 100% { transform: translate(0, 0) scale(1); }
     33%      { transform: translate(-18vw, -12vh) scale(1.1); }
@@ -184,21 +153,9 @@
 }
 
 /* Mode clair : ombres bleutées et légères au lieu du noir */
-:root[data-theme="light"] :is(.year-card, .stack-table, .pipeline, .code-block, .lh-details,
-    .arch-diagram, .security-checks, .marquee-wrap, .form-wrap, .cv-frame, .hero-stats,
-    .availability, .terminal-block, .faq-counter) {
-    box-shadow: var(--glass-edge), 0 6px 24px rgba(40, 50, 110, 0.08);
-}
-:root[data-theme="light"] :is(.whatido-card, .infra-card, .quicknav-card, .certif-item,
-    .setup-card, .stat-card, .flagship-card, .building-card, .hobby-card, .timeline-right,
-    .skill-card, .roadmap-content, .status-card, .security-block, .learned-card, .lh-card,
-    .ci-stat, .cv-info-card, .cv-sidebar-card, .contact-card, .faq-item, .myth-item, .not-item,
-    .detail-card, .stack-card, .gallery-card, .tech-card, .next-card, .tool-badge) {
-    box-shadow: var(--glass-edge), 0 10px 30px rgba(40, 50, 110, 0.10);
-}
-:root[data-theme="light"] :is(.theme-toggle, .lang-switch, .terminal-bar, .lightbox-nav) {
-    box-shadow: var(--glass-edge), 0 6px 18px rgba(40, 50, 110, 0.12);
-}
+
+
+
 
 /* ══════════════════════════════════════════
    5. NAV — les liens restent visibles bien plus longtemps
@@ -265,15 +222,7 @@
         .faq-item, .form-wrap, .hero-stats, .detail-card, .stack-card, .gallery-card) {
         background: #15172b;
     }
-    :root[data-theme="light"] :is(.nav, .nav-more-menu, .mobile-menu, .interview-box,
-        .lightbox-box, .year-card, .stack-table, .pipeline, .code-block, .whatido-card,
-        .infra-card, .quicknav-card, .certif-item, .setup-card, .stat-card, .flagship-card,
-        .building-card, .hobby-card, .timeline-right, .skill-card, .roadmap-content,
-        .status-card, .security-block, .learned-card, .lh-card, .ci-stat, .cv-info-card,
-        .cv-sidebar-card, .contact-card, .faq-item, .form-wrap, .hero-stats, .detail-card,
-        .stack-card, .gallery-card) {
-        background: #ffffff;
-    }
+
 }
 
 /* Mobile : flou plus léger (moins coûteux), halos plus petits */
@@ -342,7 +291,7 @@
 :root .nav .theme-toggle svg { width: 17px; height: 17px; }
 /* trait vertical entre les liens et les deux boutons */
 :root .nav .nav-right::before {
-    content: '';
+    content: "";
     width: 1px;
     height: 18px;
     margin: 0 6px 0 4px;
@@ -421,24 +370,65 @@
     cursor: pointer;
     list-style: none;
     padding: 1rem 1.3rem;
-    font-family: 'DM Mono', monospace;
+    font-family: "DM Mono", monospace;
     font-size: 13px;
     color: var(--accent);
 }
 .fold summary::-webkit-details-marker { display: none; }
-.fold summary::before { content: '+ '; }
-.fold[open] summary::before { content: '− '; }
+.fold summary::before { content: "+ "; }
+.fold[open] summary::before { content: "− "; }
 .fold-list { margin: 0; padding: 0 1.3rem 1.2rem; list-style: none; display: grid; gap: 0.5rem; }
 .fold-list li { display: flex; gap: 0.8rem; align-items: baseline; font-size: 14px; color: var(--muted2); line-height: 1.6; }
-.fold-list .mw-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); min-width: 1.4rem; }
+.fold-list .mw-num { font-family: "DM Mono", monospace; font-size: 11px; color: var(--accent); min-width: 1.4rem; }
 
 /* Page Infrastructure : texte des blocs sécurité, lien vers le code */
 .security-block-text { font-size: 14px; line-height: 1.7; color: var(--muted2); }
 .tech-flow { max-width: 640px; }
-.tech-source { margin-top: 2rem; font-family: 'DM Mono', monospace; font-size: 13px; }
+.tech-source { margin-top: 2rem; font-family: "DM Mono", monospace; font-size: 13px; }
 .tech-source a { color: var(--accent); text-decoration: none; }
 .tech-source a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* Page À propos : loisirs en une ligne */
 .about-offline { margin-top: 2rem; max-width: 720px; font-size: 14px; line-height: 1.8; color: var(--muted2); }
 .about-offline strong { color: var(--text); }
+
+
+/* ══════════════════════════════════════════
+   REPRIS DE THEME.CSS (supprimé avec le mode clair)
+══════════════════════════════════════════ */
+:root {
+    color-scheme: dark;
+    --ok: #34d399;
+    --warn: #fbbf24;
+    --err: #f87171;
+}
+
+/* Bouton FR / EN flottant (pages sans dock : 404) */
+.lang-switch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    text-decoration: none;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--glass-highlight);
+    transition: color 0.2s, border-color 0.2s;
+}
+.lang-switch:hover { color: var(--accent); border-color: rgba(var(--accent-rgb), 0.4); }
+.lang-switch--floating {
+    position: fixed;
+    top: max(1rem, env(safe-area-inset-top));
+    right: 1rem;
+    z-index: 20;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+}
