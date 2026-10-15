@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{template "head-common"}}
+
+    <title>Web forum — Orlando Cogo</title>
+    <meta name="description" content="A complete Go web forum: bcrypt authentication, secure sessions, role-based moderation, OAuth, SQLite, Docker. B1 team project at Ynov Campus.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orlandocogo.com/en/projects/forum">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orlandocogo.com/en/projects/forum">
+    <meta property="og:title" content="Web forum — Orlando Cogo">
+    <meta property="og:description" content="A complete Go web forum: bcrypt authentication, secure sessions, role-based moderation, OAuth, SQLite, Docker. B1 team project at Ynov Campus.">
+    <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="fr_FR">
+
+    <link rel="stylesheet" href="{{asset `/css/projects/demo-project.css`}}">
+    <link rel="stylesheet" href="{{asset `/css/projects/forum.css`}}">
+</head>
+
+<body>
+    {{template "background"}}
+    {{template "nav-en"}}
+
+    <main id="main-content">
+
+        <section class="hero" aria-labelledby="hero-title">
+            <nav class="hero-breadcrumb" aria-label="Breadcrumb">
+                <a href="/en/project" class="breadcrumb-link">← Projects</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <span class="breadcrumb-current" aria-current="page">Web forum</span>
+            </nav>
+            <div class="hero-meta"><span class="hero-meta-badge hero-meta-badge--status">Completed</span><span class="hero-meta-badge">Team · 4 people</span><span class="hero-meta-badge">B1</span></div>
+            <h1 class="hero-title" id="hero-title">Web<br><span class="outline">Forum</span></h1>
+            <p class="hero-intro">A complete forum written in Go without a framework, by a team of four: accounts, posts with categories and images, comments, likes, moderation and Google / GitHub sign-in.</p>
+            <div class="hero-actions">
+                <a href="https://github.com/enzoandria1-oss/Forum-JS" target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn--gh"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg> GitHub</a>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="facts-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">01 //</span>
+                <h2 class="section-title" id="facts-title">At a glance</h2>
+            </div>
+            <div class="pd-facts">
+                <div class="pd-fact reveal"><span class="pd-fact-key">My role</span><span class="pd-fact-val">Infrastructure, CI/CD, security and testing</span></div>
+                <div class="pd-fact reveal"><span class="pd-fact-key">Stack</span><span class="pd-fact-val">Go · SQLite · Docker · HTML/CSS</span></div>
+                <div class="pd-fact reveal"><span class="pd-fact-key">Security</span><span class="pd-fact-val">bcrypt · HttpOnly sessions · roles · rate limiting</span></div>
+                <div class="pd-fact reveal"><span class="pd-fact-key">Constraint</span><span class="pd-fact-val">Limited libraries: sqlite3, bcrypt, UUID</span></div>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="s2-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">02 //</span>
+                <h2 class="section-title" id="s2-title">What the forum does</h2>
+            </div>
+            <div class="pd-list">
+                <div class="pd-item reveal"><h3>Secure accounts</h3><p>Passwords hashed with bcrypt, expiring sessions in HttpOnly cookies, one active session per user.</p></div>
+                <div class="pd-item reveal"><h3>Posts, categories and images</h3><p>Posts sorted by category, JPEG / PNG / GIF images up to 20 MB, with clear errors when a file is rejected.</p></div>
+                <div class="pd-item reveal"><h3>Role-based moderation</h3><p>Four roles (guest, user, moderator, admin) checked by a middleware on every action.</p></div>
+                <div class="pd-item reveal"><h3>Google and GitHub sign-in</h3><p>Full OAuth 2.0 flow, linked to local accounts.</p></div>
+                <div class="pd-item reveal"><h3>Likes, filters and notifications</h3><p>Reactions on posts and comments, category filters, notifications and an activity page.</p></div>
+                <div class="pd-item reveal"><h3>Protection and deployment</h3><p>HTTPS, rate limiting against brute force, fully containerized with Docker.</p></div>
+            </div>
+        </section>
+        <section class="section" aria-labelledby="s3-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">03 //</span>
+                <h2 class="section-title" id="s3-title">Database</h2>
+            </div>
+            <details class="fold reveal">
+                <summary>See the schema of the 6 tables</summary>
+                <div class="fold-body"><div class="db-schema"><div class="db-tables"><div class="db-table"><div class="db-table-name">users</div><div class="db-field"><span class="db-field-key">PK</span><span>id</span><span class="db-field-type">UUID</span></div><div class="db-field"><span class="db-field-key"></span><span>email</span><span class="db-field-type">TEXT UNIQUE</span></div><div class="db-field"><span class="db-field-key"></span><span>username</span><span class="db-field-type">TEXT</span></div><div class="db-field"><span class="db-field-key"></span><span>password</span><span class="db-field-type">TEXT (bcrypt)</span></div><div class="db-field"><span class="db-field-key"></span><span>role</span><span class="db-field-type">TEXT</span></div><div class="db-field"><span class="db-field-key"></span><span>oauth_provider</span><span class="db-field-type">TEXT</span></div></div><div class="db-table"><div class="db-table-name">sessions</div><div class="db-field"><span class="db-field-key">PK</span><span>id</span><span class="db-field-type">UUID</span></div><div class="db-field"><span class="db-field-key">FK</span><span>user_id</span><span class="db-field-type">UUID</span></div><div class="db-field"><span class="db-field-key"></span><span>token</span><span class="db-field-type">TEXT</span></div><div class="db-field"><span class="db-field-key"></span><span>expires_at</span><span class="db-field-type">DATETIME</span></div></div><div class="db-table"><div class="db-table-name">posts</div><div class="db-field"><span class="db-field-key">PK</span><span>id</span><span class="db-field-type">UUID</span></div><div class="db-field"><span class="db-field-key">FK</span><span>user_id</span><span class="db-field-type">UUID</span></div><div class="db-field"><span class="db-field-key"></span><span>title</span><span class="db-field-type">TEXT</span></div><div class="db-field"><span class="db-field-key"></span><span>content</span><span class="db-field-type">TEXT</span></div><div class="db-field"><span class="db-field-key"></span><span>image_path</span><span class="db-field-type">TEXT</span></div></div><div class="db-table"><div class="db-table-name">comments</div><div class="db-field"><span class="db-field-key">PK</span><span>id</span><span class="db-field-type">UUID</span></div><div class="db-field"><span class="db-field-key">FK</span><span>post_id</span><span class="db-field-type">UUID</span></div><div class="db-field"><span class="db-field-key">FK</span><span>user_id</span><span class="db-field-type">UUID</span></div><div class="db-field"><span class="db-field-key"></span><span>content</span><span class="db-field-type">TEXT</span></div></div><div class="db-table"><div class="db-table-name">categories</div><div class="db-field"><span class="db-field-key">PK</span><span>id</span><span class="db-field-type">UUID</span></div><div class="db-field"><span class="db-field-key"></span><span>name</span><span class="db-field-type">TEXT</span></div></div><div class="db-table"><div class="db-table-name">likes</div><div class="db-field"><span class="db-field-key">FK</span><span>user_id</span><span class="db-field-type">UUID</span></div><div class="db-field"><span class="db-field-key">FK</span><span>post_id</span><span class="db-field-type">UUID</span></div><div class="db-field"><span class="db-field-key">FK</span><span>comment_id</span><span class="db-field-type">UUID</span></div><div class="db-field"><span class="db-field-key"></span><span>value</span><span class="db-field-type">INT (+1/-1)</span></div></div></div></div></div>
+            </details>
+        </section>
+        <section class="section" aria-labelledby="learned-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">04 //</span>
+                <h2 class="section-title" id="learned-title">What I learned</h2>
+            </div>
+            <ul class="pd-learned reveal">
+                <li><strong>Design the database before coding</strong>: the relational schema (keys, joins) guided the rest of the project.</li>
+                <li><strong>Security starts on day one</strong>: bcrypt, expiring sessions, role-protected routes, limited attempts.</li>
+                <li><strong>Four people on one codebase</strong>: one branch per feature, reviewed pull requests, and shared conventions.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    {{template "footer-en"}}
+</body>
+
+</html>

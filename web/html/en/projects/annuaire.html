@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{template "head-common"}}
+
+    <title>Network share + directory — Orlando Cogo</title>
+    <meta name="description" content="Samba file server with directory-based authentication, per-team permissions and full_audit logging, on Proxmox VMs. Infrastructure project in pairs.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orlandocogo.com/en/projects/annuaire">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orlandocogo.com/en/projects/annuaire">
+    <meta property="og:title" content="Network share + directory — Orlando Cogo">
+    <meta property="og:description" content="Samba file server with directory-based authentication, per-team permissions and full_audit logging, on Proxmox VMs. Infrastructure project in pairs.">
+    <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="fr_FR">
+
+    <link rel="stylesheet" href="{{asset `/css/projects/demo-project.css`}}">
+    <link rel="stylesheet" href="{{asset `/css/projects/annuaire.css`}}">
+</head>
+
+<body>
+    {{template "background"}}
+    {{template "nav-en"}}
+
+    <main id="main-content">
+
+        <section class="hero" aria-labelledby="hero-title">
+            <nav class="hero-breadcrumb" aria-label="Breadcrumb">
+                <a href="/en/project" class="breadcrumb-link">← Projects</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <span class="breadcrumb-current" aria-current="page">Network share + directory</span>
+            </nav>
+            <div class="hero-meta"><span class="hero-meta-badge hero-meta-badge--status">Completed</span><span class="hero-meta-badge">Pair project</span><span class="hero-meta-badge">B1</span></div>
+            <h1 class="hero-title" id="hero-title">Network share<br><span class="outline">+ Directory</span></h1>
+            <p class="hero-intro">A shared file space for several teams: everyone signs in with their directory account, only sees their own folders, and every action is logged.</p>
+        </section>
+
+        <section class="section" aria-labelledby="facts-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">01 //</span>
+                <h2 class="section-title" id="facts-title">At a glance</h2>
+            </div>
+            <div class="pd-facts">
+                <div class="pd-fact reveal"><span class="pd-fact-key">The need</span><span class="pd-fact-val">Shared and per-team folders, controlled access</span></div>
+                <div class="pd-fact reveal"><span class="pd-fact-key">Stack</span><span class="pd-fact-val">Linux · Samba · LDAP · Proxmox VE</span></div>
+                <div class="pd-fact reveal"><span class="pd-fact-key">Security</span><span class="pd-fact-val">Per-team ACLs · full_audit log</span></div>
+                <div class="pd-fact reveal"><span class="pd-fact-key">Environment</span><span class="pd-fact-val">Server and client VMs on Proxmox</span></div>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="s2-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">02 //</span>
+                <h2 class="section-title" id="s2-title">What we built</h2>
+            </div>
+            <div class="pd-list">
+                <div class="pd-item reveal"><h3>Samba file server</h3><p>One share per team plus a common share, reachable over SMB from Linux and Windows machines.</p></div>
+                <div class="pd-item reveal"><h3>Central authentication</h3><p>Accounts and groups come from the directory: one login per person.</p></div>
+                <div class="pd-item reveal"><h3>Per-team permissions</h3><p>Each group only reaches its own folders, using ACLs.</p></div>
+                <div class="pd-item reveal"><h3>Audit trail</h3><p>The full_audit module logs who opened, changed or deleted what, and from which machine.</p></div>
+            </div>
+        </section>
+        <section class="section" aria-labelledby="s3-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">03 //</span>
+                <h2 class="section-title" id="s3-title">A logged share, in practice</h2>
+            </div>
+            <div class="cmd-block reveal">
+                <div class="cmd-header"><span class="cmd-title">Excerpt from /etc/samba/smb.conf</span><span class="cmd-tag">full_audit</span></div>
+                <pre class="cmd-code"><code>[equipe-a]
+   path = /srv/samba/equipe-a
+   valid users = @equipe-a
+   read only = no
+   vfs objects = full_audit
+   full_audit:prefix = %u|%I|%m|%S
+   full_audit:success = open read write rename unlink
+   full_audit:failure = connect</code></pre>
+            </div>
+        </section>
+        <section class="section" aria-labelledby="learned-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">04 //</span>
+                <h2 class="section-title" id="learned-title">What I learned</h2>
+            </div>
+            <ul class="pd-learned reveal">
+                <li><strong>Think in groups, not users</strong>: permissions given to directory groups stay manageable as the team grows.</li>
+                <li><strong>Logging is security</strong>: without an access log, there is no way to know who deleted a file.</li>
+                <li><strong>Two people on the same VMs</strong>: Proxmox makes it possible to share a real test environment.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    {{template "footer-en"}}
+</body>
+
+</html>

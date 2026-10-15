@@ -299,28 +299,8 @@ func TechHandler(w http.ResponseWriter, r *http.Request) {
 
 // ── Pages projets ──
 
-func ZooHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "projects/zoo.html")
-}
-
-func NetflixHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "projects/netflix.html")
-}
-
-func GroupieHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "projects/groupie.html")
-}
-
-func Power4Handler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "projects/power4.html")
-}
-
 func CiscoHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "projects/cisco.html")
-}
-
-func ArtemisHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "projects/artemis.html")
 }
 
 func AnnuaireHandler(w http.ResponseWriter, r *http.Request) {
@@ -329,10 +309,6 @@ func AnnuaireHandler(w http.ResponseWriter, r *http.Request) {
 
 func ForumHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, "projects/forum.html")
-}
-
-func SnakeHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, "projects/snake.html")
 }
 
 func MotoGPHandler(w http.ResponseWriter, r *http.Request) {

@@ -73,8 +73,44 @@
 
 @media (max-width: 860px) {
     .pj-featured { grid-template-columns: 1fr; }
+    .pj-github { padding: 1.8rem 1.4rem; }
     .pj-row { grid-template-columns: 1fr auto; }
     .pj-row-desc { grid-column: 1 / -1; grid-row: 2; }
     .pj-row-stack { display: none; }
 }
 @media (max-width: 640px) { .hero { padding-top: 6rem; } }
+
+/* ── Appel vers GitHub ── */
+.pj-github {
+    margin-top: 3rem;
+    padding: clamp(2rem, 5vw, 3rem);
+    text-align: center;
+    background:
+        radial-gradient(520px circle at 50% 0%, rgba(var(--accent-rgb), 0.16), transparent 60%),
+        var(--glass-2-bg, var(--glass-bg));
+    backdrop-filter: var(--glass-2-blur, var(--glass-blur));
+    -webkit-backdrop-filter: var(--glass-2-blur, var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: calc(var(--radius) * 1.6);
+    box-shadow: var(--glass-highlight), 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+.pj-github .pj-kicker { margin-top: 0; }
+.pj-github-title { margin-top: 0.6rem; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; line-height: 1.1; }
+.pj-github-text { max-width: 520px; margin: 0.9rem auto 0; color: var(--muted2); line-height: 1.75; }
+.pj-github-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.6rem;
+    padding: 13px 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--on-accent);
+    text-decoration: none;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: var(--radius-pill);
+    box-shadow: 0 8px 26px rgba(var(--accent-rgb), 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.pj-github-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(var(--accent-rgb), 0.5); }

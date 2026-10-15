@@ -451,15 +451,9 @@ func TestHandlers_AllReturn200(t *testing.T) {
 		{"Project", ProjectHandler, "/project"},
 		{"Contact", ContactHandler, "/contact"},
 		{"Tech", TechHandler, "/tech"},
-		{"Zoo", ZooHandler, "/projects/zoo"},
-		{"Netflix", NetflixHandler, "/projects/netflix"},
-		{"Groupie", GroupieHandler, "/projects/groupie"},
-		{"Power4", Power4Handler, "/projects/power4"},
 		{"Cisco", CiscoHandler, "/projects/cisco"},
-		{"Artemis", ArtemisHandler, "/projects/artemis"},
 		{"Annuaire", AnnuaireHandler, "/projects/annuaire"},
 		{"Forum", ForumHandler, "/projects/forum"},
-		{"Snake", SnakeHandler, "/projects/snake"},
 		{"MotoGP", MotoGPHandler, "/projects/motogp"},
 	}
 
@@ -581,9 +575,7 @@ func TestProjectHandlers_ContentType(t *testing.T) {
 		path    string
 	}{
 		{"Cisco", CiscoHandler, "/projects/cisco"},
-		{"Artemis", ArtemisHandler, "/projects/artemis"},
 		{"Annuaire", AnnuaireHandler, "/projects/annuaire"},
-		{"Zoo", ZooHandler, "/projects/zoo"},
 	}
 
 	for _, tt := range tests {

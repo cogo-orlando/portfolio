@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{template "head-common"}}
+
+    <title>Multi-site network — Orlando Cogo</title>
+    <meta name="description" content="Cisco network architecture across 4 sites: 10 VLANs, DHCP on L3 switches, hub-and-spoke static routing, DNS and web servers. Solo networking project by Orlando Cogo.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orlandocogo.com/en/projects/cisco">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orlandocogo.com/en/projects/cisco">
+    <meta property="og:title" content="Multi-site network — Orlando Cogo">
+    <meta property="og:description" content="Cisco network architecture across 4 sites: 10 VLANs, DHCP on L3 switches, hub-and-spoke static routing, DNS and web servers. Solo networking project by Orlando Cogo.">
+    <meta property="og:image" content="https://orlandocogo.com/img/og-image.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="fr_FR">
+
+    <link rel="stylesheet" href="{{asset `/css/projects/demo-project.css`}}">
+    <link rel="stylesheet" href="{{asset `/css/projects/cisco.css`}}">
+</head>
+
+<body>
+    {{template "background"}}
+    {{template "nav-en"}}
+
+    <main id="main-content">
+
+        <section class="hero" aria-labelledby="hero-title">
+            <nav class="hero-breadcrumb" aria-label="Breadcrumb">
+                <a href="/en/project" class="breadcrumb-link">← Projects</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <span class="breadcrumb-current" aria-current="page">Multi-site network</span>
+            </nav>
+            <div class="hero-meta"><span class="hero-meta-badge hero-meta-badge--status">Completed</span><span class="hero-meta-badge">Solo</span><span class="hero-meta-badge">B1</span></div>
+            <h1 class="hero-title" id="hero-title">Multi-site<br><span class="outline">Network</span></h1>
+            <p class="hero-intro">The network of a company spread across four cities, designed and configured end to end in Cisco Packet Tracer.</p>
+        </section>
+
+        <section class="section" aria-labelledby="facts-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">01 //</span>
+                <h2 class="section-title" id="facts-title">At a glance</h2>
+            </div>
+            <div class="pd-facts">
+                <div class="pd-fact reveal"><span class="pd-fact-key">Tool</span><span class="pd-fact-val">Cisco Packet Tracer</span></div>
+                <div class="pd-fact reveal"><span class="pd-fact-key">Scale</span><span class="pd-fact-val">4 sites · 5 routers · 10 VLANs</span></div>
+                <div class="pd-fact reveal"><span class="pd-fact-key">Services</span><span class="pd-fact-val">DHCP · DNS · web server</span></div>
+                <div class="pd-fact reveal"><span class="pd-fact-key">Hardware</span><span class="pd-fact-val">3650-24PS L3 switches · 2960 L2</span></div>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="s2-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">02 //</span>
+                <h2 class="section-title" id="s2-title">Topology</h2>
+            </div>
+            <div class="topology-img-wrap reveal">
+                <img src="/img/projects/cisco/topology.png" alt="Network topology in Cisco Packet Tracer" class="topology-img" loading="lazy">
+            </div>
+        </section>
+        <section class="section" aria-labelledby="s3-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">03 //</span>
+                <h2 class="section-title" id="s3-title">The four sites</h2>
+            </div>
+            <div class="sites-grid">
+                <div class="site-card reveal" style="--site-color:#f5a000">
+                    <div class="site-header"><div class="site-dot" aria-hidden="true"></div><span class="site-city">Strasbourg</span><span class="site-role">Headquarters</span></div>
+                    <div class="site-rows">
+                        <div class="site-row"><span class="site-key">VLANs</span><span class="site-val">VLAN 10 · 20 · 30</span></div>
+                        <div class="site-row"><span class="site-key">Networks</span><span class="site-val">192.168.10–30.0/24</span></div>
+                    </div>
+                </div>
+                <div class="site-card reveal" style="--site-color:var(--accent2)">
+                    <div class="site-header"><div class="site-dot" aria-hidden="true"></div><span class="site-city">Brussels</span><span class="site-role">Finance</span></div>
+                    <div class="site-rows">
+                        <div class="site-row"><span class="site-key">VLANs</span><span class="site-val">VLAN 40 · 50</span></div>
+                        <div class="site-row"><span class="site-key">Networks</span><span class="site-val">172.16.40–50.0/24</span></div>
+                    </div>
+                </div>
+                <div class="site-card reveal" style="--site-color:#f500a0">
+                    <div class="site-header"><div class="site-dot" aria-hidden="true"></div><span class="site-city">Casablanca</span><span class="site-role">Operations</span></div>
+                    <div class="site-rows">
+                        <div class="site-row"><span class="site-key">VLANs</span><span class="site-val">VLAN 60 · 70 · 80</span></div>
+                        <div class="site-row"><span class="site-key">Networks</span><span class="site-val">150.80.60–80.0/24</span></div>
+                    </div>
+                </div>
+                <div class="site-card reveal" style="--site-color:var(--accent)">
+                    <div class="site-header"><div class="site-dot" aria-hidden="true"></div><span class="site-city">Stockholm</span><span class="site-role">Servers & R&amp;D</span></div>
+                    <div class="site-rows">
+                        <div class="site-row"><span class="site-key">VLANs</span><span class="site-val">VLAN 90 · 100</span></div>
+                        <div class="site-row"><span class="site-key">Networks</span><span class="site-val">DNS .10 · Web .20</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section" aria-labelledby="s4-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">04 //</span>
+                <h2 class="section-title" id="s4-title">Technical choices</h2>
+            </div>
+            <div class="pd-list">
+                <div class="pd-item reveal"><h3>Hub-and-spoke</h3><p>Each site reaches a central router over a dedicated WAN link, with static routes.</p></div>
+                <div class="pd-item reveal"><h3>Inter-VLAN routing on L3 switches</h3><p>The 3650 switches route between the site's VLANs without going through a router.</p></div>
+                <div class="pd-item reveal"><h3>DHCP close to the users</h3><p>One DHCP pool per VLAN, configured directly on the L3 switches.</p></div>
+                <div class="pd-item reveal"><h3>Central services</h3><p>The DNS and web servers in Stockholm are reachable from every site.</p></div>
+            </div>
+            <details class="fold reveal">
+                <summary>See the full addressing plan</summary>
+                <div class="fold-body"><div class="ip-table-wrap"><table class="ip-table"><thead><tr><th>Site</th><th>VLAN</th><th>Network</th><th>Gateway</th></tr></thead><tbody><tr><td>Strasbourg</td><td>VLAN10</td><td>192.168.10.0/24</td><td>192.168.10.1</td></tr><tr><td></td><td>VLAN20</td><td>192.168.20.0/24</td><td>192.168.20.1</td></tr><tr><td></td><td>VLAN30</td><td>192.168.30.0/24</td><td>192.168.30.1</td></tr><tr><td>Brussels</td><td>VLAN40</td><td>172.16.40.0/24</td><td>172.16.40.1</td></tr><tr><td></td><td>VLAN50</td><td>172.16.50.0/24</td><td>172.16.50.1</td></tr><tr><td>Casablanca</td><td>VLAN60</td><td>150.80.60.0/24</td><td>150.80.60.1</td></tr><tr><td></td><td>VLAN70</td><td>150.80.70.0/24</td><td>150.80.70.1</td></tr><tr><td></td><td>VLAN80</td><td>150.80.80.0/24</td><td>150.80.80.1</td></tr><tr><td>Stockholm</td><td>VLAN90</td><td>140.50.90.0/24</td><td>140.50.90.1</td></tr><tr><td></td><td>VLAN100</td><td>140.50.100.0/24</td><td>140.50.100.1</td></tr><tr><td></td><td>Servers</td><td>192.168.100.0/24</td><td>192.168.100.1</td></tr></tbody></table></div></div>
+            </details>
+        </section>
+        <section class="section" aria-labelledby="learned-title">
+            <div class="section-header">
+                <span class="section-tag" aria-hidden="true">05 //</span>
+                <h2 class="section-title" id="learned-title">What I learned</h2>
+            </div>
+            <ul class="pd-learned reveal">
+                <li><strong>Plan before wiring</strong>: a consistent addressing plan prevents most routing failures.</li>
+                <li><strong>An L3 switch changes the design</strong>: inter-VLAN routing and DHCP close to the users.</li>
+                <li><strong>Test methodically</strong>: ping and traceroute site by site to isolate each issue.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    {{template "footer-en"}}
+</body>
+
+</html>

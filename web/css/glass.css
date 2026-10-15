@@ -432,3 +432,41 @@
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
 }
+
+/* ══════════════════════════════════════════
+   PAGES DE DÉTAIL DES PROJETS (version allégée)
+══════════════════════════════════════════ */
+.pd-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
+.pd-fact {
+    padding: 1.1rem 1.2rem;
+    background: var(--glass-2-bg, var(--glass-bg));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--glass-highlight);
+}
+.pd-fact-key { display: block; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.pd-fact-val { display: block; margin-top: 0.45rem; font-size: 14px; line-height: 1.6; color: var(--text); }
+
+.pd-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+.pd-item {
+    padding: 1.2rem 1.3rem;
+    background: var(--glass-2-bg, var(--glass-bg));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--glass-highlight);
+}
+.pd-item h3 { font-size: 1rem; font-weight: 800; }
+.pd-item p { margin-top: 0.4rem; font-size: 14px; line-height: 1.7; color: var(--muted2); }
+
+.pd-learned { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.7rem; max-width: 760px; }
+.pd-learned li { position: relative; padding-left: 1.4rem; font-size: 15px; line-height: 1.75; color: var(--muted2); }
+.pd-learned li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+.pd-learned strong { color: var(--text); }
+
+.fold .fold-body { padding: 0 1.3rem 1.3rem; overflow-x: auto; }
+
+@media (max-width: 860px) {
+    .pd-facts { grid-template-columns: repeat(2, 1fr); }
+    .pd-list { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) { .pd-facts { grid-template-columns: 1fr; } }

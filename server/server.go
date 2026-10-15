@@ -36,15 +36,9 @@ var routes = map[string]http.HandlerFunc{
 	"/legal":             handler.PageHandler("legal.html"),
 	"/privacy":           handler.PageHandler("privacy.html"),
 	"/tech":              handler.TechHandler,
-	"/projects/zoo":      handler.ZooHandler,
-	"/projects/netflix":  handler.NetflixHandler,
-	"/projects/groupie":  handler.GroupieHandler,
-	"/projects/power4":   handler.Power4Handler,
 	"/projects/cisco":    handler.CiscoHandler,
-	"/projects/artemis":  handler.ArtemisHandler,
 	"/projects/annuaire": handler.AnnuaireHandler,
 	"/projects/forum":    handler.ForumHandler,
-	"/projects/snake":    handler.SnakeHandler,
 	"/projects/motogp":   handler.MotoGPHandler,
 }
 
@@ -282,14 +276,8 @@ var sitemapURLs = []struct {
 	{"/tech", "tech.html", "0.8", "monthly"},
 	{"/projects/forum", "projects/forum.html", "0.6", "monthly"},
 	{"/projects/motogp", "projects/motogp.html", "0.6", "monthly"},
-	{"/projects/netflix", "projects/netflix.html", "0.6", "monthly"},
-	{"/projects/groupie", "projects/groupie.html", "0.6", "monthly"},
-	{"/projects/power4", "projects/power4.html", "0.6", "monthly"},
-	{"/projects/zoo", "projects/zoo.html", "0.6", "monthly"},
 	{"/projects/cisco", "projects/cisco.html", "0.6", "monthly"},
-	{"/projects/artemis", "projects/artemis.html", "0.6", "monthly"},
 	{"/projects/annuaire", "projects/annuaire.html", "0.6", "monthly"},
-	{"/projects/snake", "projects/snake.html", "0.6", "monthly"},
 }
 
 // lastMod renvoie la vraie date de dernière modif du template
