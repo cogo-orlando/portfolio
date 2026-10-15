@@ -34,7 +34,6 @@ flowchart LR
     CF --> R[Render<br/>conteneur Docker]
     R --> MW[Middlewares Go<br/>IP · rate limit · honeypot · CSP]
     MW --> P[Pages<br/>html/template + partials]
-    MW -. asynchrone .-> DB[(Supabase<br/>PostgreSQL + RLS)]
     MON[Moniteur Go<br/>chaque minute] --> P
     MON --> ST[/api/status/]
 ```
@@ -46,8 +45,7 @@ flowchart LR
 | Conteneur | Docker multi-stage → image `scratch` (binaire statique, non-root) |
 | Hébergement | Render (déploiement uniquement si la CI est verte) |
 | Réseau | Cloudflare (DNS, TLS, WAF, protection DDoS) |
-| Base de données | Supabase PostgreSQL (logs de sécurité, Row Level Security) |
-| Dépendances Go | **une seule** : `github.com/lib/pq` |
+| Dépendances Go | **aucune** : uniquement la bibliothèque standard |
 
 ---
 
@@ -64,10 +62,8 @@ flowchart LR
 - **Timeouts** par route et `ReadHeaderTimeout` (protection Slowloris), pas de listing de dossiers.
 
 ### Données et vie privée
-- **IP des visiteurs anonymisées** avant stockage (`203.0.113.42` → `203.0.113.0`). Seules les IP des attaques (honeypot, rate limit) sont conservées complètes.
-- **Rétention de 30 jours** avec purge automatique.
-- **File d'attente bornée** et écriture par lots : un flood de requêtes ne peut pas saturer le serveur ni la base.
-- **Requêtes SQL 100 % paramétrées** (injection testée), connexion TLS obligatoire, Row Level Security sans policy publique.
+- **IP des visiteurs anonymisées** dans les journaux (`203.0.113.42` → `203.0.113.0`). Seules les alertes de sécurité (honeypot, rate limit) gardent l'IP complète.
+- **Aucune base de données, aucun cookie** : le site ne stocke rien sur ses visiteurs.
 - **Aucun service tiers côté visiteur** : polices hébergées sur le site (plus de Google Fonts).
 
 ### Conteneur
@@ -113,7 +109,6 @@ portfolio/
 │   ├── handler/               # Rendu des templates, cache-busting {{asset}}, ETag
 │   ├── middleware/            # IP réelle, rate limit, honeypot, CSP, gzip, cache, logs
 │   ├── monitor/               # Vérifie chaque page toutes les minutes → /api/status
-│   └── db/                    # Logs de sécurité : file bornée, anonymisation, rétention
 ├── web/
 │   ├── html/                  # Pages + partials (head, nav, footer, données centralisées)
 │   ├── css/                   # Design glass, tokens dans nav.css
@@ -161,8 +156,6 @@ gofmt -l . ; go vet ./... ; go test -count=1 ./...
 |---|---|---|
 | `PORT` | Port d'écoute | `8080` |
 | `GO_ENV` | `development` : rechargement des templates | production |
-| `DATABASE_URL` | Connexion PostgreSQL (logs désactivés si absente) | — |
-| `LOG_RETENTION_DAYS` | Durée de conservation des logs | `30` |
 | `REQUIRE_CLOUDFLARE` | `true` : refuse les accès qui ne passent pas par Cloudflare | désactivé |
 
 ---
@@ -172,7 +165,7 @@ gofmt -l . ; go vet ./... ; go test -count=1 ./...
 - **Pas de framework web** : la bibliothèque standard de Go suffit, et c'est la meilleure façon de comprendre ce qu'un framework fait à notre place (routing, middlewares, timeouts, arrêt gracieux).
 - **Templates Go + partials** : la navigation, le pied de page et tous les chiffres du site sont définis une seule fois. Un test garantit que chaque page s'affiche.
 - **Cache-busting automatique** : `{{asset "/css/nav.css"}}` produit `/css/nav.css?v=<hash>`. Les fichiers sont mis en cache un an et rechargés automatiquement dès qu'ils changent.
-- **Logs asynchrones et non bloquants** : la base de données ne peut jamais ralentir ni faire tomber le site.
+- **Zéro dépendance** : uniquement la bibliothèque standard de Go, donc aucun code tiers à surveiller.
 - **JavaScript sans dépendance** : un `core.js` partagé (apparition au scroll, fetch avec timeout, échappement HTML…) et un script par page, sans script inline.
 
 ---

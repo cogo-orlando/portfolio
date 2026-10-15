@@ -10,11 +10,9 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
-	"portfo/server/db"
 	"runtime/debug"
 	"strings"
 	"sync"
-	"sync/atomic"
 	"time"
 )
 
@@ -79,72 +77,6 @@ func RecoveryMiddleware(next http.Handler) http.Handler {
 		}()
 		next.ServeHTTP(w, r)
 	})
-}
-
-// ══════════════════════════════════════════
-//  CIRCUIT BREAKER — DB
-//  Si la DB échoue 5 fois → ouvre le circuit
-//  pendant 30 secondes avant de réessayer
-// ══════════════════════════════════════════
-
-type circuitState int32
-
-const (
-	circuitClosed   circuitState = 0
-	circuitOpen     circuitState = 1
-	circuitHalfOpen circuitState = 2
-)
-
-type dbCircuitBreaker struct {
-	state        atomic.Int32
-	failures     atomic.Int32
-	lastFailure  atomic.Int64
-	maxFailures  int32
-	resetTimeout time.Duration
-}
-
-var DBCircuit = &dbCircuitBreaker{
-	maxFailures:  5,
-	resetTimeout: 30 * time.Second,
-}
-
-func (cb *dbCircuitBreaker) Allow() bool {
-	state := circuitState(cb.state.Load())
-	switch state {
-	case circuitClosed:
-		return true
-	case circuitOpen:
-		last := time.Unix(0, cb.lastFailure.Load())
-		if time.Since(last) >= cb.resetTimeout {
-			cb.state.Store(int32(circuitHalfOpen))
-			return true
-		}
-		return false
-	default:
-		return true
-	}
-}
-
-func (cb *dbCircuitBreaker) RecordSuccess() {
-	cb.failures.Store(0)
-	cb.state.Store(int32(circuitClosed))
-}
-
-func (cb *dbCircuitBreaker) RecordFailure() {
-	failures := cb.failures.Add(1)
-	cb.lastFailure.Store(time.Now().UnixNano())
-	if failures >= cb.maxFailures {
-		if cb.state.Load() != int32(circuitOpen) {
-			slog.Warn("circuit breaker DB ouvert — logs DB suspendus 30s",
-				"failures", failures,
-			)
-		}
-		cb.state.Store(int32(circuitOpen))
-	}
-}
-
-func (cb *dbCircuitBreaker) IsOpen() bool {
-	return circuitState(cb.state.Load()) == circuitOpen
 }
 
 // ══════════════════════════════════════════
@@ -225,9 +157,6 @@ func HoneypotMiddleware(next http.Handler) http.Handler {
 				"user_agent", r.UserAgent(),
 				"request_id", GetRequestID(r.Context()),
 			)
-			if DBCircuit.Allow() {
-				db.LogHoneypot(ip, r.URL.Path, r.UserAgent())
-			}
 			writeNotFound(w, r) // même 404 que partout ailleurs : le piège reste invisible
 			return
 		}
@@ -262,7 +191,9 @@ func LoggerMiddleware(next http.Handler) http.Handler {
 		rw := &responseWriter{ResponseWriter: w, status: 200}
 		next.ServeHTTP(rw, r)
 		ms := time.Since(start).Milliseconds()
-		ip := GetIP(r)
+		// Journal des visites : IP anonymisée (RGPD). Les alertes de sécurité
+		// (honeypot, rate limit, blacklist) gardent l'IP complète.
+		ip := AnonymizeIP(GetIP(r))
 		id := GetRequestID(r.Context())
 
 		switch {
@@ -281,14 +212,6 @@ func LoggerMiddleware(next http.Handler) http.Handler {
 				"request_id", id, "method", r.Method, "path", r.URL.Path,
 				"status", rw.status, "duration_ms", ms, "ip", ip,
 			)
-		}
-
-		if DBCircuit.Allow() {
-			eventType := db.EventRequest
-			if rw.status >= 400 {
-				eventType = db.EventError
-			}
-			db.LogEvent(ip, r.Method, r.URL.Path, rw.status, r.UserAgent(), eventType)
 		}
 	})
 }
@@ -473,9 +396,6 @@ func RateLimitMiddleware(next http.Handler) http.Handler {
 				"ip", ip, "path", r.URL.Path,
 				"request_id", GetRequestID(r.Context()),
 			)
-			if DBCircuit.Allow() {
-				db.LogRateLimit(ip, r.URL.Path)
-			}
 			w.Header().Set("Retry-After", "60")
 			writeError(w, r, http.StatusTooManyRequests)
 			return

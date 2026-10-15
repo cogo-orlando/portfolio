@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"portfo/server"
-	"portfo/server/db"
 )
 
 func main() {
@@ -17,11 +16,6 @@ func main() {
 	if len(os.Args) > 1 && os.Args[1] == "healthcheck" {
 		os.Exit(healthcheck())
 	}
-
-	// Initialise la connexion Supabase
-	// Si DATABASE_URL n'est pas définie, ignore silencieusement
-	db.Init()
-	defer db.Close()
 
 	server.Start()
 }

@@ -20,7 +20,7 @@
         <h1 class="legal-title">Politique de confidentialité</h1>
         <p class="legal-intro">Ce site collecte le moins de données possible : pas de cookie, pas de publicité, pas
             d'outil de mesure d'audience externe. Voici exactement ce qui est traité, pourquoi, et combien de temps.</p>
-        <span class="legal-updated">Dernière mise à jour : 13 octobre 2026</span>
+        <span class="legal-updated">Dernière mise à jour : 14 octobre 2026</span>
 
         <ul class="legal-toc" aria-label="Sommaire">
             <li><a href="#responsable">Responsable</a></li>
@@ -47,23 +47,18 @@
                     <tbody>
                         <tr>
                             <td>Journal des visites : adresse IP <strong>anonymisée</strong> (le dernier bloc est
-                                effacé, ex. 203.0.113.0), page demandée, date, navigateur</td>
+                                effacé, ex. 203.0.113.0), page demandée, date, code de réponse</td>
                             <td>Faire fonctionner le site, détecter les pannes</td>
                             <td>Intérêt légitime</td>
-                            <td>30 jours, puis suppression automatique</td>
+                            <td>Quelques jours, selon la conservation des journaux de l'hébergeur</td>
                         </tr>
                         <tr>
-                            <td>Journal de sécurité : adresse IP <strong>complète</strong>, uniquement en cas de
+                            <td>Alertes de sécurité : adresse IP <strong>complète</strong>, uniquement en cas de
                                 comportement d'attaque (accès à une page piège, trop de requêtes)</td>
                             <td>Protéger le site contre les attaques</td>
                             <td>Intérêt légitime</td>
-                            <td>30 jours ; blocage temporaire de l'adresse pendant 24 h</td>
-                        </tr>
-                        <tr>
-                            <td>Journaux techniques de l'hébergeur (adresse IP, page, date)</td>
-                            <td>Diagnostic des erreurs</td>
-                            <td>Intérêt légitime</td>
-                            <td>Quelques jours, selon la conservation des journaux de l'hébergeur</td>
+                            <td>Quelques jours dans les journaux ; blocage temporaire de l'adresse pendant 24 h, en
+                                mémoire</td>
                         </tr>
                         <tr>
                             <td>Formulaire de contact : prénom, nom, e-mail, sujet, message</td>
@@ -92,7 +87,6 @@
                 <li><strong>Render</strong> (hébergement de l'application) — États-Unis</li>
                 <li><strong>Cloudflare</strong> (domaine, HTTPS, protection contre les attaques) — reçoit votre adresse IP
                     pour acheminer et filtrer le trafic</li>
-                <li><strong>Supabase</strong> (base de données des journaux de sécurité)</li>
                 <li><strong>Formspree</strong> (transmission des messages du formulaire de contact)</li>
                 <li><strong>Open-Meteo</strong> : la météo de la page Status est demandée directement par votre
                     navigateur, qui transmet donc votre adresse IP à ce service</li>
@@ -104,8 +98,8 @@
 
         <section class="legal-section" id="securite" aria-labelledby="securite-titre">
             <h2 id="securite-titre">Sécurité</h2>
-            <p>Toutes les connexions sont chiffrées (HTTPS, et TLS vers la base de données). L'accès à la base est
-                limité au strict nécessaire, et les données des visiteurs sont anonymisées avant d'être enregistrées.
+            <p>Toutes les connexions sont chiffrées (HTTPS). Le site n'a pas de base de données, et les adresses IP
+                des visiteurs sont anonymisées avant d'être écrites dans les journaux.
                 Le détail des protections est présenté sur la page <a href="/tech">Infrastructure</a>.</p>
         </section>
 

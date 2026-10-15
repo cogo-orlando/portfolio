@@ -20,7 +20,7 @@
         <h1 class="legal-title">Privacy policy</h1>
         <p class="legal-intro">This site collects as little data as possible: no cookies, no ads, no third-party
             analytics. Here is exactly what is processed, why, and for how long.</p>
-        <span class="legal-updated">Last updated: 13 October 2026</span>
+        <span class="legal-updated">Last updated: 14 October 2026</span>
 
         <ul class="legal-toc" aria-label="Contents">
             <li><a href="#responsable">Controller</a></li>
@@ -47,23 +47,17 @@
                     <tbody>
                         <tr>
                             <td>Visit log: <strong>anonymized</strong> IP address (last block removed, e.g.
-                                203.0.113.0), page requested, date, browser</td>
+                                203.0.113.0), page requested, date, response code</td>
                             <td>Running the site, detecting outages</td>
                             <td>Legitimate interest</td>
-                            <td>30 days, then deleted automatically</td>
+                            <td>A few days, depending on the hosting provider's log retention</td>
                         </tr>
                         <tr>
-                            <td>Security log: <strong>full</strong> IP address, only for attack behaviour (hitting a
+                            <td>Security alerts: <strong>full</strong> IP address, only for attack behaviour (hitting a
                                 trap page, too many requests)</td>
                             <td>Protecting the site against attacks</td>
                             <td>Legitimate interest</td>
-                            <td>30 days; the address is temporarily blocked for 24 hours</td>
-                        </tr>
-                        <tr>
-                            <td>Hosting provider's technical logs (IP address, page, date)</td>
-                            <td>Diagnosing errors</td>
-                            <td>Legitimate interest</td>
-                            <td>A few days, depending on the provider's log retention</td>
+                            <td>A few days in the logs; the address is blocked for 24 hours, in memory</td>
                         </tr>
                         <tr>
                             <td>Contact form: first name, last name, email, subject, message</td>
@@ -89,7 +83,6 @@
                 <li><strong>Render</strong> (application hosting) — United States</li>
                 <li><strong>Cloudflare</strong> (domain, HTTPS, attack protection) — receives your IP address to route and
                     filter traffic</li>
-                <li><strong>Supabase</strong> (security log database)</li>
                 <li><strong>Formspree</strong> (delivers contact form messages)</li>
                 <li><strong>Open-Meteo</strong>: the weather on the Status page is requested directly by your browser,
                     which therefore sends your IP address to this service</li>
@@ -101,8 +94,8 @@
 
         <section class="legal-section" id="securite" aria-labelledby="securite-titre">
             <h2 id="securite-titre">Security</h2>
-            <p>Every connection is encrypted (HTTPS, and TLS to the database). Database access is limited to what is
-                strictly needed, and visitor data is anonymized before being stored. The protections are detailed on
+            <p>Every connection is encrypted (HTTPS). The site has no database, and visitor IP addresses are anonymized
+                before being written to the logs. The protections are detailed on
                 the <a href="/en/tech">Infrastructure</a> page.</p>
         </section>
 

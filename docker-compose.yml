@@ -16,7 +16,7 @@ services:
     environment:
       PORT: "8080"
       TZ: "Europe/Paris"
-    # DATABASE_URL (facultatif) : mets-la dans un fichier .env, jamais dans ce fichier
+  
     env_file:
       - path: .env
         required: false
