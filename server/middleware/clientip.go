@@ -86,7 +86,6 @@ func peerIP(r *http.Request) string {
 // GetIP renvoie l'IP réelle du visiteur, sans faire confiance aux en-têtes
 // qu'il pourrait écrire lui-même.
 func GetIP(r *http.Request) string {
-	slog.Info("debug xff", "xff", r.Header.Get("X-Forwarded-For"), "remote", r.RemoteAddr)
 	peer := peerIP(r)
 	if isCloudflare(peer) {
 		if cf := strings.TrimSpace(r.Header.Get("CF-Connecting-IP")); cf != "" {

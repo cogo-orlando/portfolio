@@ -139,7 +139,7 @@ func init() { //nolint:gochecknoinits
 func HoneypotMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ip := GetIP(r)
-		if ipBlacklist.has(ip) && !isStaticAsset(r.URL.Path) {
+		if ipBlacklist.has(ip) && !isStaticAsset(r.URL.Path) && r.URL.Path != "/health" {
 			slog.Warn("ip blacklistée bloquée",
 				"ip", ip,
 				"path", r.URL.Path,

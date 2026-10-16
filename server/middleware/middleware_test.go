@@ -760,3 +760,49 @@ func TestTimeoutMiddleware_ContextHasDeadline(t *testing.T) {
 		t.Error("le context devrait avoir une deadline après TimeoutMiddleware")
 	}
 }
+
+func TestGetIPDerriereRenderEtCloudflare(t *testing.T) {
+	r := httptest.NewRequest(http.MethodGet, "/home", nil)
+	r.RemoteAddr = "[::1]:58780"
+	r.Header.Set("X-Forwarded-For", "203.0.113.5,203.0.113.5, 162.158.41.58, 10.29.246.145")
+	r.Header.Set("CF-Connecting-IP", "203.0.113.5")
+
+	if got := GetIP(r); got != "203.0.113.5" {
+		t.Errorf("GetIP = %s, attendu l'IP du visiteur 203.0.113.5", got)
+	}
+}
+
+func TestGetIPAccesDirectNonFalsifiable(t *testing.T) {
+	// Un attaquant appelle directement onrender.com et écrit lui-même
+	// X-Forwarded-For et CF-Connecting-IP. Render ajoute ensuite sa vraie IP.
+	r := httptest.NewRequest(http.MethodGet, "/home", nil)
+	r.RemoteAddr = "[::1]:58780"
+	r.Header.Set("X-Forwarded-For", "162.158.0.1, 198.51.100.7, 10.29.246.145")
+	r.Header.Set("CF-Connecting-IP", "1.2.3.4")
+
+	if got := GetIP(r); got != "198.51.100.7" {
+		t.Errorf("GetIP = %s, attendu la vraie IP de l'attaquant 198.51.100.7", got)
+	}
+}
+
+func TestHealthAccessibleMemeSiBlacklistee(t *testing.T) {
+	ip := "192.0.2.1" // IP par défaut de httptest.NewRequest
+	ipBlacklist.add(ip)
+	defer func() {
+		ipBlacklist.mu.Lock()
+		delete(ipBlacklist.records, ip)
+		ipBlacklist.mu.Unlock()
+	}()
+
+	h := HoneypotMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	}))
+
+	for path, want := range map[string]int{"/home": http.StatusForbidden, "/health": http.StatusOK} {
+		w := httptest.NewRecorder()
+		h.ServeHTTP(w, httptest.NewRequest(http.MethodGet, path, nil))
+		if w.Code != want {
+			t.Errorf("%s : attendu %d, obtenu %d", path, want, w.Code)
+		}
+	}
+}
