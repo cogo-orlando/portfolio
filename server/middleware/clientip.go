@@ -62,13 +62,19 @@ func isCloudflare(ip string) bool {
 	return false
 }
 
-// peerIP renvoie l'IP de la machine qui nous a transmis la requête
-// (dernier saut de X-Forwarded-For, ajouté par le proxy de Render ; sinon RemoteAddr)
+// peerIP renvoie l'IP de la machine qui s'est connectée à Render.
+// On lit X-Forwarded-For de droite à gauche en ignorant les proxys internes
+// de Render (IP privées) : la première IP publique rencontrée a été ajoutée
+// par Render lui-même, le visiteur ne peut pas la falsifier.
 func peerIP(r *http.Request) string {
 	if xff := r.Header.Get("X-Forwarded-For"); xff != "" {
 		parts := strings.Split(xff, ",")
-		if last := strings.TrimSpace(parts[len(parts)-1]); last != "" {
-			return last
+		for i := len(parts) - 1; i >= 0; i-- {
+			ip := strings.TrimSpace(parts[i])
+			if ip == "" || isLocal(ip) {
+				continue
+			}
+			return ip
 		}
 	}
 	if host, _, err := net.SplitHostPort(r.RemoteAddr); err == nil {
@@ -80,6 +86,7 @@ func peerIP(r *http.Request) string {
 // GetIP renvoie l'IP réelle du visiteur, sans faire confiance aux en-têtes
 // qu'il pourrait écrire lui-même.
 func GetIP(r *http.Request) string {
+		slog.Info("debug xff", "xff", r.Header.Get("X-Forwarded-For"), "remote", r.RemoteAddr)
 	peer := peerIP(r)
 	if isCloudflare(peer) {
 		if cf := strings.TrimSpace(r.Header.Get("CF-Connecting-IP")); cf != "" {
